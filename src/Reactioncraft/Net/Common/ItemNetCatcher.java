@@ -11,6 +11,7 @@ import net.minecraft.item.EnumToolMaterial;
 import net.minecraft.item.ItemStack;
 import net.minecraft.item.ItemTool;
 import net.minecraft.nbt.NBTTagCompound;
+import net.minecraft.world.World;
 import Reactioncraft.Net.RCN;
 import Reactioncraft.basemod.RCB;
 import cpw.mods.fml.relauncher.Side;
@@ -20,7 +21,7 @@ public class ItemNetCatcher extends ItemTool
 {
 
 	public ItemNetCatcher(int par1) {
-		super(par1, 0, EnumToolMaterial.GOLD, new Block[] {});
+		super(par1, 0, RCN.EnumToolMaterialNet, new Block[] {});
 		this.setUnlocalizedName("completeNet");
 		this.setCreativeTab(RCB.Reactioncraft);
 	}
@@ -31,10 +32,10 @@ public class ItemNetCatcher extends ItemTool
 		return "Catching Net";
 	}
 	
+	
 	@Override
-	public boolean onLeftClickEntity(ItemStack stack, EntityPlayer player, Entity entity) 
+	public boolean onLeftClickEntity(ItemStack stack, EntityPlayer player, Entity entity)
 	{
-		
 		if (entity == null || RCN.exclusionList.isExcluded(entity) || !(entity instanceof EntityLiving))
 			return false;
 		
@@ -65,7 +66,6 @@ public class ItemNetCatcher extends ItemTool
 //			
 //			player.dropPlayerItem(is);			
 //			stack.damageItem(1, player);
-//			return true;
 //		}
 		
 		else
@@ -89,8 +89,12 @@ public class ItemNetCatcher extends ItemTool
 			player.dropPlayerItem(is);
 			stack.damageItem(1, player);
 			entity.setDead();
-			return true;
 		}
+		if(stack.getItemDamage() >= (stack.getMaxDamage() - 1))
+		{
+			stack.stackSize--;
+		}
+		return true;
 	}
 
 	@Override
@@ -98,13 +102,24 @@ public class ItemNetCatcher extends ItemTool
 	{
 		if (itemStack.stackTagCompound != null) 
 		{
-			list.add("Hilt: " + itemStack.stackTagCompound.getByte("hilt"));
-			list.add("Net: " + itemStack.stackTagCompound.getByte("net"));
+			list.add("Hilt: " + itemStack.stackTagCompound.getInteger("hilt"));
+			list.add("Net: " + itemStack.stackTagCompound.getInteger("net"));
 		} 
 		else
 			list.add("Please craft to see results");
 		super.addInformation(itemStack, player, list, par4);
 	}
+	
+	
+	 @Override
+	 public int getItemMaxDamageFromStack(ItemStack stack)
+	 {
+	  NBTTagCompound compound = stack.stackTagCompound;
+	  int hiltLevel = compound.getInteger("hilt");
+	  int netLevel  = compound.getInteger("net");
+	  return (hiltLevel + netLevel) * 10 - 1;
+	 }
+	
 
 	@SideOnly(Side.CLIENT)
 

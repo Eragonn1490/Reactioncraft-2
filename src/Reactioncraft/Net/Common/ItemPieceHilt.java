@@ -10,7 +10,8 @@ import net.minecraft.item.ItemStack;
 public class ItemPieceHilt extends Item 
 {
 
-	public ItemPieceHilt(int par1) {
+	public ItemPieceHilt(int par1) 
+	{
 		super(par1);
 		this.setUnlocalizedName("pieceHilt");
 		this.setCreativeTab(RCB.Reactioncraft);
@@ -26,7 +27,7 @@ public class ItemPieceHilt extends Item
 	public void addInformation(ItemStack itemStack, EntityPlayer player, List list, boolean par4) 
 	{
 		if (itemStack.stackTagCompound != null)
-			list.add("Level: " + itemStack.stackTagCompound.getByte("str"));
+			list.add("Level: " + itemStack.stackTagCompound.getInteger("str"));
 		else
 			list.add("Please craft to see results");
 		super.addInformation(itemStack, player, list, par4);

@@ -128,6 +128,7 @@ public class RCORES
 			blackdiamondIID = config.getItem("Black Diamond", 10856).getInt();
 			dragonstoneshardIID = config.getItem("Dragonstone Shard", 10857).getInt();
 			irondustIID = config.getItem("Iron Dust", 10858).getInt();
+			gemdragonstoneIID = config.getItem("Gem Dragonstone", 10858).getInt();
 		}
 
 		finally 

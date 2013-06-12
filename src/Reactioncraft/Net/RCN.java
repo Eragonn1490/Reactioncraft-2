@@ -5,9 +5,11 @@ import java.io.File;
 import net.minecraft.block.Block;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.inventory.IInventory;
+import net.minecraft.item.EnumToolMaterial;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
+import net.minecraftforge.common.EnumHelper;
 import Reactioncraft.Net.Common.EntityPlayerClone;
 import Reactioncraft.Net.Common.ItemCaughtEntity;
 import Reactioncraft.Net.Common.ItemCaughtPlayer;
@@ -45,6 +47,9 @@ public class RCN implements ICraftingHandler
 	@Instance("RCN")
 	public static RCN instance;
 
+	//tool materials
+	public static EnumToolMaterial EnumToolMaterialNet = EnumHelper.addToolMaterial("Net", 3, 1, 2.0F, 2, 15);
+	
 	//config  
 	public static int caughtID;
 	
@@ -134,8 +139,8 @@ public class RCN implements ICraftingHandler
 			ItemStack netIs = new ItemStack(net);
 			hiltIs.stackTagCompound = new NBTTagCompound();
 			netIs.stackTagCompound = new NBTTagCompound();
-			hiltIs.stackTagCompound.setByte("str", (byte) (i + 1));
-			netIs.stackTagCompound.setByte("str", (byte) (i + 1));
+			hiltIs.stackTagCompound.setInteger("str", (i + 1));
+			netIs.stackTagCompound.setInteger("str", (i + 1));
 			GameRegistry.addRecipe(hiltIs, hiltRec);
 			GameRegistry.addRecipe(netIs, netRec);
 		}
@@ -148,9 +153,7 @@ public class RCN implements ICraftingHandler
 
 	private void netlevels() 
 	{
-//		ItemStack fullnet = new ItemStack(completeNet);
-//		fullnet.stackTagCompound = new NBTTagCompound();
-//		fullnet.setItemDamage(1);
+		
 	}
 
 	public void names() 
@@ -195,8 +198,8 @@ public class RCN implements ICraftingHandler
 
 			if (hilt != null && net != null) 
 			{
-				item.stackTagCompound.setByte("hilt", hilt.stackTagCompound.getByte("str"));
-				item.stackTagCompound.setByte("net", net.stackTagCompound.getByte("str"));
+				item.stackTagCompound.setInteger("hilt", hilt.stackTagCompound.getInteger("str"));
+				item.stackTagCompound.setInteger("net", net.stackTagCompound.getInteger("str"));
 			}
 
 		}
