@@ -1,0 +1,42 @@
+		    Reactioncraft Ore Dictionary Code
+
+		    Reactioncraft Converter Mod:
+		    OreDictionary.registerOre("ingotSilver", new ItemStack(ingotSilver));
+		    OreDictionary.registerOre("ingotBloodstone", new ItemStack(ingotBloodstone));
+		    OreDictionary.registerOre("ingotObsidian", new ItemStack(ingotObsidian));
+		    OreDictionary.registerOre("ingotBronze", new ItemStack(ingotBronze));
+		    OreDictionary.registerOre("ingotTitanum", new ItemStack(ingotTitanum));
+		    OreDictionary.registerOre("ingotTin", new ItemStack(ingotTin));
+		    OreDictionary.registerOre("ingotSteel", new ItemStack(ingotSteel));
+		    OreDictionary.registerOre("ingotCopper", new ItemStack(ingotCopper));
+			
+	            Reactioncraft Currency Mod:
+		    OreDictionary.registerOre("ingotBronze", new ItemStack(BronzeIngot));
+		    OreDictionary.registerOre("ingotSilver", new ItemStack(SilverIngot));
+
+		    Reactioncraft Machines Mod:
+	            OreDictionary.registerOre("bucketICE", new ItemStack(IceBucket));
+
+		    Reactioncraft Mobs Mod:
+		    OreDictionary.registerOre("jellyfish", new ItemStack(Jellyfish));
+		    
+		    Reactioncraft Plants:
+		    OreDictionary.registerOre("cocoBean", new ItemStack(CocoBean));
+
+		    Reactioncraft Plantz:
+		    OreDictionary.registerOre("BlueDreamBud", new ItemStack(Blueberryyy));
+		    OreDictionary.registerOre("BYYBud", new ItemStack(BYYBud));
+		    OreDictionary.registerOre("CrystalBud", new ItemStack(CrystalBud));
+	            OreDictionary.registerOre("FireBud", new ItemStack(FireBud));
+	            OreDictionary.registerOre("LKBud", new ItemStack(LKBud));
+	            OreDictionary.registerOre("OKBud", new ItemStack(OKBud));
+		    OreDictionary.registerOre("Toke", new ItemStack(Toke));
+		
+		    Reactioncraft Ores:
+		    OreDictionary.registerOre("goldRod", new ItemStack(OreItems,1, 0));
+		    OreDictionary.registerOre("ingotObsidian", new ItemStack(OreItems,1, 1));
+		    OreDictionary.registerOre("diamondBlack", new ItemStack(OreItems,1, 2));
+		    OreDictionary.registerOre("ingotBloodstone", new ItemStack(OreItems,1, 3));
+		    OreDictionary.registerOre("ingotSilver", new ItemStack(OreItems,1, 4));
+		    OreDictionary.registerOre("gemWizimite", new ItemStack(OreItems,1, 5));
+		    OreDictionary.registerOre("oreBloodstone", new ItemStack(RCORES.netherOres, 1, 0));
