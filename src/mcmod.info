@@ -1,0 +1,308 @@
+[
+{
+  "modid": "RCB",
+  "name": "Reactioncraft Basemod",
+  "description": "This Mod Sets Up all of the important stuff",
+  "version": "",
+  "credits": "Created by Eragonn1490",
+  "logoFile": "/Reactioncraft/logo/RC_logo.png",
+  "mcversion": "",
+  "url": "http://tinyurl.com/reactioncraft",
+  "updateUrl": "",
+  "authors": [ "Eragonn1490", "Reactioncraft Team" ],
+  "parent":"",
+  "screenshots": [],
+  "dependencies": [
+     "mod_MinecraftForge"
+  ]
+},
+{
+  "modid": "RCC",
+  "name": "Reactioncraft",
+  "description": "Extending Minecraft with Tons of new Blocks and Items to Enhance your game play",
+  "version": "",
+  "credits": "Created by Eragonn1490",
+  "logoFile": "/Reactioncraft/logo/RC_logo.png",
+  "mcversion": "",
+  "url": "http://tinyurl.com/reactioncraft",
+  "updateUrl": "",
+  "authors": [ "Eragonn1490", "Reactioncraft Team" ],
+  "parent": "",
+  "screenshots": [],
+  "dependencies": [
+     "mod_MinecraftForge"
+  ]
+},
+{
+  "modid": "RCBB",
+  "name": "Reactioncraft: Better Bookcases",
+  "description": "Extending Minecraft with a Storage Bookcase, Decorative Bookcases, And a Bookcase Door!",
+  "version": "",
+  "credits": "Created by Eragonn1490",
+  "logoFile": "/Reactioncraft/logo/RC_logo.png",
+  "mcversion": "",
+  "url": "http://tinyurl.com/reactioncraft",
+  "updateUrl": "",
+  "authors": [ "Eragonn1490", "Reactioncraft Team" ],
+  "parent": "RCC",
+  "screenshots": [],
+  "dependencies": [
+     "mod_MinecraftForge"
+  ]
+},
+{
+  "modid": "RCHRM",
+  "name": "Reactioncraft: A Christmas Mod",
+  "description": "Extending Minecraft with Christmas Cheer and The Gingerbread Cookies Aren't a lie",
+  "version": "",
+  "credits": "Created by Eragonn1490",
+  "logoFile": "/Reactioncraft/logo/RC_logo.png",
+  "mcversion": "",
+  "url": "http://tinyurl.com/reactioncraft",
+  "updateUrl": "",
+  "authors": [ "Eragonn1490", "Reactioncraft Team" ],
+  "parent": "RCC",
+  "screenshots": [],
+  "dependencies": [
+     "mod_MinecraftForge"
+  ]
+},
+{
+  "modid": "RCCM",
+  "name": "Reactioncraft: Currency Mod",
+  "description": "Extending Minecraft with Treasure and Coins you can Trade your friends",
+  "version": "",
+  "credits": "Created by Eragonn1490",
+  "logoFile": "/Reactioncraft/logo/RC_logo.png",
+  "mcversion": "",
+  "url": "http://tinyurl.com/reactioncraft",
+  "updateUrl": "",
+  "authors": [ "Eragonn1490", "Reactioncraft Team" ],
+  "parent": "RCC",
+  "screenshots": [],
+  "dependencies": [
+     "mod_MinecraftForge"
+  ]
+},
+{
+  "modid": "RCBDM",
+  "name": "Reactioncraft: Better Deserts Mod",
+  "description": "Extending Minecraft with a new Desert Biome and Hireoglyphics",
+  "version": "",
+  "credits": "Created by Eragonn1490",
+  "logoFile": "/Reactioncraft/logo/RC_logo.png",
+  "mcversion": "",
+  "url": "http://tinyurl.com/reactioncraft",
+  "updateUrl": "",
+  "authors": [ "Eragonn1490", "Reactioncraft Team" ],
+  "parent": "RCC",
+  "screenshots": [],
+  "dependencies": [
+     "mod_MinecraftForge"
+  ]
+},
+{
+  "modid": "RCXF",
+  "name": "Reactioncraft: Extra Walls and Fences",
+  "description": "Extending Minecraft with new Walls and Fences to Keep your Neighbors out",
+  "version": "",
+  "credits": "Created by Eragonn1490",
+  "logoFile": "/Reactioncraft/logo/RC_logo.png",
+  "mcversion": "",
+  "url": "http://tinyurl.com/reactioncraft",
+  "updateUrl": "",
+  "authors": [ "Eragonn1490", "Reactioncraft Team" ],
+  "parent": "RCC",
+  "screenshots": [],
+  "dependencies": [
+     "mod_MinecraftForge"
+  ]
+},
+{
+  "modid": "RCF",
+  "name": "Reactioncraft: Interesting Food Mod",
+  "description": "Extending Minecraft with edible flesh and more food to eat",
+  "version": "",
+  "credits": "Created by Eragonn1490",
+  "logoFile": "/Reactioncraft/logo/RC_logo.png",
+  "mcversion": "",
+  "url": "http://tinyurl.com/reactioncraft",
+  "updateUrl": "",
+  "authors": [ "Eragonn1490", "Reactioncraft Team" ],
+  "parent": "RCC",
+  "screenshots": [],
+  "dependencies": [
+     "mod_MinecraftForge"
+  ]
+},
+{
+  "modid": "RCG",
+  "name": "Reactioncraft: Better Glass Mod",
+  "description": "Extending Minecraft with with colored glass Blocks and Panes",
+  "version": "",
+  "credits": "Created by Eragonn1490",
+  "logoFile": "/Reactioncraft/logo/RC_logo.png",
+  "mcversion": "",
+  "url": "http://tinyurl.com/reactioncraft",
+  "updateUrl": "",
+  "authors": [ "Eragonn1490", "Reactioncraft Team" ],
+  "parent": "RCC",
+  "screenshots": [],
+  "dependencies": [
+     "mod_MinecraftForge"
+  ]
+},
+{
+  "modid": "RCMM",
+  "name": "Reactioncraft: Machines Mod",
+  "description": "Extending Minecraft with Many Machines, Freezer, and others to come..,",
+  "version": "",
+  "credits": "Created by Eragonn1490",
+  "logoFile": "/Reactioncraft/logo/RC_logo.png",
+  "mcversion": "",
+  "url": "http://tinyurl.com/reactioncraft",
+  "updateUrl": "",
+  "authors": [ "Eragonn1490", "Reactioncraft Team" ],
+  "parent": "RCC",
+  "screenshots": [],
+  "dependencies": [
+     "mod_MinecraftForge"
+  ]
+},
+{
+  "modid": "ModRCMM",
+  "name": "Reactioncraft: Mobs Mod",
+  "description": "Extending Minecraft with Crawling Zombies, Crawling Skeletons, a few new creeps and more!",
+  "version": "",
+  "credits": "Created by Eragonn1490",
+  "logoFile": "/Reactioncraft/logo/RC_logo.png",
+  "mcversion": "",
+  "url": "http://tinyurl.com/reactioncraft",
+  "updateUrl": "",
+  "authors": [ "Eragonn1490", "Reactioncraft Team" ],
+  "parent": "RCC",
+  "screenshots": [],
+  "dependencies": [
+     "mod_MinecraftForge"
+  ]
+},
+{
+  "modid": "RCN",
+  "name": "Reactioncraft: Netting Mod",
+  "description": "Extending Minecraft with nets, this mod is Guarenteed to Catch at least 10% of any mob!",
+  "version": "",
+  "credits": "Created by Eragonn1490",
+  "logoFile": "/Reactioncraft/logo/RC_logo.png",
+  "mcversion": "",
+  "url": "http://tinyurl.com/reactioncraft",
+  "updateUrl": "",
+  "authors": [ "Eragonn1490", "GenuineSounds", "Reactioncraft Team" ],
+  "parent": "RCC",
+  "screenshots": [],
+  "dependencies": [
+     "mod_MinecraftForge"
+  ]
+},
+{
+  "modid": "RCORES",
+  "name": "Reactioncraft: Ores Mod",
+  "description": "Extending Minecraft with Ores Found in Most Forge Mods",
+  "version": "",
+  "credits": "Created by Eragonn1490",
+  "logoFile": "/Reactioncraft/logo/RC_logo.png",
+  "mcversion": "",
+  "url": "http://tinyurl.com/reactioncraft",
+  "updateUrl": "",
+  "authors": [ "Eragonn1490", "Reactioncraft Team" ],
+  "parent": "RCC",
+  "screenshots": [],
+  "dependencies": [
+     "mod_MinecraftForge"
+  ]
+},
+{
+  "modid": "RCPM",
+  "name": "Reactioncraft: Plants Mod",
+  "description": "Extending Minecraft with Plants To Grow, Taller Sugarcane and Corn!",
+  "version": "",
+  "credits": "Created by Eragonn1490",
+  "logoFile": "/Reactioncraft/logo/RC_logo.png",
+  "mcversion": "",
+  "url": "http://tinyurl.com/reactioncraft",
+  "updateUrl": "",
+  "authors": [ "Eragonn1490", "Reactioncraft Team" ],
+  "parent": "RCC",
+  "screenshots": [],
+  "dependencies": [
+     "mod_MinecraftForge"
+  ]
+},
+{
+  "modid": "RCP",
+  "name": "Reactioncraft: Plants Mod",
+  "description": "Extending Minecraft with 100% Legal Plants...",
+  "version": "",
+  "credits": "Created by Eragonn1490",
+  "logoFile": "/Reactioncraft/logo/RC_logo.png",
+  "mcversion": "",
+  "url": "http://tinyurl.com/reactioncraft",
+  "updateUrl": "",
+  "authors": [ "Eragonn1490", "Reactioncraft Team" ],
+  "parent": "RCC",
+  "screenshots": [],
+  "dependencies": [
+     "mod_MinecraftForge"
+  ]
+},
+{
+  "modid": "RCW",
+  "name": "Reactioncraft: Weapons Mod",
+  "description": "Extending Minecraft with New Swords and Tools",
+  "version": "",
+  "credits": "Created by Eragonn1490",
+  "logoFile": "/Reactioncraft/logo/RC_logo.png",
+  "mcversion": "",
+  "url": "http://tinyurl.com/reactioncraft",
+  "updateUrl": "",
+  "authors": [ "Eragonn1490", "Reactioncraft Team" ],
+  "parent": "RCC",
+  "screenshots": [],
+  "dependencies": [
+     "mod_MinecraftForge"
+  ]
+},
+{
+  "modid": "RCCONV",
+  "name": "Reactioncraft: Ore Dictionary Converter Mod",
+  "description": "Extending Forge Mods Ability to work in unison",
+  "version": "",
+  "credits": "Created by Eragonn1490",
+  "logoFile": "/Reactioncraft/logo/RC_logo.png",
+  "mcversion": "",
+  "url": "http://tinyurl.com/reactioncraft",
+  "updateUrl": "",
+  "authors": [ "Eragonn1490", "Reactioncraft Team" ],
+  "parent": "RCC",
+  "screenshots": [],
+  "dependencies": [
+     "mod_MinecraftForge"
+  ]
+},
+{
+  "modid": "RCRCM",
+  "name": "Reactioncraft: Railcraft Addon",
+  "description": "Extending Railcraft with BoreHeads",
+  "version": "",
+  "credits": "Created by Eragonn1490",
+  "logoFile": "/Reactioncraft/logo/RC_logo.png",
+  "mcversion": "",
+  "url": "http://tinyurl.com/reactioncraft",
+  "updateUrl": "",
+  "authors": [ "Eragonn1490", "Reactioncraft Team" ],
+  "parent": "RCC",
+  "screenshots": [],
+  "dependencies": [
+     "mod_MinecraftForge"
+  ]
+}
+]
