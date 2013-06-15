@@ -107,6 +107,8 @@ public class RCMM
 	public void preInit(FMLPreInitializationEvent evt)
 	{
 		instance = this;
+		
+		System.out.println("Pre Initialization Loaded");
 
 		config = new ReactioncraftConfiguration(new File(evt.getModConfigurationDirectory(), "Reactioncraft/Machines.cfg"));
 

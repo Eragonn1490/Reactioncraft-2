@@ -58,6 +58,7 @@ public class RCORES
 	public static int dragonstoneshardIID;
 	public static int irondustIID;
 	public static int gemdragonstoneIID;
+	public static int superheatedironingotIID;
 	
 
 	//Items
@@ -70,6 +71,7 @@ public class RCORES
 	public static Item dragonstoneshard;
 	public static Item irondust;
 	public static Item gemdragonstone;
+	public static Item superheatedironingot;
 
 	//Blocks
 	public static Block surfaceOres;
@@ -107,6 +109,8 @@ public class RCORES
 	@PreInit
 	public void preInit(FMLPreInitializationEvent var1)
 	{
+		System.out.println("Pre Initialization Loaded");
+		
 		config = new ReactioncraftConfiguration(new File(var1.getModConfigurationDirectory(), "Reactioncraft/Ores.cfg"));
 
 		try 
@@ -129,6 +133,7 @@ public class RCORES
 			dragonstoneshardIID = config.getItem("Dragonstone Shard", 10857).getInt();
 			irondustIID = config.getItem("Iron Dust", 10858).getInt();
 			gemdragonstoneIID = config.getItem("Gem Dragonstone", 10858).getInt();
+			superheatedironingotIID = config.getItem("Superheated Iron", 10859).getInt();
 		}
 
 		finally 
@@ -156,6 +161,7 @@ public class RCORES
 		obsidianingot = new ItemBasic(obsidianingotIID).setUnlocalizedName("RCORES:obsidianingot").setCreativeTab(RCB.ReactioncraftItems);
 		ingotbloodstone = new ItemBasic(ingotbloodstoneIID).setUnlocalizedName("RCORES:bloodstoneingot").setCreativeTab(RCB.ReactioncraftItems);
 		ingotsilver = new ItemBasic(ingotsilverIID).setUnlocalizedName("RCORES:silveringot").setCreativeTab(RCB.ReactioncraftItems);
+		superheatedironingot = new ItemBasic(superheatedironingotIID).setUnlocalizedName("RCORES:shironingot").setCreativeTab(RCB.ReactioncraftItems);
 		bloodstonedust = new ItemBasic(bloodstonedustIID).setUnlocalizedName("RCORES:bloodstonedust").setCreativeTab(RCB.ReactioncraftItems);
 		blackdiamond = new ItemBasic(blackdiamondIID).setUnlocalizedName("RCORES:blackdiamond").setCreativeTab(RCB.ReactioncraftItems);
 		dragonstoneshard = new ItemBasic(dragonstoneshardIID).setUnlocalizedName("RCORES:dragonstoneshard").setCreativeTab(RCB.ReactioncraftItems);
@@ -212,7 +218,7 @@ public class RCORES
 		OreDictionary.registerOre("diamondBlack", new ItemStack(RCORES.blackdiamond));
 		OreDictionary.registerOre("ingotBloodstone", new ItemStack(RCORES.ingotbloodstone));
 		OreDictionary.registerOre("ingotSilver", new ItemStack(RCORES.ingotsilver));
-		//OreDictionary.registerOre("ingotSuperheatediron", new ItemStack(OreItems,1, 9));
+		OreDictionary.registerOre("ingotSuperheatediron", new ItemStack(superheatedironingot));
 		//OreDictionary.registerOre("gemWizimite", new ItemStack(OreItems,1, 5));
 		OreDictionary.registerOre("ironDust", new ItemStack(RCORES.irondust));
 		OreDictionary.registerOre("shardDragonstone", new ItemStack(RCORES.dragonstoneshard));
@@ -247,7 +253,7 @@ public class RCORES
 		FurnaceRecipes.smelting().addSmelting(RCORES.netherOres.blockID, 4, new ItemStack(Item.ingotGold.itemID, 1, 1), 0.5F);
 
 		//Iron Dust to Superheated Iron
-		//FurnaceRecipes.smelting().addSmelting(RCORES.irondust.itemID, 10, new ItemStack(RCORES.superheatediron.itemID, 1, 9), 0.5F);
+		GameRegistry.addSmelting(RCORES.irondust.itemID, new ItemStack(RCORES.superheatedironingot.itemID, 1, 0), 0.5F);
 
 
 		//World Gen Handlers

@@ -36,6 +36,7 @@ public class BlockCherryTreeSapling extends DesertFlower
     /**
      * Ticks the block if it's been scheduled
      */
+    @Override
     public void updateTick(World par1World, int par2, int par3, int par4, Random par5Random)
     {
         if (!par1World.isRemote)
@@ -48,7 +49,7 @@ public class BlockCherryTreeSapling extends DesertFlower
             }
         }
     }
-
+    
     public void func_96477_c(World par1World, int par2, int par3, int par4, Random par5Random)
     {
         int l = par1World.getBlockMetadata(par2, par3, par4);

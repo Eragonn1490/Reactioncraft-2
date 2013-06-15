@@ -75,6 +75,8 @@ public class RCW
 	@PreInit
 	public void preInit(FMLPreInitializationEvent var1)
 	{
+		System.out.println("Pre Initialization Loaded");
+		
 		config = new ReactioncraftConfiguration(new File(var1.getModConfigurationDirectory(), "Reactioncraft/Weapons.cfg"));
 
 		try 

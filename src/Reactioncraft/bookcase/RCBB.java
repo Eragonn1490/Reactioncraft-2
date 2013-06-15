@@ -90,7 +90,10 @@ public class RCBB
 	@PreInit
 	public void preInit(FMLPreInitializationEvent evt)
 	{	
+		System.out.println("Pre Initialization Loaded");
+		
 		config = new ReactioncraftConfiguration(new File(evt.getModConfigurationDirectory(), "Reactioncraft/BetterBookcases.cfg"));
+		
 		try 
 		{
 			config.load();

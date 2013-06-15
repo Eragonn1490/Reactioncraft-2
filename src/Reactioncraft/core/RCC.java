@@ -113,6 +113,8 @@ public class RCC
 	@PreInit
 	public void preInit(FMLPreInitializationEvent evt)
 	{
+		System.out.println("Pre Initialization Loaded");
+		
 		config = new ReactioncraftConfiguration(new File(evt.getModConfigurationDirectory(), "Reactioncraft/Core.cfg"));
 
 		try 

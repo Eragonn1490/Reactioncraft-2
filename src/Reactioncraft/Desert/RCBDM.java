@@ -130,6 +130,8 @@ public class RCBDM
 	@PreInit
 	public void preInit(FMLPreInitializationEvent evt)
 	{	
+		System.out.println("Pre Initialization Loaded");
+		
 		config = new ReactioncraftConfiguration(new File(evt.getModConfigurationDirectory(), "Reactioncraft/BetterDeserts.cfg"));
 
 		try 
@@ -531,9 +533,9 @@ public class RCBDM
 	public void blockCode() 
 	{
 		BloodstoneBrick = new BlockBasic(BloodstoneBrickID).setHardness(120.0F).setResistance(2000.0F).setLightValue(0.10F).setStepSound(Block.soundStoneFootstep).setUnlocalizedName("RCBDM:BloodStoneBrick").setCreativeTab(RCB.Reactioncraft);
-		Cherrywood = new BlockCherryTreeLog(CherrywoodID, Material.wood).setHardness(0.2F).setResistance(0.5F).setUnlocalizedName("RCBDM:woodside");
-		CherryTreeLeaves = new BlockCherryTreeLeaves(CherryTreeLeavesID).setHardness(0.2F).setResistance(0.5F).setUnlocalizedName("RCBDM:CherryTreeLeaves");
-		CherryTreeSapling = new BlockCherryTreeSapling(CherryTreeSaplingID).setHardness(0.2F).setResistance(0.5F).setUnlocalizedName("RCBDM:CherryTreeSapling");
+		Cherrywood = new BlockCherryTreeLog(CherrywoodID, Material.wood).setStepSound(Block.soundWoodFootstep).setHardness(0.2F).setResistance(0.5F).setUnlocalizedName("RCBDM:woodside");
+		CherryTreeLeaves = new BlockCherryTreeLeaves(CherryTreeLeavesID).setStepSound(Block.soundGrassFootstep).setHardness(0.2F).setResistance(0.5F).setUnlocalizedName("RCBDM:CherryTreeLeaves");
+		CherryTreeSapling = new BlockCherryTreeSapling(CherryTreeSaplingID).setStepSound(Block.soundGrassFootstep).setHardness(0.2F).setResistance(0.5F).setUnlocalizedName("RCBDM:CherryTreeSapling");
 		HireoMulti = new BlockHireoMulti(HireoBlocksIID, Material.rock).setHardness(3.0F).setUnlocalizedName("HireoMulti");
 		ColumnMulti = new BlockColumnMulti(ColumnBlockID, Material.rock).setHardness(3.0F).setUnlocalizedName("ColumnMulti");
 		ColumnMulti2 = new BlockColumnMulti2(ColumnBlock2ID, Material.rock).setHardness(3.0F).setUnlocalizedName("ColumnMulti2");

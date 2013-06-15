@@ -81,6 +81,8 @@ public class RCB
 	@PreInit
 	public void preInit(FMLPreInitializationEvent evt)
 	{
+		System.out.println("Pre Initialization Loaded");
+		
 		config = new ReactioncraftConfiguration(new File(evt.getModConfigurationDirectory(), "Reactioncraft/Basemod.wizim"));
 
 		try 

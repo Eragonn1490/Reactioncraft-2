@@ -92,7 +92,7 @@ public class ItemNetCatcher extends ItemTool
 		}
 		if(stack.getItemDamage() >= (stack.getMaxDamage() - 1))
 		{
-			stack.stackSize--;
+			--stack.stackSize;
 		}
 		return true;
 	}

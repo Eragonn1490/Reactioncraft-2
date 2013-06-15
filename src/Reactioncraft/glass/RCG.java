@@ -2,7 +2,6 @@ package Reactioncraft.glass;
 
 import java.io.File;
 import Reactioncraft.glass.client.ClientProxy;
-import Reactioncraft.glass.common.CommonProxy;
 import Reactioncraft.glass.common.*;
 import net.minecraft.block.Block;
 import net.minecraft.block.material.Material;
@@ -57,6 +56,8 @@ public class RCG
 	@PreInit
 	public void preInit(FMLPreInitializationEvent evt)
 	{
+		System.out.println("Pre Initialization Loaded");
+		
 		config = new ReactioncraftConfiguration(new File(evt.getModConfigurationDirectory(), "Reactioncraft/BetterGlass.cfg"));
 
 		try 
