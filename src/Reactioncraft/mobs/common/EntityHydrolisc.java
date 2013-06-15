@@ -1,6 +1,7 @@
 package Reactioncraft.mobs.common;
 
 import Reactioncraft.mobs.RCmobs;
+import Reactioncraft.mobs.client.ClientProxy;
 import net.minecraft.block.Block;
 import net.minecraft.enchantment.Enchantment;
 import net.minecraft.enchantment.EnchantmentHelper;
@@ -31,7 +32,8 @@ import net.minecraft.util.DamageSource;
 import net.minecraft.util.MathHelper;
 import net.minecraft.world.World;
 
-public class EntityHydrolisc extends EntityTameable {
+public class EntityHydrolisc extends EntityTameable 
+{
 
 	private int force_sync = 50; //Force server and client to sync health!
 	
@@ -39,7 +41,7 @@ public class EntityHydrolisc extends EntityTameable {
     {
         super(par1World);
        
-        this.texture = (RCmobs.CSproxy.MODEL_TEXTURE + "hydrolisctexture.png");
+        this.texture = (ClientProxy.MODEL_TEXTURE + "hydrolisctexture.png");
         this.setSize(0.5F, 0.5F);
         this.moveSpeed = 0.25F;
         this.fireResistance = 100;
@@ -232,7 +234,7 @@ public class EntityHydrolisc extends EntityTameable {
     
     private void settexture()
     {
-    	this.texture = "/Reactioncraft/images/mobs/hydrolisctexture.png";
+    	 this.texture = (ClientProxy.MODEL_TEXTURE + "hydrolisctexture.png");
     }
     
     /**

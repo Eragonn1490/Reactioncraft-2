@@ -1,6 +1,5 @@
 package Reactioncraft.mobs.client;
 
-import Reactioncraft.mobs.common.CommonProxy;
 import Reactioncraft.mobs.common.*;
 import net.minecraft.client.model.ModelCreeper;
 import net.minecraftforge.client.MinecraftForgeClient;
@@ -14,7 +13,7 @@ public class ClientProxy extends CommonProxy
 	public static String MODEL_TEXTURE ="/mods/RCmobs/textures/mobs/";
 	
 	@SideOnly(Side.CLIENT)
-	public void registerRenderInformation()
+	public static void registerRenderInformation()
 	{		
 		//Mobs Below
 		RenderingRegistry.instance().registerEntityRenderingHandler(EntityBee.class, new RenderBee(new ModelBee(), 0.5F));

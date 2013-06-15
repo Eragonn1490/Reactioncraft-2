@@ -1,6 +1,7 @@
 package Reactioncraft.mobs.common;
 
 import Reactioncraft.mobs.RCmobs;
+import Reactioncraft.mobs.client.ClientProxy;
 import net.minecraft.entity.ai.EntityAIAttackOnCollide;
 import net.minecraft.entity.ai.EntityAIAvoidEntity;
 import net.minecraft.entity.ai.EntityAICreeperSwell;
@@ -31,7 +32,7 @@ public class EntityStalker extends EntityCreeper
         this.tasks.addTask(7, new EntityAIWatchClosest(this, EntityCreeper.class, 50.0F));
         this.targetTasks.addTask(1, new EntityAINearestAttackableTarget(this, EntityPlayer.class, 16.0F, 0, true));
         this.targetTasks.addTask(2, new EntityAIHurtByTarget(this, false));
-        this.texture = (RCmobs.CSproxy.MODEL_TEXTURE + "Stalker.png");
+        this.texture = (ClientProxy.MODEL_TEXTURE + "Stalker.png");
         moveSpeed = 0.23F;
     }
 

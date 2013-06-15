@@ -132,8 +132,8 @@ public class RCORES
 			blackdiamondIID = config.getItem("Black Diamond", 10856).getInt();
 			dragonstoneshardIID = config.getItem("Dragonstone Shard", 10857).getInt();
 			irondustIID = config.getItem("Iron Dust", 10858).getInt();
-			gemdragonstoneIID = config.getItem("Gem Dragonstone", 10858).getInt();
-			superheatedironingotIID = config.getItem("Superheated Iron", 10859).getInt();
+			gemdragonstoneIID = config.getItem("Gem Dragonstone", 10859).getInt();
+			superheatedironingotIID = config.getItem("Superheated Iron", 10860).getInt();
 		}
 
 		finally 
@@ -190,7 +190,7 @@ public class RCORES
 		LanguageRegistry.addName(RCORES.bloodstonedust, "Bloodstone Dust");  
 		LanguageRegistry.addName(RCORES.dragonstoneshard, "Dragonstone Shard");
 		LanguageRegistry.addName(RCORES.gemdragonstone, "Carved Dragonstone");
-		//LanguageRegistry.addName(RCORES.OreItems, "Superheated Iron Ingot"); 
+		LanguageRegistry.addName(RCORES.superheatedironingot, "Superheated Iron Ingot"); 
 		LanguageRegistry.addName(RCORES.irondust, "Iron Dust");
 
 

@@ -24,6 +24,8 @@ import cpw.mods.fml.common.event.FMLPreInitializationEvent;
 import cpw.mods.fml.common.network.NetworkMod;
 import cpw.mods.fml.common.registry.EntityRegistry;
 import cpw.mods.fml.common.registry.LanguageRegistry;
+import cpw.mods.fml.relauncher.Side;
+import cpw.mods.fml.relauncher.SideOnly;
 
 @Mod(modid = "RCmobs", name="Reactioncraft Mobs Mod", version="[1.5.2] Reactioncraft Version 8.0", dependencies="required-after:FML@[4.2.18,)")
 
@@ -32,8 +34,7 @@ import cpw.mods.fml.common.registry.LanguageRegistry;
 public class RCmobs 
 {
 	@SidedProxy(clientSide = "Reactioncraft.mobs.client.ClientProxy", serverSide = "Reactioncraft.mobs.common.CommonProxy")
-
-	public static Reactioncraft.mobs.client.ClientProxy CSproxy;
+	
 	public static Reactioncraft.mobs.common.CommonProxy proxy;
 
 	@Instance("RCmobs")
@@ -78,7 +79,8 @@ public class RCmobs
 	public void load(FMLInitializationEvent event)
 	{
 		//MinecraftForge.EVENT_BUS.register(new LivingDropsEvent());
-		CSproxy.registerRenderInformation();
+		ClientProxy.registerRenderInformation();
+		
 		registerGlobal();
 		registerEntities();
 		addSpawn();

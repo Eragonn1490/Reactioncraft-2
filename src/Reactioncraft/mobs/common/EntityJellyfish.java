@@ -1,6 +1,7 @@
 package Reactioncraft.mobs.common;
 
 import Reactioncraft.mobs.RCmobs;
+import Reactioncraft.mobs.client.ClientProxy;
 import net.minecraft.block.material.Material;
 import net.minecraft.entity.passive.EntityWaterMob;
 import net.minecraft.entity.player.EntityPlayer;
@@ -44,7 +45,7 @@ public class EntityJellyfish extends EntityWaterMob
         randomMotionVecX = 0.0F;
         randomMotionVecY = 0.0F;
         randomMotionVecZ = 0.0F;
-        this.texture = (RCmobs.CSproxy.MODEL_TEXTURE + "Jellyfish.png");
+        this.texture = (ClientProxy.MODEL_TEXTURE + "Jellyfish.png");
         setSize(0.3F, 0.3F);
         field_21080_l = (1.0F / (rand.nextFloat() + 1.0F)) * 0.2F;
     }

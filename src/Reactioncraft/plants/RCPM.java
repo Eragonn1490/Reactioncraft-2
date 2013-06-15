@@ -151,7 +151,7 @@ public class RCPM
 		//VanillaBean= new ItemBasic(VanillaBeanIID).setUnlocalizedName("VanillaBean");
 		sugarcaneItem = (new Itemsugarcane(sugarcaneItemIID, RCPM.sugarcaneBlock)).setUnlocalizedName("RCPM:sugarcaneItem").setCreativeTab(RCB.ReactioncraftItems);
 		stalksItem = (new ItemStalks(stalksItemIID, RCPM.cornBlock)).setUnlocalizedName("RCPM:Stalks").setCreativeTab(RCB.ReactioncraftItems);
-		Wrappedcorn = new ItemBasic(WrappedcornIID).setUnlocalizedName("RPCM:Wrappedcorn").setCreativeTab(RCB.Reactioncraftfood);
+		Wrappedcorn = new ItemBasic(WrappedcornIID).setUnlocalizedName("RCPM:Wrappedcorn").setCreativeTab(RCB.Reactioncraftfood);
 		
 	
 		//Registry Code
@@ -178,7 +178,7 @@ public class RCPM
 		//LanguageRegistry.addName(CocoBean, "Coco Bean");
 		LanguageRegistry.addName(sugarcaneItem, "Sugar Cane");
 		LanguageRegistry.addName(AncientFlower, "Ancient Flower");
-		LanguageRegistry.addName(Wrappedcorn, "Corn");
+		LanguageRegistry.addName(Wrappedcorn, "Wrapped Corn");
 		LanguageRegistry.addName(stalksItem, "Corn Stalks");
 		
 		//MY Taller Sugarcane to Paper & sugar

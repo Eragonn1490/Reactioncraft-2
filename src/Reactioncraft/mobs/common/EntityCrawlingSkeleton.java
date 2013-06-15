@@ -1,6 +1,7 @@
 package Reactioncraft.mobs.common;
 
 import Reactioncraft.mobs.RCmobs;
+import Reactioncraft.mobs.client.ClientProxy;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EnumCreatureAttribute;
 import net.minecraft.entity.ai.EntityAIAttackOnCollide;
@@ -26,7 +27,7 @@ public class EntityCrawlingSkeleton extends EntityMob
     public EntityCrawlingSkeleton(World world)
     {
         super(world);
-        texture = (RCmobs.CSproxy.MODEL_TEXTURE + "skelly1.png");
+        texture = (ClientProxy.MODEL_TEXTURE + "skelly1.png");
         this.moveSpeed = 0.25F;
         this.getNavigator().setBreakDoors(true);
         this.tasks.addTask(0, new EntityAISwimming(this));

@@ -339,7 +339,7 @@ public class RCF
 		popcornseeds = new ItemBasic(popcornseedsIID).setUnlocalizedName("RCPM:CornSeed").setCreativeTab(RCB.Reactioncraftfood);
 		bagofpopcorn = new ItemBasic(bagofpopcornIID).setUnlocalizedName("RCF:bagofpopcorn").setCreativeTab(RCB.Reactioncraftfood);
 		poppedbagofpopcorn = new ItemFoodMod(poppedbagofpopcornIID, 10, true).setUnlocalizedName("RCF:poppedbagofpopcorn").setCreativeTab(RCB.Reactioncraftfood);
-		rawcorn = new ItemFoodMod(rawcornIID, 7, false).setUnlocalizedName("RCF:cookedCorn").setCreativeTab(RCB.Reactioncraftfood);
+		rawcorn = new ItemFoodMod(rawcornIID, 7, false).setUnlocalizedName("RCF:uncookedCorn").setCreativeTab(RCB.Reactioncraftfood);
 		UnwrappedCorn = new ItemFoodMod(UnwrappedCornIID, 6, false).setUnlocalizedName("RCF:UnwrappedCorn").setCreativeTab(RCB.Reactioncraftfood);
 		RawNuggets = new ItemFoodMod(RawNuggetsIID, 5, true).setPotionEffect(Potion.hunger.id, 30, 0, 0.8F).setUnlocalizedName("RCF:RawNuggets").setCreativeTab(RCB.Reactioncraftfood);
 		ChickenNuggets = new ItemFoodMod(ChickenNuggetsIID, 8, true).setUnlocalizedName("RCF:ChickenNuggets").setCreativeTab(RCB.Reactioncraftfood);
@@ -451,12 +451,13 @@ public class RCF
 		LanguageRegistry.addName(Knfie, "Knife");
 		LanguageRegistry.addName(EdibleFlesh, "Edible Flesh");
 
-		LanguageRegistry.addName(cookedCorn, "Cooked Corn");
+		LanguageRegistry.instance().addName(RCF.cookedCorn, "Cooked Corn");
+		
 		LanguageRegistry.addName(popcornseeds, "Popcorn Kernals");
 		LanguageRegistry.addName(bagofpopcorn, "Unpopped Bag of Popcorn");
 		LanguageRegistry.addName(poppedbagofpopcorn, "Bag of Popcorn");
-		LanguageRegistry.addName(rawcorn, "Uncooked Corn");
-		LanguageRegistry.addName(UnwrappedCorn, "Corn");
+		LanguageRegistry.addName(RCF.rawcorn, "Uncooked Corn");
+		LanguageRegistry.addName(UnwrappedCorn, "Unwrapped Corn");
 		LanguageRegistry.addName(ChickenNuggets, "Chicken Nuggets");
 		LanguageRegistry.addName(RawNuggets, "Raw Nuggets");
 		LanguageRegistry.addName(SlicedBread, "sliced bread");

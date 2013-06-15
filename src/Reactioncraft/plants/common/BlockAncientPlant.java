@@ -239,7 +239,7 @@ public class BlockAncientPlant extends BlockFlower
 
         for (int i = 0; i < this.iconArray.length; ++i)
         {
-            this.iconArray[i] = par1IconRegister.registerIcon("ap_" + i);
+            this.iconArray[i] = par1IconRegister.registerIcon("RCPM:ap_" + i);
         }
     }
 }

@@ -1,6 +1,7 @@
 package Reactioncraft.mobs.common;
 
 import Reactioncraft.mobs.RCmobs;
+import Reactioncraft.mobs.client.ClientProxy;
 import net.minecraft.block.Block;
 import net.minecraft.block.material.Material;
 import net.minecraft.entity.Entity;
@@ -47,7 +48,7 @@ public class EntitySeaCreeper extends EntityWaterMob
     public EntitySeaCreeper(World world)
     {
         super(world);
-        this.texture = (RCmobs.CSproxy.MODEL_TEXTURE + "seacreeper.png");
+        this.texture = (ClientProxy.MODEL_TEXTURE + "seacreeper.png");
         this.tasks.addTask(0, new EntityAISwimming(this)); 
         this.tasks.addTask(1, new EntityAIFleeSun(this, 0.2F));
         this.tasks.addTask(2, new EntityAISeaCreeperSwell(this));

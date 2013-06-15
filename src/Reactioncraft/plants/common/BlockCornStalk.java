@@ -239,7 +239,7 @@ public class BlockCornStalk extends BlockFlower
 
         for (int i = 0; i < this.iconArray.length; ++i)
         {
-            this.iconArray[i] = par1IconRegister.registerIcon("corn_" + i);
+            this.iconArray[i] = par1IconRegister.registerIcon("RCPM:corn_" + i);
         }
     }
 }
