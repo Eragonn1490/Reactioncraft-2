@@ -2,6 +2,7 @@ package Reactioncraft.plants.common;
 
 import java.util.Random;
 import Reactioncraft.core.RCC;
+import Reactioncraft.plants.RCPM;
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockGrass;
 import net.minecraft.block.material.Material;
@@ -37,7 +38,7 @@ public class BlockReed1 extends Block
 
 	public int idDropped(int i, int j, Random random)
 	{
-		return Item.reed.itemID;
+		return RCPM.sugarcaneItem.itemID;
 	}
 
 	public int idDropped(int i, Random random)

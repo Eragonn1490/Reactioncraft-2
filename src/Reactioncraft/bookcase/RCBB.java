@@ -247,10 +247,10 @@ public class RCBB
 	public void blocks() 
 	{
 		bookcasemeta = new BlockBookcaseMulti(bookcasemetaID, Material.wood).setHardness(1.5F);
-		WoodenBookcasedoorBlock = new BlockBookcasedoor(WoodenBookcasedoorBlockID, Material.wood).setHardness(1.5F).setUnlocalizedName("RCBB:WoodenBookcasedoor_lower");
-		IronBookcasedoorBlock = new BlockBookcasedoor(IronBookcasedoorBlockID, Material.iron).setHardness(1.5F).setUnlocalizedName("RCBB:IronBookcasedoorBlock_lower");;
-		Bookcasechest = (new Blockbookshelfchest(BookcasechestID)).setHardness(1.5F).setResistance(1.0F).setUnlocalizedName("RCBB:Bookcasechest");
-		leverbookcase = (new BlockLeverBookcase(leverbookcaseID)).setHardness(1.5F).setStepSound(Block.soundWoodFootstep).setUnlocalizedName("RCBB:leverbookcase").setCreativeTab(RCB.Reactioncraft);
+		WoodenBookcasedoorBlock = new BlockBookcasedoor(WoodenBookcasedoorBlockID, Material.wood).setHardness(1.5F).setUnlocalizedName("bookshelf");
+		IronBookcasedoorBlock = new BlockBookcasedoor(IronBookcasedoorBlockID, Material.iron).setHardness(1.5F).setUnlocalizedName("bookshelf");;
+		Bookcasechest = (new Blockbookshelfchest(BookcasechestID)).setHardness(1.5F).setResistance(1.0F).setUnlocalizedName("bookshelf");
+		leverbookcase = (new BlockLeverBookcase(leverbookcaseID)).setHardness(1.5F).setStepSound(Block.soundWoodFootstep).setUnlocalizedName("bookshelf").setCreativeTab(RCB.Reactioncraft);
 	}
 
 	public void items() 

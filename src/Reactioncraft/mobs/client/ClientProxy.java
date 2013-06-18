@@ -9,7 +9,6 @@ import cpw.mods.fml.relauncher.SideOnly;
 
 public class ClientProxy extends CommonProxy
 {
-	@SideOnly(Side.CLIENT)
 	public static String MODEL_TEXTURE ="/mods/RCmobs/textures/mobs/";
 	
 	@SideOnly(Side.CLIENT)

@@ -3,7 +3,6 @@ package Reactioncraft.core;
 import Reactioncraft.core.client.ClientProxy;
 import Reactioncraft.core.common.CommonProxy;
 import Reactioncraft.core.common.ItemHammer;
-
 import java.io.File;
 import net.minecraft.block.Block;
 import net.minecraft.creativetab.CreativeTabs;
@@ -14,7 +13,6 @@ import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.oredict.OreDictionary;
 import net.minecraftforge.common.Property;
 import net.minecraftforge.oredict.ShapedOreRecipe;
-import Reactioncraft.Desert.RCBDM;
 import Reactioncraft.Integration.Integration;
 import Reactioncraft.basefiles.common.*;
 import Reactioncraft.basemod.RCB;

@@ -85,14 +85,9 @@ public class EntityBee extends EntityAnimal
         return new EntityBee(worldObj);
     }
 
-	public EntityAgeable func_90011_a(EntityAgeable var1) 
-	{
-		// TODO Auto-generated method stub
-		return null;
-	}
-
 	@Override
-	public EntityAgeable createChild(EntityAgeable var1) {
+	public EntityAgeable createChild(EntityAgeable entityageable) 
+	{
 		// TODO Auto-generated method stub
 		return null;
 	}

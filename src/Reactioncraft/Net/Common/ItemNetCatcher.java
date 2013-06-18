@@ -20,7 +20,8 @@ import cpw.mods.fml.relauncher.SideOnly;
 public class ItemNetCatcher extends ItemTool 
 {
 
-	public ItemNetCatcher(int par1) {
+	public ItemNetCatcher(int par1) 
+	{
 		super(par1, 0, RCN.EnumToolMaterialNet, new Block[] {});
 		this.setUnlocalizedName("completeNet");
 		this.setCreativeTab(RCB.Reactioncraft);
@@ -90,6 +91,7 @@ public class ItemNetCatcher extends ItemTool
 			stack.damageItem(1, player);
 			entity.setDead();
 		}
+		//if(stack.getItemDamage() >= (stack.getMaxDamage() - 1))
 		if(stack.getItemDamage() >= (stack.getMaxDamage() - 1))
 		{
 			--stack.stackSize;

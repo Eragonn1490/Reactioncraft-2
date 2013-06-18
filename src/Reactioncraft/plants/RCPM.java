@@ -12,12 +12,14 @@ import net.minecraft.creativetab.CreativeTabs;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemReed;
 import net.minecraft.item.ItemStack;
+import net.minecraft.item.crafting.CraftingManager;
 import net.minecraft.util.WeightedRandomChestContent;
 import net.minecraftforge.common.ChestGenHooks;
 import net.minecraftforge.common.Configuration;
 import net.minecraftforge.common.DungeonHooks;
 import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.oredict.OreDictionary;
+import net.minecraftforge.oredict.ShapedOreRecipe;
 import cpw.mods.fml.common.Mod;
 import cpw.mods.fml.common.Mod.Init;
 import cpw.mods.fml.common.Mod.Instance;
@@ -192,6 +194,10 @@ public class RCPM
 		//Mojang coco bean to ours... Cooked one to ours (Rewriting this)
 		GameRegistry.addShapelessRecipe(new ItemStack(AncientSeeds, 1), new Object[] {AncientFlower});
 		GameRegistry.addShapelessRecipe(new ItemStack(AncientSeeds, 2), new Object[] {AncientFruit});
+		
+		//Raw Corn to Corn Seeds
+		CraftingManager.getInstance().getRecipeList().add(new ShapedOreRecipe(new ItemStack(RCPM.CornSeed, 3), true, new Object[]{"Y", Character.valueOf('Y'), "rawCorn"}));
+		
 		//GameRegistry.addRecipe(new ItemStack(CocoSeed, 1), new Object[]{"#", Character.valueOf('#'), CocoBean});
 		//GameRegistry.addRecipe(new ItemStack(CocoSeed, 1), new Object[]{"#", Character.valueOf('#'), new ItemStack(Item.dyePowder, 1, 3)});
 		//GameRegistry.addRecipe(new ItemStack(Item.cookie, 12), new Object[]{"D#D", Character.valueOf('#'), CocoBean, Character.valueOf('D'), Item.wheat});
@@ -212,7 +218,7 @@ public class RCPM
 		ChestGenHooks.addItem(ChestGenHooks.PYRAMID_JUNGLE_CHEST, new WeightedRandomChestContent(new ItemStack(RCPM.AncientFlower), 1, 5, 15));
 		
 		//Corn
-		MinecraftForge.addGrassSeed(new ItemStack(RCPM.CornSeed), 50);
+		MinecraftForge.addGrassSeed(new ItemStack(RCPM.CornSeed), 5);
 		ChestGenHooks.addItem(ChestGenHooks.BONUS_CHEST, new WeightedRandomChestContent(new ItemStack(RCPM.CornSeed), 1, 2, 5));
 		ChestGenHooks.addItem(ChestGenHooks.MINESHAFT_CORRIDOR, new WeightedRandomChestContent(new ItemStack(RCPM.CornSeed), 1, 5, 15));
 		ChestGenHooks.addItem(ChestGenHooks.PYRAMID_JUNGLE_CHEST, new WeightedRandomChestContent(new ItemStack(RCPM.CornSeed), 1, 5, 15));

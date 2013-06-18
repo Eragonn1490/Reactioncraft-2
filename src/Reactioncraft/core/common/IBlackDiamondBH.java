@@ -15,7 +15,7 @@ public class IBlackDiamondBH extends Item implements IBoreHead
 
     public String getBoreTexture()
     {
-        return "/Reactioncraft/images/tunnel_bore_blackdiamond.png";
+        return "/Reactioncraft/RCC/railcraft/tunnel_bore_blackdiamond.png";
     }
 
     public int getHarvestLevel()

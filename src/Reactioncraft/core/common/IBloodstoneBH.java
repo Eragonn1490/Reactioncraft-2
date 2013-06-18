@@ -14,7 +14,7 @@ public class IBloodstoneBH extends Item implements IBoreHead
 
     public String getBoreTexture()
     {
-        return "/Reactioncraft/images/tunnel_bore_bloodstone.png";
+        return "/Reactioncraft/RCC/railcraft/tunnel_bore_bloodstone.png";
     }
 
     public int getHarvestLevel()

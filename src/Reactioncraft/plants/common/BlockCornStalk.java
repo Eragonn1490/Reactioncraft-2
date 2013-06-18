@@ -3,6 +3,8 @@ package Reactioncraft.plants.common;
 import java.util.ArrayList;
 import java.util.Random;
 
+import Reactioncraft.plants.RCPM;
+
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockFlower;
 import net.minecraft.client.renderer.texture.IconRegister;
@@ -163,7 +165,7 @@ public class BlockCornStalk extends BlockFlower
      */
     public int getSeedItem()
     {
-        return Item.seeds.itemID;
+        return RCPM.cornBlock.blockID;
     }
 
     /**
@@ -171,7 +173,7 @@ public class BlockCornStalk extends BlockFlower
      */
     public int getCropItem()
     {
-        return Item.wheat.itemID;
+        return RCPM.cornBlock.blockID;
     }
 
     /**

@@ -221,10 +221,10 @@ public class BlockBookcaseMulti extends Block
         // meta 1, Webbed Bookshelf with books
         iconBuffer[1][0] = par1IconRegister.registerIcon("RCBB:wood"); // bottom
         iconBuffer[1][1] = par1IconRegister.registerIcon("RCBB:wood"); // top
-        iconBuffer[1][2] = par1IconRegister.registerIcon("RCBB:web2"); // north
-        iconBuffer[1][3] = par1IconRegister.registerIcon("RCBB:web2"); // east
-        iconBuffer[1][4] = par1IconRegister.registerIcon("RCBB:web2"); // south
-        iconBuffer[1][5] = par1IconRegister.registerIcon("RCBB:web2"); // west
+        iconBuffer[1][2] = par1IconRegister.registerIcon("bookshelf"); // north
+        iconBuffer[1][3] = par1IconRegister.registerIcon("bookshelf"); // east
+        iconBuffer[1][4] = par1IconRegister.registerIcon("bookshelf"); // south
+        iconBuffer[1][5] = par1IconRegister.registerIcon("bookshelf"); // west
         
         // meta 2, Webbed Bookshelf without books
         iconBuffer[2][0] = par1IconRegister.registerIcon("RCBB:wood"); // bottom

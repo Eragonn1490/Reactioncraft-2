@@ -14,6 +14,7 @@ import net.minecraft.item.ItemStack;
 import net.minecraft.item.crafting.CraftingManager;
 import net.minecraft.potion.Potion;
 import net.minecraftforge.common.Configuration;
+import net.minecraftforge.oredict.OreDictionary;
 import net.minecraftforge.oredict.ShapedOreRecipe;
 import cpw.mods.fml.common.FMLLog;
 import cpw.mods.fml.common.Mod;
@@ -345,7 +346,7 @@ public class RCF
 		ChickenNuggets = new ItemFoodMod(ChickenNuggetsIID, 8, true).setUnlocalizedName("RCF:ChickenNuggets").setCreativeTab(RCB.Reactioncraftfood);
 		SlicedBread = new ItemFoodMod(SlicedBreadIID, 4, false).setUnlocalizedName("RCF:SlicedBread").setCreativeTab(RCB.Reactioncraftfood);
 		HamSandwich = new ItemFoodMod(HamSandwichIID, 12, false).setUnlocalizedName("RCF:HamSandwich").setCreativeTab(RCB.Reactioncraftfood);
-		EdibleFlesh= new ItemBasicFood(EdibleFleshIID, 10, true).setUnlocalizedName("RCF:EdibleFlesh").setCreativeTab(RCB.Reactioncraftfood);
+		EdibleFlesh= new ItemBasicFood(EdibleFleshIID, 10, true).setUnlocalizedName("RCF:edibleflesh").setCreativeTab(RCB.Reactioncraftfood);
 		
 		//Goes Into Reactioncraft Main Creative Tab
 		Knfie = (new ItemKnife(knifeIID, EnumToolMaterial.IRON)).setUnlocalizedName("RCF:knife").setContainerItem(Knfie).setCreativeTab(RCB.ReactioncraftItems);
@@ -392,7 +393,8 @@ public class RCF
 		//GameRegistry.addRecipe(new ItemStack(HamSandwich, 1), new Object[] {"A", "B", "A", 'A', RCF.SlicedBread, 'B', Item.});
 		GameRegistry.addRecipe(new ItemStack(Knfie, 1), new Object[] {"B", "A", 'A', Item.stick, 'B', Item.ingotIron});
 
-
+		OreDictionary.registerOre("rawCorn", new ItemStack(RCF.rawcorn));
+		
 		//not used yet
 		//	 		GameRegistry.addShapelessRecipe(new ItemStack(SteakSandwich, 1), new Object[] {
 		//	            Item.beefRaw, SlicedBread, SlicedBread

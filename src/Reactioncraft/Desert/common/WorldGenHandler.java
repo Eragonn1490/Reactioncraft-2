@@ -52,7 +52,7 @@ public class WorldGenHandler implements IWorldGenerator
 				  int Xcoord1 = blockX + random.nextInt(16);
 				  int Ycoord1 = random.nextInt(80);
 				  int Zcoord1 = blockZ + random.nextInt(16);
-				  (new WorldGenReactionCraftTree()).generate(world, random, Xcoord1, Ycoord1, Zcoord1);
+				  (new WorldGenReactionCraftTreespawn()).generate(world, random, Xcoord1, Ycoord1, Zcoord1);
 			  }
 	}
 

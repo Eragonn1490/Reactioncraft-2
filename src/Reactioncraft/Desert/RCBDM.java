@@ -535,7 +535,7 @@ public class RCBDM
 		BloodstoneBrick = new BlockBasic(BloodstoneBrickID).setHardness(120.0F).setResistance(2000.0F).setLightValue(0.10F).setStepSound(Block.soundStoneFootstep).setUnlocalizedName("RCBDM:BloodStoneBrick").setCreativeTab(RCB.Reactioncraft);
 		Cherrywood = new BlockCherryTreeLog(CherrywoodID, Material.wood).setStepSound(Block.soundWoodFootstep).setHardness(0.2F).setResistance(0.5F).setUnlocalizedName("RCBDM:woodside");
 		CherryTreeLeaves = new BlockCherryTreeLeaves(CherryTreeLeavesID).setStepSound(Block.soundGrassFootstep).setHardness(0.2F).setResistance(0.5F).setUnlocalizedName("RCBDM:CherryTreeLeaves");
-		CherryTreeSapling = new BlockCherryTreeSapling(CherryTreeSaplingID).setStepSound(Block.soundGrassFootstep).setHardness(0.2F).setResistance(0.5F).setUnlocalizedName("RCBDM:CherryTreeSapling");
+		CherryTreeSapling = new BlockCherryTreeSapling(CherryTreeSaplingID, 0).setStepSound(Block.soundGrassFootstep).setHardness(0.2F).setResistance(0.5F).setUnlocalizedName("RCBDM:CherryTreeSapling");
 		HireoMulti = new BlockHireoMulti(HireoBlocksIID, Material.rock).setHardness(3.0F).setUnlocalizedName("HireoMulti");
 		ColumnMulti = new BlockColumnMulti(ColumnBlockID, Material.rock).setHardness(3.0F).setUnlocalizedName("ColumnMulti");
 		ColumnMulti2 = new BlockColumnMulti2(ColumnBlock2ID, Material.rock).setHardness(3.0F).setUnlocalizedName("ColumnMulti2");
