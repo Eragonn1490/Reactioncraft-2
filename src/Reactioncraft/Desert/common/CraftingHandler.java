@@ -11,8 +11,7 @@ public class CraftingHandler implements ICraftingHandler
 {
 
 	@Override
-	public void onCrafting(EntityPlayer player, ItemStack item,
-			IInventory craftMatrix) 
+	public void onCrafting(EntityPlayer player, ItemStack item, IInventory craftMatrix) 
 	{
 		for(int w=0; w < craftMatrix.getSizeInventory(); w++) //Checks all the slots
 		{               
@@ -45,6 +44,7 @@ public class CraftingHandler implements ICraftingHandler
 				}
 			}
 		}
+		
 		for(int z=0; z < craftMatrix.getSizeInventory(); z++) //Checks all the slots
 		{               
 			if(craftMatrix.getStackInSlot(z) != null) //If there is an item
@@ -60,6 +60,7 @@ public class CraftingHandler implements ICraftingHandler
 				}
 			}
 		}
+		
 		for(int a=0; a < craftMatrix.getSizeInventory(); a++) //Checks all the slots
 		{               
 			if(craftMatrix.getStackInSlot(a) != null) //If there is an item
@@ -75,6 +76,7 @@ public class CraftingHandler implements ICraftingHandler
 				}
 			}
 		}
+		
 		for(int G=0; G < craftMatrix.getSizeInventory(); G++) //Checks all the slots
 		{               
 			if(craftMatrix.getStackInSlot(G) != null) //If there is an item

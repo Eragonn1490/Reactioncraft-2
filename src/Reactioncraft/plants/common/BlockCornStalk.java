@@ -157,7 +157,7 @@ public class BlockCornStalk extends BlockFlower
      */
     public int getRenderType()
     {
-        return 6;
+        return 1;
     }
 
     /**

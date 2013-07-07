@@ -27,7 +27,7 @@ import cpw.mods.fml.common.registry.LanguageRegistry;
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
 
-@Mod(modid = "RCmobs", name="Reactioncraft Mobs Mod", version="[1.5.2] Reactioncraft Version 8.0", dependencies="required-after:FML@[4.2.18,)")
+@Mod(modid = "RCmobs", name="Reactioncraft Mobs Mod", version="[1.5.2] Reactioncraft Version 9.0", dependencies="required-after:FML@[4.2.18,)")
 
 @NetworkMod(channels = { "RCmobs" }, clientSideRequired = true, serverSideRequired = false, packetHandler = PacketHandler.class)
 
@@ -52,7 +52,7 @@ public class RCmobs
 	@PreInit
 	public void preInit(FMLPreInitializationEvent evt)
 	{
-		System.out.println("Pre Initialization Loaded");
+		System.out.println("[RCMOBS] Pre Initialization Loaded");
 		
 		config = new ReactioncraftConfiguration(new File(evt.getModConfigurationDirectory(), "Reactioncraft/Mobs.cfg"));
 
@@ -79,8 +79,7 @@ public class RCmobs
 	public void load(FMLInitializationEvent event)
 	{
 		//MinecraftForge.EVENT_BUS.register(new LivingDropsEvent());
-		ClientProxy.registerRenderInformation();
-		
+		ClientProxy.registerRenderInformation();		
 		registerGlobal();
 		registerEntities();
 		addSpawn();
@@ -107,10 +106,12 @@ public class RCmobs
 		EntityRegistry.registerGlobalEntityID(EntityJellyfish.class, "Jellyfish", EntityRegistry.findGlobalUniqueEntityId(), 0x333333, 0x999999);
 		EntityRegistry.registerGlobalEntityID(EntitySeaCreeper.class, "Sea Creeper", EntityRegistry.findGlobalUniqueEntityId(), 0x333333, 0x999999);
 		EntityRegistry.registerGlobalEntityID(EntityStalker.class, "Stalker", EntityRegistry.findGlobalUniqueEntityId(), 0x333333, 0x999999);
-		EntityRegistry.registerGlobalEntityID(EntityZombieCrawling.class, "Crawling Zombie", EntityRegistry.findGlobalUniqueEntityId(), 0x333333, 0x999999);
-		EntityRegistry.registerGlobalEntityID(EntityCrawlingSkeleton.class, "Crawling Skeleton", EntityRegistry.findGlobalUniqueEntityId(), 0x333333, 0x999999);
 		EntityRegistry.registerGlobalEntityID(EntityHydrolisc.class, "Hydrolisc", EntityRegistry.findGlobalUniqueEntityId(), 0x333333, 0x999999);
+		
+		EntityRegistry.registerGlobalEntityID(EntityZombieCrawling.class, "Crawling Zombie", EntityRegistry.findGlobalUniqueEntityId(), 0x333313, 0x998991);
+		EntityRegistry.registerGlobalEntityID(EntitySkeletonCrawling.class, "Crawling Skeleton", EntityRegistry.findGlobalUniqueEntityId(), 0x333313, 0x998991);
 	}
+	
 
 	public void registerGlobal()
 	{
@@ -129,8 +130,10 @@ public class RCmobs
 		EntityRegistry.addSpawn(EntityHydrolisc.class, 5, 1, 3, EnumCreatureType.creature, new BiomeGenBase[]{BiomeGenBase.beach});
 		EntityRegistry.addSpawn(EntityJellyfish.class, 5, 1, 2, EnumCreatureType.waterCreature, new BiomeGenBase[]{BiomeGenBase.ocean});
 		EntityRegistry.addSpawn(EntityStalker.class, 5, 1, 2, EnumCreatureType.monster, new BiomeGenBase[]{BiomeGenBase.plains, BiomeGenBase.forest, BiomeGenBase.forestHills, BiomeGenBase.taiga});
-		EntityRegistry.addSpawn(EntityZombieCrawling.class, 5, 1, 2, EnumCreatureType.monster, new BiomeGenBase[]{BiomeGenBase.plains, BiomeGenBase.forest, BiomeGenBase.forestHills, BiomeGenBase.taiga});
-		EntityRegistry.addSpawn(EntityCrawlingSkeleton.class, 5, 1, 2, EnumCreatureType.monster, new BiomeGenBase[]{BiomeGenBase.plains, BiomeGenBase.forest, BiomeGenBase.forestHills, BiomeGenBase.taiga});
 		EntityRegistry.addSpawn(EntitySeaCreeper.class, 5, 1, 2, EnumCreatureType.waterCreature, new BiomeGenBase[]{BiomeGenBase.ocean});
+		
+		
+		EntityRegistry.addSpawn(EntityZombieCrawling.class, 5, 1, 2, EnumCreatureType.monster, new BiomeGenBase[]{BiomeGenBase.plains, BiomeGenBase.forest, BiomeGenBase.forestHills, BiomeGenBase.taiga});
+		EntityRegistry.addSpawn(EntitySkeletonCrawling.class, 5, 1, 2, EnumCreatureType.monster, new BiomeGenBase[]{BiomeGenBase.plains, BiomeGenBase.forest, BiomeGenBase.forestHills, BiomeGenBase.taiga});
 	}
 }

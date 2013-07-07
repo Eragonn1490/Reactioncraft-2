@@ -30,7 +30,7 @@ import cpw.mods.fml.common.registry.GameRegistry;
 import cpw.mods.fml.common.registry.LanguageRegistry;
 
 
-@Mod( modid = "RCMM", name="Reactioncraft Mobs Mod", version="[1.5.2] Reactioncraft Version 8.0", dependencies="after:RCBDM")
+@Mod( modid = "RCMM", name="Reactioncraft Mobs Mod", version="[1.5.2] Reactioncraft Version 9.0", dependencies="after:RCBDM")
 @NetworkMod(channels = { "RCMM" }, clientSideRequired = true, serverSideRequired = false, packetHandler = PacketHandler.class)
 
 public class RCMM
@@ -108,7 +108,7 @@ public class RCMM
 	{
 		instance = this;
 		
-		System.out.println("Pre Initialization Loaded");
+		System.out.println("[RCMM] Pre Initialization Loaded");
 
 		config = new ReactioncraftConfiguration(new File(evt.getModConfigurationDirectory(), "Reactioncraft/Machines.cfg"));
 

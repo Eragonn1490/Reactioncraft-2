@@ -121,7 +121,7 @@ public class EntityJellyfish extends EntityWaterMob
 
         for (int k = 0; k < j; k++)
         {
-        	entityDropItem(new ItemStack(Item.appleRed, 1), 0.0F);
+        	entityDropItem(new ItemStack(Item.appleRed, 0), 0.0F);
             //entityDropItem(new ItemStack(RCmobs.Jellyfish, 1), 0.0F);
         }
     }

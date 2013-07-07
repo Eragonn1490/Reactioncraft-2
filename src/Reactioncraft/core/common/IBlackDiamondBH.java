@@ -1,5 +1,6 @@
 package Reactioncraft.core.common;
 
+import Reactioncraft.core.client.ClientProxy;
 import mods.railcraft.api.carts.bore.IBoreHead;
 import net.minecraft.item.Item;
 
@@ -15,7 +16,7 @@ public class IBlackDiamondBH extends Item implements IBoreHead
 
     public String getBoreTexture()
     {
-        return "/Reactioncraft/RCC/railcraft/tunnel_bore_blackdiamond.png";
+        return (ClientProxy.BORE_TEXTURE + "tunnel_bore_blackdiamond.png");
     }
 
     public int getHarvestLevel()

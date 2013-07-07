@@ -14,7 +14,7 @@ import net.minecraft.util.Icon;
 import net.minecraft.world.IBlockAccess;
 import net.minecraft.world.World;
 
-public class BlockGlowingGlassMulti extends Block
+public class BlockGlowingGlassMulti extends BlockGlassMulti
 {
 	private Icon[][] iconBuffer;
 
@@ -391,4 +391,27 @@ public class BlockGlowingGlassMulti extends Block
 	{
 		return iconBuffer[blockMeta][blockSide];
 	}
+	
+	/**
+     * Determines if a torch can be placed on the top surface of this block.
+     * Useful for creating your own block that torches can be on, such as fences.
+     *
+     * @param world The current world
+     * @param x X Position
+     * @param y Y Position
+     * @param z Z Position
+     * @return True to allow the torch to be placed
+     */
+    public boolean canPlaceTorchOnTop(World world, int x, int y, int z)
+    {
+        if (world.doesBlockHaveSolidTopSurface(x, y, z))
+        {
+            return true;
+        }
+        else
+        {
+            int id = world.getBlockId(x, y, z);
+            return id == Block.fence.blockID || id == Block.netherFence.blockID || id == Block.glass.blockID || id == Block.cobblestoneWall.blockID || id == RCG.GlassMulti.blockID || id == RCG.GlowingGlassMulti.blockID;
+        }
+    }
 }

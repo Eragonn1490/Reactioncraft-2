@@ -1,4 +1,4 @@
-package Reactioncraft.basefiles.common;
+package Reactioncraft.tools.common;
 
 import Reactioncraft.basemod.RCB;
 import net.minecraft.item.EnumToolMaterial;

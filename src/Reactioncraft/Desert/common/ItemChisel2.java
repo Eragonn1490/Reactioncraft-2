@@ -11,7 +11,7 @@ public class ItemChisel2 extends ItemChisel
 	{
 		super(par1);
 		this.setMaxStackSize(1);
-		this.setMaxDamage(30);
+		this.setMaxDamage(65);
 		this.setUnlocalizedName("Chisel");
 		this.setCreativeTab(RCB.ReactioncraftItems);
 	}

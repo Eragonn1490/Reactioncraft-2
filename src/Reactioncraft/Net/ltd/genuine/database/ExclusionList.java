@@ -29,6 +29,7 @@ public class ExclusionList implements Iterable
 		addExclusion("PrimedTnt");
 		addExclusion("MinecartTNT");
 		addExclusion("WitherSkull");
+		addExclusion("Hydrolisc");
 	}
 
 	public void addExclusion(String name) 

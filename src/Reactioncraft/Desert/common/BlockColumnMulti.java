@@ -75,6 +75,7 @@ public class BlockColumnMulti extends Block
     /**
      * Returns the ID of the items to drop on destruction.
      */
+    @Override
     public int idDropped(int i, Random random, int j)
     {
         switch (i)
@@ -89,16 +90,16 @@ public class BlockColumnMulti extends Block
                 return RCBDM.ColumnMulti.blockID;
 
             case 3:
-                return Block.cobblestone.blockID;
+                return RCBDM.ColumnMulti.blockID;
 
             case 4:
-                return Block.cobblestone.blockID;
+                return RCBDM.ColumnMulti.blockID;
 
             case 5:
-                return Block.sandStone.blockID;
+                return RCBDM.ColumnMulti.blockID;
 
             case 6:
-                return Block.stoneBrick.blockID;
+                return RCBDM.ColumnMulti.blockID;
         }
     }
 
@@ -271,4 +272,27 @@ public class BlockColumnMulti extends Block
 	{
 		return iconBuffer[blockMeta][blockSide];
 	}
+	
+	/**
+     * Determines if a torch can be placed on the top surface of this block.
+     * Useful for creating your own block that torches can be on, such as fences.
+     *
+     * @param world The current world
+     * @param x X Position
+     * @param y Y Position
+     * @param z Z Position
+     * @return True to allow the torch to be placed
+     */
+	public boolean canPlaceTorchOnTop(World world, int x, int y, int z)
+    {
+        if (world.doesBlockHaveSolidTopSurface(x, y, z))
+        {
+            return true;
+        }
+        else
+        {
+            int id = world.getBlockId(x, y, z);
+            return id == Block.fence.blockID || id == Block.netherFence.blockID || id == Block.glass.blockID || id == Block.cobblestoneWall.blockID || id == RCBDM.ColumnMulti.blockID || id == RCBDM.ColumnMulti2.blockID;
+        }
+    }
 }

@@ -8,8 +8,10 @@ import net.minecraft.block.Block;
 import net.minecraft.block.BlockFlower;
 import net.minecraft.block.material.Material;
 import net.minecraft.creativetab.CreativeTabs;
+import net.minecraft.entity.Entity;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.AxisAlignedBB;
+import net.minecraft.util.DamageSource;
 import net.minecraft.world.World;
 import net.minecraftforge.common.EnumPlantType;
 import net.minecraftforge.common.ForgeDirection;
@@ -46,7 +48,7 @@ public class DesertFlower extends BlockFlower implements IPlantable
      */
     public boolean canThisPlantGrowOnThisBlockID(int par1)
     {
-        return par1 == Block.grass.blockID || par1 == Block.dirt.blockID || par1 == Block.tilledField.blockID || par1 == RCC.DarkSand.blockID;
+        return par1 == Block.grass.blockID || par1 == Block.dirt.blockID || par1 == Block.tilledField.blockID || par1 == RCC.DarkSand.blockID || par1 == Block.sand.blockID;
     }
 
     /**
@@ -109,6 +111,14 @@ public class DesertFlower extends BlockFlower implements IPlantable
     public int getRenderType()
     {
         return 1;
+    }
+    
+    /**
+     * Triggered whenever an entity collides with this block (enters into the block). Args: world, x, y, z, entity
+     */
+    public void onEntityCollidedWithBlock(World par1World, int par2, int par3, int par4, Entity par5Entity)
+    {
+        par5Entity.attackEntityFrom(DamageSource.cactus, 1);
     }
 
     @Override

@@ -4,13 +4,16 @@ import Reactioncraft.basemod.RCB;
 import net.minecraft.item.EnumToolMaterial;
 import net.minecraft.item.ItemSword;
 
-public class ItemKnife extends ItemSword
+public class ItemKnife extends ItemSword 
 {
-	public ItemKnife(int i, EnumToolMaterial var2)
+
+	public ItemKnife(int par1) 
 	{
-		super(i, var2);
-		this.setCreativeTab(RCB.Reactioncraft);
+		super(par1, EnumToolMaterial.EMERALD);
 		this.setMaxStackSize(1);
-		this.setMaxDamage(35);
+		this.setMaxDamage(25);
+		this.setCreativeTab(RCB.ReactioncraftItems);
 	}
 }
+
+

@@ -23,11 +23,11 @@ public class BlockDesertMulti extends Block
         super(i, material);
         this.setCreativeTab(RCB.Reactioncraft);
     }
-
-
+    
     /**
      * Returns the ID of the items to drop on destruction.
      */
+    @Override
     public int idDropped(int i, Random random, int j)
     {
         switch (i)
@@ -61,6 +61,9 @@ public class BlockDesertMulti extends Block
                
             case 9:
                 return RCBDM.UncutDBGem.itemID;
+            
+            case 11:
+            	return blockID;
         }
     }
 
@@ -88,6 +91,9 @@ public class BlockDesertMulti extends Block
 
             case 6:
                 return 1;
+            
+            case 11:
+            	return 1;
         }
     }
 
@@ -121,6 +127,9 @@ public class BlockDesertMulti extends Block
                 
 //            case 7:
 //                return 7;
+                
+            case 11:
+            	 return 11;
         }
     }
 
@@ -137,7 +146,7 @@ public class BlockDesertMulti extends Block
     	list.add(new ItemStack(i,1,8));
     	list.add(new ItemStack(i,1,9));
     	list.add(new ItemStack(i,1,10));
-//    	list.add(new ItemStack(i,1,11));
+    	list.add(new ItemStack(i,1,11));
 //    	list.add(new ItemStack(i,1,12));
 //    	list.add(new ItemStack(i,1,13));
 //    	list.add(new ItemStack(i,1,14));
@@ -237,14 +246,14 @@ public class BlockDesertMulti extends Block
 		iconBuffer[10][4] = par1IconRegister.registerIcon("RCBDM:desertgold"); // south
 		iconBuffer[10][5] = par1IconRegister.registerIcon("RCBDM:desertgold"); // west
 
-//		// meta 0, Empty Bookshelf
-//		iconBuffer[11][0] = par1IconRegister.registerIcon("RCBDM:magentaglass"); // bottom
-//		iconBuffer[11][1] = par1IconRegister.registerIcon("RCBDM:magentaglass"); // top
-//		iconBuffer[11][2] = par1IconRegister.registerIcon("RCBDM:magentaglass"); // north
-//		iconBuffer[11][3] = par1IconRegister.registerIcon("RCBDM:magentaglass"); // east
-//		iconBuffer[11][4] = par1IconRegister.registerIcon("RCBDM:magentaglass"); // south
-//		iconBuffer[11][5] = par1IconRegister.registerIcon("RCBDM:magentaglass"); // west
-//
+		// meta 11, cherry tree planks
+		iconBuffer[11][0] = par1IconRegister.registerIcon("RCBDM:cherryplanks"); // bottom
+		iconBuffer[11][1] = par1IconRegister.registerIcon("RCBDM:cherryplanks"); // top
+		iconBuffer[11][2] = par1IconRegister.registerIcon("RCBDM:cherryplanks"); // north
+		iconBuffer[11][3] = par1IconRegister.registerIcon("RCBDM:cherryplanks"); // east
+		iconBuffer[11][4] = par1IconRegister.registerIcon("RCBDM:cherryplanks"); // south
+		iconBuffer[11][5] = par1IconRegister.registerIcon("RCBDM:cherryplanks"); // west
+
 //		// meta 0, Empty Bookshelf
 //		iconBuffer[12][0] = par1IconRegister.registerIcon("RCBDM:OrangeGlass"); // bottom
 //		iconBuffer[12][1] = par1IconRegister.registerIcon("RCBDM:OrangeGlass"); // top

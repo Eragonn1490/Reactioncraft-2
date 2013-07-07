@@ -14,14 +14,14 @@ public class RenderSkeletonCrawling extends RenderLiving
         super(modelbase, f);
     }
 
-    public void renderZombieCrawling(EntityCrawlingSkeleton EntityCrawlingSkeleton, double d, double d1, double d2, float f, float f1)
+    public void renderSkeletonCrawling(EntitySkeletonCrawling EntitySkeletonCrawling, double d, double d1, double d2, float f, float f1)
     {
-        super.doRenderLiving(EntityCrawlingSkeleton, d, d1, d2, f, f1);
+        super.doRenderLiving(EntitySkeletonCrawling, d, d1, d2, f, f1);
     }
 
     public void doRenderLiving(EntityLiving entityliving, double d, double d1, double d2, float f, float f1)
     {
-        renderZombieCrawling((EntityCrawlingSkeleton)entityliving, d, d1, d2, f, f1);
+    	renderSkeletonCrawling((EntitySkeletonCrawling)entityliving, d, d1, d2, f, f1);
     }
 
     /**
@@ -32,10 +32,10 @@ public class RenderSkeletonCrawling extends RenderLiving
      */
     public void doRender(Entity entity, double d, double d1, double d2, float f, float f1)
     {
-        renderZombieCrawling((EntityCrawlingSkeleton)entity, d, d1, d2, f, f1);
+    	renderSkeletonCrawling((EntitySkeletonCrawling)entity, d, d1, d2, f, f1);
     }
 
-    public void preRenderScale(EntityCrawlingSkeleton EntityCrawlingSkeleton, float f)
+    public void preRenderScale(EntitySkeletonCrawling EntitySkeletonCrawling, float f)
     {
         GL11.glScalef(1.0F, 1.0F, 1.0F);
     }
@@ -46,7 +46,7 @@ public class RenderSkeletonCrawling extends RenderLiving
      */
     public void preRenderCallback(EntityLiving entityliving, float f)
     {
-        preRenderScale((EntityCrawlingSkeleton)entityliving, f);
+        preRenderScale((EntitySkeletonCrawling)entityliving, f);
     }
 
     public void rotateAnimal(EntityLiving entityliving)

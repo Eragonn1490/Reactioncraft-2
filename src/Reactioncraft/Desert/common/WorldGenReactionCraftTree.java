@@ -71,6 +71,8 @@ public class WorldGenReactionCraftTree extends WorldGenerator implements IWorldG
 									/** Custom grass block **/
 									&& k1 != RCC.DarkSand.blockID
 									&& k1 != Block.dirt.blockID
+									&& k1 != Block.grass.blockID
+									&& k1 != Block.sand.blockID
 									&& !block.isWood(par1World, l1, i1, j1))
 							{
 								flag = false;

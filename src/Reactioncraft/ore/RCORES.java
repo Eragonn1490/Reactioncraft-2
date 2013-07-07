@@ -15,6 +15,7 @@ import net.minecraft.util.WeightedRandomChestContent;
 import net.minecraftforge.common.ChestGenHooks;
 import net.minecraftforge.common.Configuration;
 import net.minecraftforge.common.MinecraftForge;
+import net.minecraftforge.common.Property;
 import net.minecraftforge.oredict.OreDictionary;
 import cpw.mods.fml.common.FMLLog;
 import cpw.mods.fml.common.Mod;
@@ -30,7 +31,7 @@ import cpw.mods.fml.common.network.NetworkMod;
 import cpw.mods.fml.common.registry.GameRegistry;
 import cpw.mods.fml.common.registry.LanguageRegistry;
 
-@Mod( modid = "RCORES", name="Reactioncraft ORES", version="[1.5.2] Reactioncraft Version 8.0")
+@Mod( modid = "RCORES", name="Reactioncraft ORES", version="[1.5.2] Reactioncraft Version 9.0", dependencies="after:RCBDM")
 @NetworkMod(channels = { "RCORES" }, clientSideRequired = true, serverSideRequired = false, packetHandler = PacketHandler.class)
 
 public class RCORES
@@ -78,6 +79,12 @@ public class RCORES
 	public static Block netherOres;
 	public static Block endOres;
 
+	public static Property genBloodstone;
+	public static Property genBlackdiamond;
+	public static Property genDragonstone;
+	public static Property genNethergold;
+	public static Property genNetherdiamond;
+	
 	//Config
 	public static ReactioncraftConfiguration config;
 
@@ -85,7 +92,7 @@ public class RCORES
 	{
 		try
 		{
-			Class.forName("Reactioncraft.Desert.common.RCBDM");
+			Class.forName("Reactioncraft.Desert.RCBDM");
 		}
 		catch (NoClassDefFoundError ex) 
 		{
@@ -109,7 +116,7 @@ public class RCORES
 	@PreInit
 	public void preInit(FMLPreInitializationEvent var1)
 	{
-		System.out.println("Pre Initialization Loaded");
+		System.out.println("[RCORES] Pre Initialization Loaded");
 		
 		config = new ReactioncraftConfiguration(new File(var1.getModConfigurationDirectory(), "Reactioncraft/Ores.cfg"));
 
@@ -134,6 +141,18 @@ public class RCORES
 			irondustIID = config.getItem("Iron Dust", 10858).getInt();
 			gemdragonstoneIID = config.getItem("Gem Dragonstone", 10859).getInt();
 			superheatedironingotIID = config.getItem("Superheated Iron", 10860).getInt();
+			
+			genBloodstone    = config.get("Ore Generation", "Generate Bloodstone", true);
+			genBlackdiamond  = config.get("Ore Generation", "Generate Black Diamond", true);
+			genDragonstone   = config.get("Ore Generation", "Generate Dragonstone", true);
+			genNethergold    = config.get("Ore Generation", "Generate Nether Gold", true);
+			genNetherdiamond = config.get("Ore Generation", "Generate Nether Diamond", true);
+			
+			genBloodstone.comment    = "If this is true Bloodstone will appear in the nether, if false no other ores can generate :<";
+			genBlackdiamond.comment  = "If this is true Black diamond will appear in the nether (required for black diamond borehead)";
+			genDragonstone.comment   = "If this is true Dragonstone will appear in the nether (required for bloodstone sword)";
+			genNethergold.comment    = "If this is true Nether gold will appear in the nether";
+			genNetherdiamond.comment = "If this is true Nether Diamond will appear in the nether";
 		}
 
 		finally 

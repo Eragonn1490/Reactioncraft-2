@@ -35,7 +35,7 @@ import cpw.mods.fml.common.registry.GameRegistry;
 import cpw.mods.fml.common.registry.LanguageRegistry;
 
 
-@Mod(modid = "RCN", name = "Reactioncraft Netting", version = "[1.5.2] Reactioncraft Version 8.0")
+@Mod(modid = "RCN", name = "Reactioncraft Netting", version = "[1.5.2] Reactioncraft Version 9.0", dependencies = "required-after:RCC")
 @NetworkMod(channels = { "RCN" }, clientSideRequired = true, serverSideRequired = false, packetHandler = PacketHandler.class)
 
 public class RCN implements ICraftingHandler
@@ -80,7 +80,7 @@ public class RCN implements ICraftingHandler
 	@PreInit
 	public void preInit(FMLPreInitializationEvent evt) 
 	{
-		System.out.println("Pre Initialization Loaded");
+		System.out.println("[RCN] Pre Initialization Loaded");
 		
 		config = new ReactioncraftConfiguration(new File(evt.getModConfigurationDirectory(), "Reactioncraft/Netmod.cfg"));
 

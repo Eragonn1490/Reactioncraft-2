@@ -11,7 +11,6 @@ public class ItemHammer extends ItemSword
 		super(par1, EnumToolMaterial.EMERALD);
 		this.setMaxStackSize(1);
 		this.setMaxDamage(30);
-		this.setUnlocalizedName("Chisel");
 		this.setCreativeTab(RCB.ReactioncraftItems);
 	}
 }

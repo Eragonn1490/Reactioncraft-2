@@ -15,6 +15,8 @@ import net.minecraft.entity.ai.EntityAISwimming;
 import net.minecraft.entity.ai.EntityAIWander;
 import net.minecraft.entity.ai.EntityAIWatchClosest;
 import net.minecraft.entity.monster.EntityMob;
+import net.minecraft.entity.monster.EntityZombie;
+import net.minecraft.entity.passive.EntitySheep;
 import net.minecraft.entity.passive.EntityVillager;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.Item;
@@ -22,12 +24,12 @@ import net.minecraft.item.ItemStack;
 import net.minecraft.util.MathHelper;
 import net.minecraft.world.World;
 
-public class EntityCrawlingSkeleton extends EntityMob
+public class EntitySkeletonCrawling extends EntityMob
 {
-    public EntityCrawlingSkeleton(World world)
+    public EntitySkeletonCrawling(World world)
     {
         super(world);
-        texture = (ClientProxy.MODEL_TEXTURE + "skelly1.png");
+        this.texture = (ClientProxy.MODEL_TEXTURE + "skelly1.png");
         this.moveSpeed = 0.25F;
         this.getNavigator().setBreakDoors(true);
         this.tasks.addTask(0, new EntityAISwimming(this));
@@ -39,9 +41,10 @@ public class EntityCrawlingSkeleton extends EntityMob
         this.tasks.addTask(6, new EntityAIWander(this, this.moveSpeed));
         this.tasks.addTask(7, new EntityAIWatchClosest(this, EntityPlayer.class, 8.0F));
         this.tasks.addTask(7, new EntityAILookIdle(this));
-        this.targetTasks.addTask(1, new EntityAIHurtByTarget(this, false));
+        this.targetTasks.addTask(1, new EntityAIHurtByTarget(this, true));
         this.targetTasks.addTask(2, new EntityAINearestAttackableTarget(this, EntityPlayer.class, 16.0F, 0, true));
         this.targetTasks.addTask(2, new EntityAINearestAttackableTarget(this, EntityVillager.class, 16.0F, 0, false));
+        this.targetTasks.addTask(3, new EntityAINearestAttackableTarget(this, EntitySheep.class, 16.0F, 0, true));
     }
 
     public int getMaxHealth()
@@ -56,14 +59,6 @@ public class EntityCrawlingSkeleton extends EntityMob
     public float getSpeedModifier()
     {
         return super.getSpeedModifier() * (this.isChild() ? 1.5F : 1.0F);
-    }
-
-    public void entityInit()
-    {
-        super.entityInit();
-        this.getDataWatcher().addObject(12, Byte.valueOf((byte)0));
-        this.getDataWatcher().addObject(13, Byte.valueOf((byte)0));
-        this.getDataWatcher().addObject(14, Byte.valueOf((byte)0));
     }
     
     /**
@@ -87,22 +82,6 @@ public class EntityCrawlingSkeleton extends EntityMob
     public boolean isAIEnabled()
     {
         return true;
-    }
-
-    /**
-     * If Animal, checks if the age timer is negative
-     */
-    public boolean isChild()
-    {
-        return this.getDataWatcher().getWatchableObjectByte(12) == 1;
-    }
-    
-    /**
-     * Set whether this zombie is a child.
-     */
-    public void setChild(boolean par1)
-    {
-        this.getDataWatcher().updateObject(12, Byte.valueOf((byte)1));
     }
     
     /**
@@ -175,7 +154,7 @@ public class EntityCrawlingSkeleton extends EntityMob
      */
     public String getHurtSound()
     {
-        return "mob.skeleton.hurt";
+        return "mob.zombie.hurt";
     }
 
     /**
@@ -183,7 +162,7 @@ public class EntityCrawlingSkeleton extends EntityMob
      */
     public String getDeathSound()
     {
-        return "mob.skeleton.death";
+        return "mob.zombie.death";
     }
 
     /**
@@ -191,15 +170,15 @@ public class EntityCrawlingSkeleton extends EntityMob
      */
     public void playStepSound(int par1, int par2, int par3, int par4)
     {
-        this.playSound("mob.skeleton.step", 0.15F, 1.0F);
+        this.playSound("mob.zombie.step", 0.15F, 1.0F);
     }
-    
+
     /**
      * Returns the item ID for the item the mob drops on death.
      */
     public int getDropItemId()
     {
-        return Item.rottenFlesh.itemID;
+        return Item.bone.itemID;
     }
 
     /**

@@ -33,7 +33,7 @@ import cpw.mods.fml.common.registry.GameRegistry;
 import cpw.mods.fml.common.registry.LanguageRegistry;
 
 
-@Mod( modid = "RCBB", name="Reactioncraft Better Bookcases Mod", version="[1.5.2] Reactioncraft Version 8.1", dependencies="after:RCBDM")
+@Mod( modid = "RCBB", name="Reactioncraft Better Bookcases Mod", version="[1.5.2] Reactioncraft Version 9.0", dependencies="after:RCBDM")
 @NetworkMod(channels = { "RCBB" }, clientSideRequired = true, serverSideRequired = false, packetHandler = PacketHandler.class)
 
 public class RCBB
@@ -90,7 +90,7 @@ public class RCBB
 	@PreInit
 	public void preInit(FMLPreInitializationEvent evt)
 	{	
-		System.out.println("Pre Initialization Loaded");
+		System.out.println("[RCBB] Pre Initialization Loaded");
 		
 		config = new ReactioncraftConfiguration(new File(evt.getModConfigurationDirectory(), "Reactioncraft/BetterBookcases.cfg"));
 		
@@ -105,7 +105,7 @@ public class RCBB
 			IronBookcasedoorBlockID = config.getBlock("Iron BookShelf Door", 3003).getInt();
 			leverbookcaseID = config.getBlock("leverbookcase", 3004).getInt();
 
-			//Items 10001 - 10040
+			//Items 10001 - 10030
 			WoodenBookcasedoorIID = config.getItem("Wooden Bookcase Door", 10001).getInt();
 			IronBookcasedoorIID = config.getItem("Iron Bookcase Door", 10002).getInt();
 
@@ -273,6 +273,6 @@ public class RCBB
 	@PostInit
 	public void modsLoaded(FMLPostInitializationEvent evt)
 	{
-
+		
 	}
 }

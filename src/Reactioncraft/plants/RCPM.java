@@ -1,5 +1,7 @@
 package Reactioncraft.plants;
 
+import java.io.File;
+
 import Reactioncraft.plants.client.ClientProxy;
 import Reactioncraft.plants.common.CommonProxy;
 import Reactioncraft.basefiles.common.PacketHandler;
@@ -33,18 +35,18 @@ import cpw.mods.fml.common.network.NetworkMod;
 import cpw.mods.fml.common.registry.GameRegistry;
 import cpw.mods.fml.common.registry.LanguageRegistry;
 
-@Mod( modid = "RCPM", name="Reactioncraft Plants", version="[1.5.2] Reactioncraft Version 8.0")
+@Mod( modid = "RCPM", name="Reactioncraft Plants", version="[1.5.2] Reactioncraft Version 9.0")
 @NetworkMod(channels = { "RCPM" }, clientSideRequired = true, serverSideRequired = false, packetHandler = PacketHandler.class)
 
 public class RCPM
 {
 	@SidedProxy(clientSide = "Reactioncraft.plants.client.ClientProxy", serverSide = "Reactioncraft.plants.common.CommonProxy")
-	
+
 	public static CommonProxy proxy;
-	
+
 	@Instance("RCPM")
 	public static RCPM instance;
-	
+
 	//config for blocks
 	//public static int CocoCropID;
 	public static int AncientPlantID;
@@ -64,84 +66,96 @@ public class RCPM
 	public static int WrappedcornIID;
 	public static int CornSeedIID;
 	public static int stalksItemIID;
-	
-	
+
+
 	//Blocks
 	//public static Block CocoCrop;
 	public static Block AncientPlant;
 	public static Block sugarcaneBlock;
 	public static Block cornBlock;
 	public static Block cornStalk;
-	
+
 	//Items
 	public static Item AncientFruit;
 	//public static Item CocoBean;
 	//public static Item VanillaBean;
 	public static Item AncientFlower;
 	public static Item Wrappedcorn;
-	
+
 	//Seeds
-    public static Item AncientSeeds;
-    //public static Item CocoSeed;
-    //public static Item VanillaSeed;
-    public static Item sugarcaneItem;
-    public static Item CornSeed;
-    public static Item stalksItem;
-    
-    
-    @PreInit
-	 public void preInit(FMLPreInitializationEvent evt)
-	 {
-		 System.out.println("Pre Initialization Loaded");
-		 
-		 MinecraftForge.EVENT_BUS.register(new RCPMBonemealProvider());
-		 
-		 Configuration config = new Configuration(evt.getSuggestedConfigurationFile());
+	public static Item AncientSeeds;
+	//public static Item CocoSeed;
+	//public static Item VanillaSeed;
+	public static Item sugarcaneItem;
+	public static Item CornSeed;
+	public static Item stalksItem;
 
-        config.load();
-        
-        //Claimed IDs 3081 - 3090
-        //CocoCropID = config.getBlock("Coco Crop", 3081).getInt();
-        AncientPlantID = config.getBlock("Ancient Plant", 3082).getInt();
-        sugarcaneBlockID = config.getBlock("Sugar Cane", 3083).getInt();
-        cornBlockID = config.getBlock("corn Block", 3084).getInt();
-        cornStalkID = config.getBlock("corn Stalk", 3085).getInt();
+	//Config
+	public static ReactioncraftConfiguration config;
 
-        
-        //10861 - 10880
-        AncientSeedsIID = config.getItem("Ancient Seeds", 10861).getInt();
-        AncientFruitIID = config.getItem("Ancient Fruit", 10862).getInt();
-        //CocoSeedIID = config.getItem("Coco Seed", 10863).getInt();
-        //CocoBeanIID = config.getItem("Coco Bean", 10864).getInt();
-        //VanillaSeedIID = config.getItem("Vanilla Seed", 10865).getInt();
-        //VanillaBeanIID = config.getItem("Vanilla Bean", 10866).getInt();
-        sugarcaneItemIID = config.getItem("Sugar Cane Item", 10967).getInt();
-        WrappedcornIID = config.getItem("Wrapped Corn", 10868).getInt();
-        CornSeedIID = config.getItem("Corn Seed", 10869).getInt();
-        stalksItemIID = config.getItem("stalksItem", 10870).getInt();
-        AncientFlowerIID = config.getItem("Ancient Flower", 10871).getInt();
-        
-        //Claimed Item ids 10301 - 10400 
-        
-        config.save();
-	 }
-    
+	@PreInit
+	public void preInit(FMLPreInitializationEvent evt)
+	{
+		System.out.println("[RCPM] Pre Initialization Loaded");
 
-	 @Init
-	 public void load(FMLInitializationEvent event)
-	 {
-	 	//the meat of the mod
+		MinecraftForge.EVENT_BUS.register(new RCPMBonemealProvider());
+
+		config = new ReactioncraftConfiguration(new File(evt.getModConfigurationDirectory(), "Reactioncraft/Plants.cfg"));
+
+		try 
+		{
+			config.load();
+
+			//Claimed IDs 3081 - 3090
+			//CocoCropID = config.getBlock("Coco Crop", 3081).getInt();
+			AncientPlantID = config.getBlock("Ancient Plant", 3082).getInt();
+			sugarcaneBlockID = config.getBlock("Sugar Cane", 3083).getInt();
+			cornBlockID = config.getBlock("corn Block", 3084).getInt();
+			cornStalkID = config.getBlock("corn Stalk", 3085).getInt();
+
+
+			//10861 - 10880
+			AncientSeedsIID = config.getItem("Ancient Seeds", 10861).getInt();
+			AncientFruitIID = config.getItem("Ancient Fruit", 10862).getInt();
+			//CocoSeedIID = config.getItem("Coco Seed", 10863).getInt();
+			//CocoBeanIID = config.getItem("Coco Bean", 10864).getInt();
+			//VanillaSeedIID = config.getItem("Vanilla Seed", 10865).getInt();
+			//VanillaBeanIID = config.getItem("Vanilla Bean", 10866).getInt();
+			sugarcaneItemIID = config.getItem("Sugar Cane Item", 10967).getInt();
+			WrappedcornIID = config.getItem("Wrapped Corn", 10868).getInt();
+			CornSeedIID = config.getItem("Corn Seed", 10869).getInt();
+			stalksItemIID = config.getItem("stalksItem", 10870).getInt();
+			AncientFlowerIID = config.getItem("Ancient Flower", 10871).getInt();
+
+			//Claimed Item ids 10301 - 10400 
+
+		}
+
+		finally 
+		{
+			if (config.hasChanged()) 
+			{
+				config.save();
+			}
+		}
+	}
+
+
+	@Init
+	public void load(FMLInitializationEvent event)
+	{
+		//the meat of the mod
 		//Claimed Block Ids 3081 - 3099
 		proxy.registerRenderInformation();
-		
+
 		//Blocks
 		//CocoCrop = new BlockCocoPlant(CocoCropID).setHardness(0.0F).setResistance(1.0F).setUnlocalizedName("CocoCrop");
 		AncientPlant = new BlockAncientPlant(AncientPlantID).setHardness(0.0F).setResistance(1.0F);
 		sugarcaneBlock = (new BlockReed1(sugarcaneBlockID, 73)).setHardness(0.0F).setStepSound(Block.soundGrassFootstep);
 		cornBlock = new BlockCorn(cornBlockID, 40).setHardness(0.0F).setStepSound(Block.soundGrassFootstep);
 		cornStalk = new BlockCornStalk(cornStalkID).setHardness(0.0F).setStepSound(Block.soundGrassFootstep);
-		
-		
+
+
 		//Items
 		AncientFlower = new ItemBasic(AncientFlowerIID).setUnlocalizedName("RCPM:AncientFlower").setCreativeTab(RCB.Reactioncraft).setCreativeTab(RCB.ReactioncraftItems);
 		CornSeed = new ItemBasicSeed(CornSeedIID, RCPM.cornStalk.blockID, Block.tilledField.blockID).setUnlocalizedName("RCPM:CornSeed").setCreativeTab(RCB.ReactioncraftItems);
@@ -154,8 +168,8 @@ public class RCPM
 		sugarcaneItem = (new Itemsugarcane(sugarcaneItemIID, RCPM.sugarcaneBlock)).setUnlocalizedName("RCPM:sugarcaneItem").setCreativeTab(RCB.ReactioncraftItems);
 		stalksItem = (new ItemStalks(stalksItemIID, RCPM.cornBlock)).setUnlocalizedName("RCPM:Stalks").setCreativeTab(RCB.ReactioncraftItems);
 		Wrappedcorn = new ItemBasic(WrappedcornIID).setUnlocalizedName("RCPM:Wrappedcorn").setCreativeTab(RCB.Reactioncraftfood);
-		
-	
+
+
 		//Registry Code
 		GameRegistry.registerBlock(cornStalk, "cornStalk");
 		GameRegistry.registerBlock(cornBlock, "Corn Block");
@@ -163,76 +177,76 @@ public class RCPM
 		GameRegistry.registerBlock(AncientPlant, "AncientPlant");
 		GameRegistry.registerBlock(sugarcaneBlock, "SugarcaneBlock");
 		GameRegistry.registerItem(sugarcaneItem, "sugarcaneItem");
-		
-		
+
+
 		//GameRegistry.addSmelting(CocoSeed.itemID, new ItemStack(CocoBean), 0.1F); 
-		
+
 		//Block Code
 		LanguageRegistry.addName(cornBlock, "Corn Plant");
 		LanguageRegistry.addName(cornStalk, "Corn Stalk");
-		
-		
+
+
 		//Item Code
 		LanguageRegistry.addName(CornSeed, "Corn Seed");
 		LanguageRegistry.addName(AncientSeeds, "Ancient Seeds");
 		LanguageRegistry.addName(AncientFruit, "Ancient Fruit");
 		//LanguageRegistry.addName(CocoSeed, "Coco Seed");
 		//LanguageRegistry.addName(CocoBean, "Coco Bean");
-		LanguageRegistry.addName(sugarcaneItem, "Sugar Cane");
+		LanguageRegistry.addName(sugarcaneItem, "GM Sugar Canes");
 		LanguageRegistry.addName(AncientFlower, "Ancient Flower");
 		LanguageRegistry.addName(Wrappedcorn, "Wrapped Corn");
 		LanguageRegistry.addName(stalksItem, "Corn Stalks");
-		
+
 		//MY Taller Sugarcane to Paper & sugar
 		GameRegistry.addRecipe(new ItemStack(Item.paper, 3), new Object[] {"###", '#', RCPM.sugarcaneItem});
 		GameRegistry.addRecipe(new ItemStack(Item.sugar, 1), new Object[] {"#", '#', RCPM.sugarcaneItem});
-		
+
 		//How to get mutated sugarcane
 		GameRegistry.addShapelessRecipe(new ItemStack(sugarcaneItem, 2), new Object[] {AncientFlower, Item.reed});
-		
-		
+
+
 		//Mojang coco bean to ours... Cooked one to ours (Rewriting this)
 		GameRegistry.addShapelessRecipe(new ItemStack(AncientSeeds, 1), new Object[] {AncientFlower});
 		GameRegistry.addShapelessRecipe(new ItemStack(AncientSeeds, 2), new Object[] {AncientFruit});
-		
+
 		//Raw Corn to Corn Seeds
 		CraftingManager.getInstance().getRecipeList().add(new ShapedOreRecipe(new ItemStack(RCPM.CornSeed, 3), true, new Object[]{"Y", Character.valueOf('Y'), "rawCorn"}));
-		
+
 		//GameRegistry.addRecipe(new ItemStack(CocoSeed, 1), new Object[]{"#", Character.valueOf('#'), CocoBean});
 		//GameRegistry.addRecipe(new ItemStack(CocoSeed, 1), new Object[]{"#", Character.valueOf('#'), new ItemStack(Item.dyePowder, 1, 3)});
 		//GameRegistry.addRecipe(new ItemStack(Item.cookie, 12), new Object[]{"D#D", Character.valueOf('#'), CocoBean, Character.valueOf('D'), Item.wheat});
-		
+
 		//Ore Dict
 		//OreDictionary.registerOre("cocoBean", new ItemStack(CocoBean));
 		OreDictionary.registerOre("wrappedCorn", new ItemStack(Wrappedcorn));
-		
+
 		//To aquire ancient plant seeds
 		//ChestGenHooks.addItem(ChestGenHooks.VILLAGE_BLACKSMITH, new WeightedRandomChestContent(lootStack, minStackSize, maxStackSize, chance));
 		ChestGenHooks.addItem(ChestGenHooks.BONUS_CHEST, new WeightedRandomChestContent(new ItemStack(RCPM.AncientFruit), 1, 2, 5));
 		ChestGenHooks.addItem(ChestGenHooks.MINESHAFT_CORRIDOR, new WeightedRandomChestContent(new ItemStack(RCPM.AncientFruit), 1, 5, 15));
 		ChestGenHooks.addItem(ChestGenHooks.PYRAMID_JUNGLE_CHEST, new WeightedRandomChestContent(new ItemStack(RCPM.AncientFruit), 1, 5, 15));
-		
+
 		//Ancient Flower
 		ChestGenHooks.addItem(ChestGenHooks.BONUS_CHEST, new WeightedRandomChestContent(new ItemStack(RCPM.AncientFlower), 1, 2, 5));
 		ChestGenHooks.addItem(ChestGenHooks.MINESHAFT_CORRIDOR, new WeightedRandomChestContent(new ItemStack(RCPM.AncientFlower), 1, 5, 15));
 		ChestGenHooks.addItem(ChestGenHooks.PYRAMID_JUNGLE_CHEST, new WeightedRandomChestContent(new ItemStack(RCPM.AncientFlower), 1, 5, 15));
-		
+
 		//Corn
 		MinecraftForge.addGrassSeed(new ItemStack(RCPM.CornSeed), 5);
 		ChestGenHooks.addItem(ChestGenHooks.BONUS_CHEST, new WeightedRandomChestContent(new ItemStack(RCPM.CornSeed), 1, 2, 5));
 		ChestGenHooks.addItem(ChestGenHooks.MINESHAFT_CORRIDOR, new WeightedRandomChestContent(new ItemStack(RCPM.CornSeed), 1, 5, 15));
 		ChestGenHooks.addItem(ChestGenHooks.PYRAMID_JUNGLE_CHEST, new WeightedRandomChestContent(new ItemStack(RCPM.CornSeed), 1, 5, 15));
-	 
+
 		//Sugarcane
 		ChestGenHooks.addItem(ChestGenHooks.BONUS_CHEST, new WeightedRandomChestContent(new ItemStack(RCPM.sugarcaneItem), 1, 2, 5));
 		ChestGenHooks.addItem(ChestGenHooks.MINESHAFT_CORRIDOR, new WeightedRandomChestContent(new ItemStack(RCPM.sugarcaneItem), 1, 5, 15));
 		ChestGenHooks.addItem(ChestGenHooks.PYRAMID_JUNGLE_CHEST, new WeightedRandomChestContent(new ItemStack(RCPM.sugarcaneItem), 1, 5, 15));
-	 }
-	 
+	}
 
-	 @PostInit
-	 public void modsLoaded(FMLPostInitializationEvent evt)
-	 {
-		 //new as well! How about that stuff after the mods are loaded/initialized?
-	 }
+
+	@PostInit
+	public void modsLoaded(FMLPostInitializationEvent evt)
+	{
+		//new as well! How about that stuff after the mods are loaded/initialized?
+	}
 }

@@ -30,7 +30,7 @@ import cpw.mods.fml.common.network.NetworkMod;
 import cpw.mods.fml.common.registry.GameRegistry;
 import cpw.mods.fml.common.registry.LanguageRegistry;
 
-@Mod( modid = "RCB", name="Reactioncraft Base Mod", version="[1.5.2] Reactioncraft Version 8.0")
+@Mod( modid = "RCB", name="Reactioncraft Base Mod", version="[1.5.2] Reactioncraft Version 9.0")
 @NetworkMod(channels = { "RCB" }, clientSideRequired = true, serverSideRequired = false, packetHandler = PacketHandler.class, connectionHandler = ConnectionHandler.class)
 
 public class RCB
@@ -81,7 +81,7 @@ public class RCB
 	@PreInit
 	public void preInit(FMLPreInitializationEvent evt)
 	{
-		System.out.println("Pre Initialization Loaded");
+		System.out.println("[RCB] Pre Initialization Loaded");
 		
 		config = new ReactioncraftConfiguration(new File(evt.getModConfigurationDirectory(), "Reactioncraft/Basemod.wizim"));
 
@@ -152,7 +152,7 @@ public class RCB
 
 	public void itemCode() 
 	{
-		Mask = new ItemMask(MaskIID).setUnlocalizedName("RCB:Mask").setCreativeTab(RCB.ReactioncraftItems);
+		Mask = new ItemBasic(MaskIID).setUnlocalizedName("RCB:Mask").setCreativeTab(RCB.ReactioncraftItems);
 	}
 
 

@@ -51,7 +51,7 @@ public class BlockClayalizer extends BlockContainer
      */
     public int idDropped(int par1, Random par2Random, int par3)
     {
-        return RCMM.BrickOvenIdle.blockID;
+        return RCMM.ClayalizerIdle.blockID;
     }
 
     /**

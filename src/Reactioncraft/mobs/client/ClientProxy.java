@@ -15,14 +15,15 @@ public class ClientProxy extends CommonProxy
 	public static void registerRenderInformation()
 	{		
 		//Mobs Below
-		RenderingRegistry.instance().registerEntityRenderingHandler(EntityBee.class, new RenderBee(new ModelBee(), 0.5F));
-		RenderingRegistry.instance().registerEntityRenderingHandler(EntityJellyfish.class, new RenderJellyfish(new ModelJellyfish(), 0.5F));
-		RenderingRegistry.instance().registerEntityRenderingHandler(EntitySeaCreeper.class, new RenderSeaCreeper(new ModelSeaCreeper(), 0.5F));
-		RenderingRegistry.instance().registerEntityRenderingHandler(EntityStalker.class, new RenderStalker(new ModelCreeper(), 0.5F));
-		RenderingRegistry.instance().registerEntityRenderingHandler(EntityZombieCrawling.class, new RenderZombieCrawling(new ModelZombieCrawling(), 0.5F));
-		RenderingRegistry.instance().registerEntityRenderingHandler(EntityCrawlingSkeleton.class, new RenderSkeletonCrawling(new ModelZombieCrawling(), 0.5F));
+		RenderingRegistry.registerEntityRenderingHandler(EntityBee.class, new RenderBee(new ModelBee(), 0.5F));
+		RenderingRegistry.registerEntityRenderingHandler(EntityJellyfish.class, new RenderJellyfish(new ModelJellyfish(), 0.5F));
+		RenderingRegistry.registerEntityRenderingHandler(EntitySeaCreeper.class, new RenderSeaCreeper(new ModelSeaCreeper(), 0.5F));
+		RenderingRegistry.registerEntityRenderingHandler(EntityStalker.class, new RenderStalker(new ModelCreeper(), 0.5F));
+		RenderingRegistry.registerEntityRenderingHandler(EntityZombieCrawling.class, new RenderZombieCrawling(new ModelZombieCrawling(), 0.5F));
+		RenderingRegistry.registerEntityRenderingHandler(EntitySkeletonCrawling.class, new RenderSkeletonCrawling(new ModelZombieCrawling(), 0.5F));
 		
-		RenderingRegistry.instance().registerEntityRenderingHandler(EntityHydrolisc.class, new RenderHydrolisc(new ModelHydrolisc(0.65F), 0.65F, 0.65F ));
+		//Special Mob
+		RenderingRegistry.registerEntityRenderingHandler(EntityHydrolisc.class, new RenderHydrolisc(new ModelHydrolisc(0.65F), 0.65F, 0.65F ));
 	}
 	
 	public int addArmor(String armorName)

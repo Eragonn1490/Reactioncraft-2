@@ -11,6 +11,7 @@ import net.minecraftforge.common.EnumHelper;
 import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.oredict.ShapedOreRecipe;
 import Reactioncraft.tools.common.*;
+import Reactioncraft.tools.common.BasicSword;
 import Reactioncraft.basefiles.common.*;
 import Reactioncraft.tools.common.CommonProxy;
 import cpw.mods.fml.common.Mod;
@@ -26,7 +27,7 @@ import cpw.mods.fml.common.network.NetworkMod;
 import cpw.mods.fml.common.registry.GameRegistry;
 import cpw.mods.fml.common.registry.LanguageRegistry;
 
-@Mod( modid = "RCW", name="Reactioncraft Weapons", version="[1.5.2] Reactioncraft Version 8.0", dependencies="after:RCORES")
+@Mod( modid = "RCW", name="Reactioncraft Weapons", version="[1.5.2] Reactioncraft Version 9.0", dependencies="after:RCORES")
 @NetworkMod(channels = { "RCW" }, clientSideRequired = true, serverSideRequired = false, packetHandler = PacketHandler.class)
 
 public class RCW
@@ -75,7 +76,7 @@ public class RCW
 	@PreInit
 	public void preInit(FMLPreInitializationEvent var1)
 	{
-		System.out.println("Pre Initialization Loaded");
+		System.out.println("[RCW] Pre Initialization Loaded");
 		
 		config = new ReactioncraftConfiguration(new File(var1.getModConfigurationDirectory(), "Reactioncraft/Weapons.cfg"));
 

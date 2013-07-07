@@ -41,6 +41,21 @@ public class WorldGenHandler implements IWorldGenerator
                    (new WorldGenSponge(6)).generate(world, random, RandPosX, RandPosY, RandPosZ);
             }
     	}
+    	
+    	if(RCC.GenDarkSand.getBoolean(true))
+		{
+    		biomegenbase = world.getWorldChunkManager().getBiomeGenAt(blockX, blockZ);
+        	if(biomegenbase instanceof BiomeGenOcean)
+			{
+				for(int k = 0; k < 10; k++)
+				{
+					int RandPosX = blockX + random.nextInt(5);
+					int RandPosY = random.nextInt(80);
+					int RandPosZ = blockZ + random.nextInt(5);
+					(new WorldGenDarkSand(6)).generate(world, random, RandPosX, RandPosY, RandPosZ);
+				}
+			}
+		}
     	}
 //    	//Magma
 //    	for(int i = 0; i < 7; i++)

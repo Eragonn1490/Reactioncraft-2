@@ -1,7 +1,6 @@
 package Reactioncraft.ore.common;
 
 import java.util.Random;
-
 import Reactioncraft.ore.RCORES;
 import Reactioncraft.ore.common.*;
 import net.minecraft.block.Block;
@@ -13,7 +12,8 @@ import cpw.mods.fml.common.IWorldGenerator;
 public class WorldGenHandler implements IWorldGenerator 
 {
 	@Override
-	public void generate(Random random, int chunkX, int chunkZ, World world,IChunkProvider chunkGenerator, IChunkProvider chunkProvider){
+	public void generate(Random random, int chunkX, int chunkZ, World world,IChunkProvider chunkGenerator, IChunkProvider chunkProvider)
+	{
 
 		switch(world.provider.dimensionId)
 		{
@@ -27,81 +27,71 @@ public class WorldGenHandler implements IWorldGenerator
 
 	}
 
-	public void generateSurface(World world, Random random, int blockX, int blockZ) 
+	private void generateSurface(World world, Random random, int chunkX,int chunkZ)
 	{
-		//Silver
 		for(int i = 0; i < 15; i++)
 		{
-			int xCoord = blockX + random.nextInt(16);
+			int xCoord = chunkX + random.nextInt(16);
 			int yCoord = random.nextInt(64);
-			int zCoord = blockZ + random.nextInt(16);
+			int zCoord = chunkZ + random.nextInt(16);
+
 			(new WorldGenMinable(RCORES.surfaceOres.blockID, 5, 0, Block.stone.blockID)).generate(world, random, xCoord, yCoord, zCoord);
 		}
-		//		  		for(int i = 0; i < 10; i++)
-		//		  		{
-		//		                int randPosX2 = blockX + random.nextInt(16);
-		//		                int randPosY2 = random.nextInt(128);
-		//		                int randPosZ2 = blockZ + random.nextInt(16);
-		//		                (new WorldGenMinable(AliensVsPredator.oreTitanium.blockID, 5)).generate(world, random, randPosX2, randPosY2, randPosZ2);
-		//		  		}
 	}
 
 	public void generateNether(World world, Random random, int blockX, int blockZ) 
-	{		
-		//Bloodstone
-		int Xcoord = blockX + random.nextInt(16);
-		int Ycoord = 10 + random.nextInt(128);
-		int Zcoord = blockZ + random.nextInt(16);
-		(new WorldGenNetherMinable(RCORES.netherOres.blockID, 50, Block.netherrack.blockID)).generate(world, random, Xcoord, Ycoord, Zcoord);
+	{
+		if(RCORES.genBloodstone.getBoolean(true))
+		{
+			//Bloodstone
+			int Xcoord = blockX + random.nextInt(16);
+			int Ycoord = 10 + random.nextInt(128);
+			int Zcoord = blockZ + random.nextInt(16);
+			(new WorldGenNetherMinable(RCORES.netherOres.blockID, 100, Block.netherrack.blockID)).generate(world, random, Xcoord, Ycoord, Zcoord);
+		}
 
+		if(RCORES.genBlackdiamond.getBoolean(true))
+		{
+			//Black Diamond
+			int XCoord1 = blockX + random.nextInt(16);
+			int YCoord1 = random.nextInt(128);
+			int ZCoord1 = blockZ + random.nextInt(16);
+			(new WorldGenNetherMinable(RCORES.netherOres.blockID, 1, 6, RCORES.netherOres.blockID)).generate(world, random, XCoord1, YCoord1, ZCoord1);
+		}
 
-		for(int i = 0; i < 60; i++)
+		if(RCORES.genDragonstone.getBoolean(true))
 		{
-			int xCoord = blockX + random.nextInt(16);
-			int yCoord = random.nextInt(37);
-			int zCoord = blockZ + random.nextInt(16);
-			(new WorldGenNetherMinable(RCORES.netherOres.blockID, 50, Block.netherrack.blockID)).generate(world, random, xCoord, yCoord, zCoord);
+			//Dragonstone
+			int XCoord2 = blockX + random.nextInt(16);
+			int YCoord2 = random.nextInt(128);
+			int ZCoord2 = blockZ + random.nextInt(16);
+			(new WorldGenNetherMinable(RCORES.netherOres.blockID, 2, 6, RCORES.netherOres.blockID)).generate(world, random, XCoord2, YCoord2, ZCoord2);
 		}
-		//Black Diamond
-		for(int i = 0; i < 65; i++){
-			int xCoord = blockX + random.nextInt(16);
-			int yCoord = random.nextInt(37);
-			int zCoord = blockZ + random.nextInt(16);
-			(new WorldGenNetherMinable(RCORES.netherOres.blockID, 3, 1, Block.netherrack.blockID)).generate(world, random, xCoord, yCoord, zCoord);
-		}
-		//Dragonstone
-		for(int i = 0; i < 65; i++){
-			int xCoord = blockX + random.nextInt(16);
-			int yCoord = random.nextInt(37);
-			int zCoord = blockZ + random.nextInt(16);
-			(new WorldGenNetherMinable(RCORES.netherOres.blockID, 3, 2, Block.netherrack.blockID)).generate(world, random, xCoord, yCoord, zCoord);
-		}
-		//Diamond
-		for(int i = 0; i < 65; i++)
+
+		if(RCORES.genNetherdiamond.getBoolean(true))
 		{
-			int xCoord = blockX + random.nextInt(16);
-			int yCoord = random.nextInt(37);
-			int zCoord = blockZ + random.nextInt(16);
-			(new WorldGenNetherMinable(RCORES.netherOres.blockID, 3, 3, Block.netherrack.blockID)).generate(world, random, xCoord, yCoord, zCoord);
+			//Diamond
+			int XCoord3 = blockX + random.nextInt(16);
+			int YCoord3 = random.nextInt(128);
+			int ZCoord3 = blockZ + random.nextInt(16);
+			(new WorldGenNetherMinable(RCORES.netherOres.blockID, 3, 6, RCORES.netherOres.blockID)).generate(world, random, XCoord3, YCoord3, ZCoord3);
 		}
-		//Gold
-		for(int i = 0; i < 65; i++)
+
+		if(RCORES.genNethergold.getBoolean(true))
 		{
-			int xCoord = blockX + random.nextInt(16);
-			int yCoord = random.nextInt(37);
-			int zCoord = blockZ + random.nextInt(16);
-			(new WorldGenNetherMinable(RCORES.netherOres.blockID, 4, 3, Block.netherrack.blockID)).generate(world, random, xCoord, yCoord, zCoord);
-		}
+			//Gold
+			int XCoord4 = blockX + random.nextInt(16);
+			int YCoord4 = random.nextInt(128);
+			int ZCoord4 = blockZ + random.nextInt(16);
+			(new WorldGenNetherMinable(RCORES.netherOres.blockID, 4, 6, RCORES.netherOres.blockID)).generate(world, random, XCoord4, YCoord4, ZCoord4);
+		}	
 	}
 
 	public void generateEnd(World world, Random random, int blockX, int blockZ) 
 	{
-		for(int i = 0; i < 62; i++){
-			int xCoord = blockX + random.nextInt(16);
-			int yCoord = random.nextInt(64);
-			int zCoord = blockZ + random.nextInt(16);
-			(new WorldGenMinable(RCORES.endOres.blockID, 10, 0, Block.whiteStone.blockID)).generate(world, random, xCoord, yCoord, zCoord);
-		}
+		int xCoord = blockX + random.nextInt(16);
+		int yCoord = random.nextInt(64);
+		int zCoord = blockZ + random.nextInt(16);
+		(new WorldGenMinable(RCORES.endOres.blockID, 10, 0, Block.whiteStone.blockID)).generate(world, random, xCoord, yCoord, zCoord);
 	}
-
 }

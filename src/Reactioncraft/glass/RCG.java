@@ -24,7 +24,7 @@ import cpw.mods.fml.common.registry.LanguageRegistry;
 import Reactioncraft.basefiles.common.*;
 import Reactioncraft.basemod.RCB;
 
-@Mod( modid = "RCG", name="Reactioncraft Glass", version="[1.5.2] Reactioncraft Version 8.0")
+@Mod( modid = "RCG", name="Reactioncraft Glass", version="[1.5.2] Reactioncraft Version 9.0", dependencies = "required-after:RCC")
 @NetworkMod(channels = { "RCG" }, clientSideRequired = true, serverSideRequired = false, packetHandler = PacketHandler.class)
 
 public class RCG
@@ -56,7 +56,7 @@ public class RCG
 	@PreInit
 	public void preInit(FMLPreInitializationEvent evt)
 	{
-		System.out.println("Pre Initialization Loaded");
+		System.out.println("[RCG] Pre Initialization Loaded");
 		
 		config = new ReactioncraftConfiguration(new File(evt.getModConfigurationDirectory(), "Reactioncraft/BetterGlass.cfg"));
 
@@ -64,7 +64,7 @@ public class RCG
 		{
 			config.load();		
 
-			//Block IDs 3061 - 3065
+			//Block IDs 3061 - 3064
 			glassID = config.getBlock("Glass Meta", 3061).getInt();
 			glass2ID = config.getBlock("Glowing Glass Meta", 3062).getInt();
 			//glasspaneID = config.getBlock("Glass Pane Meta", 3062).getInt();

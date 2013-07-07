@@ -28,6 +28,7 @@ public class BlockHireoMulti extends Block
     /**
      * Returns the ID of the items to drop on destruction.
      */
+    @Override
     public int idDropped(int i, Random random, int j)
     {
         switch (i)

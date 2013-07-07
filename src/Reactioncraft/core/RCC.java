@@ -2,6 +2,7 @@ package Reactioncraft.core;
 
 import Reactioncraft.core.client.ClientProxy;
 import Reactioncraft.core.common.CommonProxy;
+import Reactioncraft.core.common.CraftingHanlder;
 import Reactioncraft.core.common.ItemHammer;
 import java.io.File;
 import net.minecraft.block.Block;
@@ -17,6 +18,8 @@ import Reactioncraft.Integration.Integration;
 import Reactioncraft.basefiles.common.*;
 import Reactioncraft.basemod.RCB;
 import Reactioncraft.core.common.*;
+import Reactioncraft.vanillaclasses.EntityReactionFishHook;
+import Reactioncraft.vanillaclasses.ItemReactionRod;
 import cpw.mods.fml.common.FMLLog;
 import cpw.mods.fml.common.Mod;
 import cpw.mods.fml.common.Mod.Init;
@@ -28,10 +31,11 @@ import cpw.mods.fml.common.event.FMLInitializationEvent;
 import cpw.mods.fml.common.event.FMLPostInitializationEvent;
 import cpw.mods.fml.common.event.FMLPreInitializationEvent;
 import cpw.mods.fml.common.network.NetworkMod;
+import cpw.mods.fml.common.registry.EntityRegistry;
 import cpw.mods.fml.common.registry.GameRegistry;
 import cpw.mods.fml.common.registry.LanguageRegistry;
 
-@Mod( modid = "RCC", name="Reactioncraft Core", version="[1.5.2] Reactioncraft Version 8.0", dependencies = "required-after:RCB")
+@Mod( modid = "RCC", name="Reactioncraft Core", version="[1.5.2] Reactioncraft Version 9.0", dependencies = "required-after:RCB")
 @NetworkMod(channels = { "RCC" }, clientSideRequired = true, serverSideRequired = false, packetHandler = PacketHandler.class)
 
 public class RCC
@@ -54,6 +58,13 @@ public class RCC
 	public static int BlackdiamondboreIID;
 	public static int BloodstoneboreIID;
 	public static int SandStonePasteIID;
+	public static int SamonRawIID;
+	public static int SamonIID;
+	public static int YellowTailRawIID;
+	public static int YellowTailCookedIID;
+	public static int MapinabottleIID;
+    public static int ShipinabottleIID;
+
 	
 	//Biomes
 	public static int RcDesertBID;
@@ -62,12 +73,6 @@ public class RCC
 	//Biomes
 	public static BiomeGenBase RcDesert;
 		
-	//Cactus Properties
-	public static Property GenCactusGreen;
-	public static Property GenCactusRed;
-	
-	
-
 	//block code
 	public static Block DarkSand;
 	public static Block newSponge; int newSpongeId;
@@ -82,6 +87,17 @@ public class RCC
 	public static Item Hammer;
 	public static Item SandStonePaste;
 
+	//New Fish
+	public static Item SamonRaw;
+	public static Item Samon;
+	public static Item YellowTailRaw;
+	public static Item YellowTailCooked;
+	
+	//Bottled Items
+	public static Item Mapinabottle;
+    public static Item Shipinabottle;
+
+	
 	//Railcraft Items
 	public static Item Blackdiamondbore;
 	public static Item Bloodstonebore;
@@ -89,6 +105,9 @@ public class RCC
 	public static Property GenSponge;
 	public static Property GenDarkSand;
 	public static Property vanillaOverrideCake;
+	public static Property vanillaOverrideBed;
+	public static Property vanillaOverrideFishingrod;
+	public static Property hardcorerailcraft;
 	
 	public static final int WILDCARD_VALUE = Short.MAX_VALUE;
 
@@ -111,7 +130,7 @@ public class RCC
 	@PreInit
 	public void preInit(FMLPreInitializationEvent evt)
 	{
-		System.out.println("Pre Initialization Loaded");
+		System.out.println("[RCC] Pre Initialization Loaded");
 		
 		config = new ReactioncraftConfiguration(new File(evt.getModConfigurationDirectory(), "Reactioncraft/Core.cfg"));
 
@@ -131,14 +150,25 @@ public class RCC
 			chainladderID = config.getBlock("chain ladder", 3023).getInt();
 
 			//Items
-			//Reserved 10081 - 10090 
-			ChainLoopIID = config.getItem("Chain Loop", 10082).getInt();
-			HammerIID = config.getItem("Hammer", 10083).getInt();
-			BlackdiamondboreIID = config.getItem("Black Diamond Bore", 10084).getInt();
-			BloodstoneboreIID = config.getItem("Bloodstone Bore", 10085).getInt();
-			SandStonePasteIID = config.getItem("Sandstone Paste", 10086).getInt();
+			//Reserved 10031 - 10090 
+			ChainLoopIID = config.getItem("Chain Loop", 10031).getInt();
+			HammerIID = config.getItem("Hammer", 10032).getInt();
+			BlackdiamondboreIID = config.getItem("Black Diamond Bore", 10033).getInt();
+			BloodstoneboreIID = config.getItem("Bloodstone Bore", 10034).getInt();
+			SandStonePasteIID = config.getItem("Dark Sandstone Paste", 10035).getInt();
 			
 			
+			SamonRawIID = config.getItem("Raw Samon", 10036).getInt();
+			SamonIID = config.getItem("Cooked Samon", 10037).getInt();
+			YellowTailRawIID = config.getItem("Raw Yellowtail", 10038).getInt();
+			YellowTailCookedIID = config.getItem("Cooked Yellowtail", 10039).getInt();
+			MapinabottleIID = config.getItem("Map in a bottle", 10041).getInt();
+		    ShipinabottleIID = config.getItem("Ship in a bottle", 10040).getInt();
+	
+			
+			//Property Stuff Below
+		    hardcorerailcraft = config.get("Hardcore", "Hardcore Rails", false);
+		    
 			GenSponge = config.get("Generation", "Gen Sponge", true);
 			GenSponge.comment = "If this is true sponges generate in the ocean";
 			
@@ -148,12 +178,31 @@ public class RCC
 			vanillaOverrideCake = config.get("Vanilla Overrides", "Override Cake", true);
 			vanillaOverrideCake.comment = "If this is true item Cake is overwrote and stacks to 4";
 			
+			vanillaOverrideBed = config.get("Vanilla Overrides", "Override Bed", true);
+			vanillaOverrideBed.comment = "If this is true item Bed is overwrote to stack to 3";
+			
+			vanillaOverrideFishingrod = config.get("Vanilla Overrides", "Override Fishing Rod", false);
+			vanillaOverrideFishingrod.comment = "If this is true item fishing rod is overwrote to catch mutiple fish and items, to play regular vanilla servers set to false and restart your game!";
 			
 			if(RCC.vanillaOverrideCake.getBoolean(true))
 			{
 				int cakeId = Item.cake.itemID;
 				Item.itemsList[cakeId] = null;
 				Item.cake = new ItemReed(cakeId - 256, Block.cake).setUnlocalizedName("cake").setMaxStackSize(4).setCreativeTab(CreativeTabs.tabFood);
+			}
+			
+			if(RCC.vanillaOverrideBed.getBoolean(true))
+			{
+				int cakeId = Item.bed.itemID;
+				Item.itemsList[cakeId] = null;
+				Item.bed = new ItemBed(cakeId - 256).setUnlocalizedName("bed").setMaxStackSize(3).setCreativeTab(CreativeTabs.tabDecorations);
+			}
+			
+			if(RCC.vanillaOverrideFishingrod.getBoolean(true))
+			{
+				int cakeId = Item.fishingRod.itemID;
+				Item.itemsList[cakeId] = null;
+				Item.fishingRod = (ItemFishingRod)new ItemReactionRod(cakeId - 256).setUnlocalizedName("fishingRod");
 			}
 		}
 
@@ -169,6 +218,8 @@ public class RCC
 	@Init 
 	public void load(FMLInitializationEvent event)
 	{	
+		EntityRegistry.registerModEntity(EntityReactionFishHook.class, "ReactioncraftFishHook", 0, this, 64, 1, false);
+		
 		blockCode();
 		blockRegistry();
 		ItemCode();
@@ -206,7 +257,7 @@ public class RCC
 
 	public void HarvestLevel() 
 	{
-		MinecraftForge.setBlockHarvestLevel(RCC.DarkSand, "shovel", 1);
+		MinecraftForge.setBlockHarvestLevel(RCC.DarkSand, "shovel", 0);
 	}
 	
 
@@ -229,7 +280,7 @@ public class RCC
 	{
 		GameRegistry.addSmelting(Block.sponge.blockID, new ItemStack(RCC.newSponge), 0.1F); 
 		
-		GameRegistry.addSmelting(RCC.DarkSand.blockID, new ItemStack(Block.glass.blockID, 1, 1), 0.5F);
+		GameRegistry.addSmelting(RCC.DarkSand.blockID, new ItemStack(Block.glass.blockID, 1, 0), 0.5F);
 		
 		//
 		CraftingManager.getInstance().getRecipeList().add(new ShapedOreRecipe(new ItemStack(RCC.ChainLoop,3,8), true, new Object[]{"X","Y", Character.valueOf('Y'), "ingotSuperheatediron", Character.valueOf('X'), new ItemStack(RCC.Hammer,1,WILDCARD_VALUE)}));
@@ -239,12 +290,19 @@ public class RCC
 		GameRegistry.addRecipe(new ItemStack(snowblock, 1), new Object[]{ "DD", "DD", Character.valueOf('D'), Block.ice});
 		
 		//DarkSand Clay
-		GameRegistry.addShapelessRecipe(new ItemStack(RCC.SandStonePaste, 2,2), RCC.DarkSand, Item.bucketWater);
+		GameRegistry.addShapelessRecipe(new ItemStack(RCC.SandStonePaste, 2), RCC.DarkSand, Item.bucketWater);
+		
+		//Bore Heads
+		CraftingManager.getInstance().getRecipeList().add(new ShapedOreRecipe(Bloodstonebore, true, new Object[]{
+		         "XXX", "X#X", "XXX", Character.valueOf('X'), "ingotSteel", Character.valueOf('#'), "oreBloodstone"}));
+		CraftingManager.getInstance().getRecipeList().add(new ShapedOreRecipe(Blackdiamondbore, true, new Object[]{
+		         "XXX", "X#X", "XXX", Character.valueOf('X'), "ingotSteel", Character.valueOf('#'), "diamondBlack"}));
 	}
 	
 	public void OreDictionary() 
 	{
 		OreDictionary.registerOre("darkclay", new ItemStack(RCC.SandStonePaste));
+		OreDictionary.registerOre("darkclay", new ItemStack(RCC.SandStonePaste, 1,2));
 	}
 	
 	public void blockCode() 
@@ -262,6 +320,7 @@ public class RCC
 	public void worldGenHandler() 
 	{
 		GameRegistry.registerWorldGenerator(new WorldGenHandler());
+		GameRegistry.registerCraftingHandler(new CraftingHanlder());
 	}
 
 	public void ItemCode() 
@@ -271,6 +330,12 @@ public class RCC
 		Blackdiamondbore = new IBlackDiamondBH(BlackdiamondboreIID).setUnlocalizedName("RCC:Blackdiamondbore").setCreativeTab(RCB.ReactioncraftItems);
 		Bloodstonebore = new IBloodstoneBH(BloodstoneboreIID).setUnlocalizedName("RCC:Bloodstonebore").setCreativeTab(RCB.ReactioncraftItems);		
 		SandStonePaste = (new ItemBasic(SandStonePasteIID)).setUnlocalizedName("RCBDM:SandStonePaste");
+		SamonRaw = (new ItemBasicFood(SamonRawIID, 2, 0.3F, false)).setUnlocalizedName("RCC:samonr");
+		Samon = (new ItemBasicFood(SamonIID, 5, 0.6F, false)).setUnlocalizedName("RCC:samonc");
+		YellowTailRaw = (new ItemBasicFood(YellowTailRawIID, 2, 0.3F, false)).setUnlocalizedName("RCC:yellowtailr");
+		YellowTailCooked = (new ItemBasicFood(YellowTailCookedIID, 5, 0.6F, false)).setUnlocalizedName("RCC:yellowtailc");
+		Mapinabottle = new ItemBasic(MapinabottleIID).setUnlocalizedName("RCC:mapinbottle");
+		Shipinabottle = new ItemBasic(ShipinabottleIID).setUnlocalizedName("RCC:shipinbottle").setCreativeTab(RCB.ReactioncraftItems);
 	}
 
 	public void addNames() 
@@ -289,6 +354,15 @@ public class RCC
 		
 		//Sandstone Paste
 		LanguageRegistry.addName(SandStonePaste, "Dark Sand Clay");
+		
+		//New Fish
+		LanguageRegistry.addName(SamonRaw, "Raw Samon");
+		LanguageRegistry.addName(Samon, "Cooked Samon");
+		
+		LanguageRegistry.addName(YellowTailRaw, "Raw Yellow Tail");
+		LanguageRegistry.addName(YellowTailCooked, "Cooked Yellowtail");
+		LanguageRegistry.addName(RCC.Mapinabottle, "Map in a bottle");
+		LanguageRegistry.addName(RCC.Shipinabottle, "Ship in a bottle");
 	}
 	
 	public void addBiomes() 
