@@ -354,17 +354,17 @@ public class RCF
 		//		bowlofnoodles = new ItemFoodMod(bowlofnoodlesIID, 0, false).setIconCoord(109, 0).setUnlocalizedName("bowlofnoodlesNoodles").setContainerItem(Item.bowlEmpty);
 		
 		//Food Tab
-		cookedCorn = new ItemFoodMod(cookedCornIID, 8, false).setUnlocalizedName("RCF:cookedCorn").setCreativeTab(RCB.Reactioncraftfood);
+		cookedCorn = new ItemFoodMod(cookedCornIID, 6, false).setUnlocalizedName("RCF:cookedCorn").setCreativeTab(RCB.Reactioncraftfood);
 		popcornseeds = new ItemBasic(popcornseedsIID).setUnlocalizedName("RCPM:CornSeed").setCreativeTab(RCB.Reactioncraftfood);
 		bagofpopcorn = new ItemBasic(bagofpopcornIID).setUnlocalizedName("RCF:bagofpopcorn").setCreativeTab(RCB.Reactioncraftfood);
 		poppedbagofpopcorn = new ItemFoodMod(poppedbagofpopcornIID, 10, true).setUnlocalizedName("RCF:poppedbagofpopcorn").setCreativeTab(RCB.Reactioncraftfood);
-		rawcorn = new ItemFoodMod(rawcornIID, 7, false).setUnlocalizedName("RCF:uncookedCorn").setCreativeTab(RCB.Reactioncraftfood);
-		UnwrappedCorn = new ItemFoodMod(UnwrappedCornIID, 6, false).setUnlocalizedName("RCF:UnwrappedCorn").setCreativeTab(RCB.Reactioncraftfood);
-		RawNuggets = new ItemFoodMod(RawNuggetsIID, 5, true).setPotionEffect(Potion.hunger.id, 30, 0, 0.8F).setUnlocalizedName("RCF:RawNuggets").setCreativeTab(RCB.Reactioncraftfood);
-		ChickenNuggets = new ItemFoodMod(ChickenNuggetsIID, 8, true).setUnlocalizedName("RCF:ChickenNuggets").setCreativeTab(RCB.Reactioncraftfood);
+		rawcorn = new ItemFoodMod(rawcornIID, 2, false).setUnlocalizedName("RCF:uncookedCorn").setCreativeTab(RCB.Reactioncraftfood);
+		UnwrappedCorn = new ItemFoodMod(UnwrappedCornIID, 2, false).setUnlocalizedName("RCF:UnwrappedCorn").setCreativeTab(RCB.Reactioncraftfood);
+		RawNuggets = new ItemFoodMod(RawNuggetsIID, 2, true).setPotionEffect(Potion.hunger.id, 30, 0, 0.8F).setUnlocalizedName("RCF:RawNuggets").setCreativeTab(RCB.Reactioncraftfood);
+		ChickenNuggets = new ItemFoodMod(ChickenNuggetsIID, 7, true).setUnlocalizedName("RCF:ChickenNuggets").setCreativeTab(RCB.Reactioncraftfood);
 		SlicedBread = new ItemFoodMod(SlicedBreadIID, 4, false).setUnlocalizedName("RCF:SlicedBread").setCreativeTab(RCB.Reactioncraftfood);
-		HamSandwich = new ItemFoodMod(HamSandwichIID, 12, false).setUnlocalizedName("RCF:HamSandwich").setCreativeTab(RCB.Reactioncraftfood);
-		EdibleFlesh= new ItemBasicFood(EdibleFleshIID, 10, true).setUnlocalizedName("RCF:edibleflesh").setCreativeTab(RCB.Reactioncraftfood);
+		HamSandwich = new ItemFoodMod(HamSandwichIID, 8, false).setUnlocalizedName("RCF:HamSandwich").setCreativeTab(RCB.Reactioncraftfood);
+		EdibleFlesh= new ItemBasicFood(EdibleFleshIID, 6, true).setUnlocalizedName("RCF:edibleflesh").setCreativeTab(RCB.Reactioncraftfood);
 		Hamburger = new ItemFoodMod(HamburgerIID, 12, true).setUnlocalizedName("RCF:hamburger").setCreativeTab(RCB.Reactioncraftfood);
 		
 		//Block Tab

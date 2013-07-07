@@ -414,6 +414,18 @@ public class RCBDM
 	@PostInit
 	public void modsLoaded(FMLPostInitializationEvent evt)
 	{	
+		/**chisel Recipes**/
+		//Flint
+		GameRegistry.addRecipe(new ItemStack(FlintChisel, 1), new Object[]{"G", "I", Character.valueOf('G'), Item.flint, Character.valueOf('I'), Item.stick});
+		//Copper
+		CraftingManager.getInstance().getRecipeList().add(new ShapedOreRecipe(CopperChisel, true, new Object[]{"I", "X", Character.valueOf('I'), "ingotCopper", Character.valueOf('X'), Item.stick}));
+		//Gold
+		GameRegistry.addRecipe(new ItemStack(GoldChisel, 1), new Object[]{"G", "I", Character.valueOf('G'), Item.ingotGold, Character.valueOf('I'), Item.stick});
+		//Diamond
+		GameRegistry.addRecipe(new ItemStack(DiamondChisel, 1), new Object[]{"G", "I", Character.valueOf('G'), Item.diamond, Character.valueOf('I'), Item.stick});
+		//Bloodstone
+		CraftingManager.getInstance().getRecipeList().add(new ShapedOreRecipe(BloodstoneChisel, true, new Object[]{"I", "X", Character.valueOf('I'), "ingotBloodstone", Character.valueOf('X'), Item.stick}));
+		
 		FMLLog.info("The Deserts are Epic!"); 
 	}
 }
