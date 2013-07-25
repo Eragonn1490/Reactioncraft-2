@@ -20,6 +20,10 @@ public class FuelHandler implements IFuelHandler
             if(fuel.itemID == RCBDM.CherryTreeSapling.blockID)
             		return 120;
             
+            if(fuel.itemID == RCBDM.DesertBlockMulti.blockID)
+            		return 0;
+            
+            
             if(fuel.itemID == CherryPlanks.itemID)
             		return 150;
             

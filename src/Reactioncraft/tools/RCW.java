@@ -6,14 +6,18 @@ import net.minecraft.item.EnumToolMaterial;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.item.crafting.CraftingManager;
+import net.minecraft.nbt.NBTTagCompound;
+import net.minecraft.nbt.NBTTagList;
 import net.minecraftforge.common.Configuration;
 import net.minecraftforge.common.EnumHelper;
 import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.oredict.ShapedOreRecipe;
 import Reactioncraft.tools.common.*;
-import Reactioncraft.tools.common.BasicSword;
+import Reactioncraft.Integration.Integration;
 import Reactioncraft.basefiles.common.*;
 import Reactioncraft.tools.common.CommonProxy;
+import cpw.mods.fml.common.FMLLog;
+import cpw.mods.fml.common.Loader;
 import cpw.mods.fml.common.Mod;
 import cpw.mods.fml.common.Mod.Init;
 import cpw.mods.fml.common.Mod.Instance;
@@ -21,6 +25,7 @@ import cpw.mods.fml.common.Mod.PostInit;
 import cpw.mods.fml.common.Mod.PreInit;
 import cpw.mods.fml.common.SidedProxy;
 import cpw.mods.fml.common.event.FMLInitializationEvent;
+import cpw.mods.fml.common.event.FMLInterModComms;
 import cpw.mods.fml.common.event.FMLPostInitializationEvent;
 import cpw.mods.fml.common.event.FMLPreInitializationEvent;
 import cpw.mods.fml.common.network.NetworkMod;
@@ -69,6 +74,18 @@ public class RCW
 	public static Item BloodstoneBlade;
 	public static Item GoldenSwordFragment;
 	public static Item UnbindedSword;
+	
+//	public static boolean TreeCapitator() throws ClassNotFoundException 
+//	{
+//		try{
+//			Class.forName("bspkrs.treecapitator.TreeCapitator");
+//		}
+//		catch (NoClassDefFoundError ex) 
+//		{
+//			return false ;
+//		}
+//		return true ;
+//	}
 
 	//Config
 	public static ReactioncraftConfiguration config;
@@ -77,7 +94,7 @@ public class RCW
 	public void preInit(FMLPreInitializationEvent var1)
 	{
 		System.out.println("[RCW] Pre Initialization Loaded");
-		
+
 		config = new ReactioncraftConfiguration(new File(var1.getModConfigurationDirectory(), "Reactioncraft/Weapons.cfg"));
 
 		try 
@@ -119,7 +136,25 @@ public class RCW
 		ItemCode();
 		LanguageRegistry();
 		forgestuff();
+		//Integration();
 	}
+
+//	private void Integration() 
+//	{
+//				//Reactioncraft integration
+//				try
+//				{
+//					if(TreeCapitator())
+//					{
+//						Integration.treecapitator();
+//						System.out.println("Reactioncraft TreeCapitator integration loaded !");
+//					}
+//				}
+//				catch (ClassNotFoundException e)
+//				{
+//					System.out.println("Reactioncraft Weapons did not find TreeCapitator Mod, Cherry Tree TreeCapitation Support disabled!");
+//				}
+//	}
 
 	private void forgestuff() 
 	{
@@ -195,5 +230,7 @@ public class RCW
 		CraftingManager.getInstance().getRecipeList().add(new ShapedOreRecipe(BloodstoneHoe, true, new Object[]{"II ", " X ", " X ", Character.valueOf('I'), "ingotBloodstone", Character.valueOf('X'), "goldRod"}));
 
 		GameRegistry.addSmelting(UnbindedSword.itemID, new ItemStack(BloodstoneSword.itemID, 1, 1), 0.5F);
+		
+		FMLLog.info("The Weapons are Epic!"); 
 	}
 }

@@ -34,7 +34,7 @@ public class GuiClayalizer extends GuiContainer
     public void drawGuiContainerBackgroundLayer(float par1, int par2, int par3)
     {
         GL11.glColor4f(1.0F, 1.0F, 1.0F, 1.0F);
-        this.mc.renderEngine.bindTexture("/mods/RCMM/textures/gui/brickoven.png");
+        this.mc.renderEngine.bindTexture("/mods/RCMM/textures/gui/clayalizer.png");
         int k = (this.width - this.xSize) / 2;
         int l = (this.height - this.ySize) / 2;
         this.drawTexturedModalRect(k, l, 0, 0, this.xSize, this.ySize);

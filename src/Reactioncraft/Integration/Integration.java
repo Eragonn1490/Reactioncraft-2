@@ -8,8 +8,11 @@ import Reactioncraft.api.common.ClayalizerRecipes;
 import Reactioncraft.bookcase.RCBB;
 import Reactioncraft.core.RCC;
 import Reactioncraft.ore.RCORES;
+import Reactioncraft.tools.RCW;
 import Reactioncraft.machines.RCMM;
 import cpw.mods.fml.common.FMLLog;
+import cpw.mods.fml.common.Loader;
+import cpw.mods.fml.common.event.FMLInterModComms;
 import cpw.mods.fml.common.registry.GameRegistry;
 import mods.railcraft.api.crafting.RailcraftCraftingManager;
 import net.minecraft.block.Block;
@@ -17,6 +20,8 @@ import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.item.crafting.CraftingManager;
 import net.minecraft.item.crafting.FurnaceRecipes;
+import net.minecraft.nbt.NBTTagCompound;
+import net.minecraft.nbt.NBTTagList;
 import net.minecraftforge.liquids.LiquidContainerRegistry;
 import net.minecraftforge.liquids.LiquidDictionary;
 import net.minecraftforge.liquids.LiquidStack;
@@ -89,6 +94,30 @@ public class Integration
 		//Iron Ingot to IronDust
 		Recipes.macerator.addRecipe(new ItemStack(Item.ingotIron), new ItemStack(RCORES.irondust));
 	}
+
+//	public static void treecapitator()
+//	{
+//		//TreeCapitator
+//		if (Loader.isModLoaded("TreeCapitator"))
+//		{
+//			NBTTagCompound tpModCfg = new NBTTagCompound();
+//			tpModCfg.setString("modID", "Natura");
+//			tpModCfg.setString("axeIDList", String.format("%d; %d; %d; %d; %d", RCW.BloodstoneAxe.itemID, RCW.ObbyAxe.itemID));
+//			tpModCfg.setBoolean("useShiftedItemID", false);
+//
+//			NBTTagList treeList = new NBTTagList();
+//
+//			// CherryTree
+//			NBTTagCompound treeDef = new NBTTagCompound();
+//			treeDef.setString("treeName", "cherry tree");
+//			treeDef.setString("logs", String.format("%d,2; %d,6; %d,10", RCBDM.Cherrywood.blockID));
+//			treeDef.setString("leaves", String.format("%d,2; %d,10", RCBDM.CherryTreeLeaves.blockID));
+//
+//			tpModCfg.setTag("trees", treeList);
+//
+//			FMLInterModComms.sendMessage("TreeCapitator", "ThirdPartyModConfig", tpModCfg);
+//		}
+//	}
 
 	public static void loadReactioncraftBDM() 
 	{
