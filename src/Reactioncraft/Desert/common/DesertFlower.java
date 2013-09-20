@@ -1,28 +1,32 @@
-package Reactioncraft.Desert.common;
+package Reactioncraft.desert.common;
+
+import static net.minecraftforge.common.EnumPlantType.Cave;
+import static net.minecraftforge.common.EnumPlantType.Crop;
+import static net.minecraftforge.common.EnumPlantType.Desert;
+import static net.minecraftforge.common.EnumPlantType.Nether;
+import static net.minecraftforge.common.EnumPlantType.Plains;
+import static net.minecraftforge.common.EnumPlantType.Water;
 
 import java.util.Random;
-import Reactioncraft.Desert.RCBDM;
-import Reactioncraft.basemod.RCB;
-import Reactioncraft.core.RCC;
+
 import net.minecraft.block.Block;
+import net.minecraft.block.BlockCactus;
 import net.minecraft.block.BlockFlower;
 import net.minecraft.block.material.Material;
-import net.minecraft.creativetab.CreativeTabs;
 import net.minecraft.entity.Entity;
-import net.minecraft.tileentity.TileEntity;
-import net.minecraft.util.AxisAlignedBB;
 import net.minecraft.util.DamageSource;
 import net.minecraft.world.World;
 import net.minecraftforge.common.EnumPlantType;
 import net.minecraftforge.common.ForgeDirection;
 import net.minecraftforge.common.IPlantable;
-import static net.minecraftforge.common.EnumPlantType.*;
+import Reactioncraft.basemod.RCB;
+import Reactioncraft.core.RCC;
 
 public class DesertFlower extends BlockFlower implements IPlantable
 {
     public DesertFlower(int par1, Material par2Material)
     {
-        super(par1, par2Material);
+        super(par1);
         this.setTickRandomly(true);
         float f = 0.2F;
         this.setBlockBounds(0.5F - f, 0.0F, 0.5F - f, 0.5F + f, f * 3.0F, 0.5F + f);
@@ -33,7 +37,14 @@ public class DesertFlower extends BlockFlower implements IPlantable
     {
         this(par1, Material.plants);
     }
-
+    
+   public void setBounds()
+   {
+	   float f = 0.2F;
+       this.setBlockBounds(0.5F - f, 0.0F, 0.5F - f, 0.5F + f, f * 3.0F, 0.5F + f);
+   }
+  
+   
     /**
      * Checks to see if its valid to put this block at the specified coordinates. Args: world, x, y, z
      */
@@ -55,6 +66,7 @@ public class DesertFlower extends BlockFlower implements IPlantable
      * Lets the block know when one of its neighbor changes. Doesn't know which neighbor changed (coordinates passed are
      * their own) Args: x, y, z, neighbor blockID
      */
+    @Override
     public void onNeighborBlockChange(World par1World, int par2, int par3, int par4, int par5)
     {
         super.onNeighborBlockChange(par1World, par2, par3, par4, par5);
@@ -64,31 +76,21 @@ public class DesertFlower extends BlockFlower implements IPlantable
     /**
      * Ticks the block if it's been scheduled
      */
+    @Override
     public void updateTick(World par1World, int par2, int par3, int par4, Random par5Random)
     {
         this.checkFlowerChange(par1World, par2, par3, par4);
     }
-
-    /**
-     * Can this block stay at this position.  Similar to canPlaceBlockAt except gets checked often with plants.
-     */
+    
     public boolean canBlockStay(World par1World, int par2, int par3, int par4)
     {
         Block soil = blocksList[par1World.getBlockId(par2, par3 - 1, par4)];
+      
         return (par1World.getFullBlockLightValue(par2, par3, par4) >= 8 || par1World.canBlockSeeTheSky(par2, par3, par4)) && 
                 (soil != null && soil.canSustainPlant(par1World, par2, par3 - 1, par4, ForgeDirection.UP, this));
     }
-
-    /**
-     * Returns a bounding box from the pool of bounding boxes (this means this box can change after the pool has been
-     * cleared to be reused)
-     */
-    public AxisAlignedBB getCollisionBoundingBoxFromPool(World par1World, int par2, int par3, int par4)
-    {
-        return null;
-    }
-
-    /**
+    
+	/**
      * Is this block (a) opaque and (b) a full 1m cube?  This determines whether or not to render the shared face of two
      * adjacent blocks and also whether the player can attach torches, redstone wire, etc to this block.
      */
@@ -134,7 +136,7 @@ public class DesertFlower extends BlockFlower implements IPlantable
         if (blockID == melonStem.blockID    ) return Crop;
         if (blockID == pumpkinStem.blockID  ) return Crop;
         if (blockID == tallGrass.blockID    ) return Plains;
-        return Plains;
+        return Desert;
     }
 
     @Override

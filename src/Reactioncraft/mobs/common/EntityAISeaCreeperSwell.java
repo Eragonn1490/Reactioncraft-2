@@ -1,7 +1,9 @@
 package Reactioncraft.mobs.common;
 
 import net.minecraft.entity.EntityLiving;
+import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.ai.EntityAIBase;
+import net.minecraft.entity.monster.EntityCreeper;
 
 public class EntityAISeaCreeperSwell extends EntityAIBase
 {
@@ -11,11 +13,11 @@ public class EntityAISeaCreeperSwell extends EntityAIBase
     /**
      * The creeper's attack target. This is used for the changing of the creeper's state.
      */
-    EntityLiving creeperAttackTarget;
+    EntityLivingBase creeperAttackTarget;
 
-    public EntityAISeaCreeperSwell(EntitySeaCreeper par1EntitySeaSeaCreeper)
+    public EntityAISeaCreeperSwell(EntitySeaCreeper par1EntityCreeper)
     {
-        this.swellingSeaCreeper = par1EntitySeaSeaCreeper;
+        this.swellingSeaCreeper = par1EntityCreeper;
         this.setMutexBits(1);
     }
 
@@ -24,8 +26,8 @@ public class EntityAISeaCreeperSwell extends EntityAIBase
      */
     public boolean shouldExecute()
     {
-        EntityLiving var1 = this.swellingSeaCreeper.getAttackTarget();
-        return this.swellingSeaCreeper.getSeaCreeperState() > 0 || var1 != null && this.swellingSeaCreeper.getDistanceSqToEntity(var1) < 9.0D;
+        EntityLivingBase entitylivingbase = this.swellingSeaCreeper.getAttackTarget();
+        return this.swellingSeaCreeper.getSeaCreeperState() > 0 || entitylivingbase != null && this.swellingSeaCreeper.getDistanceSqToEntity(entitylivingbase) < 9.0D;
     }
 
     /**

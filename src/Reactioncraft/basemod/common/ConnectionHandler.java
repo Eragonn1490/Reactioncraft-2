@@ -22,7 +22,7 @@ public class ConnectionHandler implements IConnectionHandler
     public void playerLoggedIn(Player player, NetHandler netHandler, INetworkManager manager)
     {
         EntityPlayer p = (EntityPlayer) player;
-        if (RCB.instance().getRCManualEnabled() && !p.getEntityData().getBoolean("hasRCManual"))
+        if (RCB.getRCManualEnabled() && !p.getEntityData().getBoolean("hasRCManual"))
         {
             ItemStack book = new ItemStack(Item.writtenBook);
             book.stackTagCompound = new NBTTagCompound();
@@ -30,7 +30,7 @@ public class ConnectionHandler implements IConnectionHandler
             
             pages.appendTag(new NBTTagString("", "Welcome To Reactioncraft\n" +
                                                  "If this is your first time playing that is great.\n"  +
-            		                             "-this book is annoying and will spawn every time you play so go ahead and use it as fuel in a furnace its a handly feature of Better Bookcases Mod\n"));
+            		                             "-this book is annoying and will spawn every time you play until you change the config 'basemod.wizim'\n"));
             
             pages.appendTag(new NBTTagString("", "-to play Reactioncraft to its fullest dont cheat!\n"  +
                                                  "-Reactioncraft adds tons of blocks from colored glass to hireoglyphics with mobs and even christmas trees\n" +
@@ -41,7 +41,13 @@ public class ConnectionHandler implements IConnectionHandler
             									 "-Rule 2 dont run from the crawlers.. they like it when you run..\n" +
             									 "-Rule 3 if you find a wizim library burn it... the wizim wont like it but who cares right?\n"));
             
-            pages.appendTag(new NBTTagString("", "Thanks to: Eragonn1490 (Primary Coder), Wizim (Texturees, LOGO's), Ri5ux (Code Assitant), LexManos,\n" +
+            pages.appendTag(new NBTTagString("", "1.5 +" +
+            									 "Thanks to: Eragonn1490 (Lead Coder), Electriccz7 / MrVenti (Logo, Testing, Ideas), Wizim (Texture's,Logos)\n" +
+            									 "MrVenti is also the Emperor of the Universe (if you didnt know)\n" +	
+            									 "\n"));
+            
+            pages.appendTag(new NBTTagString("", "1.4.7 and Below" +
+            									 "Thanks to: Eragonn1490 (Primary Coder), Wizim (Texturees, LOGO's), Ri5ux (Code Assitant), LexManos,\n" +
             									 "Trilby11 (Code), Joey (Code), Malkerian (Code), LegendaryTriforce (Code/Textures),\n"));
             									 
             pages.appendTag(new NBTTagString("",  "CPW, DV8FROMTHEWORLD, COWEDOFFACLIFF, CovertJaguar, Fred_Funny (Textures), AND OTHERS\n" + 

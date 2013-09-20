@@ -1,11 +1,10 @@
-package Reactioncraft.Desert.common;
+package Reactioncraft.desert.common;
 
-import Reactioncraft.Desert.RCBDM;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.inventory.IInventory;
 import net.minecraft.item.ItemStack;
+import Reactioncraft.desert.RCBDM;
 import cpw.mods.fml.common.ICraftingHandler;
-import cpw.mods.fml.common.registry.GameRegistry;
 
 public class CraftingHandler implements ICraftingHandler 
 {

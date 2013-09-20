@@ -1,4 +1,4 @@
-package Reactioncraft.Net.Common;
+package Reactioncraft.net.Common;
 
 import java.util.List;
 import net.minecraft.client.Minecraft;

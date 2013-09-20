@@ -1,4 +1,4 @@
-package Reactioncraft.Net.Common;
+package Reactioncraft.net.Common;
 
 import java.util.List;
 
@@ -12,7 +12,7 @@ import net.minecraft.item.ItemStack;
 import net.minecraft.item.ItemTool;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.world.World;
-import Reactioncraft.Net.RCN;
+import Reactioncraft.net.RCN;
 import Reactioncraft.basemod.RCB;
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
@@ -25,50 +25,58 @@ public class ItemNetCatcher extends ItemTool
 		super(par1, 0, RCN.EnumToolMaterialNet, new Block[] {});
 		this.setUnlocalizedName("completeNet");
 		this.setCreativeTab(RCB.Reactioncraft);
+		this.setMaxStackSize(1);
 	}
-
+	
+	public int getItemMaxDamageFromStack(ItemStack stack)
+	{
+		NBTTagCompound compound = stack.stackTagCompound;
+		int hiltLevel = compound.getInteger("hilt");
+		int netLevel  = compound.getInteger("net");
+		return (hiltLevel + netLevel) * 10 - 1;
+	}
+	
 	@Override
 	public String getItemDisplayName(ItemStack par1ItemStack) 
 	{
 		return "Catching Net";
 	}
-	
-	
+
 	@Override
 	public boolean onLeftClickEntity(ItemStack stack, EntityPlayer player, Entity entity)
 	{
 		if (entity == null || RCN.exclusionList.isExcluded(entity) || !(entity instanceof EntityLiving))
 			return false;
-		
+
 		else if(entity instanceof EntityPlayer)
 		{
 			return false;
 		}
-		
+
 		//Code Below Works. on Client and Lan (Textures of players / username dont) dosent work server side!
-//		else if(entity instanceof EntityPlayer)
-//		{
-//			NBTTagCompound nbt = new NBTTagCompound();
-//			entity.writeToNBT(nbt);
-//			nbt.removeTag("Pos");
-//			nbt.removeTag("Motion");
-//			
-//			EntityPlayer entPlayer = (EntityPlayer) entity;
-//			
-//			ItemStack is = new ItemStack(RCN.caughtplayer);
-//			
-//			is.stackTagCompound = new NBTTagCompound();
-//			is.stackTagCompound.setString("entity", "player");
-//			is.stackTagCompound.setString("playerUser", entPlayer.username);
-//			if(!(entPlayer.skinUrl == null))
-//					is.stackTagCompound.setString("playerSkin", entPlayer.skinUrl);
-//			if(!(entPlayer.skinUrl == null))
-//				is.stackTagCompound.setString("playerCape", entPlayer.cloakUrl);
-//			
-//			player.dropPlayerItem(is);			
-//			stack.damageItem(1, player);
-//		}
-		
+		//		else if(entity instanceof EntityPlayer)
+		//		{
+		//			NBTTagCompound nbt = new NBTTagCompound();
+		//			entity.writeToNBT(nbt);
+		//			nbt.removeTag("Pos");
+		//			nbt.removeTag("Motion");
+		//			
+		//			EntityPlayer entPlayer = (EntityPlayer) entity;
+		//			
+		//			ItemStack is = new ItemStack(RCN.caughtplayer);
+		//			
+		//			is.stackTagCompound = new NBTTagCompound();
+		//			is.stackTagCompound.setString("entity", "player");
+		//			is.stackTagCompound.setString("playerUser", entPlayer.username);
+		//			if(!(entPlayer.skinUrl == null))
+		//					is.stackTagCompound.setString("playerSkin", entPlayer.skinUrl);
+		//			if(!(entPlayer.skinUrl == null))
+		//				is.stackTagCompound.setString("playerCape", entPlayer.cloakUrl);
+		//			
+		//			player.dropPlayerItem(is);			
+		//			stack.damageItem(1, player);
+		//		}
+
 		else
 		{
 			NBTTagCompound nbt = new NBTTagCompound();
@@ -82,7 +90,7 @@ public class ItemNetCatcher extends ItemTool
 			nbt.removeTag("InLove");
 			nbt.removeTag("HurtTime");
 			nbt.removeTag("DeathTime");
-			nbt.removeTag("AttackTime");
+			nbt.removeTag("AttackTime");		
 			ItemStack is = new ItemStack(RCN.caught);
 			is.stackTagCompound = new NBTTagCompound();
 			is.stackTagCompound.setString("entity", EntityList.getEntityString(entity));
@@ -91,10 +99,16 @@ public class ItemNetCatcher extends ItemTool
 			stack.damageItem(1, player);
 			entity.setDead();
 		}
-		//if(stack.getItemDamage() >= (stack.getMaxDamage() - 1))
+//
+//		if(stack.getItemDamage() >= (RCN.completeNet.getMaxDamage() - 1))
+//		{
+//			--stack.stackSize;
+//			return true;
+//		}
 		if(stack.getItemDamage() >= (stack.getMaxDamage() - 1))
 		{
 			--stack.stackSize;
+			return true;
 		}
 		return true;
 	}
@@ -111,17 +125,7 @@ public class ItemNetCatcher extends ItemTool
 			list.add("Please craft to see results");
 		super.addInformation(itemStack, player, list, par4);
 	}
-	
-	
-	 @Override
-	 public int getItemMaxDamageFromStack(ItemStack stack)
-	 {
-	  NBTTagCompound compound = stack.stackTagCompound;
-	  int hiltLevel = compound.getInteger("hilt");
-	  int netLevel  = compound.getInteger("net");
-	  return (hiltLevel + netLevel) * 10 - 1;
-	 }
-	
+
 
 	@SideOnly(Side.CLIENT)
 

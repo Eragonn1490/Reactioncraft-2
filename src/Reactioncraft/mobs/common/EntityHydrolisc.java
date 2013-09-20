@@ -2,14 +2,13 @@ package Reactioncraft.mobs.common;
 
 import Reactioncraft.mobs.RCmobs;
 import Reactioncraft.mobs.client.ClientProxy;
-import net.minecraft.block.Block;
-import net.minecraft.block.BlockCloth;
 import net.minecraft.enchantment.Enchantment;
 import net.minecraft.enchantment.EnchantmentHelper;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityAgeable;
 import net.minecraft.entity.EntityLiving;
 import net.minecraft.entity.IRangedAttackMob;
+import net.minecraft.entity.SharedMonsterAttributes;
 import net.minecraft.entity.ai.EntityAIArrowAttack;
 import net.minecraft.entity.ai.EntityAIFollowOwner;
 import net.minecraft.entity.ai.EntityAILookIdle;
@@ -49,9 +48,7 @@ public class EntityHydrolisc extends EntityTameable
 	public EntityHydrolisc(World par1World)
 	{
 		super(par1World);
-		this.texture = (ClientProxy.MODEL_TEXTURE + "hydrolisctexture.png");
 		this.setSize(0.5F, 0.5F);
-		this.moveSpeed = 0.25F;
 		this.fireResistance = 100;
 		this.getNavigator().setAvoidsWater(false);
 		this.setSitting(false);
@@ -70,11 +67,7 @@ public class EntityHydrolisc extends EntityTameable
 
 	protected void entityInit()
 	{
-		super.entityInit();  
-		this.dataWatcher.addObject(18, new Integer(this.getMaxHealth()));
-		this.health = this.getMaxHealth();
-		this.force_sync = 50; //Force server and client to sync health!
-		this.setSitting(false);
+
 	}
 	
 	/**
@@ -93,24 +86,7 @@ public class EntityHydrolisc extends EntityTameable
 	 */
 	public void writeEntityToNBT(NBTTagCompound par1NBTTagCompound)
 	{
-		super.writeEntityToNBT(par1NBTTagCompound);
-		par1NBTTagCompound.setInteger("HydroHealth",this.dataWatcher.getWatchableObjectInt(18));
-		
-		//par1NBTTagCompound.setInteger("tamednum", tamedNum);
-		//par1NBTTagCompound.setBoolean("on", on);
-		//par1NBTTagCompound.setInteger("foodnum", foodNum);
-		//par1NBTTagCompound.setInteger("tamednum", tamedNum);
 
-
-		
-		if (this.getOwnerName() == null)
-		{
-			par1NBTTagCompound.setString("Owner", "");
-		}
-		else
-		{
-			par1NBTTagCompound.setString("Owner", this.getOwnerName());
-		} 
 	}
 
 	/**
@@ -118,188 +94,13 @@ public class EntityHydrolisc extends EntityTameable
 	 */
 	public void readEntityFromNBT(NBTTagCompound par1NBTTagCompound)
 	{
-		super.readEntityFromNBT(par1NBTTagCompound);
-		this.health = par1NBTTagCompound.getInteger("HydroHealth");
-		this.dataWatcher.updateObject(18, Integer.valueOf(this.health));
-		String var2 = par1NBTTagCompound.getString("Owner");
 
-		if (var2.length() > 0)
-		{
-			this.setOwner(var2);
-			this.setTamed(true);
-			//System.out.printf("Restored Owner %s has type %d and id %d, %s\n", this.getOwnerName(), this.getTameSkin(), this.entityId, this.worldObj.isRemote?"is Remote":"is NOT remote");
-		}
-	}
-
-	private int closest = 99999;
-	private int tx = 0, ty = 0, tz = 0;
-
-	private boolean scan_it(int x, int y, int z, int dx, int dy, int dz){
-		int found = 0;
-		int i, j, bid, d;
-
-		//Fixed x, scan two sides of 3d rectangle
-		for(i=-dy;i<=dy;i++)
-		{
-			for(j=-dz;j<=dz;j++)
-			{
-				bid = this.worldObj.getBlockId(x+dx, y+i, z+j);
-				if(bid == Block.waterStill.blockID || bid == Block.waterMoving.blockID)
-				{
-					d = dx*dx + j*j + i*i;
-					if(d < closest)
-					{
-						closest = d;
-						tx = x+dx; ty = y+i; tz = z+j;
-						found++;
-					}
-				}
-				bid = this.worldObj.getBlockId(x-dx, y+i, z+j);
-				if(bid == Block.waterStill.blockID || bid == Block.waterMoving.blockID)
-				{
-					d = dx*dx + j*j + i*i;
-					if(d < closest)
-					{
-						closest = d;
-						tx = x-dx; ty = y+i; tz = z+j;
-						found++;
-					}
-				} 			
-			}
-		}
-		//Fixed y, scan two sides of 3d rectangle
-		for(i=-dx;i<=dx;i++)
-		{
-			for(j=-dz;j<=dz;j++)
-			{
-				bid = this.worldObj.getBlockId(x+i, y+dy, z+j);
-				if(bid == Block.waterStill.blockID || bid == Block.waterMoving.blockID)
-				{
-					d = dy*dy + j*j + i*i;
-					if(d < closest)
-					{
-						closest = d;
-						tx = x+i; ty = y+dy; tz = z+j;
-						found++;
-					}
-				}
-				bid = this.worldObj.getBlockId(x+i, y-dy, z+j);
-				if(bid == Block.waterStill.blockID || bid == Block.waterMoving.blockID)
-				{
-					d = dy*dy + j*j + i*i;
-					if(d < closest)
-					{
-						closest = d;
-						tx = x+i; ty = y-dy; tz = z+j;
-						found++;
-					}
-				} 			
-			}
-		}    	
-		//Fixed z, scan two sides of 3d rectangle
-		for(i=-dx;i<=dx;i++)
-		{
-			for(j=-dy;j<=dy;j++)
-			{
-				bid = this.worldObj.getBlockId(x+i, y+j, z+dz);
-				if(bid == Block.waterStill.blockID || bid == Block.waterMoving.blockID)
-				{
-					d = dz*dz + j*j + i*i;
-					if(d < closest)
-					{
-						closest = d;
-						tx = x+i; ty = y+i; tz = z+dz;
-						found++;
-					}
-				}
-				bid = this.worldObj.getBlockId(x+i, y+j, z-dz);
-				if(bid == Block.waterStill.blockID || bid == Block.waterMoving.blockID)
-				{
-					d = dz*dz + j*j + i*i;
-					if(d < closest)
-					{
-						closest = d;
-						tx = x+i; ty = y+i; tz = z-dz;
-						found++;
-					}
-				} 			
-			}
-		}    	
-
-		if(found != 0)return true;
-		return false;
 	}
 
 	/**
 	 * main AI tick function
 	 */
-	protected void updateAITick()
-	{
-		int i, j;
-
-		if(this.isSitting() == false){
-			//Find water. We love water!
-			if((this.worldObj.rand.nextInt(20) == 0 && this.getHydroHealth() < this.getMaxHealth()) || this.worldObj.rand.nextInt(100) == 0)
-			{
-				//System.out.printf("Searching for food %d\n",this.getHydroHealth()); 
-				//Very efficient search from near to far.
-				closest = 99999;
-				tx = ty = tz = 0;
-				for(i=1;i<11;i++){
-					j = i;
-					if(j > 4)j = 4; //Limit y range
-					if(scan_it((int)this.posX, (int)this.posY-1, (int)this.posZ, i, j, i) == true)break;
-					if(i>=6)i++; //skip to reduce long-range intensive processing...
-				}
-
-				if(closest < 99999)
-				{
-					this.getNavigator().tryMoveToXYZ(tx,  ty-1,  tz,  this.moveSpeed);
-					if(this.isInWater())
-					{
-						this.heal(1);
-						this.playSound("splash", 1.0F, this.worldObj.rand.nextFloat()*0.2F + 0.9F );
-					}
-				}		
-			}
-		}
-
-		//Transfer health to owner!
-		if(this.worldObj.rand.nextInt(20) == 0 )
-		{
-			if(this.isTamed())
-			{
-				EntityLiving e = this.getOwner();
-				if(e != null){  			
-					if(e.getHealth() != e.getMaxHealth())
-					{  
-						if(this.getHydroHealth() > 1)
-						{
-							e.heal(1);
-							this.health--;
-							this.dataWatcher.updateObject(18, Integer.valueOf(this.getHealth()));
-						}
-					}
-				}
-			}
-		}
-
-	}
-
-	private void settexture()
-	{
-		this.texture = (ClientProxy.MODEL_TEXTURE + "hydrolisctexture.png");
-	}
-
-	/**
-	 * Returns the texture's file path as a String.
-	 */
-	public String getTexture()
-	{
-		this.settexture();
-		return this.texture;
-	}
-
+	
 	/**
 	 * Returns true if the newer Entity AI code should be run
 	 */
@@ -314,10 +115,12 @@ public class EntityHydrolisc extends EntityTameable
 		return true;
 	}
 
-	public int getMaxHealth()
-	{
-		return this.isTamed() ? 30 : 10;
-	}
+	  protected void applyEntityAttributes()
+	    {
+	        super.applyEntityAttributes();
+	        this.getEntityAttribute(SharedMonsterAttributes.maxHealth).setAttribute(4.0D);
+	        this.getEntityAttribute(SharedMonsterAttributes.movementSpeed).setAttribute(0.20000000298023224D);
+	    }
 
 	/**
 	 * Called frequently so the entity can update its state every tick as required. For example, zombies and skeletons
@@ -326,34 +129,6 @@ public class EntityHydrolisc extends EntityTameable
 	public void onLivingUpdate()
 	{
 
-		super.onLivingUpdate();
-
-		//Force Client to synch with server (or vice-versa).
-		//One side gets from this.health and passes through the watchable object to the other.
-		//the other side gets from the watchable object and sets this.health.
-		//YES. There ARE two copies of the entity. One in the client. One in the server.
-		//The trick is to keep them synchronized at all times.
-		//Some things work correctly, automagically.
-		//Some don't!
-		this.force_sync--;
-		if(this.force_sync <= 0)
-		{
-			this.force_sync = 50; //Not too often...  
-			if (!this.worldObj.isRemote)//is CLIENT
-			{
-				this.dataWatcher.updateObject(18, Integer.valueOf(this.getHealth()));
-				this.setSitting(this.isSitting());
-
-			}else
-			{
-				this.health = this.getHydroHealth();
-			}
-			//Use health as a clue that we are tamed, which doesn't always seem to sync properly either.
-			if(this.health >= 15)
-			{
-				this.setTamed(true);
-			}
-		}
 	}
 
 	/**
@@ -364,71 +139,6 @@ public class EntityHydrolisc extends EntityTameable
 		return this.dataWatcher.getWatchableObjectInt(18);
 	}
 	
-//	public boolean on;
-	
-//	public boolean interact(EntityPlayer par1EntityPlayer)
-//	{      
-//		ItemStack itemstack = par1EntityPlayer.inventory.getCurrentItem();
-//
-//		if(tamedNum == 0)
-//		{
-//			tamedNum = rand.nextInt(10) + 1;
-//		}
-//
-//
-//		if (!isTamed())
-//		{
-//			//Taming
-//			if (itemstack != null && itemstack.itemID == Item.fishRaw.itemID && par1EntityPlayer.getDistanceSqToEntity(this) < 9D)
-//			{
-//				itemstack.stackSize--;
-//				foodNum++;
-//				if (itemstack.stackSize <= 0)
-//				{
-//					par1EntityPlayer.inventory.setInventorySlotContents(par1EntityPlayer.inventory.currentItem, null);
-//				}
-//
-//				if (!worldObj.isRemote && foodNum >= tamedNum)
-//				{
-//					setTamed(true);
-//					setOwner(par1EntityPlayer.username);
-//					aiSit.setSitting(true);
-//					worldObj.setEntityState(this, (byte)7);
-//					//ModLoader.getMinecraftInstance().thePlayer.addChatMessage("Yes, Sir what do you wont me to do?");
-//				}
-//				
-//				if (par1EntityPlayer.username.equalsIgnoreCase(this.getOwnerName()) && !this.worldObj.isRemote && !this.isBreedingItem(itemstack))
-//	            {
-//	                this.aiSit.setSitting(!this.isSitting());
-//	                this.isJumping = false;
-//	                this.setPathToEntity((PathEntity)null);
-//	            }
-//			}
-//
-//			return true;
-//		}
-//		else
-//		{
-//			if (this.rand.nextInt(3) == 0)
-//            {
-//                this.setTamed(true);
-//                this.setPathToEntity((PathEntity)null);
-//                this.setAttackTarget((EntityLiving)null);
-//                this.aiSit.setSitting(true);
-//                this.setEntityHealth(20);
-//                this.setOwner(par1EntityPlayer.username);
-//                this.playTameEffect(true);
-//                this.worldObj.setEntityState(this, (byte)7);
-//            }
-//            else
-//            {
-//                this.playTameEffect(false);
-//                this.worldObj.setEntityState(this, (byte)6);
-//            }
-//		}
-//
-//		return super.interact(par1EntityPlayer);  
-//	}
 
 	public boolean interact(EntityPlayer par1EntityPlayer)
     {
@@ -488,7 +198,6 @@ public class EntityHydrolisc extends EntityTameable
                     this.setPathToEntity((PathEntity)null);
                     this.setAttackTarget((EntityLiving)null);
                     this.aiSit.setSitting(true);
-                    this.setEntityHealth(20);
                     this.setOwner(par1EntityPlayer.username);
                     this.playTameEffect(true);
                     this.worldObj.setEntityState(this, (byte)7);
@@ -520,10 +229,6 @@ public class EntityHydrolisc extends EntityTameable
 	 */
 	protected String getLivingSound()
 	{
-		//if(this.isSitting())
-		//{
-		//	return "";
-		//}
 		return "";
 	}
 

@@ -19,21 +19,28 @@ public class CommonProxy implements IGuiHandler
     {
             TileEntity tileEntity = world.getBlockTileEntity(x, y, z);
             
-            if(tileEntity instanceof TileEntityFreezer)
-            {
-                return new ContainerFreezer(player.inventory, (TileEntityFreezer) tileEntity);
-            }
-
+            if(tileEntity == null)
+            	return null;
             
-            if(tileEntity instanceof TileEntityBrickOven)
+            if (id == 0)
             {
-                return new ContainerBrickOven(player.inventory, (TileEntityBrickOven) tileEntity);
+            	if(tileEntity instanceof TileEntityClayalizer)
+                	return new ContainerClayalizer(player.inventory, (TileEntityClayalizer) tileEntity);
             }
             
-            if(tileEntity instanceof TileEntityClayalizer)
+            if (id == 1)
             {
-                return new ContainerClayalizer(player.inventory, (TileEntityClayalizer) tileEntity);
+            	if(tileEntity instanceof TileEntityBrickOven)
+                	return new ContainerBrickOven(player.inventory, (TileEntityBrickOven) tileEntity);
             }
+            
+            if (id == 2)
+            {
+            	if(tileEntity instanceof TileEntityFreezer)
+                    return new ContainerFreezer(player.inventory, (TileEntityFreezer) tileEntity);
+            }
+            //else if (id == ....)// its easy.
+                     
             
            // if(tileEntity instanceof TileEntity6X6)
            // {
@@ -52,19 +59,25 @@ public class CommonProxy implements IGuiHandler
     {
             TileEntity tileEntity = world.getBlockTileEntity(x, y, z);
             
-            if(tileEntity instanceof TileEntityFreezer)
+            if(tileEntity == null)
+            	return null;
+            
+            if (id == 0)
             {
-                    return new GuiFreezer(player.inventory, (TileEntityFreezer) tileEntity);
+              if(tileEntity instanceof TileEntityClayalizer)
+             	return new GuiClayalizer(player.inventory, (TileEntityClayalizer) tileEntity);
             }
             
-            if(tileEntity instanceof TileEntityBrickOven)
+            if (id == 1)
             {
-                    return new GuiBrickoven(player.inventory, (TileEntityBrickOven) tileEntity);
+              if(tileEntity instanceof TileEntityBrickOven)
+            	return new GuiBrickoven(player.inventory, (TileEntityBrickOven) tileEntity);
             }
             
-            if(tileEntity instanceof TileEntityClayalizer)
+            if (id == 2)
             {
-                    return new GuiClayalizer(player.inventory, (TileEntityClayalizer) tileEntity);
+              if(tileEntity instanceof TileEntityFreezer)
+            	return new GuiFreezer(player.inventory, (TileEntityFreezer) tileEntity);
             }
             
            // if(tileEntity instanceof TileEntity6X6)
@@ -77,8 +90,7 @@ public class CommonProxy implements IGuiHandler
             return null;
     }
     
-    
-	
+   
 	public int addArmor(String armorName)
 	{
 		return 0;

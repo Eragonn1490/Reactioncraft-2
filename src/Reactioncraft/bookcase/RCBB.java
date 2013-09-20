@@ -3,23 +3,22 @@ package Reactioncraft.bookcase;
 import Reactioncraft.bookcase.client.ClientProxy;
 import Reactioncraft.bookcase.common.CommonProxy;
 import java.io.File;
-import Reactioncraft.Integration.Integration;
-import Reactioncraft.basefiles.common.ItemMulti;
-import Reactioncraft.basefiles.common.ReactioncraftConfiguration;
+import Reactioncraft.integration.*;
+import Reactioncraft.basefiles.common.PacketHandler;
+import Reactioncraft.basefiles.common.*;
 import Reactioncraft.basemod.RCB;
 import Reactioncraft.bookcase.common.*;
-import net.minecraft.block.Block;
-import net.minecraft.block.BlockEnchantmentTable;
-import net.minecraft.block.BlockLever;
+import Reactioncraft.vanillaclasses.BlockReactioncraftEnchantmentTable;
+import net.minecraft.block.*;
 import net.minecraft.block.material.Material;
-import net.minecraft.item.Item;
-import net.minecraft.item.ItemStack;
+import net.minecraft.item.*;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.world.chunk.Chunk;
 import net.minecraftforge.common.Configuration;
 import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.common.Property;
 import cpw.mods.fml.common.Mod;
+import cpw.mods.fml.common.Mod.EventHandler;
 import cpw.mods.fml.common.Mod.Init;
 import cpw.mods.fml.common.Mod.Instance;
 import cpw.mods.fml.common.Mod.PostInit;
@@ -33,7 +32,7 @@ import cpw.mods.fml.common.registry.GameRegistry;
 import cpw.mods.fml.common.registry.LanguageRegistry;
 
 
-@Mod( modid = "RCBB", name="Reactioncraft Better Bookcases Mod", version="[1.5.2] Reactioncraft Version 9.0", dependencies="after:RCBDM")
+@Mod( modid = "rcbb", name="Reactioncraft Better Bookcases Mod", version="[1.6.2] Reactioncraft 3 Version 1.1.2", dependencies="after:rcbdm")
 @NetworkMod(channels = { "RCBB" }, clientSideRequired = true, serverSideRequired = false, packetHandler = PacketHandler.class)
 
 public class RCBB
@@ -75,7 +74,7 @@ public class RCBB
 	public static boolean RCBDM() throws ClassNotFoundException 
 	{
 		try{
-			Class.forName("Reactioncraft.Desert.RCBDM");
+			Class.forName("Reactioncraft.desert.RCBDM");
 		}
 		catch (NoClassDefFoundError ex) 
 		{
@@ -87,7 +86,7 @@ public class RCBB
 	//Config
 	public static ReactioncraftConfiguration config;
 
-	@PreInit
+	@EventHandler
 	public void preInit(FMLPreInitializationEvent evt)
 	{	
 		System.out.println("[RCBB] Pre Initialization Loaded");
@@ -124,7 +123,7 @@ public class RCBB
 		}
 	}
 
-	@Init 
+	@EventHandler
 	public void load(FMLInitializationEvent event)
 	{
 		instance = this;
@@ -164,7 +163,7 @@ public class RCBB
 		{
 			Block.blocksList[Block.enchantmentTable.blockID] = null;
 			Item.itemsList[Block.enchantmentTable.blockID] = null;
-			Block enchantmentTable = new BlockReactioncraftEnchantmentTable().setUnlocalizedName("enchantmentTable");
+			Block enchantmentTable = new BlockReactioncraftEnchantmentTable().setUnlocalizedName("enchantmentTable").setTextureName("enchanting_table");
 			GameRegistry.registerBlock(Block.enchantmentTable);
 			LanguageRegistry.addName(enchantmentTable, "Enchantment Table");
 		}
@@ -216,47 +215,31 @@ public class RCBB
 
 	public void languageRegistry() 
 	{
-		LanguageRegistry.addName(WoodenBookcasedoor, "Wooden Bookcase Door");
-		LanguageRegistry.addName(IronBookcasedoor, "Iron Bookcase Door");
-
-		LanguageRegistry.addName(Bookcasechest, "Chest Bookshelf");
-
-		//Door Blocks
-		LanguageRegistry.addName(WoodenBookcasedoorBlock, "WoodenBookcasedoorBlock");
-		LanguageRegistry.addName(IronBookcasedoorBlock, "IronBookcasedoorBlock");
-
-		//Metadata Bookshelfs
-		LanguageRegistry.addName(new ItemStack(bookcasemeta, 1, 0), "Empty Bookshelf");
-		LanguageRegistry.addName(new ItemStack(bookcasemeta, 1, 1), "Webbed Bookshelf");
-		LanguageRegistry.addName(new ItemStack(bookcasemeta, 1, 2), "Empty Webbed Bookshelf");
-		LanguageRegistry.addName(new ItemStack(bookcasemeta, 1, 3), "Scroll shelf");
-
-		//Lever Bookcase
-		LanguageRegistry.addName(leverbookcase, "Lever Bookshelf");
+		IntegratedLanguageFile.loadBookcasenames();
 	}
 
 	public void blockRegistry() 
 	{
-		GameRegistry.registerBlock(bookcasemeta, ItemBookcaseMulti.class);
+		GameRegistry.registerBlock(bookcasemeta, ItemBookcaseMulti.class, "bookcasemeta");
 		GameRegistry.registerBlock(Bookcasechest, "Bookcasechest");
 		GameRegistry.registerBlock(WoodenBookcasedoorBlock, "WoodenBookcasedoorBlock");
 		GameRegistry.registerBlock(IronBookcasedoorBlock, "IronBookcasedoorBlock");
-		GameRegistry.registerBlock(leverbookcase, "Lever Bookshelf");
+		GameRegistry.registerBlock(leverbookcase, "leverbookcase");
 	}
 
 	public void blocks() 
 	{
 		bookcasemeta = new BlockBookcaseMulti(bookcasemetaID, Material.wood).setHardness(1.5F);
-		WoodenBookcasedoorBlock = new BlockBookcasedoor(WoodenBookcasedoorBlockID, Material.wood).setHardness(1.5F).setUnlocalizedName("bookshelf");
-		IronBookcasedoorBlock = new BlockBookcasedoor(IronBookcasedoorBlockID, Material.iron).setHardness(1.5F).setUnlocalizedName("bookshelf");;
-		Bookcasechest = (new Blockbookshelfchest(BookcasechestID)).setHardness(1.5F).setResistance(1.0F).setUnlocalizedName("bookshelf");
-		leverbookcase = (new BlockLeverBookcase(leverbookcaseID)).setHardness(1.5F).setStepSound(Block.soundWoodFootstep).setUnlocalizedName("bookshelf").setCreativeTab(RCB.Reactioncraft);
+		WoodenBookcasedoorBlock = new BlockBookcasedoor(WoodenBookcasedoorBlockID, Material.wood).setHardness(1.5F).setUnlocalizedName("WoodenBookcasedoorBlock");
+		IronBookcasedoorBlock = new BlockBookcasedoor(IronBookcasedoorBlockID, Material.iron).setHardness(1.5F).setUnlocalizedName("IronBookcasedoorBlock");
+		Bookcasechest = (new Blockbookshelfchest(BookcasechestID)).setHardness(1.5F).setResistance(1.0F).setUnlocalizedName("Bookcasechest");
+		leverbookcase = (new BlockLeverBookcase(leverbookcaseID)).setHardness(1.5F).setStepSound(Block.soundWoodFootstep).setUnlocalizedName("leverbookcase").setCreativeTab(RCB.Reactioncraft);
 	}
 
 	public void items() 
 	{
-		WoodenBookcasedoor = (new ItemBookcaseDoor(WoodenBookcasedoorIID, Material.wood)).setUnlocalizedName("RCBB:WoodenBookcasedoor");
-		IronBookcasedoor = (new ItemBookcaseDoor(IronBookcasedoorIID, Material.iron)).setUnlocalizedName("RCBB:IronBookcasedoor");
+		WoodenBookcasedoor = (new ItemBookcaseDoor(WoodenBookcasedoorIID, Material.wood)).setUnlocalizedName("rcbb:WoodenBookcasedoor").setTextureName("rcbb:WoodenBookcasedoor");
+		IronBookcasedoor = (new ItemBookcaseDoor(IronBookcasedoorIID, Material.iron)).setUnlocalizedName("rcbb:IronBookcasedoor").setTextureName("rcbb:IronBookcasedoor");
 	}
 
 	public void tileentities() 
@@ -270,7 +253,7 @@ public class RCBB
 
 	}
 
-	@PostInit
+	@EventHandler
 	public void modsLoaded(FMLPostInitializationEvent evt)
 	{
 		

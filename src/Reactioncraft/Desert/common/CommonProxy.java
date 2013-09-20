@@ -1,4 +1,4 @@
-package Reactioncraft.Desert.common;
+package Reactioncraft.desert.common;
 
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.world.World;

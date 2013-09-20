@@ -1,40 +1,32 @@
 package Reactioncraft.food;
 
 import java.io.File;
-import Reactioncraft.basefiles.common.*;
-import Reactioncraft.basemod.RCB;
-import Reactioncraft.food.client.ClientProxy;
-import Reactioncraft.food.common.BlockReactioncraftStem;
-import Reactioncraft.food.common.CommonProxy;
-import Reactioncraft.basemod.common.PacketHandler;
-import Reactioncraft.food.common.*;
-import net.minecraft.block.Block;
-import net.minecraft.block.BlockStem;
-import net.minecraft.block.material.Material;
-import net.minecraft.item.EnumToolMaterial;
-import net.minecraft.item.Item;
-import net.minecraft.item.ItemStack;
+
+import net.minecraft.item.*;
 import net.minecraft.item.crafting.CraftingManager;
 import net.minecraft.potion.Potion;
-import net.minecraftforge.common.Configuration;
-import net.minecraftforge.common.Property;
 import net.minecraftforge.oredict.OreDictionary;
 import net.minecraftforge.oredict.ShapedOreRecipe;
+import Reactioncraft.basefiles.common.*;
+import Reactioncraft.basemod.RCB;
+import Reactioncraft.basemod.common.PacketHandler;
+import Reactioncraft.food.client.ClientProxy;
+import Reactioncraft.food.common.CommonProxy;
+import Reactioncraft.food.common.*;
+import Reactioncraft.integration.*;
+import com.mrcrayfish.furnitureapi.OvenRecipesAPI;
 import cpw.mods.fml.common.FMLLog;
 import cpw.mods.fml.common.Mod;
-import cpw.mods.fml.common.Mod.Init;
+import cpw.mods.fml.common.Mod.EventHandler;
 import cpw.mods.fml.common.Mod.Instance;
-import cpw.mods.fml.common.Mod.PostInit;
-import cpw.mods.fml.common.Mod.PreInit;
 import cpw.mods.fml.common.SidedProxy;
 import cpw.mods.fml.common.event.FMLInitializationEvent;
 import cpw.mods.fml.common.event.FMLPostInitializationEvent;
 import cpw.mods.fml.common.event.FMLPreInitializationEvent;
 import cpw.mods.fml.common.network.NetworkMod;
 import cpw.mods.fml.common.registry.GameRegistry;
-import cpw.mods.fml.common.registry.LanguageRegistry;
 
-@Mod( modid = "RCF", name="Reactioncraft Food", version="[1.5.2] Reactioncraft Version 9.0", dependencies = "required-after:RCC")
+@Mod( modid = "rcf", name="Reactioncraft Food", version="[1.6.2] Reactioncraft 3 Version 1.1.2", dependencies = "required-after:rcc")
 @NetworkMod(channels = { "RCF" }, clientSideRequired = true, serverSideRequired = false, packetHandler = PacketHandler.class)
 
 public class RCF
@@ -65,8 +57,6 @@ public class RCF
 	//	public static int darkchoclatebarIID;
 	//	public static int choclatebarmouldIID;
 	//	public static int CoconutcakeIID;
-	//	public static int BaconIID;
-	//	public static int BaconRawIID;
 	//	public static int SteakSandwichIID;
 	//	public static int FishSandwichIID;
 	//	public static int HamIID;
@@ -105,9 +95,9 @@ public class RCF
 	//Implemented
 	public static int EdibleFleshIID;
 	public static int knifeIID;
-	
+
 	//public static int pumpkinID;
-	
+
 	public static int UnwrappedCornIID;
 	public static int cookedCornIID;
 	public static int popcornseedsIID;
@@ -119,7 +109,11 @@ public class RCF
 	public static int SlicedBreadIID;
 	public static int HamSandwichIID;
 	public static int HamburgerIID;
-
+	public static int CheeseburgerIID;
+	public static int BaconIID;
+	public static int BaconRawIID;
+	public static int cheeseIID;
+	
 	//Items
 	//	public static Item Jellyfishonstick;
 	//	public static Item bowlofeggs;
@@ -128,8 +122,6 @@ public class RCF
 	//	public static Item darkchoclatebar;
 	//	public static Item choclatebarmould;
 	//	public static Item Coconutcake;
-	//	public static Item Bacon;
-	//	public static Item BaconRaw;
 	//	public static Item SteakSandwich;
 	//	public static Item FishSandwich;
 	//	public static Item Ham;
@@ -185,15 +177,33 @@ public class RCF
 	public static Item SlicedBread;
 	public static Item HamSandwich;
 	public static Item Hamburger;
+	public static Item Cheeseburger;
+	public static Item Bacon;
+	public static Item BaconRaw;
+	public static Item cheese;
 
 	//public static Property vanillaOverridePumpkin;
-	
+
 	public static final int WILDCARD_VALUE = Short.MAX_VALUE;
-	
+
+	public static boolean crayfish() throws ClassNotFoundException 
+	{
+		try
+		{
+			Class.forName("com.mrcrayfish.furniture.MrCrayfishFurnitureMod");
+		}
+		catch (NoClassDefFoundError ex) 
+		{
+			return false ;
+		}
+		return true ;
+	}
+
 	//Config
 	public static ReactioncraftConfiguration config;
+	
 
-	@PreInit
+	@EventHandler
 	public void preInit(FMLPreInitializationEvent evt)
 	{
 		System.out.println("[RCF] Pre Initialization Loaded");
@@ -213,7 +223,6 @@ public class RCF
 			//Claimed Item IDS 10221 - 10800
 			//         cciIID = config.getItem("Carrot Cake Item", 10221).getInt();
 			//         uncookedccIID = config.getItem("Uncooked Carrot Cake", 10222).getInt();
-			//         BaconRawIID = config.getItem("Raw Bacon", 10223).getInt();
 			//         CakepanIID = config.getItem("Cake Pan", 10224).getInt();
 			//         CakeMBIID = config.getItem("idk what this is..", 10225).getInt();
 			//         uncookedbreadIID = config.getItem("Uncooked Bread", 10226).getInt();
@@ -228,7 +237,6 @@ public class RCF
 			//         darkchoclatebarIID = config.getItem("Dark Chocolate Bar", 10234).getInt();
 			//         choclatebarmouldIID = config.getItem("Chocolate bar mould", 10235).getInt();
 			//         CoconutcakeIID = config.getItem("Coconut Cake", 10236).getInt();
-			//         BaconIID = config.getItem("Bacon", 10237).getInt();
 			//         SteakSandwichIID = config.getItem("Steak Sandwich", 10238).getInt();
 			//         FishSandwichIID = config.getItem("Fish Sandwich", 10239).getInt();
 			//         HamIID = config.getItem("Ham", 10240).getInt();
@@ -274,6 +282,10 @@ public class RCF
 			SlicedBreadIID = config.getItem("Sliced Bread", 10280).getInt();
 			HamSandwichIID = config.getItem("Ham Sandwich", 10281).getInt();
 			HamburgerIID = config.getItem("Hamburger", 10282).getInt();
+			CheeseburgerIID = config.getItem("Cheeseburger", 10283).getInt();
+			BaconIID = config.getItem("Bacon", 10284).getInt();
+			BaconRawIID = config.getItem("Raw Bacon", 10285).getInt();
+			cheeseIID = config.getItem("cheese", 10286).getInt();
 			
 			//vanillaOverridePumpkin = config.get("Vanilla Overrides", "Override Block Pumpkin", true);
 			//vanillaOverridePumpkin.comment = "If this is true the vanilla pumpkin vine is slightly overwritten now spawns my custom pumpkin, use it in a crafting table with a knife to get the mojang pumpkin";
@@ -289,16 +301,16 @@ public class RCF
 	}
 
 
-	@Init
+	@EventHandler
 	public void load(FMLInitializationEvent event)
 	{
 		//the meat of the mod
 		//Claimed Block Ids 3038 - 3055
 		//Claimed Item Ids 10075 - 10150
 		ClientProxy.registerRenderInformation();
-		
+
 		//Overrides();
-		
+
 		//Cake / Pie Blocks
 		//		carrotcake = new BlockBasicCake(carrotcakeID, 0).setHardness(1.0F).setResistance(1.0F).setUnlocalizedName("carrotcake");
 		//		ChoclateCake = new BlockBasicCake(ChoclateCakeID, 0).setHardness(1.0F).setResistance(1.0F).setUnlocalizedName("Choclatecake");
@@ -309,7 +321,6 @@ public class RCF
 		//		
 		//		
 		//		//Uncooked Regular Foods
-		//		BaconRaw = new ItemFoodMod(BaconRawIID, 0, false).setPotionEffect(Potion.hunger.id, 30, 0, 0.8F).setIconCoord(109, 0).setUnlocalizedName("BaconRaw");
 		//		UncookedChoclateCake= new ItemFoodMod(UncookedChoclateCakeIID, 0, false).setPotionEffect(Potion.hunger.id, 30, 0, 0.8F).setIconCoord(109, 0).setUnlocalizedName("UncookedChoclateCake");
 		//		uncookedwizimsurprise= new ItemFoodMod(uncookedwizimsurpriseIID, 0, false).setPotionEffect(Potion.hunger.id, 30, 0, 0.8F).setIconCoord(109, 0).setUnlocalizedName("uncookedwizimsurprise");
 		//		Bowlofeggs= new ItemFoodMod(BowlofeggsIID, 0, false).setPotionEffect(Potion.hunger.id, 30, 0, 0.8F).setIconCoord(109, 0).setUnlocalizedName("Bowlofeggs");
@@ -322,7 +333,6 @@ public class RCF
 		//		darkchoclatebar = new ItemFoodMod(darkchoclatebarIID, 0, false).setIconCoord(109, 0).setUnlocalizedName("darkchoclatebar");
 		//		choclatebarmould = new ItemFoodMod(choclatebarmouldIID, 0, false).setIconCoord(109, 0).setUnlocalizedName(" choclatebarmould");
 		//		Coconutcake = new ItemFoodMod(CoconutcakeIID, 0, false).setIconCoord(109, 0).setUnlocalizedName("Coconutcake");
-		//		Bacon = new ItemFoodMod(BaconIID, 0, false).setIconCoord(109, 0).setUnlocalizedName("Bacon");
 		//		SteakSandwich = new ItemFoodMod(SteakSandwichIID, 0, false).setIconCoord(109, 0).setUnlocalizedName("SteakSandwich");
 		//		FishSandwich = new ItemFoodMod(FishSandwichIID, 0, false).setIconCoord(109, 0).setUnlocalizedName("FishSandwich");
 		//		Ham = new ItemFoodMod(HamIID, 0, false).setIconCoord(109, 0).setUnlocalizedName("Ham");
@@ -352,33 +362,50 @@ public class RCF
 		//		Chickenonastick= new ItemFoodMod(ChickenonastickIID, 0, false).setIconCoord(109, 0).setUnlocalizedName("Chickenonastick").setContainerItem(Item.stick);
 		//		Noodles= new ItemFoodMod(NoodlesIID, 0, false).setIconCoord(109, 0).setUnlocalizedName("Noodles");
 		//		bowlofnoodles = new ItemFoodMod(bowlofnoodlesIID, 0, false).setIconCoord(109, 0).setUnlocalizedName("bowlofnoodlesNoodles").setContainerItem(Item.bowlEmpty);
-		
+
 		//Food Tab
-		cookedCorn = new ItemFoodMod(cookedCornIID, 6, false).setUnlocalizedName("RCF:cookedCorn").setCreativeTab(RCB.Reactioncraftfood);
-		popcornseeds = new ItemBasic(popcornseedsIID).setUnlocalizedName("RCPM:CornSeed").setCreativeTab(RCB.Reactioncraftfood);
-		bagofpopcorn = new ItemBasic(bagofpopcornIID).setUnlocalizedName("RCF:bagofpopcorn").setCreativeTab(RCB.Reactioncraftfood);
-		poppedbagofpopcorn = new ItemFoodMod(poppedbagofpopcornIID, 10, true).setUnlocalizedName("RCF:poppedbagofpopcorn").setCreativeTab(RCB.Reactioncraftfood);
-		rawcorn = new ItemFoodMod(rawcornIID, 2, false).setUnlocalizedName("RCF:uncookedCorn").setCreativeTab(RCB.Reactioncraftfood);
-		UnwrappedCorn = new ItemFoodMod(UnwrappedCornIID, 2, false).setUnlocalizedName("RCF:UnwrappedCorn").setCreativeTab(RCB.Reactioncraftfood);
-		RawNuggets = new ItemFoodMod(RawNuggetsIID, 2, true).setPotionEffect(Potion.hunger.id, 30, 0, 0.8F).setUnlocalizedName("RCF:RawNuggets").setCreativeTab(RCB.Reactioncraftfood);
-		ChickenNuggets = new ItemFoodMod(ChickenNuggetsIID, 7, true).setUnlocalizedName("RCF:ChickenNuggets").setCreativeTab(RCB.Reactioncraftfood);
-		SlicedBread = new ItemFoodMod(SlicedBreadIID, 4, false).setUnlocalizedName("RCF:SlicedBread").setCreativeTab(RCB.Reactioncraftfood);
-		HamSandwich = new ItemFoodMod(HamSandwichIID, 8, false).setUnlocalizedName("RCF:HamSandwich").setCreativeTab(RCB.Reactioncraftfood);
-		EdibleFlesh= new ItemBasicFood(EdibleFleshIID, 6, true).setUnlocalizedName("RCF:edibleflesh").setCreativeTab(RCB.Reactioncraftfood);
-		Hamburger = new ItemFoodMod(HamburgerIID, 12, true).setUnlocalizedName("RCF:hamburger").setCreativeTab(RCB.Reactioncraftfood);
+		cookedCorn = new ItemFoodMod(cookedCornIID, 6, false).setUnlocalizedName("rcf:cookedCorn").setTextureName("rcf:cookedCorn").setCreativeTab(RCB.Reactioncraftfood);
+		popcornseeds = new ItemBasic(popcornseedsIID).setUnlocalizedName("rcpm:CornSeed").setTextureName("rcpm:CornSeed").setCreativeTab(RCB.Reactioncraftfood);
+		bagofpopcorn = new ItemBasic(bagofpopcornIID).setUnlocalizedName("rcf:bagofpopcorn").setTextureName("rcf:bagofpopcorn").setCreativeTab(RCB.Reactioncraftfood);
+		poppedbagofpopcorn = new ItemFoodMod(poppedbagofpopcornIID, 10, true).setUnlocalizedName("rcf:poppedbagofpopcorn").setTextureName("rcf:poppedbagofpopcorn").setCreativeTab(RCB.Reactioncraftfood);
+		rawcorn = new ItemFoodMod(rawcornIID, 2, false).setUnlocalizedName("rcf:uncookedCorn").setTextureName("rcf:uncookedCorn").setCreativeTab(RCB.Reactioncraftfood);
+		UnwrappedCorn = new ItemFoodMod(UnwrappedCornIID, 2, false).setUnlocalizedName("rcf:UnwrappedCorn").setTextureName("rcf:UnwrappedCorn").setCreativeTab(RCB.Reactioncraftfood);
+		RawNuggets = new ItemFoodMod(RawNuggetsIID, 2, true).setPotionEffect(Potion.hunger.id, 30, 0, 0.8F).setUnlocalizedName("rcf:RawNuggets").setTextureName("rcf:RawNuggets").setCreativeTab(RCB.Reactioncraftfood);
+		ChickenNuggets = new ItemFoodMod(ChickenNuggetsIID, 7, true).setUnlocalizedName("rcf:ChickenNuggets").setTextureName("rcf:ChickenNuggets").setCreativeTab(RCB.Reactioncraftfood);
+		SlicedBread = new ItemFoodMod(SlicedBreadIID, 4, false).setUnlocalizedName("rcf:SlicedBread").setTextureName("rcf:SlicedBread").setCreativeTab(RCB.Reactioncraftfood);
+		HamSandwich = new ItemFoodMod(HamSandwichIID, 8, false).setUnlocalizedName("rcf:HamSandwich").setTextureName("rcf:HamSandwich").setCreativeTab(RCB.Reactioncraftfood);
+		EdibleFlesh= new ItemBasicFood(EdibleFleshIID, 6, true).setUnlocalizedName("rcf:edibleflesh").setTextureName("rcf:edibleflesh").setCreativeTab(RCB.Reactioncraftfood);
+		Hamburger = new ItemFoodMod(HamburgerIID, 8, true).setUnlocalizedName("rcf:hamburger").setTextureName("rcf:hamburger").setCreativeTab(RCB.Reactioncraftfood);
+		Cheeseburger = new ItemFoodMod(CheeseburgerIID, 14, true).setUnlocalizedName("rcf:cheeseburger").setTextureName("rcf:cheeseburger").setCreativeTab(RCB.Reactioncraftfood);
+		BaconRaw = new ItemFoodMod(BaconRawIID, 4, true).setPotionEffect(Potion.hunger.id, 30, 0, 0.8F).setUnlocalizedName("rcf:rawbacon").setTextureName("rcf:rawbacon").setUnlocalizedName("BaconRaw");
+		Bacon = new ItemFoodMod(BaconIID, 6, true).setUnlocalizedName("rcf:bacon").setTextureName("rcf:bacon").setUnlocalizedName("Bacon");
+		cheese = new ItemFoodMod(cheeseIID, 3, false).setUnlocalizedName("rcf:cheese").setTextureName("rcf:cheese").setUnlocalizedName("cheese");
 		
 		//Block Tab
 		//pumpkin = new BlockPumpkin2(pumpkinID).setHardness(1.0F).setStepSound(Block.soundWoodFootstep);
-		
+
 		//Goes Into Reactioncraft Items Creative Tab
-		Knfie = (new ItemKnife(knifeIID)).setUnlocalizedName("RCF:knife").setCreativeTab(RCB.ReactioncraftItems);
+		Knfie = (new ItemKnife(knifeIID)).setUnlocalizedName("rcf:knife").setTextureName("rcf:knife").setCreativeTab(RCB.ReactioncraftItems);
 
 		//.setContainerItem(bucketEmpty)
 		registry();
 		langRegistry();
-		recipes();
 		furnaceRecipes();
 		Handlers();
+		
+		OreDictionary.registerOre("rawCorn", new ItemStack(RCF.rawcorn));
+		OreDictionary.registerOre("cheese", new ItemStack(RCF.cheese));
+		
+		recipes();
+		
+		//Support for MrCrayFish's Mods
+		OvenRecipesAPI.instance().addFoodToOvenRecipes(RCF.rawcorn.itemID, new ItemStack(RCF.cookedCorn));
+		OvenRecipesAPI.instance().addFoodToOvenRecipes(RCF.bagofpopcorn.itemID, new ItemStack(RCF.poppedbagofpopcorn));
+		OvenRecipesAPI.instance().addFoodToOvenRecipes(Item.rottenFlesh.itemID, new ItemStack(RCF.EdibleFlesh));
+		OvenRecipesAPI.instance().addFoodToOvenRecipes(RCF.RawNuggets.itemID, new ItemStack(RCF.ChickenNuggets));
+		OvenRecipesAPI.instance().addFoodToOvenRecipes(RCF.BaconRaw.itemID, new ItemStack(RCF.Bacon));
+		
+		//FreezerRecipesAPI.instance().addSolidifying(Item.bucketWater.itemID, new ItemStack(RCMM.IceBucket));
 	}
 
 	private void Overrides() 
@@ -403,7 +430,10 @@ public class RCF
 	public void furnaceRecipes() 
 	{
 		//GameRegistry.addSmelting(uncookedcc.shiftedIndex, new ItemStack(ccItem), 0.5F); 
-
+		
+		//Cookin Da Bacon!
+		GameRegistry.addSmelting(RCF.BaconRaw.itemID, new ItemStack(RCF.Bacon), 0.5F); 
+		
 		//Rotten Flesh to Edible Flesh
 		GameRegistry.addSmelting(Item.rottenFlesh.itemID, new ItemStack(EdibleFlesh), 0.5F); 
 
@@ -426,19 +456,20 @@ public class RCF
 		GameRegistry.addShapelessRecipe(new ItemStack(SlicedBread, 6), new Object[] {Item.bread, new ItemStack(RCF.Knfie,1, WILDCARD_VALUE)});
 		GameRegistry.addRecipe(new ItemStack(HamSandwich, 1), new Object[] {"A", "B", "A", 'A', RCF.SlicedBread, 'B', Item.porkRaw});
 		GameRegistry.addRecipe(new ItemStack(Hamburger, 1), new Object[] {"A", "B", "A", 'A', RCF.SlicedBread, 'B', Item.beefCooked});
+			
+		
+		CraftingManager.getInstance().getRecipeList().add(new ShapedOreRecipe(RCF.Cheeseburger, true, new Object[]{" A ", " BC", " A ", Character.valueOf('C'), "cheese", Character.valueOf('A'), RCF.SlicedBread, Character.valueOf('B'), Item.beefCooked}));
+		
 		//GameRegistry.addRecipe(new ItemStack(HamSandwich, 1), new Object[] {"A", "B", "A", 'A', RCF.SlicedBread, 'B', Item.});
 		GameRegistry.addRecipe(new ItemStack(Knfie, 1), new Object[] {"B", "A", 'A', Item.stick, 'B', Item.ingotIron});
 		//GameRegistry.addShapelessRecipe(new ItemStack(Block.pumpkin, 1), new Object[]{RCF.Knfie, RCF.pumpkin});
-
-		OreDictionary.registerOre("rawCorn", new ItemStack(RCF.rawcorn));
+ 		GameRegistry.addShapelessRecipe(new ItemStack(BaconRaw, 4), new Object[] {Item.porkRaw, new ItemStack(RCF.Knfie, 1, WILDCARD_VALUE)});
 		
 		//not used yet
 		//	 		GameRegistry.addShapelessRecipe(new ItemStack(SteakSandwich, 1), new Object[] {
 		//	            Item.beefRaw, SlicedBread, SlicedBread
 		//	             });
-		//	 		GameRegistry.addShapelessRecipe(new ItemStack(BaconRaw, 4), new Object[] {
-		//	        	Item.porkRaw, Knfie
-		//	         	});
+		
 		//GameRegistry.addShapelessRecipe(new ItemStack(Flour, 1), new Object[] {"AAA", "BEB", "CCC", 'A', Item.bucketMilk, 'B', Item.sugar, 'C', Item.wheat, 'E', Item.egg});
 		//GameRegistry.addRecipe(new ItemStack(carrotcake, 1), new Object[] {"AAA", "BEB", "CCC", 'A', Item.carrot, 'B', Item.sugar, 'C', Item.wheat, 'E', Item.egg});
 		//CraftingManager.getInstance().getRecipeList().add(new ShapelessOreRecipe(uncookedcc, true, new Object[]{Item.carrot, Item.Carrot,}));
@@ -448,61 +479,7 @@ public class RCF
 
 	private void langRegistry() 
 	{
-		//			LanguageRegistry.addName(carrotcake, "Carrot Cake");
-		//	 		LanguageRegistry.addName(ccItem, "Carrot Cake");
-		//	 		LanguageRegistry.addName(uncookedcc, "Uncooked Carrot Cake");
-		//			LanguageRegistry.addName(Jellyfishonstick, "Jellyfish on stick");
-		//			//LanguageRegistry.addName(bowlofeggs, "bowl of eggs");
-		//			LanguageRegistry.addName(whitechoclatebar, "white chocolate bar");
-		//			LanguageRegistry.addName(choclatebar, "chocolate bar");
-		//			LanguageRegistry.addName(darkchoclatebar, "dark chocolate bar");
-		//	 		LanguageRegistry.addName(choclatebarmould, "chocolate bar mould");
-		//			LanguageRegistry.addName(Coconutcake, "Coconut cake");
-		//			LanguageRegistry.addName(Bacon, " Bacon");
-		//			LanguageRegistry.addName(BaconRaw, "Raw Bacon");
-		//			LanguageRegistry.addName(SteakSandwich, "Uncooked Carrot Cake");
-		//			LanguageRegistry.addName(FishSandwich, "Uncooked Carrot Cake");
-		//			LanguageRegistry.addName(Ham, "Carrot Cake");
-		//	 		LanguageRegistry.addName(SlicedCheese, "Uncooked Carrot Cake");
-		//			LanguageRegistry.addName(HamandCheeseSandwich, "Uncooked Carrot Cake");
-		//			LanguageRegistry.addName(Honeybun, "honeybun");
-		//			LanguageRegistry.addName(twinkie, "twinkie");
-		//			LanguageRegistry.addName(ChoclateCakeItem, "Chocolate Cake");
-		//			LanguageRegistry.addName(ccItem, "Carrot Cake");
-		//	 		LanguageRegistry.addName(uncookedcc, "Uncooked Carrot Cake");
-		//			LanguageRegistry.addName(uncookedcc, "Uncooked Carrot Cake");
-		//			LanguageRegistry.addName(uncookedcc, "Uncooked Carrot Cake");
-		//			LanguageRegistry.addName(uncookedcc, "Uncooked Carrot Cake");
-		//			LanguageRegistry.addName(uncookedcc, "Uncooked Carrot Cake");
-		//			LanguageRegistry.addName(ccItem, "Carrot Cake");
-		//	 		LanguageRegistry.addName(uncookedcc, "Uncooked Carrot Cake");
-		//			LanguageRegistry.addName(uncookedcc, "Uncooked Carrot Cake");
-		//			LanguageRegistry.addName(uncookedcc, "Uncooked Carrot Cake");
-		//			LanguageRegistry.addName(uncookedcc, "Uncooked Carrot Cake");
-		//			LanguageRegistry.addName(uncookedcc, "Uncooked Carrot Cake");
-		//			LanguageRegistry.addName(ccItem, "Carrot Cake");
-		//	 		LanguageRegistry.addName(uncookedcc, "Uncooked Carrot Cake");
-		//			LanguageRegistry.addName(uncookedcc, "Uncooked Carrot Cake");
-		//			LanguageRegistry.addName(uncookedcc, "Uncooked Carrot Cake");
-		//			LanguageRegistry.addName(uncookedcc, "Uncooked Carrot Cake");
-		//			LanguageRegistry.addName(uncookedcc, "Uncooked Carrot Cake");
-		//			LanguageRegistry.addName(ccItem, "Carrot Cake");
-		LanguageRegistry.addName(Knfie, "Knife");
-		LanguageRegistry.addName(EdibleFlesh, "Edible Flesh");
-
-		LanguageRegistry.instance().addName(RCF.cookedCorn, "Cooked Corn");
-		
-		LanguageRegistry.addName(RCF.popcornseeds, "Popcorn Kernals");
-		LanguageRegistry.addName(RCF.bagofpopcorn, "Unpopped Bag of Popcorn");
-		LanguageRegistry.addName(RCF.poppedbagofpopcorn, "Bag of Popcorn");
-		LanguageRegistry.addName(RCF.rawcorn, "Uncooked Corn");
-		LanguageRegistry.addName(RCF.UnwrappedCorn, "Unwrapped Corn");
-		LanguageRegistry.addName(RCF.ChickenNuggets, "Chicken Nuggets");
-		LanguageRegistry.addName(RCF.RawNuggets, "Raw Nuggets");
-		LanguageRegistry.addName(RCF.SlicedBread, "sliced bread");
-		LanguageRegistry.addName(RCF.HamSandwich, "Ham Sandwich");
-		LanguageRegistry.addName(RCF.Hamburger, "Hamburger");
-		//LanguageRegistry.addName(RCF.pumpkin, "Pumpkin");
+		IntegratedLanguageFile.loadFoodnames();
 	}
 
 
@@ -513,9 +490,9 @@ public class RCF
 	}
 
 
-	@PostInit
+	@EventHandler
 	public void modsLoaded(FMLPostInitializationEvent evt)
 	{
-		FMLLog.info("Were Cookin Tonight..");
+		FMLLog.info("[RCF] Were Cookin Tonight");
 	}	 
 }

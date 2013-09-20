@@ -1,11 +1,12 @@
 package Reactioncraft.core.common;
 
 import java.util.Random;
-import Reactioncraft.core.RCC;
+
 import net.minecraft.block.Block;
 import net.minecraft.block.material.Material;
 import net.minecraft.world.World;
 import net.minecraft.world.gen.feature.WorldGenerator;
+import Reactioncraft.core.RCC;
 
 
 public class WorldGenDarkSand extends WorldGenerator

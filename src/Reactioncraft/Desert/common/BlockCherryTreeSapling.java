@@ -1,31 +1,21 @@
-package Reactioncraft.Desert.common;
+package Reactioncraft.desert.common;
 
-import java.util.List;
 import java.util.Random;
 
-import Reactioncraft.basemod.RCB;
-import Reactioncraft.core.RCC;
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockFlower;
-import net.minecraft.block.BlockSapling;
-import net.minecraft.client.renderer.texture.IconRegister;
-import net.minecraft.creativetab.CreativeTabs;
-import net.minecraft.item.ItemStack;
-import net.minecraft.util.Icon;
 import net.minecraft.world.World;
 import net.minecraft.world.gen.feature.WorldGenBigTree;
 import net.minecraft.world.gen.feature.WorldGenForest;
-import net.minecraft.world.gen.feature.WorldGenHugeTrees;
 import net.minecraft.world.gen.feature.WorldGenTaiga2;
-import net.minecraft.world.gen.feature.WorldGenTrees;
 import net.minecraft.world.gen.feature.WorldGenerator;
 import net.minecraftforge.event.terraingen.TerrainGen;
-import cpw.mods.fml.relauncher.Side;
-import cpw.mods.fml.relauncher.SideOnly;
+import Reactioncraft.basemod.RCB;
+import Reactioncraft.core.RCC;
 public class BlockCherryTreeSapling extends BlockFlower
 {
 	/** change the name to your sapling name **/
-	public static final String[] WOOD_TYPES = new String[] {"Tutorial"};
+	public static final String[] WOOD_TYPES = new String[] {"rccherry"};
 	public BlockCherryTreeSapling(int i, int j)
 	{
 		super(i);
@@ -73,11 +63,11 @@ public class BlockCherryTreeSapling extends BlockFlower
 		boolean flag = false;
 		if (l == 1)
 		{
-			object = new WorldGenTaiga2(true);
+			object = new WorldGenReactionCraftTree(true);
 		}
 		else if (l == 2)
 		{
-			object = new WorldGenForest(true);
+			object = new WorldGenReactionCraftTree(true);
 		}
 		else if (l == 3)
 		{
@@ -109,7 +99,7 @@ public class BlockCherryTreeSapling extends BlockFlower
 			object = new WorldGenReactionCraftTree(true); // Changed //
 			if (par5Random.nextInt(10) == 0)
 			{
-				object = new WorldGenBigTree(true);
+				object = new WorldGenReactionCraftTree(true);
 			}
 		}
 		if (flag)

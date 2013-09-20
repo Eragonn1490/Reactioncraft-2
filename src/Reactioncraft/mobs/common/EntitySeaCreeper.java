@@ -5,6 +5,7 @@ import Reactioncraft.mobs.client.ClientProxy;
 import net.minecraft.block.Block;
 import net.minecraft.block.material.Material;
 import net.minecraft.entity.Entity;
+import net.minecraft.entity.SharedMonsterAttributes;
 import net.minecraft.entity.ai.EntityAIAttackOnCollide;
 import net.minecraft.entity.ai.EntityAIAvoidEntity;
 import net.minecraft.entity.ai.EntityAIFleeSun;
@@ -48,7 +49,6 @@ public class EntitySeaCreeper extends EntityWaterMob
     public EntitySeaCreeper(World world)
     {
         super(world);
-        this.texture = (ClientProxy.MODEL_TEXTURE + "seacreeper.png");
         this.tasks.addTask(0, new EntityAISwimming(this)); 
         this.tasks.addTask(1, new EntityAIFleeSun(this, 0.2F));
         this.tasks.addTask(2, new EntityAISeaCreeperSwell(this));
@@ -57,7 +57,7 @@ public class EntitySeaCreeper extends EntityWaterMob
         this.tasks.addTask(5, new EntityAIWander(this, 0.2F));
         this.tasks.addTask(6, new EntityAIWatchClosest(this, EntityPlayer.class, 8.0F));
         this.tasks.addTask(6, new EntityAILookIdle(this));
-        this.targetTasks.addTask(1, new EntityAINearestAttackableTarget(this, EntityPlayer.class, 16.0F, 0, true));
+        this.targetTasks.addTask(1, new EntityAINearestAttackableTarget(this, EntityPlayer.class, 0, true));
         this.targetTasks.addTask(2, new EntityAIHurtByTarget(this, false));
     }
     
@@ -137,11 +137,6 @@ public class EntitySeaCreeper extends EntityWaterMob
         return true;
     }
 
-    public int func_82143_as()
-    {
-        return this.getAttackTarget() == null ? 3 : 3 + (this.health - 1);
-    }
-
     /**
      * Called when the mob is falling. Calculates and applies fall damage.
      */
@@ -156,9 +151,11 @@ public class EntitySeaCreeper extends EntityWaterMob
         }
     }
 
-    public int getMaxHealth()
+    protected void applyEntityAttributes()
     {
-        return 20;
+        super.applyEntityAttributes();
+        this.getEntityAttribute(SharedMonsterAttributes.maxHealth).setAttribute(16.0D);
+        this.getEntityAttribute(SharedMonsterAttributes.movementSpeed).setAttribute(0.25D);
     }
 
     public void entityInit()

@@ -6,14 +6,17 @@ import net.minecraft.client.gui.inventory.GuiContainer;
 import net.minecraft.entity.player.InventoryPlayer;
 import net.minecraft.inventory.ContainerFurnace;
 import net.minecraft.tileentity.TileEntityFurnace;
+import net.minecraft.util.ResourceLocation;
 import net.minecraft.util.StatCollector;
 import org.lwjgl.opengl.GL11;
 
 @SideOnly(Side.CLIENT)
 public class GuiFreezer extends GuiContainer
 {
-    private TileEntityFreezer furnaceInventory;
-
+	private static final ResourceLocation furnaceGuiTextures = new ResourceLocation("rcmm", "textures/gui/freezer.png");
+	
+	private TileEntityFreezer furnaceInventory;
+    
     public GuiFreezer(InventoryPlayer par1InventoryPlayer, TileEntityFreezer tileEntity)
     {
         super(new ContainerFreezer(par1InventoryPlayer, tileEntity));
@@ -33,10 +36,10 @@ public class GuiFreezer extends GuiContainer
     /**
      * Draw the background layer for the GuiContainer (everything behind the items)
      */
-    public void drawGuiContainerBackgroundLayer(float par1, int par2, int par3)
+    protected void drawGuiContainerBackgroundLayer(float par1, int par2, int par3)
     {
         GL11.glColor4f(1.0F, 1.0F, 1.0F, 1.0F);
-        this.mc.renderEngine.bindTexture("/mods/RCMM/textures/gui/freezer.png");
+        this.mc.getTextureManager().bindTexture(furnaceGuiTextures);
         int k = (this.width - this.xSize) / 2;
         int l = (this.height - this.ySize) / 2;
         this.drawTexturedModalRect(k, l, 0, 0, this.xSize, this.ySize);

@@ -1,12 +1,20 @@
-package Reactioncraft.Integration;
+package Reactioncraft.integration;
 
-import Reactioncraft.Desert.RCBDM;
+import com.mrcrayfish.furnitureapi.FreezerRecipesAPI;
+import com.mrcrayfish.furnitureapi.OvenRecipesAPI;
+import Reactioncraft.desert.RCBDM;
+import ic2.api.*;
+import ic2.api.item.Items;
+import ic2.api.recipe.IMachineRecipeManager;
+import ic2.api.recipe.IRecipeInput;
+import ic2.api.recipe.RecipeInputOreDict;
 import ic2.api.recipe.Recipes;
-import Reactioncraft.Desert.RCBDM;
 import Reactioncraft.api.common.BrickOvenRecipes;
 import Reactioncraft.api.common.ClayalizerRecipes;
 import Reactioncraft.bookcase.RCBB;
 import Reactioncraft.core.RCC;
+import Reactioncraft.food.RCF;
+import Reactioncraft.glass.RCG;
 import Reactioncraft.ore.RCORES;
 import Reactioncraft.tools.RCW;
 import Reactioncraft.machines.RCMM;
@@ -34,9 +42,12 @@ public class Integration
 
 	public static void loadRailCraft()
 	{
-		GameRegistry.addRecipe(new ItemStack(Block.rail, 8), new Object[] {"X X", "X#X", "X X", 'X', Item.ingotIron, '#', Item.stick});
+		if(RCC.hardcorerailcraft.getBoolean(true))
+		{
+			GameRegistry.addRecipe(new ItemStack(Block.rail, 6), new Object[] {"X X", "X#X", "X X", 'X', Item.ingotIron, '#', Item.stick});
+		}
 	}
-
+	
 	public static void loadBlastFurnace()
 	{
 		ItemStack LavaBucket = new ItemStack(Item.bucketLava);
@@ -47,13 +58,21 @@ public class Integration
 
 	public static void loadReactioncraftBookcases() 
 	{
-		GameRegistry.addRecipe(new ItemStack(RCBB.bookcasemeta, 1, 3), new Object[]{"###", "BBB", "###", Character.valueOf('#'), new ItemStack(RCBDM.DesertBlockMulti, 1, 0), Character.valueOf('B'), RCBDM.scroll});
+		if(Loader.isModLoaded("rcbdm"))
+		{
+			CraftingManager.getInstance().getRecipeList().add(new ShapedOreRecipe(new ItemStack(RCBB.bookcasemeta, 1, 3), true, new Object[]{"XXX", "###", "XXX", Character.valueOf('X'), "carveddarkstone", Character.valueOf('#'), "scroll"}));
+			//GameRegistry.addRecipe(new ItemStack(RCBB.bookcasemeta, 1, 3), new Object[]{"###", "BBB", "###", Character.valueOf('#'), new ItemStack(RCBDM.DesertBlockMulti, 1, 0), Character.valueOf('B'), RCBDM.scroll});
+		}
 	}
-
 	public static void loadDesertMachines() 
 	{
-		GameRegistry.addRecipe(new ItemStack(RCMM.BrickOvenIdle, 1), new Object[]{"XXX","X X", "XXX", Character.valueOf('X'), new ItemStack(RCBDM.DesertBlockMulti, 1, 3)});
-		GameRegistry.addRecipe(new ItemStack(RCMM.ClayalizerIdle, 1), new Object[]{"XXX","XGX", "XXX", Character.valueOf('G'), Block.glass, Character.valueOf('X'), new ItemStack(RCBDM.DesertBlockMulti, 1, 3)});
+		if(Loader.isModLoaded("rcbdm"))
+		{
+			CraftingManager.getInstance().getRecipeList().add(new ShapedOreRecipe(new ItemStack(RCMM.BrickOvenIdle, 1), true, new Object[]{"XXX", "X X", "XXX", Character.valueOf('X'), "darkstonebrick"}));
+			CraftingManager.getInstance().getRecipeList().add(new ShapedOreRecipe(new ItemStack(RCMM.ClayalizerIdle, 1), true, new Object[]{"XXX", "XGX", "XXX", Character.valueOf('X'), "darkstonebrick", Character.valueOf('G'), Block.glass}));			
+			//GameRegistry.addRecipe(new ItemStack(RCMM.BrickOvenIdle, 1), new Object[]{"XXX","X X", "XXX", Character.valueOf('X'), new ItemStack(RCBDM.DesertBlockMulti, 1, 3)});
+			//GameRegistry.addRecipe(new ItemStack(RCMM.ClayalizerIdle, 1), new Object[]{"XXX","XGX", "XXX", Character.valueOf('G'), Block.glass, Character.valueOf('X'), new ItemStack(RCBDM.DesertBlockMulti, 1, 3)});
+		}
 	}
 
 	public static void loadCoreGeneration() 
@@ -62,7 +81,9 @@ public class Integration
 		ClayalizerRecipes.smelting().addSmelting(RCC.DarkSand.blockID, new ItemStack(RCC.SandStonePaste, 4), 0.1F);
 
 		//Multi Colored Sandstone Brick
-		GameRegistry.addRecipe(new ItemStack(RCBDM.DesertBlockMulti, 2, 5), new Object[]{"XYX","YXY", "XYX", Character.valueOf('Y'), new ItemStack(RCBDM.DesertBlockMulti, 1, 3), Character.valueOf('X'), new ItemStack(RCC.SandStonePaste)});
+		GameRegistry.addRecipe(new ItemStack(RCBDM.DesertBlockMulti, 4, 5), new Object[]{"XYX","YXY", "XYX", Character.valueOf('Y'), new ItemStack(RCBDM.DesertBlockMulti, 1, 3), Character.valueOf('X'), new ItemStack(RCC.SandStonePaste)});
+
+		//SandStone Clay
 		GameRegistry.addRecipe(new ItemStack(RCBDM.DesertBlockMulti, 1, 2), new Object[]  {"GG", "GG", Character.valueOf('G'), RCC.SandStonePaste});
 	}
 
@@ -75,24 +96,32 @@ public class Integration
 	}
 
 	public static void loadIndustrialCraft()
-	{
+	{	
 		//Bloodstone block to bloodstone dust
-		Recipes.macerator.addRecipe(new ItemStack(RCORES.netherOres, 1, 0), new ItemStack(RCORES.bloodstonedust, 4));
+		Recipes.macerator.addRecipe(new RecipeInputOreDict("oreBloodstone", 1), null, new ItemStack[] { new ItemStack(RCORES.bloodstonedust, 4)});
 
 		//Black Diamond Ore to Black Diamond
-		Recipes.macerator.addRecipe(new ItemStack(RCORES.netherOres, 1, 1), new ItemStack(RCORES.blackdiamond));
+		Recipes.macerator.addRecipe(new RecipeInputOreDict("oreNetherBlackDiamond", 1), null, new ItemStack[] { new ItemStack(RCORES.blackdiamond, 1)});
 
 		//Dragonstone to Dragonstone Shard
-		Recipes.macerator.addRecipe(new ItemStack(RCORES.netherOres, 1, 2), new ItemStack(RCORES.dragonstoneshard));
+		Recipes.macerator.addRecipe(new RecipeInputOreDict("oreNetherDragonstone", 1), null, new ItemStack[] { new ItemStack(RCORES.dragonstoneshard, 1)});
 
-		//Diamond to Diamond
-		Recipes.macerator.addRecipe(new ItemStack(RCORES.netherOres, 1, 3), new ItemStack(Item.diamond, 4));
+		//Nether Diamond to Diamond
+		Recipes.macerator.addRecipe(new RecipeInputOreDict("oreNetherDiamondOre", 1), null, new ItemStack[] { new ItemStack(Item.diamond, 2)});
 
-		//Gold to Gold Ingot
-		FurnaceRecipes.smelting().addSmelting(RCORES.netherOres.blockID, 4, new ItemStack(Item.ingotGold.itemID, 1, 0), 0.5F);
-
-		//Iron Ingot to IronDust
-		Recipes.macerator.addRecipe(new ItemStack(Item.ingotIron), new ItemStack(RCORES.irondust));
+		//Nether Gold to Gold Dust
+		Recipes.macerator.addRecipe(new RecipeInputOreDict("oreNetherGoldOre", 1), null, new ItemStack[] { new ItemStack(RCORES.goldDust, 2)}); 
+		GameRegistry.addSmelting(RCORES.goldDust.itemID, new ItemStack(Item.ingotGold.itemID, 1, 0), 0.1F);
+		
+		if(Loader.isModLoaded("rcc"))
+		{
+			ItemStack resin1 = Items.getItem("resin");
+			
+			if(RCC.hardcoreIC2.getBoolean(true))
+			{
+				Recipes.macerator.addRecipe(new RecipeInputOreDict("woodRubber", 1), null, new ItemStack[] { new ItemStack(resin1.itemID, 2, 0)}); 
+			}
+		}
 	}
 
 //	public static void treecapitator()
@@ -119,272 +148,287 @@ public class Integration
 //		}
 //	}
 
-	public static void loadReactioncraftBDM() 
-	{
-		//CraftingManager.getInstance().getRecipeList().add(new ShapelessOreRecipe(new ItemStack(RCORES.gemdragonstone, 1), new Object[]{RCORES.dragonstoneshard, "chisel"}));
-		GameRegistry.addShapelessRecipe(new ItemStack(RCORES.gemdragonstone, 1,0), new Object[]{new ItemStack(RCORES.dragonstoneshard,1,0),new ItemStack(RCBDM.FlintChisel,1,WILDCARD_VALUE)});
-		GameRegistry.addShapelessRecipe(new ItemStack(RCORES.gemdragonstone, 1,0), new Object[]{new ItemStack(RCORES.dragonstoneshard,1,0),new ItemStack(RCBDM.GoldChisel,1,WILDCARD_VALUE)});
-		GameRegistry.addShapelessRecipe(new ItemStack(RCORES.gemdragonstone, 1,0), new Object[]{new ItemStack(RCORES.dragonstoneshard,1,0),new ItemStack(RCBDM.CopperChisel,1,WILDCARD_VALUE)});
-		GameRegistry.addShapelessRecipe(new ItemStack(RCORES.gemdragonstone, 1,0), new Object[]{new ItemStack(RCORES.dragonstoneshard,1,0),new ItemStack(RCBDM.DiamondChisel,1,WILDCARD_VALUE)});
-		GameRegistry.addShapelessRecipe(new ItemStack(RCORES.gemdragonstone, 1,0), new Object[]{new ItemStack(RCORES.dragonstoneshard,1,0),new ItemStack(RCBDM.BloodstoneChisel,1,WILDCARD_VALUE)});
-	}
+public static void loadReactioncraftBDM() 
+{
+	//CraftingManager.getInstance().getRecipeList().add(new ShapelessOreRecipe(new ItemStack(RCORES.gemdragonstone, 1), new Object[]{RCORES.dragonstoneshard, "chisel"}));
+	GameRegistry.addShapelessRecipe(new ItemStack(RCORES.gemdragonstone, 1,0), new Object[]{new ItemStack(RCORES.dragonstoneshard,1,0),new ItemStack(RCBDM.FlintChisel,1,WILDCARD_VALUE)});
+	GameRegistry.addShapelessRecipe(new ItemStack(RCORES.gemdragonstone, 1,0), new Object[]{new ItemStack(RCORES.dragonstoneshard,1,0),new ItemStack(RCBDM.GoldChisel,1,WILDCARD_VALUE)});
+	GameRegistry.addShapelessRecipe(new ItemStack(RCORES.gemdragonstone, 1,0), new Object[]{new ItemStack(RCORES.dragonstoneshard,1,0),new ItemStack(RCBDM.CopperChisel,1,WILDCARD_VALUE)});
+	GameRegistry.addShapelessRecipe(new ItemStack(RCORES.gemdragonstone, 1,0), new Object[]{new ItemStack(RCORES.dragonstoneshard,1,0),new ItemStack(RCBDM.DiamondChisel,1,WILDCARD_VALUE)});
+	GameRegistry.addShapelessRecipe(new ItemStack(RCORES.gemdragonstone, 1,0), new Object[]{new ItemStack(RCORES.dragonstoneshard,1,0),new ItemStack(RCBDM.BloodstoneChisel,1,WILDCARD_VALUE)});
+}
 
-	public static void loadDesertRecipes() 
-	{
-		//Cherry Tree Planks
-		CraftingManager.getInstance().getRecipeList().add(new ShapelessOreRecipe(new ItemStack(RCBDM.DesertBlockMulti,4,11), new Object[]{"CherryWood"}));
+public static void loadDesertRecipes() 
+{
+	//Cherry Tree Planks
+	CraftingManager.getInstance().getRecipeList().add(new ShapelessOreRecipe(new ItemStack(RCBDM.CherryPlanks, 4, 0), new Object[]{"CherryWood"}));
 
-		//Darkstone
-		CraftingManager.getInstance().getRecipeList().add(new ShapelessOreRecipe(new ItemStack(RCBDM.DesertBlockMulti, 1, 2), new Object[]{"darkclay", "darkclay", "darkclay", "darkclay"}));
+	//Darkstone
+	CraftingManager.getInstance().getRecipeList().add(new ShapelessOreRecipe(new ItemStack(RCBDM.DesertBlockMulti, 1, 2), new Object[]{"darkclay", "darkclay", "darkclay", "darkclay"}));
 
+	//Mossy Dark Stone Brick Recipe
+	//GameRegistry.addRecipe(new ItemStack(RCBDM.DesertBlockMulti, 1, 11), new Object[]{"XY", Character.valueOf('X'), new ItemStack(RCBDM.DesertBlockMulti, 1, 4), Character.valueOf('Y'), new ItemStack(Block.vine)});
+	GameRegistry.addShapelessRecipe(new ItemStack(RCBDM.DesertBlockMulti, 1, 11), new ItemStack(RCBDM.DesertBlockMulti, 1, 4), Block.vine);
 
-		//Limestone to Chiseled Limestone
-		GameRegistry.addShapelessRecipe(new ItemStack(RCBDM.DesertBlockMulti, 1, 7), new ItemStack(RCBDM.DesertBlockMulti, 1, 6), new ItemStack(RCBDM.FlintChisel,1,WILDCARD_VALUE));
-		GameRegistry.addShapelessRecipe(new ItemStack(RCBDM.DesertBlockMulti, 1, 7), new ItemStack(RCBDM.DesertBlockMulti, 1, 6), new ItemStack(RCBDM.GoldChisel,1,WILDCARD_VALUE));
-		GameRegistry.addShapelessRecipe(new ItemStack(RCBDM.DesertBlockMulti, 1, 7), new ItemStack(RCBDM.DesertBlockMulti, 1, 6), new ItemStack(RCBDM.CopperChisel,1,WILDCARD_VALUE));
-		GameRegistry.addShapelessRecipe(new ItemStack(RCBDM.DesertBlockMulti, 1, 7), new ItemStack(RCBDM.DesertBlockMulti, 1, 6), new ItemStack(RCBDM.DiamondChisel,1,WILDCARD_VALUE));
-		GameRegistry.addShapelessRecipe(new ItemStack(RCBDM.DesertBlockMulti, 1, 7), new ItemStack(RCBDM.DesertBlockMulti, 1, 6), new ItemStack(RCBDM.BloodstoneChisel,1,WILDCARD_VALUE));
+	//Limestone to Chiseled Limestone
+	GameRegistry.addShapelessRecipe(new ItemStack(RCBDM.DesertBlockMulti, 1, 7), new ItemStack(RCBDM.DesertBlockMulti, 1, 6), new ItemStack(RCBDM.FlintChisel,1,WILDCARD_VALUE));
+	GameRegistry.addShapelessRecipe(new ItemStack(RCBDM.DesertBlockMulti, 1, 7), new ItemStack(RCBDM.DesertBlockMulti, 1, 6), new ItemStack(RCBDM.GoldChisel,1,WILDCARD_VALUE));
+	GameRegistry.addShapelessRecipe(new ItemStack(RCBDM.DesertBlockMulti, 1, 7), new ItemStack(RCBDM.DesertBlockMulti, 1, 6), new ItemStack(RCBDM.CopperChisel,1,WILDCARD_VALUE));
+	GameRegistry.addShapelessRecipe(new ItemStack(RCBDM.DesertBlockMulti, 1, 7), new ItemStack(RCBDM.DesertBlockMulti, 1, 6), new ItemStack(RCBDM.DiamondChisel,1,WILDCARD_VALUE));
+	GameRegistry.addShapelessRecipe(new ItemStack(RCBDM.DesertBlockMulti, 1, 7), new ItemStack(RCBDM.DesertBlockMulti, 1, 6), new ItemStack(RCBDM.BloodstoneChisel,1,WILDCARD_VALUE));
 
-		/**Bloodstone brick recipe**/
-		CraftingManager.getInstance().getRecipeList().add(new ShapelessOreRecipe(new ItemStack(RCBDM.BloodstoneBrick,4,4), new Object[]{"oreBloodstone", "oreBloodstone", "oreBloodstone", "oreBloodstone"}));
+	/**Bloodstone brick recipe**/
+	CraftingManager.getInstance().getRecipeList().add(new ShapelessOreRecipe(new ItemStack(RCBDM.BloodstoneBrick, 4, 0), new Object[]{"oreBloodstone", "oreBloodstone", "oreBloodstone", "oreBloodstone"}));
 
-		/**Chisels Cutting the Gems into Cut form.**/
-		GameRegistry.addShapelessRecipe(new ItemStack(RCBDM.CutLBGem,1,0), new Object[]{RCBDM.CutLBGem, new ItemStack(RCBDM.FlintChisel,1,WILDCARD_VALUE)});
-		GameRegistry.addShapelessRecipe(new ItemStack(RCBDM.CutLBGem,1,0), new Object[]{RCBDM.CutLBGem, new ItemStack(RCBDM.GoldChisel,1,WILDCARD_VALUE)});
-		GameRegistry.addShapelessRecipe(new ItemStack(RCBDM.CutLBGem,1,0), new Object[]{RCBDM.CutLBGem, new ItemStack(RCBDM.CopperChisel,1,WILDCARD_VALUE)});
-		GameRegistry.addShapelessRecipe(new ItemStack(RCBDM.CutLBGem,1,0), new Object[]{RCBDM.CutLBGem, new ItemStack(RCBDM.DiamondChisel,1,WILDCARD_VALUE)});
-		GameRegistry.addShapelessRecipe(new ItemStack(RCBDM.CutLBGem,1,0), new Object[]{RCBDM.CutLBGem, new ItemStack(RCBDM.BloodstoneChisel,1,WILDCARD_VALUE)});
+	/**Chisels Cutting the Gems into Cut form.**/
+	GameRegistry.addShapelessRecipe(new ItemStack(RCBDM.CutLBGem,1,0), new Object[]{RCBDM.CutLBGem, new ItemStack(RCBDM.FlintChisel,1,WILDCARD_VALUE)});
+	GameRegistry.addShapelessRecipe(new ItemStack(RCBDM.CutLBGem,1,0), new Object[]{RCBDM.CutLBGem, new ItemStack(RCBDM.GoldChisel,1,WILDCARD_VALUE)});
+	GameRegistry.addShapelessRecipe(new ItemStack(RCBDM.CutLBGem,1,0), new Object[]{RCBDM.CutLBGem, new ItemStack(RCBDM.CopperChisel,1,WILDCARD_VALUE)});
+	GameRegistry.addShapelessRecipe(new ItemStack(RCBDM.CutLBGem,1,0), new Object[]{RCBDM.CutLBGem, new ItemStack(RCBDM.DiamondChisel,1,WILDCARD_VALUE)});
+	GameRegistry.addShapelessRecipe(new ItemStack(RCBDM.CutLBGem,1,0), new Object[]{RCBDM.CutLBGem, new ItemStack(RCBDM.BloodstoneChisel,1,WILDCARD_VALUE)});
 
-		GameRegistry.addShapelessRecipe(new ItemStack(RCBDM.CutDBGem,1,0), RCBDM.CutDBGem, new ItemStack(RCBDM.FlintChisel,1,WILDCARD_VALUE));
-		GameRegistry.addShapelessRecipe(new ItemStack(RCBDM.CutDBGem,1,0), RCBDM.CutDBGem, new ItemStack(RCBDM.GoldChisel,1,WILDCARD_VALUE));
-		GameRegistry.addShapelessRecipe(new ItemStack(RCBDM.CutDBGem,1,0), RCBDM.CutDBGem, new ItemStack(RCBDM.CopperChisel,1,WILDCARD_VALUE));
-		GameRegistry.addShapelessRecipe(new ItemStack(RCBDM.CutDBGem,1,0), RCBDM.CutDBGem, new ItemStack(RCBDM.DiamondChisel,1,WILDCARD_VALUE));
-		GameRegistry.addShapelessRecipe(new ItemStack(RCBDM.CutDBGem,1,0), RCBDM.CutDBGem, new ItemStack(RCBDM.BloodstoneChisel,1,WILDCARD_VALUE));
+	GameRegistry.addShapelessRecipe(new ItemStack(RCBDM.CutDBGem,1,0), RCBDM.CutDBGem, new ItemStack(RCBDM.FlintChisel,1,WILDCARD_VALUE));
+	GameRegistry.addShapelessRecipe(new ItemStack(RCBDM.CutDBGem,1,0), RCBDM.CutDBGem, new ItemStack(RCBDM.GoldChisel,1,WILDCARD_VALUE));
+	GameRegistry.addShapelessRecipe(new ItemStack(RCBDM.CutDBGem,1,0), RCBDM.CutDBGem, new ItemStack(RCBDM.CopperChisel,1,WILDCARD_VALUE));
+	GameRegistry.addShapelessRecipe(new ItemStack(RCBDM.CutDBGem,1,0), RCBDM.CutDBGem, new ItemStack(RCBDM.DiamondChisel,1,WILDCARD_VALUE));
+	GameRegistry.addShapelessRecipe(new ItemStack(RCBDM.CutDBGem,1,0), RCBDM.CutDBGem, new ItemStack(RCBDM.BloodstoneChisel,1,WILDCARD_VALUE));
 
-		//Chisels Cutting Columns
+	//Chisels Cutting Columns
 
-		//Dark Sandstone Column
-		GameRegistry.addRecipe(new ItemStack(RCBDM.ColumnMulti, 1, 0), new Object[]{"X  ","XY ", "X  ", Character.valueOf('X'), new ItemStack(RCBDM.DesertBlockMulti, 1, 3), Character.valueOf('Y'), new ItemStack(RCBDM.FlintChisel,1,WILDCARD_VALUE)});
-		GameRegistry.addRecipe(new ItemStack(RCBDM.ColumnMulti, 1, 0), new Object[]{"X  ","XY ", "X  ", Character.valueOf('X'), new ItemStack(RCBDM.DesertBlockMulti, 1, 3), Character.valueOf('Y'), new ItemStack(RCBDM.GoldChisel,1,WILDCARD_VALUE)});
-		GameRegistry.addRecipe(new ItemStack(RCBDM.ColumnMulti, 1, 0), new Object[]{"X  ","XY ", "X  ", Character.valueOf('X'), new ItemStack(RCBDM.DesertBlockMulti, 1, 3), Character.valueOf('Y'), new ItemStack(RCBDM.CopperChisel,1,WILDCARD_VALUE)});
-		GameRegistry.addRecipe(new ItemStack(RCBDM.ColumnMulti, 1, 0), new Object[]{"X  ","XY ", "X  ", Character.valueOf('X'), new ItemStack(RCBDM.DesertBlockMulti, 1, 3), Character.valueOf('Y'), new ItemStack(RCBDM.DiamondChisel,1,WILDCARD_VALUE)});
-		GameRegistry.addRecipe(new ItemStack(RCBDM.ColumnMulti, 1, 0), new Object[]{"X  ","XY ", "X  ", Character.valueOf('X'), new ItemStack(RCBDM.DesertBlockMulti, 1, 3), Character.valueOf('Y'), new ItemStack(RCBDM.BloodstoneChisel,1,WILDCARD_VALUE)});
+	//Dark Sandstone Column
+	GameRegistry.addRecipe(new ItemStack(RCBDM.ColumnMulti, 3, 0), new Object[]{"X  ","XY ", "X  ", Character.valueOf('X'), new ItemStack(RCBDM.DesertBlockMulti, 1, 3), Character.valueOf('Y'), new ItemStack(RCBDM.FlintChisel,1,WILDCARD_VALUE)});
+	GameRegistry.addRecipe(new ItemStack(RCBDM.ColumnMulti, 3, 0), new Object[]{"X  ","XY ", "X  ", Character.valueOf('X'), new ItemStack(RCBDM.DesertBlockMulti, 1, 3), Character.valueOf('Y'), new ItemStack(RCBDM.GoldChisel,1,WILDCARD_VALUE)});
+	GameRegistry.addRecipe(new ItemStack(RCBDM.ColumnMulti, 3, 0), new Object[]{"X  ","XY ", "X  ", Character.valueOf('X'), new ItemStack(RCBDM.DesertBlockMulti, 1, 3), Character.valueOf('Y'), new ItemStack(RCBDM.CopperChisel,1,WILDCARD_VALUE)});
+	GameRegistry.addRecipe(new ItemStack(RCBDM.ColumnMulti, 3, 0), new Object[]{"X  ","XY ", "X  ", Character.valueOf('X'), new ItemStack(RCBDM.DesertBlockMulti, 1, 3), Character.valueOf('Y'), new ItemStack(RCBDM.DiamondChisel,1,WILDCARD_VALUE)});
+	GameRegistry.addRecipe(new ItemStack(RCBDM.ColumnMulti, 3, 0), new Object[]{"X  ","XY ", "X  ", Character.valueOf('X'), new ItemStack(RCBDM.DesertBlockMulti, 1, 3), Character.valueOf('Y'), new ItemStack(RCBDM.BloodstoneChisel,1,WILDCARD_VALUE)});
 
-		//stone Column
-		GameRegistry.addRecipe(new ItemStack(RCBDM.ColumnMulti, 1, 3), new Object[]{"X  ","XY ", "X  ", Character.valueOf('X'), Block.stone, Character.valueOf('Y'), new ItemStack(RCBDM.FlintChisel,1,WILDCARD_VALUE)});
-		GameRegistry.addRecipe(new ItemStack(RCBDM.ColumnMulti, 1, 3), new Object[]{"X  ","XY ", "X  ", Character.valueOf('X'), Block.stone, Character.valueOf('Y'), new ItemStack(RCBDM.GoldChisel,1,WILDCARD_VALUE)});
-		GameRegistry.addRecipe(new ItemStack(RCBDM.ColumnMulti, 1, 3), new Object[]{"X  ","XY ", "X  ", Character.valueOf('X'), Block.stone, Character.valueOf('Y'), new ItemStack(RCBDM.CopperChisel,1,WILDCARD_VALUE)});
-		GameRegistry.addRecipe(new ItemStack(RCBDM.ColumnMulti, 1, 3), new Object[]{"X  ","XY ", "X  ", Character.valueOf('X'), Block.stone, Character.valueOf('Y'), new ItemStack(RCBDM.DiamondChisel,1,WILDCARD_VALUE)});
-		GameRegistry.addRecipe(new ItemStack(RCBDM.ColumnMulti, 1, 3), new Object[]{"X  ","XY ", "X  ", Character.valueOf('X'), Block.stone, Character.valueOf('Y'), new ItemStack(RCBDM.BloodstoneChisel,1,WILDCARD_VALUE)});
+	//stone Column
+	GameRegistry.addRecipe(new ItemStack(RCBDM.ColumnMulti, 3, 3), new Object[]{"X  ","XY ", "X  ", Character.valueOf('X'), Block.stone, Character.valueOf('Y'), new ItemStack(RCBDM.FlintChisel,1,WILDCARD_VALUE)});
+	GameRegistry.addRecipe(new ItemStack(RCBDM.ColumnMulti, 3, 3), new Object[]{"X  ","XY ", "X  ", Character.valueOf('X'), Block.stone, Character.valueOf('Y'), new ItemStack(RCBDM.GoldChisel,1,WILDCARD_VALUE)});
+	GameRegistry.addRecipe(new ItemStack(RCBDM.ColumnMulti, 3, 3), new Object[]{"X  ","XY ", "X  ", Character.valueOf('X'), Block.stone, Character.valueOf('Y'), new ItemStack(RCBDM.CopperChisel,1,WILDCARD_VALUE)});
+	GameRegistry.addRecipe(new ItemStack(RCBDM.ColumnMulti, 3, 3), new Object[]{"X  ","XY ", "X  ", Character.valueOf('X'), Block.stone, Character.valueOf('Y'), new ItemStack(RCBDM.DiamondChisel,1,WILDCARD_VALUE)});
+	GameRegistry.addRecipe(new ItemStack(RCBDM.ColumnMulti, 3, 3), new Object[]{"X  ","XY ", "X  ", Character.valueOf('X'), Block.stone, Character.valueOf('Y'), new ItemStack(RCBDM.BloodstoneChisel,1,WILDCARD_VALUE)});
 
-		//Cobblestone Column
-		GameRegistry.addRecipe(new ItemStack(RCBDM.ColumnMulti, 1, 4), new Object[]{"X  ","XY ", "X  ", Character.valueOf('X'), Block.cobblestone, Character.valueOf('Y'), new ItemStack(RCBDM.FlintChisel,1,WILDCARD_VALUE)});
-		GameRegistry.addRecipe(new ItemStack(RCBDM.ColumnMulti, 1, 4), new Object[]{"X  ","XY ", "X  ", Character.valueOf('X'), Block.cobblestone, Character.valueOf('Y'), new ItemStack(RCBDM.GoldChisel,1,WILDCARD_VALUE)});
-		GameRegistry.addRecipe(new ItemStack(RCBDM.ColumnMulti, 1, 4), new Object[]{"X  ","XY ", "X  ", Character.valueOf('X'), Block.cobblestone, Character.valueOf('Y'), new ItemStack(RCBDM.CopperChisel,1,WILDCARD_VALUE)});
-		GameRegistry.addRecipe(new ItemStack(RCBDM.ColumnMulti, 1, 4), new Object[]{"X  ","XY ", "X  ", Character.valueOf('X'), Block.cobblestone, Character.valueOf('Y'), new ItemStack(RCBDM.DiamondChisel,1,WILDCARD_VALUE)});
-		GameRegistry.addRecipe(new ItemStack(RCBDM.ColumnMulti, 1, 4), new Object[]{"X  ","XY ", "X  ", Character.valueOf('X'), Block.cobblestone, Character.valueOf('Y'), new ItemStack(RCBDM.BloodstoneChisel,1,WILDCARD_VALUE)});
-
-
-		//Gold Column
-		GameRegistry.addRecipe(new ItemStack(RCBDM.ColumnMulti, 1, 5), new Object[]{"X  ","XY ", "X  ", Character.valueOf('X'), Block.blockGold, Character.valueOf('Y'), new ItemStack(RCBDM.CopperChisel,1,WILDCARD_VALUE)});
-		GameRegistry.addRecipe(new ItemStack(RCBDM.ColumnMulti, 1, 5), new Object[]{"X  ","XY ", "X  ", Character.valueOf('X'), Block.blockGold, Character.valueOf('Y'), new ItemStack(RCBDM.DiamondChisel,1,WILDCARD_VALUE)});
-		GameRegistry.addRecipe(new ItemStack(RCBDM.ColumnMulti, 1, 5), new Object[]{"X  ","XY ", "X  ", Character.valueOf('X'), Block.blockGold, Character.valueOf('Y'), new ItemStack(RCBDM.BloodstoneChisel,1,WILDCARD_VALUE)});
-
-		//Diamond Column
-		GameRegistry.addRecipe(new ItemStack(RCBDM.ColumnMulti, 1, 6), new Object[]{"X  ","XY ", "X  ", Character.valueOf('X'), Block.blockDiamond, Character.valueOf('Y'), new ItemStack(RCBDM.DiamondChisel,1,WILDCARD_VALUE)});
-		GameRegistry.addRecipe(new ItemStack(RCBDM.ColumnMulti, 1, 6), new Object[]{"X  ","XY ", "X  ", Character.valueOf('X'), Block.blockDiamond, Character.valueOf('Y'), new ItemStack(RCBDM.BloodstoneChisel,1,WILDCARD_VALUE)});
-
-		//Stone Brick Column
-		GameRegistry.addRecipe(new ItemStack(RCBDM.ColumnMulti, 1, 7), new Object[]{"X  ","XY ", "X  ", Character.valueOf('X'), Block.stoneBrick, Character.valueOf('Y'), new ItemStack(RCBDM.FlintChisel,1,WILDCARD_VALUE)});
-		GameRegistry.addRecipe(new ItemStack(RCBDM.ColumnMulti, 1, 7), new Object[]{"X  ","XY ", "X  ", Character.valueOf('X'), Block.stoneBrick, Character.valueOf('Y'), new ItemStack(RCBDM.GoldChisel,1,WILDCARD_VALUE)});
-		GameRegistry.addRecipe(new ItemStack(RCBDM.ColumnMulti, 1, 7), new Object[]{"X  ","XY ", "X  ", Character.valueOf('X'), Block.stoneBrick, Character.valueOf('Y'), new ItemStack(RCBDM.CopperChisel,1,WILDCARD_VALUE)});
-		GameRegistry.addRecipe(new ItemStack(RCBDM.ColumnMulti, 1, 7), new Object[]{"X  ","XY ", "X  ", Character.valueOf('X'), Block.stoneBrick, Character.valueOf('Y'), new ItemStack(RCBDM.DiamondChisel,1,WILDCARD_VALUE)});
-		GameRegistry.addRecipe(new ItemStack(RCBDM.ColumnMulti, 1, 7), new Object[]{"X  ","XY ", "X  ", Character.valueOf('X'), Block.stoneBrick, Character.valueOf('Y'), new ItemStack(RCBDM.BloodstoneChisel,1,WILDCARD_VALUE)});
-
-		//Limestone Column
-		GameRegistry.addRecipe(new ItemStack(RCBDM.ColumnMulti, 1, 8), new Object[]{"X  ","XY ", "X  ", Character.valueOf('X'), new ItemStack(RCBDM.DesertBlockMulti, 1, 7), Character.valueOf('Y'), new ItemStack(RCBDM.FlintChisel,1,WILDCARD_VALUE)});
-		GameRegistry.addRecipe(new ItemStack(RCBDM.ColumnMulti, 1, 8), new Object[]{"X  ","XY ", "X  ", Character.valueOf('X'), new ItemStack(RCBDM.DesertBlockMulti, 1, 7), Character.valueOf('Y'), new ItemStack(RCBDM.GoldChisel,1,WILDCARD_VALUE)});
-		GameRegistry.addRecipe(new ItemStack(RCBDM.ColumnMulti, 1, 8), new Object[]{"X  ","XY ", "X  ", Character.valueOf('X'), new ItemStack(RCBDM.DesertBlockMulti, 1, 7), Character.valueOf('Y'), new ItemStack(RCBDM.CopperChisel,1,WILDCARD_VALUE)});
-		GameRegistry.addRecipe(new ItemStack(RCBDM.ColumnMulti, 1, 8), new Object[]{"X  ","XY ", "X  ", Character.valueOf('X'), new ItemStack(RCBDM.DesertBlockMulti, 1, 7), Character.valueOf('Y'), new ItemStack(RCBDM.DiamondChisel,1,WILDCARD_VALUE)});
-		GameRegistry.addRecipe(new ItemStack(RCBDM.ColumnMulti, 1, 8), new Object[]{"X  ","XY ", "X  ", Character.valueOf('X'), new ItemStack(RCBDM.DesertBlockMulti, 1, 7), Character.valueOf('Y'), new ItemStack(RCBDM.BloodstoneChisel,1,WILDCARD_VALUE)});
-
-		//Bloodstone Column
-		GameRegistry.addRecipe(new ItemStack(RCBDM.ColumnMulti, 1, 2), new Object[]{"X  ","XY ", "X  ", Character.valueOf('X'), RCBDM.BloodstoneBrick, Character.valueOf('Y'), new ItemStack(RCBDM.BloodstoneChisel,1,WILDCARD_VALUE)});
-
-		//Skinny Columns
-		//Dark Sandstone Column
-		GameRegistry.addRecipe(new ItemStack(RCBDM.ColumnMulti2, 1, 0), new Object[]{"XY", Character.valueOf('X'), new ItemStack(RCBDM.ColumnMulti, 1, 0), Character.valueOf('Y'), new ItemStack(RCBDM.FlintChisel,1,WILDCARD_VALUE)});
-		GameRegistry.addRecipe(new ItemStack(RCBDM.ColumnMulti2, 1, 0), new Object[]{"XY", Character.valueOf('X'), new ItemStack(RCBDM.ColumnMulti, 1, 0), Character.valueOf('Y'), new ItemStack(RCBDM.GoldChisel,1,WILDCARD_VALUE)});
-		GameRegistry.addRecipe(new ItemStack(RCBDM.ColumnMulti2, 1, 0), new Object[]{"XY", Character.valueOf('X'), new ItemStack(RCBDM.ColumnMulti, 1, 0), Character.valueOf('Y'), new ItemStack(RCBDM.CopperChisel,1,WILDCARD_VALUE)});
-		GameRegistry.addRecipe(new ItemStack(RCBDM.ColumnMulti2, 1, 0), new Object[]{"XY", Character.valueOf('X'), new ItemStack(RCBDM.ColumnMulti, 1, 0), Character.valueOf('Y'), new ItemStack(RCBDM.DiamondChisel,1,WILDCARD_VALUE)});
-		GameRegistry.addRecipe(new ItemStack(RCBDM.ColumnMulti2, 1, 0), new Object[]{"XY", Character.valueOf('X'), new ItemStack(RCBDM.ColumnMulti, 1, 0), Character.valueOf('Y'), new ItemStack(RCBDM.BloodstoneChisel,1,WILDCARD_VALUE)});
-
-		//stone Column
-		GameRegistry.addRecipe(new ItemStack(RCBDM.ColumnMulti2, 1, 3), new Object[]{"XY", Character.valueOf('X'), new ItemStack(RCBDM.ColumnMulti, 1, 3), Character.valueOf('Y'), new ItemStack(RCBDM.FlintChisel,1,WILDCARD_VALUE)});
-		GameRegistry.addRecipe(new ItemStack(RCBDM.ColumnMulti2, 1, 3), new Object[]{"XY", Character.valueOf('X'), new ItemStack(RCBDM.ColumnMulti, 1, 3), Character.valueOf('Y'), new ItemStack(RCBDM.GoldChisel,1,WILDCARD_VALUE)});
-		GameRegistry.addRecipe(new ItemStack(RCBDM.ColumnMulti2, 1, 3), new Object[]{"XY", Character.valueOf('X'), new ItemStack(RCBDM.ColumnMulti, 1, 3), Character.valueOf('Y'), new ItemStack(RCBDM.CopperChisel,1,WILDCARD_VALUE)});
-		GameRegistry.addRecipe(new ItemStack(RCBDM.ColumnMulti2, 1, 3), new Object[]{"XY", Character.valueOf('X'), new ItemStack(RCBDM.ColumnMulti, 1, 3), Character.valueOf('Y'), new ItemStack(RCBDM.DiamondChisel,1,WILDCARD_VALUE)});
-		GameRegistry.addRecipe(new ItemStack(RCBDM.ColumnMulti2, 1, 3), new Object[]{"XY", Character.valueOf('X'), new ItemStack(RCBDM.ColumnMulti, 1, 3), Character.valueOf('Y'), new ItemStack(RCBDM.BloodstoneChisel,1,WILDCARD_VALUE)});
-
-		//Cobblestone Column
-		GameRegistry.addRecipe(new ItemStack(RCBDM.ColumnMulti2, 1, 4), new Object[]{"XY", Character.valueOf('X'), new ItemStack(RCBDM.ColumnMulti, 1, 4), Character.valueOf('Y'), new ItemStack(RCBDM.FlintChisel,1,WILDCARD_VALUE)});
-		GameRegistry.addRecipe(new ItemStack(RCBDM.ColumnMulti2, 1, 4), new Object[]{"XY", Character.valueOf('X'), new ItemStack(RCBDM.ColumnMulti, 1, 4), Character.valueOf('Y'), new ItemStack(RCBDM.GoldChisel,1,WILDCARD_VALUE)});
-		GameRegistry.addRecipe(new ItemStack(RCBDM.ColumnMulti2, 1, 4), new Object[]{"XY", Character.valueOf('X'), new ItemStack(RCBDM.ColumnMulti, 1, 4), Character.valueOf('Y'), new ItemStack(RCBDM.CopperChisel,1,WILDCARD_VALUE)});
-		GameRegistry.addRecipe(new ItemStack(RCBDM.ColumnMulti2, 1, 4), new Object[]{"XY", Character.valueOf('X'), new ItemStack(RCBDM.ColumnMulti, 1, 4), Character.valueOf('Y'), new ItemStack(RCBDM.DiamondChisel,1,WILDCARD_VALUE)});
-		GameRegistry.addRecipe(new ItemStack(RCBDM.ColumnMulti2, 1, 4), new Object[]{"XY", Character.valueOf('X'), new ItemStack(RCBDM.ColumnMulti, 1, 4), Character.valueOf('Y'), new ItemStack(RCBDM.BloodstoneChisel,1,WILDCARD_VALUE)});
+	//Cobblestone Column
+	GameRegistry.addRecipe(new ItemStack(RCBDM.ColumnMulti, 3, 4), new Object[]{"X  ","XY ", "X  ", Character.valueOf('X'), Block.cobblestone, Character.valueOf('Y'), new ItemStack(RCBDM.FlintChisel,1,WILDCARD_VALUE)});
+	GameRegistry.addRecipe(new ItemStack(RCBDM.ColumnMulti, 3, 4), new Object[]{"X  ","XY ", "X  ", Character.valueOf('X'), Block.cobblestone, Character.valueOf('Y'), new ItemStack(RCBDM.GoldChisel,1,WILDCARD_VALUE)});
+	GameRegistry.addRecipe(new ItemStack(RCBDM.ColumnMulti, 3, 4), new Object[]{"X  ","XY ", "X  ", Character.valueOf('X'), Block.cobblestone, Character.valueOf('Y'), new ItemStack(RCBDM.CopperChisel,1,WILDCARD_VALUE)});
+	GameRegistry.addRecipe(new ItemStack(RCBDM.ColumnMulti, 3, 4), new Object[]{"X  ","XY ", "X  ", Character.valueOf('X'), Block.cobblestone, Character.valueOf('Y'), new ItemStack(RCBDM.DiamondChisel,1,WILDCARD_VALUE)});
+	GameRegistry.addRecipe(new ItemStack(RCBDM.ColumnMulti, 3, 4), new Object[]{"X  ","XY ", "X  ", Character.valueOf('X'), Block.cobblestone, Character.valueOf('Y'), new ItemStack(RCBDM.BloodstoneChisel,1,WILDCARD_VALUE)});
 
 
-		//Gold Column
-		GameRegistry.addRecipe(new ItemStack(RCBDM.ColumnMulti2, 1, 5), new Object[]{"XY", Character.valueOf('X'), new ItemStack(RCBDM.ColumnMulti, 1, 5), Character.valueOf('Y'), new ItemStack(RCBDM.CopperChisel,1,WILDCARD_VALUE)});
-		GameRegistry.addRecipe(new ItemStack(RCBDM.ColumnMulti2, 1, 5), new Object[]{"XY", Character.valueOf('X'), new ItemStack(RCBDM.ColumnMulti, 1, 5), Character.valueOf('Y'), new ItemStack(RCBDM.DiamondChisel,1,WILDCARD_VALUE)});
-		GameRegistry.addRecipe(new ItemStack(RCBDM.ColumnMulti2, 1, 5), new Object[]{"XY", Character.valueOf('X'), new ItemStack(RCBDM.ColumnMulti, 1, 5), Character.valueOf('Y'), new ItemStack(RCBDM.BloodstoneChisel,1,WILDCARD_VALUE)});
+	//Gold Column
+	GameRegistry.addRecipe(new ItemStack(RCBDM.ColumnMulti, 3, 5), new Object[]{"X  ","XY ", "X  ", Character.valueOf('X'), Block.blockGold, Character.valueOf('Y'), new ItemStack(RCBDM.CopperChisel,1,WILDCARD_VALUE)});
+	GameRegistry.addRecipe(new ItemStack(RCBDM.ColumnMulti, 3, 5), new Object[]{"X  ","XY ", "X  ", Character.valueOf('X'), Block.blockGold, Character.valueOf('Y'), new ItemStack(RCBDM.DiamondChisel,1,WILDCARD_VALUE)});
+	GameRegistry.addRecipe(new ItemStack(RCBDM.ColumnMulti, 3, 5), new Object[]{"X  ","XY ", "X  ", Character.valueOf('X'), Block.blockGold, Character.valueOf('Y'), new ItemStack(RCBDM.BloodstoneChisel,1,WILDCARD_VALUE)});
 
-		//Diamond Column
-		GameRegistry.addRecipe(new ItemStack(RCBDM.ColumnMulti2, 1, 6), new Object[]{"XY", Character.valueOf('X'), new ItemStack(RCBDM.ColumnMulti, 1, 6), Character.valueOf('Y'), new ItemStack(RCBDM.DiamondChisel,1,WILDCARD_VALUE)});
-		GameRegistry.addRecipe(new ItemStack(RCBDM.ColumnMulti2, 1, 6), new Object[]{"XY", Character.valueOf('X'), new ItemStack(RCBDM.ColumnMulti, 1, 6), Character.valueOf('Y'), new ItemStack(RCBDM.BloodstoneChisel,1,WILDCARD_VALUE)});
+	//Diamond Column
+	GameRegistry.addRecipe(new ItemStack(RCBDM.ColumnMulti, 3, 6), new Object[]{"X  ","XY ", "X  ", Character.valueOf('X'), Block.blockDiamond, Character.valueOf('Y'), new ItemStack(RCBDM.DiamondChisel,1,WILDCARD_VALUE)});
+	GameRegistry.addRecipe(new ItemStack(RCBDM.ColumnMulti, 3, 6), new Object[]{"X  ","XY ", "X  ", Character.valueOf('X'), Block.blockDiamond, Character.valueOf('Y'), new ItemStack(RCBDM.BloodstoneChisel,1,WILDCARD_VALUE)});
 
-		//Stone Brick Column
-		GameRegistry.addRecipe(new ItemStack(RCBDM.ColumnMulti2, 1, 7), new Object[]{"XY", Character.valueOf('X'), new ItemStack(RCBDM.ColumnMulti, 1, 7), Character.valueOf('Y'), new ItemStack(RCBDM.FlintChisel,1,WILDCARD_VALUE)});
-		GameRegistry.addRecipe(new ItemStack(RCBDM.ColumnMulti2, 1, 7), new Object[]{"XY", Character.valueOf('X'), new ItemStack(RCBDM.ColumnMulti, 1, 7), Character.valueOf('Y'), new ItemStack(RCBDM.GoldChisel,1,WILDCARD_VALUE)});
-		GameRegistry.addRecipe(new ItemStack(RCBDM.ColumnMulti2, 1, 7), new Object[]{"XY", Character.valueOf('X'), new ItemStack(RCBDM.ColumnMulti, 1, 7), Character.valueOf('Y'), new ItemStack(RCBDM.CopperChisel,1,WILDCARD_VALUE)});
-		GameRegistry.addRecipe(new ItemStack(RCBDM.ColumnMulti2, 1, 7), new Object[]{"XY", Character.valueOf('X'), new ItemStack(RCBDM.ColumnMulti, 1, 7), Character.valueOf('Y'), new ItemStack(RCBDM.DiamondChisel,1,WILDCARD_VALUE)});
-		GameRegistry.addRecipe(new ItemStack(RCBDM.ColumnMulti2, 1, 7), new Object[]{"XY", Character.valueOf('X'), new ItemStack(RCBDM.ColumnMulti, 1, 7), Character.valueOf('Y'), new ItemStack(RCBDM.BloodstoneChisel,1,WILDCARD_VALUE)});
+	//Stone Brick Column
+	GameRegistry.addRecipe(new ItemStack(RCBDM.ColumnMulti, 3, 7), new Object[]{"X  ","XY ", "X  ", Character.valueOf('X'), Block.stoneBrick, Character.valueOf('Y'), new ItemStack(RCBDM.FlintChisel,1,WILDCARD_VALUE)});
+	GameRegistry.addRecipe(new ItemStack(RCBDM.ColumnMulti, 3, 7), new Object[]{"X  ","XY ", "X  ", Character.valueOf('X'), Block.stoneBrick, Character.valueOf('Y'), new ItemStack(RCBDM.GoldChisel,1,WILDCARD_VALUE)});
+	GameRegistry.addRecipe(new ItemStack(RCBDM.ColumnMulti, 3, 7), new Object[]{"X  ","XY ", "X  ", Character.valueOf('X'), Block.stoneBrick, Character.valueOf('Y'), new ItemStack(RCBDM.CopperChisel,1,WILDCARD_VALUE)});
+	GameRegistry.addRecipe(new ItemStack(RCBDM.ColumnMulti, 3, 7), new Object[]{"X  ","XY ", "X  ", Character.valueOf('X'), Block.stoneBrick, Character.valueOf('Y'), new ItemStack(RCBDM.DiamondChisel,1,WILDCARD_VALUE)});
+	GameRegistry.addRecipe(new ItemStack(RCBDM.ColumnMulti, 3, 7), new Object[]{"X  ","XY ", "X  ", Character.valueOf('X'), Block.stoneBrick, Character.valueOf('Y'), new ItemStack(RCBDM.BloodstoneChisel,1,WILDCARD_VALUE)});
 
-		//Limestone Column
-		GameRegistry.addRecipe(new ItemStack(RCBDM.ColumnMulti2, 1, 8), new Object[]{"XY", Character.valueOf('X'), new ItemStack(RCBDM.ColumnMulti, 1, 8), Character.valueOf('Y'), new ItemStack(RCBDM.FlintChisel,1,WILDCARD_VALUE)});
-		GameRegistry.addRecipe(new ItemStack(RCBDM.ColumnMulti2, 1, 8), new Object[]{"XY", Character.valueOf('X'), new ItemStack(RCBDM.ColumnMulti, 1, 8), Character.valueOf('Y'), new ItemStack(RCBDM.GoldChisel,1,WILDCARD_VALUE)});
-		GameRegistry.addRecipe(new ItemStack(RCBDM.ColumnMulti2, 1, 8), new Object[]{"XY", Character.valueOf('X'), new ItemStack(RCBDM.ColumnMulti, 1, 8), Character.valueOf('Y'), new ItemStack(RCBDM.CopperChisel,1,WILDCARD_VALUE)});
-		GameRegistry.addRecipe(new ItemStack(RCBDM.ColumnMulti2, 1, 8), new Object[]{"XY", Character.valueOf('X'), new ItemStack(RCBDM.ColumnMulti, 1, 8), Character.valueOf('Y'), new ItemStack(RCBDM.DiamondChisel,1,WILDCARD_VALUE)});
-		GameRegistry.addRecipe(new ItemStack(RCBDM.ColumnMulti2, 1, 8), new Object[]{"XY", Character.valueOf('X'), new ItemStack(RCBDM.ColumnMulti, 1, 8), Character.valueOf('Y'), new ItemStack(RCBDM.BloodstoneChisel,1,WILDCARD_VALUE)});
+	//Limestone Column
+	GameRegistry.addRecipe(new ItemStack(RCBDM.ColumnMulti, 3, 8), new Object[]{"X  ","XY ", "X  ", Character.valueOf('X'), new ItemStack(RCBDM.DesertBlockMulti, 1, 7), Character.valueOf('Y'), new ItemStack(RCBDM.FlintChisel,1,WILDCARD_VALUE)});
+	GameRegistry.addRecipe(new ItemStack(RCBDM.ColumnMulti, 3, 8), new Object[]{"X  ","XY ", "X  ", Character.valueOf('X'), new ItemStack(RCBDM.DesertBlockMulti, 1, 7), Character.valueOf('Y'), new ItemStack(RCBDM.GoldChisel,1,WILDCARD_VALUE)});
+	GameRegistry.addRecipe(new ItemStack(RCBDM.ColumnMulti, 3, 8), new Object[]{"X  ","XY ", "X  ", Character.valueOf('X'), new ItemStack(RCBDM.DesertBlockMulti, 1, 7), Character.valueOf('Y'), new ItemStack(RCBDM.CopperChisel,1,WILDCARD_VALUE)});
+	GameRegistry.addRecipe(new ItemStack(RCBDM.ColumnMulti, 3, 8), new Object[]{"X  ","XY ", "X  ", Character.valueOf('X'), new ItemStack(RCBDM.DesertBlockMulti, 1, 7), Character.valueOf('Y'), new ItemStack(RCBDM.DiamondChisel,1,WILDCARD_VALUE)});
+	GameRegistry.addRecipe(new ItemStack(RCBDM.ColumnMulti, 3, 8), new Object[]{"X  ","XY ", "X  ", Character.valueOf('X'), new ItemStack(RCBDM.DesertBlockMulti, 1, 7), Character.valueOf('Y'), new ItemStack(RCBDM.BloodstoneChisel,1,WILDCARD_VALUE)});
 
-		//Bloodstone Column
-		GameRegistry.addRecipe(new ItemStack(RCBDM.ColumnMulti2, 1, 2), new Object[]{"XY", Character.valueOf('X'), new ItemStack(RCBDM.ColumnMulti, 1, 2), Character.valueOf('Y'), new ItemStack(RCBDM.BloodstoneChisel,1,WILDCARD_VALUE)});
+	//Bloodstone Column
+	GameRegistry.addRecipe(new ItemStack(RCBDM.ColumnMulti, 3, 2), new Object[]{"X  ","XY ", "X  ", Character.valueOf('X'), RCBDM.BloodstoneBrick, Character.valueOf('Y'), new ItemStack(RCBDM.BloodstoneChisel,1,WILDCARD_VALUE)});
+
+	//Skinny Columns
+	//Dark Sandstone Column
+	GameRegistry.addRecipe(new ItemStack(RCBDM.ColumnMulti2, 1, 0), new Object[]{"XY", Character.valueOf('X'), new ItemStack(RCBDM.ColumnMulti, 1, 0), Character.valueOf('Y'), new ItemStack(RCBDM.FlintChisel,1,WILDCARD_VALUE)});
+	GameRegistry.addRecipe(new ItemStack(RCBDM.ColumnMulti2, 1, 0), new Object[]{"XY", Character.valueOf('X'), new ItemStack(RCBDM.ColumnMulti, 1, 0), Character.valueOf('Y'), new ItemStack(RCBDM.GoldChisel,1,WILDCARD_VALUE)});
+	GameRegistry.addRecipe(new ItemStack(RCBDM.ColumnMulti2, 1, 0), new Object[]{"XY", Character.valueOf('X'), new ItemStack(RCBDM.ColumnMulti, 1, 0), Character.valueOf('Y'), new ItemStack(RCBDM.CopperChisel,1,WILDCARD_VALUE)});
+	GameRegistry.addRecipe(new ItemStack(RCBDM.ColumnMulti2, 1, 0), new Object[]{"XY", Character.valueOf('X'), new ItemStack(RCBDM.ColumnMulti, 1, 0), Character.valueOf('Y'), new ItemStack(RCBDM.DiamondChisel,1,WILDCARD_VALUE)});
+	GameRegistry.addRecipe(new ItemStack(RCBDM.ColumnMulti2, 1, 0), new Object[]{"XY", Character.valueOf('X'), new ItemStack(RCBDM.ColumnMulti, 1, 0), Character.valueOf('Y'), new ItemStack(RCBDM.BloodstoneChisel,1,WILDCARD_VALUE)});
+
+	//stone Column
+	GameRegistry.addRecipe(new ItemStack(RCBDM.ColumnMulti2, 2, 3), new Object[]{"XY", Character.valueOf('X'), new ItemStack(RCBDM.ColumnMulti, 1, 3), Character.valueOf('Y'), new ItemStack(RCBDM.FlintChisel,1,WILDCARD_VALUE)});
+	GameRegistry.addRecipe(new ItemStack(RCBDM.ColumnMulti2, 2, 3), new Object[]{"XY", Character.valueOf('X'), new ItemStack(RCBDM.ColumnMulti, 1, 3), Character.valueOf('Y'), new ItemStack(RCBDM.GoldChisel,1,WILDCARD_VALUE)});
+	GameRegistry.addRecipe(new ItemStack(RCBDM.ColumnMulti2, 2, 3), new Object[]{"XY", Character.valueOf('X'), new ItemStack(RCBDM.ColumnMulti, 1, 3), Character.valueOf('Y'), new ItemStack(RCBDM.CopperChisel,1,WILDCARD_VALUE)});
+	GameRegistry.addRecipe(new ItemStack(RCBDM.ColumnMulti2, 2, 3), new Object[]{"XY", Character.valueOf('X'), new ItemStack(RCBDM.ColumnMulti, 1, 3), Character.valueOf('Y'), new ItemStack(RCBDM.DiamondChisel,1,WILDCARD_VALUE)});
+	GameRegistry.addRecipe(new ItemStack(RCBDM.ColumnMulti2, 2, 3), new Object[]{"XY", Character.valueOf('X'), new ItemStack(RCBDM.ColumnMulti, 1, 3), Character.valueOf('Y'), new ItemStack(RCBDM.BloodstoneChisel,1,WILDCARD_VALUE)});
+
+	//Cobblestone Column
+	GameRegistry.addRecipe(new ItemStack(RCBDM.ColumnMulti2, 2, 4), new Object[]{"XY", Character.valueOf('X'), new ItemStack(RCBDM.ColumnMulti, 1, 4), Character.valueOf('Y'), new ItemStack(RCBDM.FlintChisel,1,WILDCARD_VALUE)});
+	GameRegistry.addRecipe(new ItemStack(RCBDM.ColumnMulti2, 2, 4), new Object[]{"XY", Character.valueOf('X'), new ItemStack(RCBDM.ColumnMulti, 1, 4), Character.valueOf('Y'), new ItemStack(RCBDM.GoldChisel,1,WILDCARD_VALUE)});
+	GameRegistry.addRecipe(new ItemStack(RCBDM.ColumnMulti2, 2, 4), new Object[]{"XY", Character.valueOf('X'), new ItemStack(RCBDM.ColumnMulti, 1, 4), Character.valueOf('Y'), new ItemStack(RCBDM.CopperChisel,1,WILDCARD_VALUE)});
+	GameRegistry.addRecipe(new ItemStack(RCBDM.ColumnMulti2, 2, 4), new Object[]{"XY", Character.valueOf('X'), new ItemStack(RCBDM.ColumnMulti, 1, 4), Character.valueOf('Y'), new ItemStack(RCBDM.DiamondChisel,1,WILDCARD_VALUE)});
+	GameRegistry.addRecipe(new ItemStack(RCBDM.ColumnMulti2, 2, 4), new Object[]{"XY", Character.valueOf('X'), new ItemStack(RCBDM.ColumnMulti, 1, 4), Character.valueOf('Y'), new ItemStack(RCBDM.BloodstoneChisel,1,WILDCARD_VALUE)});
 
 
-		//Carved Dark Sandstone
-		GameRegistry.addRecipe(new ItemStack(RCBDM.DesertBlockMulti, 1, 0), new Object[]{"XY", Character.valueOf('X'), new ItemStack(RCBDM.DesertBlockMulti, 1, 2), Character.valueOf('Y'), new ItemStack(RCBDM.FlintChisel,1,WILDCARD_VALUE)});
-		GameRegistry.addRecipe(new ItemStack(RCBDM.DesertBlockMulti, 1, 0), new Object[]{"XY", Character.valueOf('X'), new ItemStack(RCBDM.DesertBlockMulti, 1, 2), Character.valueOf('Y'), new ItemStack(RCBDM.GoldChisel,1,WILDCARD_VALUE)});
-		GameRegistry.addRecipe(new ItemStack(RCBDM.DesertBlockMulti, 1, 0), new Object[]{"XY", Character.valueOf('X'), new ItemStack(RCBDM.DesertBlockMulti, 1, 2), Character.valueOf('Y'), new ItemStack(RCBDM.CopperChisel,1,WILDCARD_VALUE)});
-		GameRegistry.addRecipe(new ItemStack(RCBDM.DesertBlockMulti, 1, 0), new Object[]{"XY", Character.valueOf('X'), new ItemStack(RCBDM.DesertBlockMulti, 1, 2), Character.valueOf('Y'), new ItemStack(RCBDM.DiamondChisel,1,WILDCARD_VALUE)});
-		GameRegistry.addRecipe(new ItemStack(RCBDM.DesertBlockMulti, 1, 0), new Object[]{"XY", Character.valueOf('X'), new ItemStack(RCBDM.DesertBlockMulti, 1, 2), Character.valueOf('Y'), new ItemStack(RCBDM.BloodstoneChisel,1,WILDCARD_VALUE)});
+	//Gold Column
+	GameRegistry.addRecipe(new ItemStack(RCBDM.ColumnMulti2, 2, 5), new Object[]{"XY", Character.valueOf('X'), new ItemStack(RCBDM.ColumnMulti, 1, 5), Character.valueOf('Y'), new ItemStack(RCBDM.CopperChisel,1,WILDCARD_VALUE)});
+	GameRegistry.addRecipe(new ItemStack(RCBDM.ColumnMulti2, 2, 5), new Object[]{"XY", Character.valueOf('X'), new ItemStack(RCBDM.ColumnMulti, 1, 5), Character.valueOf('Y'), new ItemStack(RCBDM.DiamondChisel,1,WILDCARD_VALUE)});
+	GameRegistry.addRecipe(new ItemStack(RCBDM.ColumnMulti2, 2, 5), new Object[]{"XY", Character.valueOf('X'), new ItemStack(RCBDM.ColumnMulti, 1, 5), Character.valueOf('Y'), new ItemStack(RCBDM.BloodstoneChisel,1,WILDCARD_VALUE)});
 
-		//Cracked Dark Sandstone to Carved Dark Sandstone
-		GameRegistry.addShapelessRecipe(new ItemStack(RCBDM.DesertBlockMulti, 1, 0), new ItemStack(RCBDM.DesertBlockMulti, 1, 1), new ItemStack(RCBDM.FlintChisel,1,WILDCARD_VALUE));
-		GameRegistry.addShapelessRecipe(new ItemStack(RCBDM.DesertBlockMulti, 1, 0), new ItemStack(RCBDM.DesertBlockMulti, 1, 1), new ItemStack(RCBDM.GoldChisel,1,WILDCARD_VALUE));
-		GameRegistry.addShapelessRecipe(new ItemStack(RCBDM.DesertBlockMulti, 1, 0), new ItemStack(RCBDM.DesertBlockMulti, 1, 1), new ItemStack(RCBDM.CopperChisel,1,WILDCARD_VALUE));
-		GameRegistry.addShapelessRecipe(new ItemStack(RCBDM.DesertBlockMulti, 1, 0), new ItemStack(RCBDM.DesertBlockMulti, 1, 1), new ItemStack(RCBDM.DiamondChisel,1,WILDCARD_VALUE));
-		GameRegistry.addShapelessRecipe(new ItemStack(RCBDM.DesertBlockMulti, 1, 0), new ItemStack(RCBDM.DesertBlockMulti, 1, 1), new ItemStack(RCBDM.BloodstoneChisel,1,WILDCARD_VALUE));
+	//Diamond Column
+	GameRegistry.addRecipe(new ItemStack(RCBDM.ColumnMulti2, 2, 6), new Object[]{"XY", Character.valueOf('X'), new ItemStack(RCBDM.ColumnMulti, 1, 6), Character.valueOf('Y'), new ItemStack(RCBDM.DiamondChisel,1,WILDCARD_VALUE)});
+	GameRegistry.addRecipe(new ItemStack(RCBDM.ColumnMulti2, 2, 6), new Object[]{"XY", Character.valueOf('X'), new ItemStack(RCBDM.ColumnMulti, 1, 6), Character.valueOf('Y'), new ItemStack(RCBDM.BloodstoneChisel,1,WILDCARD_VALUE)});
 
-		//Dark Sandstone Brick
-		GameRegistry.addRecipe(new ItemStack(RCBDM.DesertBlockMulti, 1, 3), new Object[]{"XX","XX", Character.valueOf('X'), new ItemStack(RCBDM.DesertBlockMulti, 1, 0)});
+	//Stone Brick Column
+	GameRegistry.addRecipe(new ItemStack(RCBDM.ColumnMulti2, 2, 7), new Object[]{"XY", Character.valueOf('X'), new ItemStack(RCBDM.ColumnMulti, 1, 7), Character.valueOf('Y'), new ItemStack(RCBDM.FlintChisel,1,WILDCARD_VALUE)});
+	GameRegistry.addRecipe(new ItemStack(RCBDM.ColumnMulti2, 2, 7), new Object[]{"XY", Character.valueOf('X'), new ItemStack(RCBDM.ColumnMulti, 1, 7), Character.valueOf('Y'), new ItemStack(RCBDM.GoldChisel,1,WILDCARD_VALUE)});
+	GameRegistry.addRecipe(new ItemStack(RCBDM.ColumnMulti2, 2, 7), new Object[]{"XY", Character.valueOf('X'), new ItemStack(RCBDM.ColumnMulti, 1, 7), Character.valueOf('Y'), new ItemStack(RCBDM.CopperChisel,1,WILDCARD_VALUE)});
+	GameRegistry.addRecipe(new ItemStack(RCBDM.ColumnMulti2, 2, 7), new Object[]{"XY", Character.valueOf('X'), new ItemStack(RCBDM.ColumnMulti, 1, 7), Character.valueOf('Y'), new ItemStack(RCBDM.DiamondChisel,1,WILDCARD_VALUE)});
+	GameRegistry.addRecipe(new ItemStack(RCBDM.ColumnMulti2, 2, 7), new Object[]{"XY", Character.valueOf('X'), new ItemStack(RCBDM.ColumnMulti, 1, 7), Character.valueOf('Y'), new ItemStack(RCBDM.BloodstoneChisel,1,WILDCARD_VALUE)});
 
-		/**
+	//Limestone Column
+	GameRegistry.addRecipe(new ItemStack(RCBDM.ColumnMulti2, 2, 8), new Object[]{"XY", Character.valueOf('X'), new ItemStack(RCBDM.ColumnMulti, 1, 8), Character.valueOf('Y'), new ItemStack(RCBDM.FlintChisel,1,WILDCARD_VALUE)});
+	GameRegistry.addRecipe(new ItemStack(RCBDM.ColumnMulti2, 2, 8), new Object[]{"XY", Character.valueOf('X'), new ItemStack(RCBDM.ColumnMulti, 1, 8), Character.valueOf('Y'), new ItemStack(RCBDM.GoldChisel,1,WILDCARD_VALUE)});
+	GameRegistry.addRecipe(new ItemStack(RCBDM.ColumnMulti2, 2, 8), new Object[]{"XY", Character.valueOf('X'), new ItemStack(RCBDM.ColumnMulti, 1, 8), Character.valueOf('Y'), new ItemStack(RCBDM.CopperChisel,1,WILDCARD_VALUE)});
+	GameRegistry.addRecipe(new ItemStack(RCBDM.ColumnMulti2, 2, 8), new Object[]{"XY", Character.valueOf('X'), new ItemStack(RCBDM.ColumnMulti, 1, 8), Character.valueOf('Y'), new ItemStack(RCBDM.DiamondChisel,1,WILDCARD_VALUE)});
+	GameRegistry.addRecipe(new ItemStack(RCBDM.ColumnMulti2, 2, 8), new Object[]{"XY", Character.valueOf('X'), new ItemStack(RCBDM.ColumnMulti, 1, 8), Character.valueOf('Y'), new ItemStack(RCBDM.BloodstoneChisel,1,WILDCARD_VALUE)});
+
+	//Bloodstone Column
+	GameRegistry.addRecipe(new ItemStack(RCBDM.ColumnMulti2, 2, 2), new Object[]{"XY", Character.valueOf('X'), new ItemStack(RCBDM.ColumnMulti, 1, 2), Character.valueOf('Y'), new ItemStack(RCBDM.BloodstoneChisel,1,WILDCARD_VALUE)});
+
+
+	//Carved Dark Sandstone
+	GameRegistry.addRecipe(new ItemStack(RCBDM.DesertBlockMulti, 1, 0), new Object[]{"XY", Character.valueOf('X'), new ItemStack(RCBDM.DesertBlockMulti, 1, 2), Character.valueOf('Y'), new ItemStack(RCBDM.FlintChisel,1,WILDCARD_VALUE)});
+	GameRegistry.addRecipe(new ItemStack(RCBDM.DesertBlockMulti, 1, 0), new Object[]{"XY", Character.valueOf('X'), new ItemStack(RCBDM.DesertBlockMulti, 1, 2), Character.valueOf('Y'), new ItemStack(RCBDM.GoldChisel,1,WILDCARD_VALUE)});
+	GameRegistry.addRecipe(new ItemStack(RCBDM.DesertBlockMulti, 1, 0), new Object[]{"XY", Character.valueOf('X'), new ItemStack(RCBDM.DesertBlockMulti, 1, 2), Character.valueOf('Y'), new ItemStack(RCBDM.CopperChisel,1,WILDCARD_VALUE)});
+	GameRegistry.addRecipe(new ItemStack(RCBDM.DesertBlockMulti, 1, 0), new Object[]{"XY", Character.valueOf('X'), new ItemStack(RCBDM.DesertBlockMulti, 1, 2), Character.valueOf('Y'), new ItemStack(RCBDM.DiamondChisel,1,WILDCARD_VALUE)});
+	GameRegistry.addRecipe(new ItemStack(RCBDM.DesertBlockMulti, 1, 0), new Object[]{"XY", Character.valueOf('X'), new ItemStack(RCBDM.DesertBlockMulti, 1, 2), Character.valueOf('Y'), new ItemStack(RCBDM.BloodstoneChisel,1,WILDCARD_VALUE)});
+
+	//Cracked Dark Sandstone to Carved Dark Sandstone
+	GameRegistry.addShapelessRecipe(new ItemStack(RCBDM.DesertBlockMulti, 1, 0), new ItemStack(RCBDM.DesertBlockMulti, 1, 1), new ItemStack(RCBDM.FlintChisel,1,WILDCARD_VALUE));
+	GameRegistry.addShapelessRecipe(new ItemStack(RCBDM.DesertBlockMulti, 1, 0), new ItemStack(RCBDM.DesertBlockMulti, 1, 1), new ItemStack(RCBDM.GoldChisel,1,WILDCARD_VALUE));
+	GameRegistry.addShapelessRecipe(new ItemStack(RCBDM.DesertBlockMulti, 1, 0), new ItemStack(RCBDM.DesertBlockMulti, 1, 1), new ItemStack(RCBDM.CopperChisel,1,WILDCARD_VALUE));
+	GameRegistry.addShapelessRecipe(new ItemStack(RCBDM.DesertBlockMulti, 1, 0), new ItemStack(RCBDM.DesertBlockMulti, 1, 1), new ItemStack(RCBDM.DiamondChisel,1,WILDCARD_VALUE));
+	GameRegistry.addShapelessRecipe(new ItemStack(RCBDM.DesertBlockMulti, 1, 0), new ItemStack(RCBDM.DesertBlockMulti, 1, 1), new ItemStack(RCBDM.BloodstoneChisel,1,WILDCARD_VALUE));
+
+	//Dark Sandstone Brick
+	GameRegistry.addRecipe(new ItemStack(RCBDM.DesertBlockMulti, 1, 3), new Object[]{"XX","XX", Character.valueOf('X'), new ItemStack(RCBDM.DesertBlockMulti, 1, 0)});
+
+	/**
 		        LanguageRegistry.addName(new ItemStack(RCBDM.ColumnMulti, 1, 1), "Marble Column");
-		 **/
+	 **/
 
 
-		//Cracked Darkstone Brick to Darkstone Brick
-		GameRegistry.addRecipe(new ItemStack(RCBDM.DesertBlockMulti, 1, 3), new Object[]{"Y","X", Character.valueOf('X'), new ItemStack(RCBDM.DesertBlockMulti, 1, 4), Character.valueOf('Y'), new ItemStack(RCBDM.FlintChisel,1,WILDCARD_VALUE)});
-		GameRegistry.addRecipe(new ItemStack(RCBDM.DesertBlockMulti, 1, 3), new Object[]{"Y","X", Character.valueOf('X'), new ItemStack(RCBDM.DesertBlockMulti, 1, 4), Character.valueOf('Y'), new ItemStack(RCBDM.GoldChisel,1,WILDCARD_VALUE)});
-		GameRegistry.addRecipe(new ItemStack(RCBDM.DesertBlockMulti, 1, 3), new Object[]{"Y","X", Character.valueOf('X'), new ItemStack(RCBDM.DesertBlockMulti, 1, 4), Character.valueOf('Y'), new ItemStack(RCBDM.CopperChisel,1,WILDCARD_VALUE)});
-		GameRegistry.addRecipe(new ItemStack(RCBDM.DesertBlockMulti, 1, 3), new Object[]{"Y","X", Character.valueOf('X'), new ItemStack(RCBDM.DesertBlockMulti, 1, 4), Character.valueOf('Y'), new ItemStack(RCBDM.DiamondChisel,1,WILDCARD_VALUE)});
-		GameRegistry.addRecipe(new ItemStack(RCBDM.DesertBlockMulti, 1, 3), new Object[]{"Y","X", Character.valueOf('X'), new ItemStack(RCBDM.DesertBlockMulti, 1, 4), Character.valueOf('Y'), new ItemStack(RCBDM.BloodstoneChisel,1,WILDCARD_VALUE)});
+	//Cracked Darkstone Brick to Darkstone Brick
+	GameRegistry.addRecipe(new ItemStack(RCBDM.DesertBlockMulti, 1, 3), new Object[]{"Y","X", Character.valueOf('X'), new ItemStack(RCBDM.DesertBlockMulti, 1, 4), Character.valueOf('Y'), new ItemStack(RCBDM.FlintChisel,1,WILDCARD_VALUE)});
+	GameRegistry.addRecipe(new ItemStack(RCBDM.DesertBlockMulti, 1, 3), new Object[]{"Y","X", Character.valueOf('X'), new ItemStack(RCBDM.DesertBlockMulti, 1, 4), Character.valueOf('Y'), new ItemStack(RCBDM.GoldChisel,1,WILDCARD_VALUE)});
+	GameRegistry.addRecipe(new ItemStack(RCBDM.DesertBlockMulti, 1, 3), new Object[]{"Y","X", Character.valueOf('X'), new ItemStack(RCBDM.DesertBlockMulti, 1, 4), Character.valueOf('Y'), new ItemStack(RCBDM.CopperChisel,1,WILDCARD_VALUE)});
+	GameRegistry.addRecipe(new ItemStack(RCBDM.DesertBlockMulti, 1, 3), new Object[]{"Y","X", Character.valueOf('X'), new ItemStack(RCBDM.DesertBlockMulti, 1, 4), Character.valueOf('Y'), new ItemStack(RCBDM.DiamondChisel,1,WILDCARD_VALUE)});
+	GameRegistry.addRecipe(new ItemStack(RCBDM.DesertBlockMulti, 1, 3), new Object[]{"Y","X", Character.valueOf('X'), new ItemStack(RCBDM.DesertBlockMulti, 1, 4), Character.valueOf('Y'), new ItemStack(RCBDM.BloodstoneChisel,1,WILDCARD_VALUE)});
+
+	//Mossy Darkstone Brick to Darkstone Brick
+	GameRegistry.addRecipe(new ItemStack(RCBDM.DesertBlockMulti, 1, 3), new Object[]{"Y","X", Character.valueOf('X'), new ItemStack(RCBDM.DesertBlockMulti, 1, 11), Character.valueOf('Y'), new ItemStack(RCBDM.FlintChisel,1,WILDCARD_VALUE)});
+	GameRegistry.addRecipe(new ItemStack(RCBDM.DesertBlockMulti, 1, 3), new Object[]{"Y","X", Character.valueOf('X'), new ItemStack(RCBDM.DesertBlockMulti, 1, 11), Character.valueOf('Y'), new ItemStack(RCBDM.GoldChisel,1,WILDCARD_VALUE)});
+	GameRegistry.addRecipe(new ItemStack(RCBDM.DesertBlockMulti, 1, 3), new Object[]{"Y","X", Character.valueOf('X'), new ItemStack(RCBDM.DesertBlockMulti, 1, 11), Character.valueOf('Y'), new ItemStack(RCBDM.CopperChisel,1,WILDCARD_VALUE)});
+	GameRegistry.addRecipe(new ItemStack(RCBDM.DesertBlockMulti, 1, 3), new Object[]{"Y","X", Character.valueOf('X'), new ItemStack(RCBDM.DesertBlockMulti, 1, 11), Character.valueOf('Y'), new ItemStack(RCBDM.DiamondChisel,1,WILDCARD_VALUE)});
+	GameRegistry.addRecipe(new ItemStack(RCBDM.DesertBlockMulti, 1, 3), new Object[]{"Y","X", Character.valueOf('X'), new ItemStack(RCBDM.DesertBlockMulti, 1, 11), Character.valueOf('Y'), new ItemStack(RCBDM.BloodstoneChisel,1,WILDCARD_VALUE)});
 
 
-		//Weather Hireoglyphics to Carved Dark Stone
-		GameRegistry.addShapelessRecipe(new ItemStack(RCBDM.DesertBlockMulti, 1, 0), new ItemStack(RCBDM.HireoMulti, 1, 11), new ItemStack(RCBDM.FlintChisel,1,WILDCARD_VALUE));
-		GameRegistry.addShapelessRecipe(new ItemStack(RCBDM.DesertBlockMulti, 1, 0), new ItemStack(RCBDM.HireoMulti, 1, 11), new ItemStack(RCBDM.GoldChisel,1,WILDCARD_VALUE));
-		GameRegistry.addShapelessRecipe(new ItemStack(RCBDM.DesertBlockMulti, 1, 0), new ItemStack(RCBDM.HireoMulti, 1, 11), new ItemStack(RCBDM.CopperChisel,1,WILDCARD_VALUE));
-		GameRegistry.addShapelessRecipe(new ItemStack(RCBDM.DesertBlockMulti, 1, 0), new ItemStack(RCBDM.HireoMulti, 1, 11), new ItemStack(RCBDM.DiamondChisel,1,WILDCARD_VALUE));
-		GameRegistry.addShapelessRecipe(new ItemStack(RCBDM.DesertBlockMulti, 1, 0), new ItemStack(RCBDM.HireoMulti, 1, 11), new ItemStack(RCBDM.BloodstoneChisel,1,WILDCARD_VALUE));
+	//Weather Hireoglyphics to Carved Dark Stone
+	GameRegistry.addShapelessRecipe(new ItemStack(RCBDM.DesertBlockMulti, 1, 0), new ItemStack(RCBDM.HireoMulti, 1, 11), new ItemStack(RCBDM.FlintChisel,1,WILDCARD_VALUE));
+	GameRegistry.addShapelessRecipe(new ItemStack(RCBDM.DesertBlockMulti, 1, 0), new ItemStack(RCBDM.HireoMulti, 1, 11), new ItemStack(RCBDM.GoldChisel,1,WILDCARD_VALUE));
+	GameRegistry.addShapelessRecipe(new ItemStack(RCBDM.DesertBlockMulti, 1, 0), new ItemStack(RCBDM.HireoMulti, 1, 11), new ItemStack(RCBDM.CopperChisel,1,WILDCARD_VALUE));
+	GameRegistry.addShapelessRecipe(new ItemStack(RCBDM.DesertBlockMulti, 1, 0), new ItemStack(RCBDM.HireoMulti, 1, 11), new ItemStack(RCBDM.DiamondChisel,1,WILDCARD_VALUE));
+	GameRegistry.addShapelessRecipe(new ItemStack(RCBDM.DesertBlockMulti, 1, 0), new ItemStack(RCBDM.HireoMulti, 1, 11), new ItemStack(RCBDM.BloodstoneChisel,1,WILDCARD_VALUE));
 
 
-		/** Regular Hireoglyphics **/
-		//Flint Chisel
-		GameRegistry.addRecipe(new ItemStack(RCBDM.HireoMulti, 1, 0), new Object[]{"YYY", " X ", "   ", Character.valueOf('X'), new ItemStack(RCBDM.DesertBlockMulti, 1, 0), Character.valueOf('Y'), new ItemStack(RCBDM.FlintChisel,1,WILDCARD_VALUE)});
-		GameRegistry.addRecipe(new ItemStack(RCBDM.HireoMulti, 1, 1), new Object[]{"YYY", "YX ", "   ", Character.valueOf('X'), new ItemStack(RCBDM.DesertBlockMulti, 1, 0), Character.valueOf('Y'), new ItemStack(RCBDM.FlintChisel,1,WILDCARD_VALUE)});
-		GameRegistry.addRecipe(new ItemStack(RCBDM.HireoMulti, 1, 2), new Object[]{"YYY", "YXY", "   ", Character.valueOf('X'), new ItemStack(RCBDM.DesertBlockMulti, 1, 0), Character.valueOf('Y'), new ItemStack(RCBDM.FlintChisel,1,WILDCARD_VALUE)});
-		//Copper Chisel
-		GameRegistry.addRecipe(new ItemStack(RCBDM.HireoMulti, 1, 0), new Object[]{"YYY", " X ", "   ", Character.valueOf('X'), new ItemStack(RCBDM.DesertBlockMulti, 1, 0), Character.valueOf('Y'), new ItemStack(RCBDM.CopperChisel,1,WILDCARD_VALUE)});
-		GameRegistry.addRecipe(new ItemStack(RCBDM.HireoMulti, 1, 1), new Object[]{"YYY", "YX ", "   ", Character.valueOf('X'), new ItemStack(RCBDM.DesertBlockMulti, 1, 0), Character.valueOf('Y'), new ItemStack(RCBDM.CopperChisel,1,WILDCARD_VALUE)});
-		GameRegistry.addRecipe(new ItemStack(RCBDM.HireoMulti, 1, 2), new Object[]{"YYY", "YXY", "   ", Character.valueOf('X'), new ItemStack(RCBDM.DesertBlockMulti, 1, 0), Character.valueOf('Y'), new ItemStack(RCBDM.CopperChisel,1,WILDCARD_VALUE)});
-		//Gold Chisel
-		GameRegistry.addRecipe(new ItemStack(RCBDM.HireoMulti, 1, 0), new Object[]{"YYY", " X ", "   ", Character.valueOf('X'), new ItemStack(RCBDM.DesertBlockMulti, 1, 0), Character.valueOf('Y'), new ItemStack(RCBDM.GoldChisel,1,WILDCARD_VALUE)});
-		GameRegistry.addRecipe(new ItemStack(RCBDM.HireoMulti, 1, 1), new Object[]{"YYY", "YX ", "   ", Character.valueOf('X'), new ItemStack(RCBDM.DesertBlockMulti, 1, 0), Character.valueOf('Y'), new ItemStack(RCBDM.GoldChisel,1,WILDCARD_VALUE)});
-		GameRegistry.addRecipe(new ItemStack(RCBDM.HireoMulti, 1, 2), new Object[]{"YYY", "YXY", "   ", Character.valueOf('X'), new ItemStack(RCBDM.DesertBlockMulti, 1, 0), Character.valueOf('Y'), new ItemStack(RCBDM.GoldChisel,1,WILDCARD_VALUE)});
-		//Diamond Chisel
-		GameRegistry.addRecipe(new ItemStack(RCBDM.HireoMulti, 1, 0), new Object[]{"YYY", " X ", "   ", Character.valueOf('X'), new ItemStack(RCBDM.DesertBlockMulti, 1, 0), Character.valueOf('Y'), new ItemStack(RCBDM.DiamondChisel,1,WILDCARD_VALUE)});
-		GameRegistry.addRecipe(new ItemStack(RCBDM.HireoMulti, 1, 1), new Object[]{"YYY", "YX ", "   ", Character.valueOf('X'), new ItemStack(RCBDM.DesertBlockMulti, 1, 0), Character.valueOf('Y'), new ItemStack(RCBDM.DiamondChisel,1,WILDCARD_VALUE)});
-		GameRegistry.addRecipe(new ItemStack(RCBDM.HireoMulti, 1, 2), new Object[]{"YYY", "YXY", "   ", Character.valueOf('X'), new ItemStack(RCBDM.DesertBlockMulti, 1, 0), Character.valueOf('Y'), new ItemStack(RCBDM.DiamondChisel,1,WILDCARD_VALUE)});
-		//Bloodstone Chisel
-		GameRegistry.addRecipe(new ItemStack(RCBDM.HireoMulti, 1, 0), new Object[]{"YYY", " X ", "   ", Character.valueOf('X'), new ItemStack(RCBDM.DesertBlockMulti, 1, 0), Character.valueOf('Y'), new ItemStack(RCBDM.BloodstoneChisel,1,WILDCARD_VALUE)});
-		GameRegistry.addRecipe(new ItemStack(RCBDM.HireoMulti, 1, 1), new Object[]{"YYY", "YX ", "   ", Character.valueOf('X'), new ItemStack(RCBDM.DesertBlockMulti, 1, 0), Character.valueOf('Y'), new ItemStack(RCBDM.BloodstoneChisel,1,WILDCARD_VALUE)});
-		GameRegistry.addRecipe(new ItemStack(RCBDM.HireoMulti, 1, 2), new Object[]{"YYY", "YXY", "   ", Character.valueOf('X'), new ItemStack(RCBDM.DesertBlockMulti, 1, 0), Character.valueOf('Y'), new ItemStack(RCBDM.BloodstoneChisel,1,WILDCARD_VALUE)});
+	/** Regular Hireoglyphics **/
+	//Flint Chisel
+	GameRegistry.addRecipe(new ItemStack(RCBDM.HireoMulti, 1, 0), new Object[]{"YYY", " X ", "   ", Character.valueOf('X'), new ItemStack(RCBDM.DesertBlockMulti, 1, 0), Character.valueOf('Y'), new ItemStack(RCBDM.FlintChisel,1,WILDCARD_VALUE)});
+	GameRegistry.addRecipe(new ItemStack(RCBDM.HireoMulti, 1, 1), new Object[]{"YYY", "YX ", "   ", Character.valueOf('X'), new ItemStack(RCBDM.DesertBlockMulti, 1, 0), Character.valueOf('Y'), new ItemStack(RCBDM.FlintChisel,1,WILDCARD_VALUE)});
+	GameRegistry.addRecipe(new ItemStack(RCBDM.HireoMulti, 1, 2), new Object[]{"YYY", "YXY", "   ", Character.valueOf('X'), new ItemStack(RCBDM.DesertBlockMulti, 1, 0), Character.valueOf('Y'), new ItemStack(RCBDM.FlintChisel,1,WILDCARD_VALUE)});
+	//Copper Chisel
+	GameRegistry.addRecipe(new ItemStack(RCBDM.HireoMulti, 1, 0), new Object[]{"YYY", " X ", "   ", Character.valueOf('X'), new ItemStack(RCBDM.DesertBlockMulti, 1, 0), Character.valueOf('Y'), new ItemStack(RCBDM.CopperChisel,1,WILDCARD_VALUE)});
+	GameRegistry.addRecipe(new ItemStack(RCBDM.HireoMulti, 1, 1), new Object[]{"YYY", "YX ", "   ", Character.valueOf('X'), new ItemStack(RCBDM.DesertBlockMulti, 1, 0), Character.valueOf('Y'), new ItemStack(RCBDM.CopperChisel,1,WILDCARD_VALUE)});
+	GameRegistry.addRecipe(new ItemStack(RCBDM.HireoMulti, 1, 2), new Object[]{"YYY", "YXY", "   ", Character.valueOf('X'), new ItemStack(RCBDM.DesertBlockMulti, 1, 0), Character.valueOf('Y'), new ItemStack(RCBDM.CopperChisel,1,WILDCARD_VALUE)});
+	//Gold Chisel
+	GameRegistry.addRecipe(new ItemStack(RCBDM.HireoMulti, 1, 0), new Object[]{"YYY", " X ", "   ", Character.valueOf('X'), new ItemStack(RCBDM.DesertBlockMulti, 1, 0), Character.valueOf('Y'), new ItemStack(RCBDM.GoldChisel,1,WILDCARD_VALUE)});
+	GameRegistry.addRecipe(new ItemStack(RCBDM.HireoMulti, 1, 1), new Object[]{"YYY", "YX ", "   ", Character.valueOf('X'), new ItemStack(RCBDM.DesertBlockMulti, 1, 0), Character.valueOf('Y'), new ItemStack(RCBDM.GoldChisel,1,WILDCARD_VALUE)});
+	GameRegistry.addRecipe(new ItemStack(RCBDM.HireoMulti, 1, 2), new Object[]{"YYY", "YXY", "   ", Character.valueOf('X'), new ItemStack(RCBDM.DesertBlockMulti, 1, 0), Character.valueOf('Y'), new ItemStack(RCBDM.GoldChisel,1,WILDCARD_VALUE)});
+	//Diamond Chisel
+	GameRegistry.addRecipe(new ItemStack(RCBDM.HireoMulti, 1, 0), new Object[]{"YYY", " X ", "   ", Character.valueOf('X'), new ItemStack(RCBDM.DesertBlockMulti, 1, 0), Character.valueOf('Y'), new ItemStack(RCBDM.DiamondChisel,1,WILDCARD_VALUE)});
+	GameRegistry.addRecipe(new ItemStack(RCBDM.HireoMulti, 1, 1), new Object[]{"YYY", "YX ", "   ", Character.valueOf('X'), new ItemStack(RCBDM.DesertBlockMulti, 1, 0), Character.valueOf('Y'), new ItemStack(RCBDM.DiamondChisel,1,WILDCARD_VALUE)});
+	GameRegistry.addRecipe(new ItemStack(RCBDM.HireoMulti, 1, 2), new Object[]{"YYY", "YXY", "   ", Character.valueOf('X'), new ItemStack(RCBDM.DesertBlockMulti, 1, 0), Character.valueOf('Y'), new ItemStack(RCBDM.DiamondChisel,1,WILDCARD_VALUE)});
+	//Bloodstone Chisel
+	GameRegistry.addRecipe(new ItemStack(RCBDM.HireoMulti, 1, 0), new Object[]{"YYY", " X ", "   ", Character.valueOf('X'), new ItemStack(RCBDM.DesertBlockMulti, 1, 0), Character.valueOf('Y'), new ItemStack(RCBDM.BloodstoneChisel,1,WILDCARD_VALUE)});
+	GameRegistry.addRecipe(new ItemStack(RCBDM.HireoMulti, 1, 1), new Object[]{"YYY", "YX ", "   ", Character.valueOf('X'), new ItemStack(RCBDM.DesertBlockMulti, 1, 0), Character.valueOf('Y'), new ItemStack(RCBDM.BloodstoneChisel,1,WILDCARD_VALUE)});
+	GameRegistry.addRecipe(new ItemStack(RCBDM.HireoMulti, 1, 2), new Object[]{"YYY", "YXY", "   ", Character.valueOf('X'), new ItemStack(RCBDM.DesertBlockMulti, 1, 0), Character.valueOf('Y'), new ItemStack(RCBDM.BloodstoneChisel,1,WILDCARD_VALUE)});
 
-		/** Lightblue Hireoglyphics **/
-		//Flint
-		GameRegistry.addRecipe(new ItemStack(RCBDM.HireoMulti, 1, 3), new Object[]{"YYY", " X ", " @ ", Character.valueOf('X'), new ItemStack(RCBDM.DesertBlockMulti, 1, 0), Character.valueOf('@'), RCBDM.CutLBGem, Character.valueOf('Y'), new ItemStack(RCBDM.FlintChisel,1,WILDCARD_VALUE)});
-		GameRegistry.addRecipe(new ItemStack(RCBDM.HireoMulti, 1, 4), new Object[]{"YYY", "YX ", "Y@ ", Character.valueOf('X'), new ItemStack(RCBDM.DesertBlockMulti, 1, 0), Character.valueOf('@'), RCBDM.CutLBGem, Character.valueOf('Y'), new ItemStack(RCBDM.FlintChisel,1,WILDCARD_VALUE)});
-		GameRegistry.addRecipe(new ItemStack(RCBDM.HireoMulti, 1, 5), new Object[]{"YYY", "YXY", "Y@Y", Character.valueOf('X'), new ItemStack(RCBDM.DesertBlockMulti, 1, 0), Character.valueOf('@'), RCBDM.CutLBGem, Character.valueOf('Y'), new ItemStack(RCBDM.FlintChisel,1,WILDCARD_VALUE)});
-		//Copper
-		GameRegistry.addRecipe(new ItemStack(RCBDM.HireoMulti, 1, 3), new Object[]{"YYY", " X ", " @ ", Character.valueOf('X'), new ItemStack(RCBDM.DesertBlockMulti, 1, 0), Character.valueOf('@'), RCBDM.CutLBGem, Character.valueOf('Y'), new ItemStack(RCBDM.CopperChisel,1,WILDCARD_VALUE)});
-		GameRegistry.addRecipe(new ItemStack(RCBDM.HireoMulti, 1, 4), new Object[]{"YYY", "YX ", "Y@ ", Character.valueOf('X'), new ItemStack(RCBDM.DesertBlockMulti, 1, 0), Character.valueOf('@'), RCBDM.CutLBGem, Character.valueOf('Y'), new ItemStack(RCBDM.CopperChisel,1,WILDCARD_VALUE)});
-		GameRegistry.addRecipe(new ItemStack(RCBDM.HireoMulti, 1, 5), new Object[]{"YYY", "YXY", "Y@Y", Character.valueOf('X'), new ItemStack(RCBDM.DesertBlockMulti, 1, 0), Character.valueOf('@'), RCBDM.CutLBGem, Character.valueOf('Y'), new ItemStack(RCBDM.CopperChisel,1,WILDCARD_VALUE)});
-		//Gold
-		GameRegistry.addRecipe(new ItemStack(RCBDM.HireoMulti, 1, 3), new Object[]{"YYY", " X ", " @ ", Character.valueOf('X'), new ItemStack(RCBDM.DesertBlockMulti, 1, 0), Character.valueOf('@'), RCBDM.CutLBGem, Character.valueOf('Y'), new ItemStack(RCBDM.GoldChisel,1,WILDCARD_VALUE)});
-		GameRegistry.addRecipe(new ItemStack(RCBDM.HireoMulti, 1, 4), new Object[]{"YYY", "YX ", "Y@ ", Character.valueOf('X'), new ItemStack(RCBDM.DesertBlockMulti, 1, 0), Character.valueOf('@'), RCBDM.CutLBGem, Character.valueOf('Y'), new ItemStack(RCBDM.GoldChisel,1,WILDCARD_VALUE)});
-		GameRegistry.addRecipe(new ItemStack(RCBDM.HireoMulti, 1, 5), new Object[]{"YYY", "YXY", "Y@Y", Character.valueOf('X'), new ItemStack(RCBDM.DesertBlockMulti, 1, 0), Character.valueOf('@'), RCBDM.CutLBGem, Character.valueOf('Y'), new ItemStack(RCBDM.GoldChisel,1,WILDCARD_VALUE)});
-		//Diamond Based Lightblue Hireoglyphics
-		GameRegistry.addRecipe(new ItemStack(RCBDM.HireoMulti, 1, 3), new Object[]{"YYY", " X ", " @ ", Character.valueOf('X'), new ItemStack(RCBDM.DesertBlockMulti, 1, 0), Character.valueOf('@'), RCBDM.CutLBGem, Character.valueOf('Y'), new ItemStack(RCBDM.DiamondChisel,1,WILDCARD_VALUE)});
-		GameRegistry.addRecipe(new ItemStack(RCBDM.HireoMulti, 1, 4), new Object[]{"YYY", "YX ", "Y@ ", Character.valueOf('X'), new ItemStack(RCBDM.DesertBlockMulti, 1, 0), Character.valueOf('@'), RCBDM.CutLBGem, Character.valueOf('Y'), new ItemStack(RCBDM.DiamondChisel,1,WILDCARD_VALUE)});
-		GameRegistry.addRecipe(new ItemStack(RCBDM.HireoMulti, 1, 5), new Object[]{"YYY", "YXY", "Y@Y", Character.valueOf('X'), new ItemStack(RCBDM.DesertBlockMulti, 1, 0), Character.valueOf('@'), RCBDM.CutLBGem, Character.valueOf('Y'), new ItemStack(RCBDM.DiamondChisel,1,WILDCARD_VALUE)});
-		//Bloodstone Based Lightblue Hireoglyphics
-		GameRegistry.addRecipe(new ItemStack(RCBDM.HireoMulti, 1, 3), new Object[]{"YYY", " X ", " @ ", Character.valueOf('X'), new ItemStack(RCBDM.DesertBlockMulti, 1, 0), Character.valueOf('@'), RCBDM.CutLBGem, Character.valueOf('Y'), new ItemStack(RCBDM.BloodstoneChisel,1,WILDCARD_VALUE)});
-		GameRegistry.addRecipe(new ItemStack(RCBDM.HireoMulti, 1, 4), new Object[]{"YYY", "YX ", "Y@ ", Character.valueOf('X'), new ItemStack(RCBDM.DesertBlockMulti, 1, 0), Character.valueOf('@'), RCBDM.CutLBGem, Character.valueOf('Y'), new ItemStack(RCBDM.BloodstoneChisel,1,WILDCARD_VALUE)});
-		GameRegistry.addRecipe(new ItemStack(RCBDM.HireoMulti, 1, 5), new Object[]{"YYY", "YXY", "Y@Y", Character.valueOf('X'), new ItemStack(RCBDM.DesertBlockMulti, 1, 0), Character.valueOf('@'), RCBDM.CutLBGem, Character.valueOf('Y'), new ItemStack(RCBDM.BloodstoneChisel,1,WILDCARD_VALUE)});
+	/** Lightblue Hireoglyphics **/
+	//Flint
+	GameRegistry.addRecipe(new ItemStack(RCBDM.HireoMulti, 1, 3), new Object[]{"YYY", " X ", " @ ", Character.valueOf('X'), new ItemStack(RCBDM.DesertBlockMulti, 1, 0), Character.valueOf('@'), RCBDM.CutLBGem, Character.valueOf('Y'), new ItemStack(RCBDM.FlintChisel,1,WILDCARD_VALUE)});
+	GameRegistry.addRecipe(new ItemStack(RCBDM.HireoMulti, 1, 4), new Object[]{"YYY", "YX ", "Y@ ", Character.valueOf('X'), new ItemStack(RCBDM.DesertBlockMulti, 1, 0), Character.valueOf('@'), RCBDM.CutLBGem, Character.valueOf('Y'), new ItemStack(RCBDM.FlintChisel,1,WILDCARD_VALUE)});
+	GameRegistry.addRecipe(new ItemStack(RCBDM.HireoMulti, 1, 5), new Object[]{"YYY", "YXY", "Y@Y", Character.valueOf('X'), new ItemStack(RCBDM.DesertBlockMulti, 1, 0), Character.valueOf('@'), RCBDM.CutLBGem, Character.valueOf('Y'), new ItemStack(RCBDM.FlintChisel,1,WILDCARD_VALUE)});
+	//Copper
+	GameRegistry.addRecipe(new ItemStack(RCBDM.HireoMulti, 1, 3), new Object[]{"YYY", " X ", " @ ", Character.valueOf('X'), new ItemStack(RCBDM.DesertBlockMulti, 1, 0), Character.valueOf('@'), RCBDM.CutLBGem, Character.valueOf('Y'), new ItemStack(RCBDM.CopperChisel,1,WILDCARD_VALUE)});
+	GameRegistry.addRecipe(new ItemStack(RCBDM.HireoMulti, 1, 4), new Object[]{"YYY", "YX ", "Y@ ", Character.valueOf('X'), new ItemStack(RCBDM.DesertBlockMulti, 1, 0), Character.valueOf('@'), RCBDM.CutLBGem, Character.valueOf('Y'), new ItemStack(RCBDM.CopperChisel,1,WILDCARD_VALUE)});
+	GameRegistry.addRecipe(new ItemStack(RCBDM.HireoMulti, 1, 5), new Object[]{"YYY", "YXY", "Y@Y", Character.valueOf('X'), new ItemStack(RCBDM.DesertBlockMulti, 1, 0), Character.valueOf('@'), RCBDM.CutLBGem, Character.valueOf('Y'), new ItemStack(RCBDM.CopperChisel,1,WILDCARD_VALUE)});
+	//Gold
+	GameRegistry.addRecipe(new ItemStack(RCBDM.HireoMulti, 1, 3), new Object[]{"YYY", " X ", " @ ", Character.valueOf('X'), new ItemStack(RCBDM.DesertBlockMulti, 1, 0), Character.valueOf('@'), RCBDM.CutLBGem, Character.valueOf('Y'), new ItemStack(RCBDM.GoldChisel,1,WILDCARD_VALUE)});
+	GameRegistry.addRecipe(new ItemStack(RCBDM.HireoMulti, 1, 4), new Object[]{"YYY", "YX ", "Y@ ", Character.valueOf('X'), new ItemStack(RCBDM.DesertBlockMulti, 1, 0), Character.valueOf('@'), RCBDM.CutLBGem, Character.valueOf('Y'), new ItemStack(RCBDM.GoldChisel,1,WILDCARD_VALUE)});
+	GameRegistry.addRecipe(new ItemStack(RCBDM.HireoMulti, 1, 5), new Object[]{"YYY", "YXY", "Y@Y", Character.valueOf('X'), new ItemStack(RCBDM.DesertBlockMulti, 1, 0), Character.valueOf('@'), RCBDM.CutLBGem, Character.valueOf('Y'), new ItemStack(RCBDM.GoldChisel,1,WILDCARD_VALUE)});
+	//Diamond Based Lightblue Hireoglyphics
+	GameRegistry.addRecipe(new ItemStack(RCBDM.HireoMulti, 1, 3), new Object[]{"YYY", " X ", " @ ", Character.valueOf('X'), new ItemStack(RCBDM.DesertBlockMulti, 1, 0), Character.valueOf('@'), RCBDM.CutLBGem, Character.valueOf('Y'), new ItemStack(RCBDM.DiamondChisel,1,WILDCARD_VALUE)});
+	GameRegistry.addRecipe(new ItemStack(RCBDM.HireoMulti, 1, 4), new Object[]{"YYY", "YX ", "Y@ ", Character.valueOf('X'), new ItemStack(RCBDM.DesertBlockMulti, 1, 0), Character.valueOf('@'), RCBDM.CutLBGem, Character.valueOf('Y'), new ItemStack(RCBDM.DiamondChisel,1,WILDCARD_VALUE)});
+	GameRegistry.addRecipe(new ItemStack(RCBDM.HireoMulti, 1, 5), new Object[]{"YYY", "YXY", "Y@Y", Character.valueOf('X'), new ItemStack(RCBDM.DesertBlockMulti, 1, 0), Character.valueOf('@'), RCBDM.CutLBGem, Character.valueOf('Y'), new ItemStack(RCBDM.DiamondChisel,1,WILDCARD_VALUE)});
+	//Bloodstone Based Lightblue Hireoglyphics
+	GameRegistry.addRecipe(new ItemStack(RCBDM.HireoMulti, 1, 3), new Object[]{"YYY", " X ", " @ ", Character.valueOf('X'), new ItemStack(RCBDM.DesertBlockMulti, 1, 0), Character.valueOf('@'), RCBDM.CutLBGem, Character.valueOf('Y'), new ItemStack(RCBDM.BloodstoneChisel,1,WILDCARD_VALUE)});
+	GameRegistry.addRecipe(new ItemStack(RCBDM.HireoMulti, 1, 4), new Object[]{"YYY", "YX ", "Y@ ", Character.valueOf('X'), new ItemStack(RCBDM.DesertBlockMulti, 1, 0), Character.valueOf('@'), RCBDM.CutLBGem, Character.valueOf('Y'), new ItemStack(RCBDM.BloodstoneChisel,1,WILDCARD_VALUE)});
+	GameRegistry.addRecipe(new ItemStack(RCBDM.HireoMulti, 1, 5), new Object[]{"YYY", "YXY", "Y@Y", Character.valueOf('X'), new ItemStack(RCBDM.DesertBlockMulti, 1, 0), Character.valueOf('@'), RCBDM.CutLBGem, Character.valueOf('Y'), new ItemStack(RCBDM.BloodstoneChisel,1,WILDCARD_VALUE)});
 
-		/** Darkblue Hireoglyphics **/
-		//Flint
-		GameRegistry.addRecipe(new ItemStack(RCBDM.HireoMulti, 1, 6), new Object[]{"YYY", " X ", " @ ", Character.valueOf('X'), new ItemStack(RCBDM.DesertBlockMulti, 1, 0), Character.valueOf('@'), RCBDM.CutDBGem, Character.valueOf('Y'), new ItemStack(RCBDM.FlintChisel,1,WILDCARD_VALUE)});
-		GameRegistry.addRecipe(new ItemStack(RCBDM.HireoMulti, 1, 7), new Object[]{"YYY", "YX ", "Y@ ", Character.valueOf('X'), new ItemStack(RCBDM.DesertBlockMulti, 1, 0), Character.valueOf('@'), RCBDM.CutDBGem, Character.valueOf('Y'), new ItemStack(RCBDM.FlintChisel,1,WILDCARD_VALUE)});
-		GameRegistry.addRecipe(new ItemStack(RCBDM.HireoMulti, 1, 8), new Object[]{"YYY", "YXY", "Y@Y", Character.valueOf('X'), new ItemStack(RCBDM.DesertBlockMulti, 1, 0), Character.valueOf('@'), RCBDM.CutDBGem, Character.valueOf('Y'), new ItemStack(RCBDM.FlintChisel,1,WILDCARD_VALUE)});
-		//Copper 
-		GameRegistry.addRecipe(new ItemStack(RCBDM.HireoMulti, 1, 6), new Object[]{"YYY", " X ", " @ ", Character.valueOf('X'), new ItemStack(RCBDM.DesertBlockMulti, 1, 0), Character.valueOf('@'), RCBDM.CutDBGem, Character.valueOf('Y'), new ItemStack(RCBDM.CopperChisel,1,WILDCARD_VALUE)});
-		GameRegistry.addRecipe(new ItemStack(RCBDM.HireoMulti, 1, 7), new Object[]{"YYY", "YX ", "Y@ ", Character.valueOf('X'), new ItemStack(RCBDM.DesertBlockMulti, 1, 0), Character.valueOf('@'), RCBDM.CutDBGem, Character.valueOf('Y'), new ItemStack(RCBDM.CopperChisel,1,WILDCARD_VALUE)});
-		GameRegistry.addRecipe(new ItemStack(RCBDM.HireoMulti, 1, 8), new Object[]{"YYY", "YXY", "Y@Y", Character.valueOf('X'), new ItemStack(RCBDM.DesertBlockMulti, 1, 0), Character.valueOf('@'), RCBDM.CutDBGem, Character.valueOf('Y'), new ItemStack(RCBDM.CopperChisel,1,WILDCARD_VALUE)});
-		//Gold
-		GameRegistry.addRecipe(new ItemStack(RCBDM.HireoMulti, 1, 6), new Object[]{"YYY", " X ", " @ ", Character.valueOf('X'), new ItemStack(RCBDM.DesertBlockMulti, 1, 0), Character.valueOf('@'), RCBDM.CutDBGem, Character.valueOf('Y'), new ItemStack(RCBDM.GoldChisel,1,WILDCARD_VALUE)});
-		GameRegistry.addRecipe(new ItemStack(RCBDM.HireoMulti, 1, 7), new Object[]{"YYY", "YX ", "Y@ ", Character.valueOf('X'), new ItemStack(RCBDM.DesertBlockMulti, 1, 0), Character.valueOf('@'), RCBDM.CutDBGem, Character.valueOf('Y'), new ItemStack(RCBDM.GoldChisel,1,WILDCARD_VALUE)});
-		GameRegistry.addRecipe(new ItemStack(RCBDM.HireoMulti, 1, 8), new Object[]{"YYY", "YXY", "Y@Y", Character.valueOf('X'), new ItemStack(RCBDM.DesertBlockMulti, 1, 0), Character.valueOf('@'), RCBDM.CutDBGem, Character.valueOf('Y'), new ItemStack(RCBDM.GoldChisel,1,WILDCARD_VALUE)});
-		//Diamond
-		GameRegistry.addRecipe(new ItemStack(RCBDM.HireoMulti, 1, 6), new Object[]{"YYY", " X ", " @ ", Character.valueOf('X'), new ItemStack(RCBDM.DesertBlockMulti, 1, 0), Character.valueOf('@'), RCBDM.CutDBGem, Character.valueOf('Y'), new ItemStack(RCBDM.DiamondChisel,1,WILDCARD_VALUE)});
-		GameRegistry.addRecipe(new ItemStack(RCBDM.HireoMulti, 1, 7), new Object[]{"YYY", "YX ", "Y@ ", Character.valueOf('X'), new ItemStack(RCBDM.DesertBlockMulti, 1, 0), Character.valueOf('@'), RCBDM.CutDBGem, Character.valueOf('Y'), new ItemStack(RCBDM.DiamondChisel,1,WILDCARD_VALUE)});
-		GameRegistry.addRecipe(new ItemStack(RCBDM.HireoMulti, 1, 8), new Object[]{"YYY", "YXY", "Y@Y", Character.valueOf('X'), new ItemStack(RCBDM.DesertBlockMulti, 1, 0), Character.valueOf('@'), RCBDM.CutDBGem, Character.valueOf('Y'), new ItemStack(RCBDM.DiamondChisel,1,WILDCARD_VALUE)});
-		//Bloodstone Based Darkblue Hireoglyphics
-		GameRegistry.addRecipe(new ItemStack(RCBDM.HireoMulti, 1, 6), new Object[]{"YYY", " X ", " @ ", Character.valueOf('X'), new ItemStack(RCBDM.DesertBlockMulti, 1, 0), Character.valueOf('@'), RCBDM.CutDBGem, Character.valueOf('Y'), new ItemStack(RCBDM.BloodstoneChisel,1,WILDCARD_VALUE)});
-		GameRegistry.addRecipe(new ItemStack(RCBDM.HireoMulti, 1, 7), new Object[]{"YYY", "YX ", "Y@ ", Character.valueOf('X'), new ItemStack(RCBDM.DesertBlockMulti, 1, 0), Character.valueOf('@'), RCBDM.CutDBGem, Character.valueOf('Y'), new ItemStack(RCBDM.BloodstoneChisel,1,WILDCARD_VALUE)});
-		GameRegistry.addRecipe(new ItemStack(RCBDM.HireoMulti, 1, 8), new Object[]{"YYY", "YXY", "Y@Y", Character.valueOf('X'), new ItemStack(RCBDM.DesertBlockMulti, 1, 0), Character.valueOf('@'), RCBDM.CutDBGem, Character.valueOf('Y'), new ItemStack(RCBDM.BloodstoneChisel,1,WILDCARD_VALUE)});
+	/** Darkblue Hireoglyphics **/
+	//Flint
+	GameRegistry.addRecipe(new ItemStack(RCBDM.HireoMulti, 1, 6), new Object[]{"YYY", " X ", " @ ", Character.valueOf('X'), new ItemStack(RCBDM.DesertBlockMulti, 1, 0), Character.valueOf('@'), RCBDM.CutDBGem, Character.valueOf('Y'), new ItemStack(RCBDM.FlintChisel,1,WILDCARD_VALUE)});
+	GameRegistry.addRecipe(new ItemStack(RCBDM.HireoMulti, 1, 7), new Object[]{"YYY", "YX ", "Y@ ", Character.valueOf('X'), new ItemStack(RCBDM.DesertBlockMulti, 1, 0), Character.valueOf('@'), RCBDM.CutDBGem, Character.valueOf('Y'), new ItemStack(RCBDM.FlintChisel,1,WILDCARD_VALUE)});
+	GameRegistry.addRecipe(new ItemStack(RCBDM.HireoMulti, 1, 8), new Object[]{"YYY", "YXY", "Y@Y", Character.valueOf('X'), new ItemStack(RCBDM.DesertBlockMulti, 1, 0), Character.valueOf('@'), RCBDM.CutDBGem, Character.valueOf('Y'), new ItemStack(RCBDM.FlintChisel,1,WILDCARD_VALUE)});
+	//Copper 
+	GameRegistry.addRecipe(new ItemStack(RCBDM.HireoMulti, 1, 6), new Object[]{"YYY", " X ", " @ ", Character.valueOf('X'), new ItemStack(RCBDM.DesertBlockMulti, 1, 0), Character.valueOf('@'), RCBDM.CutDBGem, Character.valueOf('Y'), new ItemStack(RCBDM.CopperChisel,1,WILDCARD_VALUE)});
+	GameRegistry.addRecipe(new ItemStack(RCBDM.HireoMulti, 1, 7), new Object[]{"YYY", "YX ", "Y@ ", Character.valueOf('X'), new ItemStack(RCBDM.DesertBlockMulti, 1, 0), Character.valueOf('@'), RCBDM.CutDBGem, Character.valueOf('Y'), new ItemStack(RCBDM.CopperChisel,1,WILDCARD_VALUE)});
+	GameRegistry.addRecipe(new ItemStack(RCBDM.HireoMulti, 1, 8), new Object[]{"YYY", "YXY", "Y@Y", Character.valueOf('X'), new ItemStack(RCBDM.DesertBlockMulti, 1, 0), Character.valueOf('@'), RCBDM.CutDBGem, Character.valueOf('Y'), new ItemStack(RCBDM.CopperChisel,1,WILDCARD_VALUE)});
+	//Gold
+	GameRegistry.addRecipe(new ItemStack(RCBDM.HireoMulti, 1, 6), new Object[]{"YYY", " X ", " @ ", Character.valueOf('X'), new ItemStack(RCBDM.DesertBlockMulti, 1, 0), Character.valueOf('@'), RCBDM.CutDBGem, Character.valueOf('Y'), new ItemStack(RCBDM.GoldChisel,1,WILDCARD_VALUE)});
+	GameRegistry.addRecipe(new ItemStack(RCBDM.HireoMulti, 1, 7), new Object[]{"YYY", "YX ", "Y@ ", Character.valueOf('X'), new ItemStack(RCBDM.DesertBlockMulti, 1, 0), Character.valueOf('@'), RCBDM.CutDBGem, Character.valueOf('Y'), new ItemStack(RCBDM.GoldChisel,1,WILDCARD_VALUE)});
+	GameRegistry.addRecipe(new ItemStack(RCBDM.HireoMulti, 1, 8), new Object[]{"YYY", "YXY", "Y@Y", Character.valueOf('X'), new ItemStack(RCBDM.DesertBlockMulti, 1, 0), Character.valueOf('@'), RCBDM.CutDBGem, Character.valueOf('Y'), new ItemStack(RCBDM.GoldChisel,1,WILDCARD_VALUE)});
+	//Diamond
+	GameRegistry.addRecipe(new ItemStack(RCBDM.HireoMulti, 1, 6), new Object[]{"YYY", " X ", " @ ", Character.valueOf('X'), new ItemStack(RCBDM.DesertBlockMulti, 1, 0), Character.valueOf('@'), RCBDM.CutDBGem, Character.valueOf('Y'), new ItemStack(RCBDM.DiamondChisel,1,WILDCARD_VALUE)});
+	GameRegistry.addRecipe(new ItemStack(RCBDM.HireoMulti, 1, 7), new Object[]{"YYY", "YX ", "Y@ ", Character.valueOf('X'), new ItemStack(RCBDM.DesertBlockMulti, 1, 0), Character.valueOf('@'), RCBDM.CutDBGem, Character.valueOf('Y'), new ItemStack(RCBDM.DiamondChisel,1,WILDCARD_VALUE)});
+	GameRegistry.addRecipe(new ItemStack(RCBDM.HireoMulti, 1, 8), new Object[]{"YYY", "YXY", "Y@Y", Character.valueOf('X'), new ItemStack(RCBDM.DesertBlockMulti, 1, 0), Character.valueOf('@'), RCBDM.CutDBGem, Character.valueOf('Y'), new ItemStack(RCBDM.DiamondChisel,1,WILDCARD_VALUE)});
+	//Bloodstone Based Darkblue Hireoglyphics
+	GameRegistry.addRecipe(new ItemStack(RCBDM.HireoMulti, 1, 6), new Object[]{"YYY", " X ", " @ ", Character.valueOf('X'), new ItemStack(RCBDM.DesertBlockMulti, 1, 0), Character.valueOf('@'), RCBDM.CutDBGem, Character.valueOf('Y'), new ItemStack(RCBDM.BloodstoneChisel,1,WILDCARD_VALUE)});
+	GameRegistry.addRecipe(new ItemStack(RCBDM.HireoMulti, 1, 7), new Object[]{"YYY", "YX ", "Y@ ", Character.valueOf('X'), new ItemStack(RCBDM.DesertBlockMulti, 1, 0), Character.valueOf('@'), RCBDM.CutDBGem, Character.valueOf('Y'), new ItemStack(RCBDM.BloodstoneChisel,1,WILDCARD_VALUE)});
+	GameRegistry.addRecipe(new ItemStack(RCBDM.HireoMulti, 1, 8), new Object[]{"YYY", "YXY", "Y@Y", Character.valueOf('X'), new ItemStack(RCBDM.DesertBlockMulti, 1, 0), Character.valueOf('@'), RCBDM.CutDBGem, Character.valueOf('Y'), new ItemStack(RCBDM.BloodstoneChisel,1,WILDCARD_VALUE)});
 
-		/** Gold Hireoglyphics **/
-		GameRegistry.addRecipe(new ItemStack(RCBDM.HireoMulti, 1, 13), new Object[]{"YYY", " X ", " @ ", Character.valueOf('X'), new ItemStack(RCBDM.DesertBlockMulti, 1, 0), Character.valueOf('@'), Item.ingotGold, Character.valueOf('Y'), new ItemStack(RCBDM.FlintChisel,1,WILDCARD_VALUE)});
-		GameRegistry.addRecipe(new ItemStack(RCBDM.HireoMulti, 1, 14), new Object[]{"YYY", "YX ", "Y@ ", Character.valueOf('X'), new ItemStack(RCBDM.DesertBlockMulti, 1, 0), Character.valueOf('@'), Item.ingotGold, Character.valueOf('Y'), new ItemStack(RCBDM.FlintChisel,1,WILDCARD_VALUE)});
-		GameRegistry.addRecipe(new ItemStack(RCBDM.HireoMulti, 1, 15), new Object[]{"YYY", "YXY", "Y@Y", Character.valueOf('X'), new ItemStack(RCBDM.DesertBlockMulti, 1, 0), Character.valueOf('@'), Item.ingotGold, Character.valueOf('Y'), new ItemStack(RCBDM.FlintChisel,1,WILDCARD_VALUE)});
-		//Copper Based DarkBlue Hireoglyphics
-		GameRegistry.addRecipe(new ItemStack(RCBDM.HireoMulti, 1, 13), new Object[]{"YYY", " X ", " @ ", Character.valueOf('X'), new ItemStack(RCBDM.DesertBlockMulti, 1, 0), Character.valueOf('@'), Item.ingotGold, Character.valueOf('Y'), new ItemStack(RCBDM.CopperChisel,1,WILDCARD_VALUE)});
-		GameRegistry.addRecipe(new ItemStack(RCBDM.HireoMulti, 1, 14), new Object[]{"YYY", "YX ", "Y@ ", Character.valueOf('X'), new ItemStack(RCBDM.DesertBlockMulti, 1, 0), Character.valueOf('@'), Item.ingotGold, Character.valueOf('Y'), new ItemStack(RCBDM.CopperChisel,1,WILDCARD_VALUE)});
-		GameRegistry.addRecipe(new ItemStack(RCBDM.HireoMulti, 1, 15), new Object[]{"YYY", "YXY", "Y@Y", Character.valueOf('X'), new ItemStack(RCBDM.DesertBlockMulti, 1, 0), Character.valueOf('@'), Item.ingotGold, Character.valueOf('Y'), new ItemStack(RCBDM.CopperChisel,1,WILDCARD_VALUE)});
-		//gold Based Darkblue Hireoglyphics
-		GameRegistry.addRecipe(new ItemStack(RCBDM.HireoMulti, 1, 13), new Object[]{"YYY", " X ", " @ ", Character.valueOf('X'), new ItemStack(RCBDM.DesertBlockMulti, 1, 0), Character.valueOf('@'), Item.ingotGold, Character.valueOf('Y'), new ItemStack(RCBDM.GoldChisel,1,WILDCARD_VALUE)});
-		GameRegistry.addRecipe(new ItemStack(RCBDM.HireoMulti, 1, 14), new Object[]{"YYY", "YX ", "Y@ ", Character.valueOf('X'), new ItemStack(RCBDM.DesertBlockMulti, 1, 0), Character.valueOf('@'), Item.ingotGold, Character.valueOf('Y'), new ItemStack(RCBDM.GoldChisel,1,WILDCARD_VALUE)});
-		GameRegistry.addRecipe(new ItemStack(RCBDM.HireoMulti, 1, 15), new Object[]{"YYY", "YXY", "Y@Y", Character.valueOf('X'), new ItemStack(RCBDM.DesertBlockMulti, 1, 0), Character.valueOf('@'), Item.ingotGold, Character.valueOf('Y'), new ItemStack(RCBDM.GoldChisel,1,WILDCARD_VALUE)});
-		//Diamond Based Darkblue Hireoglyphics
-		GameRegistry.addRecipe(new ItemStack(RCBDM.HireoMulti, 1, 13), new Object[]{"YYY", " X ", " @ ", Character.valueOf('X'), new ItemStack(RCBDM.DesertBlockMulti, 1, 0), Character.valueOf('@'), Item.ingotGold, Character.valueOf('Y'), new ItemStack(RCBDM.DiamondChisel,1,WILDCARD_VALUE)});
-		GameRegistry.addRecipe(new ItemStack(RCBDM.HireoMulti, 1, 14), new Object[]{"YYY", "YX ", "Y@ ", Character.valueOf('X'), new ItemStack(RCBDM.DesertBlockMulti, 1, 0), Character.valueOf('@'), Item.ingotGold, Character.valueOf('Y'), new ItemStack(RCBDM.DiamondChisel,1,WILDCARD_VALUE)});
-		GameRegistry.addRecipe(new ItemStack(RCBDM.HireoMulti, 1, 15), new Object[]{"YYY", "YXY", "Y@Y", Character.valueOf('X'), new ItemStack(RCBDM.DesertBlockMulti, 1, 0), Character.valueOf('@'), Item.ingotGold, Character.valueOf('Y'), new ItemStack(RCBDM.DiamondChisel,1,WILDCARD_VALUE)});
-		//Bloodstone Based Darkblue Hireoglyphics
-		GameRegistry.addRecipe(new ItemStack(RCBDM.HireoMulti, 1, 13), new Object[]{"YYY", " X ", " @ ", Character.valueOf('X'), new ItemStack(RCBDM.DesertBlockMulti, 1, 0), Character.valueOf('@'), Item.ingotGold, Character.valueOf('Y'), new ItemStack(RCBDM.BloodstoneChisel,1,WILDCARD_VALUE)});
-		GameRegistry.addRecipe(new ItemStack(RCBDM.HireoMulti, 1, 14), new Object[]{"YYY", "YX ", "Y@ ", Character.valueOf('X'), new ItemStack(RCBDM.DesertBlockMulti, 1, 0), Character.valueOf('@'), Item.ingotGold, Character.valueOf('Y'), new ItemStack(RCBDM.BloodstoneChisel,1,WILDCARD_VALUE)});
-		GameRegistry.addRecipe(new ItemStack(RCBDM.HireoMulti, 1, 15), new Object[]{"YYY", "YXY", "Y@Y", Character.valueOf('X'), new ItemStack(RCBDM.DesertBlockMulti, 1, 0), Character.valueOf('@'), Item.ingotGold, Character.valueOf('Y'), new ItemStack(RCBDM.BloodstoneChisel,1,WILDCARD_VALUE)});
-		FMLLog.info("Better Desert Recipes Loaded");
-	}
+	/** Gold Hireoglyphics **/
+	GameRegistry.addRecipe(new ItemStack(RCBDM.HireoMulti, 1, 13), new Object[]{"YYY", " X ", " @ ", Character.valueOf('X'), new ItemStack(RCBDM.DesertBlockMulti, 1, 0), Character.valueOf('@'), Item.ingotGold, Character.valueOf('Y'), new ItemStack(RCBDM.FlintChisel,1,WILDCARD_VALUE)});
+	GameRegistry.addRecipe(new ItemStack(RCBDM.HireoMulti, 1, 14), new Object[]{"YYY", "YX ", "Y@ ", Character.valueOf('X'), new ItemStack(RCBDM.DesertBlockMulti, 1, 0), Character.valueOf('@'), Item.ingotGold, Character.valueOf('Y'), new ItemStack(RCBDM.FlintChisel,1,WILDCARD_VALUE)});
+	GameRegistry.addRecipe(new ItemStack(RCBDM.HireoMulti, 1, 15), new Object[]{"YYY", "YXY", "Y@Y", Character.valueOf('X'), new ItemStack(RCBDM.DesertBlockMulti, 1, 0), Character.valueOf('@'), Item.ingotGold, Character.valueOf('Y'), new ItemStack(RCBDM.FlintChisel,1,WILDCARD_VALUE)});
+	//Copper Based DarkBlue Hireoglyphics
+	GameRegistry.addRecipe(new ItemStack(RCBDM.HireoMulti, 1, 13), new Object[]{"YYY", " X ", " @ ", Character.valueOf('X'), new ItemStack(RCBDM.DesertBlockMulti, 1, 0), Character.valueOf('@'), Item.ingotGold, Character.valueOf('Y'), new ItemStack(RCBDM.CopperChisel,1,WILDCARD_VALUE)});
+	GameRegistry.addRecipe(new ItemStack(RCBDM.HireoMulti, 1, 14), new Object[]{"YYY", "YX ", "Y@ ", Character.valueOf('X'), new ItemStack(RCBDM.DesertBlockMulti, 1, 0), Character.valueOf('@'), Item.ingotGold, Character.valueOf('Y'), new ItemStack(RCBDM.CopperChisel,1,WILDCARD_VALUE)});
+	GameRegistry.addRecipe(new ItemStack(RCBDM.HireoMulti, 1, 15), new Object[]{"YYY", "YXY", "Y@Y", Character.valueOf('X'), new ItemStack(RCBDM.DesertBlockMulti, 1, 0), Character.valueOf('@'), Item.ingotGold, Character.valueOf('Y'), new ItemStack(RCBDM.CopperChisel,1,WILDCARD_VALUE)});
+	//gold Based Darkblue Hireoglyphics
+	GameRegistry.addRecipe(new ItemStack(RCBDM.HireoMulti, 1, 13), new Object[]{"YYY", " X ", " @ ", Character.valueOf('X'), new ItemStack(RCBDM.DesertBlockMulti, 1, 0), Character.valueOf('@'), Item.ingotGold, Character.valueOf('Y'), new ItemStack(RCBDM.GoldChisel,1,WILDCARD_VALUE)});
+	GameRegistry.addRecipe(new ItemStack(RCBDM.HireoMulti, 1, 14), new Object[]{"YYY", "YX ", "Y@ ", Character.valueOf('X'), new ItemStack(RCBDM.DesertBlockMulti, 1, 0), Character.valueOf('@'), Item.ingotGold, Character.valueOf('Y'), new ItemStack(RCBDM.GoldChisel,1,WILDCARD_VALUE)});
+	GameRegistry.addRecipe(new ItemStack(RCBDM.HireoMulti, 1, 15), new Object[]{"YYY", "YXY", "Y@Y", Character.valueOf('X'), new ItemStack(RCBDM.DesertBlockMulti, 1, 0), Character.valueOf('@'), Item.ingotGold, Character.valueOf('Y'), new ItemStack(RCBDM.GoldChisel,1,WILDCARD_VALUE)});
+	//Diamond Based Darkblue Hireoglyphics
+	GameRegistry.addRecipe(new ItemStack(RCBDM.HireoMulti, 1, 13), new Object[]{"YYY", " X ", " @ ", Character.valueOf('X'), new ItemStack(RCBDM.DesertBlockMulti, 1, 0), Character.valueOf('@'), Item.ingotGold, Character.valueOf('Y'), new ItemStack(RCBDM.DiamondChisel,1,WILDCARD_VALUE)});
+	GameRegistry.addRecipe(new ItemStack(RCBDM.HireoMulti, 1, 14), new Object[]{"YYY", "YX ", "Y@ ", Character.valueOf('X'), new ItemStack(RCBDM.DesertBlockMulti, 1, 0), Character.valueOf('@'), Item.ingotGold, Character.valueOf('Y'), new ItemStack(RCBDM.DiamondChisel,1,WILDCARD_VALUE)});
+	GameRegistry.addRecipe(new ItemStack(RCBDM.HireoMulti, 1, 15), new Object[]{"YYY", "YXY", "Y@Y", Character.valueOf('X'), new ItemStack(RCBDM.DesertBlockMulti, 1, 0), Character.valueOf('@'), Item.ingotGold, Character.valueOf('Y'), new ItemStack(RCBDM.DiamondChisel,1,WILDCARD_VALUE)});
+	//Bloodstone Based Darkblue Hireoglyphics
+	GameRegistry.addRecipe(new ItemStack(RCBDM.HireoMulti, 1, 13), new Object[]{"YYY", " X ", " @ ", Character.valueOf('X'), new ItemStack(RCBDM.DesertBlockMulti, 1, 0), Character.valueOf('@'), Item.ingotGold, Character.valueOf('Y'), new ItemStack(RCBDM.BloodstoneChisel,1,WILDCARD_VALUE)});
+	GameRegistry.addRecipe(new ItemStack(RCBDM.HireoMulti, 1, 14), new Object[]{"YYY", "YX ", "Y@ ", Character.valueOf('X'), new ItemStack(RCBDM.DesertBlockMulti, 1, 0), Character.valueOf('@'), Item.ingotGold, Character.valueOf('Y'), new ItemStack(RCBDM.BloodstoneChisel,1,WILDCARD_VALUE)});
+	GameRegistry.addRecipe(new ItemStack(RCBDM.HireoMulti, 1, 15), new Object[]{"YYY", "YXY", "Y@Y", Character.valueOf('X'), new ItemStack(RCBDM.DesertBlockMulti, 1, 0), Character.valueOf('@'), Item.ingotGold, Character.valueOf('Y'), new ItemStack(RCBDM.BloodstoneChisel,1,WILDCARD_VALUE)});
+	FMLLog.info("Better Desert Recipes Loaded");
+}
+
+public static void loadReactioncraftGlass() 
+{
+	//Nothing Valid Goes Here
+}
 }

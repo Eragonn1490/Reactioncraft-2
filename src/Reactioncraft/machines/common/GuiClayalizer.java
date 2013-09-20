@@ -4,12 +4,15 @@ import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
 import net.minecraft.client.gui.inventory.GuiContainer;
 import net.minecraft.entity.player.InventoryPlayer;
+import net.minecraft.util.ResourceLocation;
 import net.minecraft.util.StatCollector;
 import org.lwjgl.opengl.GL11;
 
 @SideOnly(Side.CLIENT)
 public class GuiClayalizer extends GuiContainer
 {
+	private static final ResourceLocation furnaceGuiTextures = new ResourceLocation("rcmm", "textures/gui/clayalizer.png");
+	
     private TileEntityClayalizer furnaceInventory;
 
     public GuiClayalizer(InventoryPlayer par1InventoryPlayer, TileEntityClayalizer tileEntity)
@@ -31,10 +34,10 @@ public class GuiClayalizer extends GuiContainer
     /**
      * Draw the background layer for the GuiContainer (everything behind the items)
      */
-    public void drawGuiContainerBackgroundLayer(float par1, int par2, int par3)
+    protected void drawGuiContainerBackgroundLayer(float par1, int par2, int par3)
     {
         GL11.glColor4f(1.0F, 1.0F, 1.0F, 1.0F);
-        this.mc.renderEngine.bindTexture("/mods/RCMM/textures/gui/clayalizer.png");
+        this.mc.getTextureManager().bindTexture(furnaceGuiTextures);
         int k = (this.width - this.xSize) / 2;
         int l = (this.height - this.ySize) / 2;
         this.drawTexturedModalRect(k, l, 0, 0, this.xSize, this.ySize);

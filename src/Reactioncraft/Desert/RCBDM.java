@@ -1,53 +1,45 @@
-package Reactioncraft.Desert;
+package Reactioncraft.desert;
 
 import java.io.File;
-import Reactioncraft.Desert.client.ClientProxy;
-import Reactioncraft.Desert.common.*;
-import Reactioncraft.Integration.Integration;
-import Reactioncraft.basefiles.common.*;
+import Reactioncraft.desert.client.ClientProxy;
+import Reactioncraft.desert.common.BlockPlank;
+import Reactioncraft.desert.common.CommonProxy;
+import Reactioncraft.basefiles.common.PacketHandler;
+import Reactioncraft.desert.common.*;
 import Reactioncraft.basemod.RCB;
+import Reactioncraft.basefiles.common.*;
+import Reactioncraft.integration.*;
 import net.minecraft.block.Block;
-import net.minecraft.block.BlockFlower;
 import net.minecraft.block.material.Material;
-import net.minecraft.entity.player.EntityPlayer;
-import net.minecraft.inventory.IInventory;
-import net.minecraft.item.Item;
-import net.minecraft.item.ItemStack;
-import net.minecraft.item.crafting.CraftingManager;
-import net.minecraft.item.crafting.FurnaceRecipes;
-import net.minecraft.nbt.NBTTagCompound;
-import net.minecraft.nbt.NBTTagList;
+import net.minecraft.item.*;
+import net.minecraft.item.crafting.*;
+import net.minecraft.stats.AchievementList;
 import net.minecraft.util.WeightedRandomChestContent;
-import net.minecraft.world.biome.BiomeGenBase;
 import net.minecraftforge.common.ChestGenHooks;
-import net.minecraftforge.common.Configuration;
 import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.common.Property;
+import net.minecraftforge.event.ForgeSubscribe;
+import net.minecraftforge.event.entity.player.EntityItemPickupEvent;
 import net.minecraftforge.oredict.OreDictionary;
 import net.minecraftforge.oredict.ShapedOreRecipe;
-import net.minecraftforge.oredict.ShapelessOreRecipe;
 import cpw.mods.fml.common.FMLLog;
-import cpw.mods.fml.common.Loader;
 import cpw.mods.fml.common.Mod;
-import cpw.mods.fml.common.Mod.Init;
+import cpw.mods.fml.common.Mod.EventHandler;
 import cpw.mods.fml.common.Mod.Instance;
-import cpw.mods.fml.common.Mod.PostInit;
-import cpw.mods.fml.common.Mod.PreInit;
 import cpw.mods.fml.common.SidedProxy;
 import cpw.mods.fml.common.event.FMLInitializationEvent;
-import cpw.mods.fml.common.event.FMLInterModComms;
 import cpw.mods.fml.common.event.FMLPostInitializationEvent;
 import cpw.mods.fml.common.event.FMLPreInitializationEvent;
 import cpw.mods.fml.common.network.NetworkMod;
 import cpw.mods.fml.common.registry.GameRegistry;
-import cpw.mods.fml.common.registry.LanguageRegistry;
 
-@Mod( modid = "RCBDM", name="Reactioncraft Better Desert Mod", version="[1.5.2] Reactioncraft Version 9.0", dependencies = "required-after:RCC")
+@Mod( modid = "rcbdm", name="Reactioncraft Better Desert Mod", version="[1.6.2] Reactioncraft 3 Version 1.1.2", dependencies = "after:rcc")
 @NetworkMod(channels = { "RCBDM" }, clientSideRequired = true, serverSideRequired = false, packetHandler = PacketHandler.class)
 
 public class RCBDM
 {
-	@SidedProxy(clientSide = "Reactioncraft.Desert.client.ClientProxy", serverSide = "Reactioncraft.Desert.common.CommonProxy")
+	@SidedProxy(clientSide = "Reactioncraft.desert.client.ClientProxy", serverSide = "Reactioncraft.desert.common.CommonProxy")
+	
 	public static CommonProxy proxy;
 
 	@Instance("RCBDM")
@@ -65,6 +57,7 @@ public class RCBDM
 	public static int CherryTreeLeavesID;
 	public static int CherrywoodID;
 	public static int CherryTreeSaplingID;
+	public static int CherryPlanksID;
 	public static int GoldChiselIID;
 	public static int FlintChiselIID;
 	public static int BloodstoneChiselIID;
@@ -79,7 +72,6 @@ public class RCBDM
 
 	//Instances of Blocks and Items
 	public static Block HireoMulti;
-	public static Block DesertMulti;
 	public static Block ColumnMulti;
 	public static Block ColumnMulti2;
 	public static Block DesertBlockMulti;
@@ -89,7 +81,8 @@ public class RCBDM
 	public static Block Cherrywood;
 	public static Block CherryTreeSapling;
 	public static Block BloodstoneBrick;
-
+	public static Block CherryPlanks;
+	
 	public static Item GoldChisel;
 	public static Item FlintChisel;
 	public static Item DiamondChisel;
@@ -127,7 +120,7 @@ public class RCBDM
 	{
 		try
 		{
-			Class.forName("Reactioncraft.Ore.RCORES");
+			Class.forName("Reactioncraft.ore.RCORES");
 		}
 		catch (NoClassDefFoundError ex) 
 		{
@@ -136,10 +129,13 @@ public class RCBDM
 		return true ;
 	}
 
-	@PreInit
+	@EventHandler
 	public void preInit(FMLPreInitializationEvent evt)
 	{	
 		System.out.println("[RCBDM] Pre Initialization Loaded");
+		
+		MinecraftForge.TERRAIN_GEN_BUS.register(new RCBDM());
+		MinecraftForge.EVENT_BUS.register(new RCBDM());
 		
 		config = new ReactioncraftConfiguration(new File(evt.getModConfigurationDirectory(), "Reactioncraft/BetterDeserts.cfg"));
 
@@ -173,6 +169,7 @@ public class RCBDM
 		Cactus1ID = config.getBlock("Cactus Block 1", 3035).getInt();
 		Cactus2ID = config.getBlock("Cactus Block 2", 3036).getInt();
 		ColumnBlock2ID = config.getBlock("Skinny Column Blocks", 3037).getInt();
+		CherryPlanksID = config.getBlock("Cherry Planks", 3038).getInt();
 
 		//Items... 10121 - 10220
 		FlintChiselIID = config.getItem("Flint Chisel", 10121).getInt();
@@ -189,7 +186,7 @@ public class RCBDM
 		config.save();
 	}
 
-	@Init
+	@EventHandler
 	public void load(FMLInitializationEvent event)
 	{
 		itemCode();
@@ -207,13 +204,13 @@ public class RCBDM
 		{
 			if(RCORES())
 			{
-				Integration.loadReactioncraftBDM();
+				//Integration.loadReactioncraftBDM();
 				System.out.println("Redpower World enabled");
 			}
 		}
 		catch (ClassNotFoundException e)	
 		{
-			System.out.println(" Reactioncraft: Better Deserts did not find Redpower, Marble Column's Disabled!");
+			System.out.println(" Reactioncraft: Better Deserts, did not find Redpower, Marble Column's Disabled!");
 		}
 
 		//RCC integration
@@ -242,6 +239,7 @@ public class RCBDM
 
 	public void setHarvestinglevel() 
 	{
+		MinecraftForge.removeBlockEffectiveness(RCBDM.DesertBlockMulti, "pickaxe");
 		MinecraftForge.setBlockHarvestLevel(RCBDM.DesertBlockMulti, 0,   "pickaxe", 0);
 		MinecraftForge.setBlockHarvestLevel(RCBDM.DesertBlockMulti, 1,   "pickaxe", 0);
 		MinecraftForge.setBlockHarvestLevel(RCBDM.DesertBlockMulti, 2,   "pickaxe", 0);
@@ -249,7 +247,7 @@ public class RCBDM
 		MinecraftForge.setBlockHarvestLevel(RCBDM.DesertBlockMulti, 4,   "pickaxe", 0);
 		MinecraftForge.setBlockHarvestLevel(RCBDM.DesertBlockMulti, 5,   "pickaxe", 0);
 		MinecraftForge.setBlockHarvestLevel(RCBDM.DesertBlockMulti, 6,   "pickaxe", 0);
-		MinecraftForge.setBlockHarvestLevel(RCBDM.DesertBlockMulti, 11,  "axe", 0);
+		MinecraftForge.setBlockHarvestLevel(RCBDM.DesertBlockMulti, 11,  "pickaxe", 0);
 	}
 
 	public void addSmelting() 
@@ -263,9 +261,11 @@ public class RCBDM
 	public void oreDictionary() 
 	{		
 		OreDictionary.registerOre("BloodstoneBrick", new ItemStack(RCBDM.BloodstoneBrick));
-		OreDictionary.registerOre("plankWood", new ItemStack(RCBDM.DesertBlockMulti, 1, 11));
+		OreDictionary.registerOre("carveddarkstone", new ItemStack(RCBDM.DesertBlockMulti, 1, 0));
+		OreDictionary.registerOre("darkstonebrick", new ItemStack(RCBDM.DesertBlockMulti, 1, 3));
+		OreDictionary.registerOre("plankWood", new ItemStack(RCBDM.CherryPlanks));
 		OreDictionary.registerOre("CherryWood", new ItemStack(RCBDM.Cherrywood));
-		
+		OreDictionary.registerOre("scroll", new ItemStack(RCBDM.scroll));
 		OreDictionary.registerOre("chisel", new ItemStack(RCBDM.FlintChisel,      1, 0));
 		OreDictionary.registerOre("chisel", new ItemStack(RCBDM.CopperChisel,     1, 0));
 		OreDictionary.registerOre("chisel", new ItemStack(RCBDM.GoldChisel,       1, 0));
@@ -275,123 +275,36 @@ public class RCBDM
 
 	public void itemCode() 
 	{
-		FlintChisel =      (new ItemChisel(FlintChiselIID).setUnlocalizedName("RCBDM:flintchisel"));
-		GoldChisel =       (new ItemChisel2(GoldChiselIID)).setUnlocalizedName("RCBDM:goldchisel");
-		CopperChisel =     (new ItemChisel3(CopperChiselIID).setUnlocalizedName("RCBDM:copperchisel"));
-		DiamondChisel =    (new ItemChisel4(DiamondChiselIID)).setUnlocalizedName("RCBDM:diamondchisel");
-		BloodstoneChisel = (new ItemChisel5(BloodstoneChiselIID)).setUnlocalizedName("RCBDM:bloodstonechisel");
-		UncutLBGem = (new ItemBasic(UncutLBGemIID)).setUnlocalizedName("RCBDM:UncutLBGem");
-		CutLBGem = (new ItemBasic(CutLBGemIID)).setUnlocalizedName("RCBDM:CutLBGem");
-		UncutDBGem = (new ItemBasic(UncutDBGemIID)).setUnlocalizedName("RCBDM:UncutDBGem");
-		CutDBGem = (new ItemBasic(CutDBGemIID)).setUnlocalizedName("RCBDM:CutDBGem");
-		scroll = (new ItemBasic(scrollIID)).setUnlocalizedName("RCBDM:scroll");
+		FlintChisel =      (new ItemChisel(FlintChiselIID).setUnlocalizedName("rcbdm:flintchisel").setTextureName("rcbdm:flintchisel"));
+		GoldChisel =       (new ItemChisel2(GoldChiselIID)).setUnlocalizedName("rcbdm:goldchisel").setTextureName("rcbdm:goldchisel");
+		CopperChisel =     (new ItemChisel3(CopperChiselIID).setUnlocalizedName("rcbdm:copperchisel").setTextureName("rcbdm:copperchisel"));
+		DiamondChisel =    (new ItemChisel4(DiamondChiselIID)).setUnlocalizedName("rcbdm:diamondchisel").setTextureName("rcbdm:diamondchisel");
+		BloodstoneChisel = (new ItemChisel5(BloodstoneChiselIID)).setUnlocalizedName("rcbdm:bloodstonechisel").setTextureName("rcbdm:bloodstonechisel");
+		UncutLBGem = (new ItemBasic(UncutLBGemIID)).setUnlocalizedName("rcbdm:UncutLBGem").setTextureName("rcbdm:UncutLBGem");
+		CutLBGem = (new ItemBasic(CutLBGemIID)).setUnlocalizedName("rcbdm:CutLBGem").setTextureName("rcbdm:CutLBGem");
+		UncutDBGem = (new ItemBasic(UncutDBGemIID)).setUnlocalizedName("rcbdm:UncutDBGem").setTextureName("rcbdm:UncutDBGem");
+		CutDBGem = (new ItemBasic(CutDBGemIID)).setUnlocalizedName("rcbdm:CutDBGem").setTextureName("rcbdm:CutDBGem");
+		scroll = (new ItemBasic(scrollIID)).setUnlocalizedName("rcbdm:scroll").setTextureName("rcbdm:scroll");
 	}
 
 	public void blockCode() 
 	{
-		BloodstoneBrick = new BlockBasic(BloodstoneBrickID).setHardness(120.0F).setResistance(2000.0F).setLightValue(0.10F).setStepSound(Block.soundStoneFootstep).setUnlocalizedName("RCBDM:BloodStoneBrick").setCreativeTab(RCB.Reactioncraft);
-		Cherrywood = new BlockCherryTreeLog(CherrywoodID).setStepSound(Block.soundWoodFootstep).setHardness(2.0F).setResistance(0.5F).setUnlocalizedName("RCBDM:woodside");
-		CherryTreeLeaves = new BlockCherryTreeLeaves(CherryTreeLeavesID).setStepSound(Block.soundGrassFootstep).setHardness(0.2F).setResistance(0.5F).setUnlocalizedName("RCBDM:CherryTreeLeaves");
-		CherryTreeSapling = new BlockCherryTreeSapling(CherryTreeSaplingID, 0).setStepSound(Block.soundGrassFootstep).setHardness(0.0F).setResistance(0.5F).setUnlocalizedName("RCBDM:CherryTreeSapling");
+		BloodstoneBrick = new BlockBasic(BloodstoneBrickID).setHardness(120.0F).setResistance(2000.0F).setLightValue(0.10F).setStepSound(Block.soundStoneFootstep).setUnlocalizedName("rcbdm:BloodStoneBrick").setTextureName("rcbdm:BloodStoneBrick").setCreativeTab(RCB.Reactioncraft);
+		Cherrywood = new BlockCherryTreeLog(CherrywoodID).setStepSound(Block.soundWoodFootstep).setHardness(2.0F).setResistance(0.5F).setUnlocalizedName("rcbdm:woodside");
+		CherryTreeLeaves = new BlockCherryTreeLeaves(CherryTreeLeavesID).setStepSound(Block.soundGrassFootstep).setHardness(0.2F).setResistance(0.5F).setUnlocalizedName("rcbdm:CherryTreeLeaves").setTextureName("rcbdm:CherryTreeLeaves");
+		CherryTreeSapling = new BlockCherryTreeSapling(CherryTreeSaplingID, 0).setStepSound(Block.soundGrassFootstep).setHardness(0.0F).setResistance(0.5F).setUnlocalizedName("rcbdm:CherryTreeSapling").setTextureName("rcbdm:CherryTreeSapling");
 		HireoMulti = new BlockHireoMulti(HireoBlocksIID, Material.rock).setHardness(3.0F).setUnlocalizedName("HireoMulti");
 		ColumnMulti = new BlockColumnMulti(ColumnBlockID, Material.rock).setHardness(3.0F).setUnlocalizedName("ColumnMulti");
 		ColumnMulti2 = new BlockColumnMulti2(ColumnBlock2ID, Material.rock).setHardness(3.0F).setUnlocalizedName("ColumnMulti2");
+		CherryPlanks = new BlockPlank(CherryPlanksID).setHardness(2.0F).setResistance(5.0F).setStepSound(Block.soundWoodFootstep).setUnlocalizedName("rcbdm:cherryplanks").setTextureName("rcbdm:cherryplanks");
 		DesertBlockMulti = new BlockDesertMulti(DesertBlockMultiID, Material.rock).setHardness(2.5F).setResistance(15.0F).setUnlocalizedName("DesertBlockMulti");
-		Cactus1 = (new DesertFlower(Cactus1ID)).setHardness(0.0F).setStepSound(Block.soundGrassFootstep).setUnlocalizedName("RCBDM:Cactus1");
-		Cactus2 = (new DesertFlower(Cactus2ID)).setHardness(0.0F).setStepSound(Block.soundGrassFootstep).setUnlocalizedName("RCBDM:Cactus2");
+		Cactus1 = (new DesertFlower(Cactus1ID)).setHardness(0.0F).setStepSound(Block.soundGrassFootstep).setUnlocalizedName("rcbdm:Cactus1").setTextureName("rcbdm:Cactus1");
+		Cactus2 = (new DesertFlower(Cactus2ID)).setHardness(0.0F).setStepSound(Block.soundGrassFootstep).setUnlocalizedName("rcbdm:Cactus2").setTextureName("rcbdm:Cactus2");
 	}
 
 	public void addNames() 
 	{	
-		//Cherry Trees
-		LanguageRegistry.addName(Cherrywood, "Cherry Log");
-		LanguageRegistry.addName(CherryTreeLeaves, "Cherry Leaves");
-		LanguageRegistry.addName(CherryTreeSapling, "Cherry Tree Sapling");
-
-
-		//Scroll
-		LanguageRegistry.addName(scroll, "Scroll");
-
-		//Bloodstone Brick
-		LanguageRegistry.addName(BloodstoneBrick, "Bloodstone Brick");
-
-		//Gems
-		LanguageRegistry.addName(UncutLBGem, "Uncut Light Blue Gem");
-		LanguageRegistry.addName(CutLBGem, "Light Blue Gem");
-		LanguageRegistry.addName(UncutDBGem, "Uncut Dark Blue Gem");
-		LanguageRegistry.addName(CutDBGem, "Dark Blue Gem");
-
-		//Chisel's
-		LanguageRegistry.addName(GoldChisel, "Gold Chisel");
-		LanguageRegistry.addName(FlintChisel, "Flint Chisel");
-		LanguageRegistry.addName(CopperChisel, "Copper Chisel");
-		LanguageRegistry.addName(DiamondChisel, "Diamond Chisel");
-		LanguageRegistry.addName(BloodstoneChisel, "Bloodstone Chisel");
-
-		//Desert Blocks
-		LanguageRegistry.addName(new ItemStack(DesertBlockMulti, 1),    "Carved Dark Stone");
-		LanguageRegistry.addName(new ItemStack(DesertBlockMulti, 1, 1), "Cracked Dark Stone");
-		LanguageRegistry.addName(new ItemStack(DesertBlockMulti, 1, 2), "Dark Stone");
-		LanguageRegistry.addName(new ItemStack(DesertBlockMulti, 1, 3), "Dark Stone Brick");
-		LanguageRegistry.addName(new ItemStack(DesertBlockMulti, 1, 4), "Cracked Dark Stone Brick");
-		LanguageRegistry.addName(new ItemStack(DesertBlockMulti, 1, 5), "Dark Sandstone Bricks");
-		LanguageRegistry.addName(new ItemStack(DesertBlockMulti, 1, 6), "Limestone");
-		LanguageRegistry.addName(new ItemStack(DesertBlockMulti, 1, 7), "Carved Limestone");
-		LanguageRegistry.addName(new ItemStack(DesertBlockMulti, 1, 8), "Desert Gemstone");
-		LanguageRegistry.addName(new ItemStack(DesertBlockMulti, 1, 9), "Desert Gemstone");
-		LanguageRegistry.addName(new ItemStack(DesertBlockMulti, 1, 10), "Desert Gold");
-		LanguageRegistry.addName(new ItemStack(DesertBlockMulti, 1, 11), "Cherry Planks");
-		
-
-		//Hireoglyphics
-		LanguageRegistry.addName(new ItemStack(HireoMulti, 1, 0),   "Hireoglyphics");
-		LanguageRegistry.addName(new ItemStack(HireoMulti, 1, 1), 	"Hireoglyphics");
-		LanguageRegistry.addName(new ItemStack(HireoMulti, 1, 2), 	"Hireoglyphics");
-
-		LanguageRegistry.addName(new ItemStack(HireoMulti, 1, 3), 	"Hireoglyphics");
-		LanguageRegistry.addName(new ItemStack(HireoMulti, 1, 4), 	"Hireoglyphics");
-		LanguageRegistry.addName(new ItemStack(HireoMulti, 1, 5), 	"Hireoglyphics");  
-
-		LanguageRegistry.addName(new ItemStack(HireoMulti, 1, 6), 	"Hireoglyphics");
-		LanguageRegistry.addName(new ItemStack(HireoMulti, 1, 7), 	"Hireoglyphics");
-		LanguageRegistry.addName(new ItemStack(HireoMulti, 1, 8), 	"Hireoglyphics");
-
-		//LanguageRegistry.addName(new ItemStack(HireoMulti, 1, 9),   "Column Top");
-		//LanguageRegistry.addName(new ItemStack(HireoMulti, 1, 10),  "Column Base");		       
-		//LanguageRegistry.addName(new ItemStack(HireoMulti, 1, 12),  "Marble");
-
-		//Weathered Hireoglyphic
-		LanguageRegistry.addName(new ItemStack(HireoMulti, 1, 11),  "Weathered Hireoglyph");
-
-		//Gold Hireoglyphics
-		LanguageRegistry.addName(new ItemStack(HireoMulti, 1, 13),  "Hireoglyphics");  
-		LanguageRegistry.addName(new ItemStack(HireoMulti, 1, 14),  "Hireoglyphics");  
-		LanguageRegistry.addName(new ItemStack(HireoMulti, 1, 15),  "Hireoglyphics"); 
-
-
-		LanguageRegistry.addName(new ItemStack(ColumnMulti, 1, 0), "Dark Sandstone Column");
-		LanguageRegistry.addName(new ItemStack(ColumnMulti, 1, 1), "Marble Column");
-		LanguageRegistry.addName(new ItemStack(ColumnMulti, 1, 2), "Bloodstone Column");
-		LanguageRegistry.addName(new ItemStack(ColumnMulti, 1, 3), "Stone Column");
-		LanguageRegistry.addName(new ItemStack(ColumnMulti, 1, 4), "Cobblestone Column");
-		LanguageRegistry.addName(new ItemStack(ColumnMulti, 1, 5), "Gold Column");
-		LanguageRegistry.addName(new ItemStack(ColumnMulti, 1, 6), "Diamond Column");
-		LanguageRegistry.addName(new ItemStack(ColumnMulti, 1, 7), "Stonebrick Column");
-		LanguageRegistry.addName(new ItemStack(ColumnMulti, 1, 8), "Limestone Column");
-
-		LanguageRegistry.addName(new ItemStack(ColumnMulti2, 1, 0), "Dark Sandstone Column");
-		LanguageRegistry.addName(new ItemStack(ColumnMulti2, 1, 1), "Marble Column");
-		LanguageRegistry.addName(new ItemStack(ColumnMulti2, 1, 2), "Bloodstone Column");
-		LanguageRegistry.addName(new ItemStack(ColumnMulti2, 1, 3), "Stone Column");
-		LanguageRegistry.addName(new ItemStack(ColumnMulti2, 1, 4), "Cobblestone Column");
-		LanguageRegistry.addName(new ItemStack(ColumnMulti2, 1, 5), "Gold Column");
-		LanguageRegistry.addName(new ItemStack(ColumnMulti2, 1, 6), "Diamond Column");
-		LanguageRegistry.addName(new ItemStack(ColumnMulti2, 1, 7), "Stonebrick Column");
-		LanguageRegistry.addName(new ItemStack(ColumnMulti2, 1, 8), "Limestone Column");
-
-		//Cactus's
-		LanguageRegistry.addName(Cactus1, "Cactus");
-		LanguageRegistry.addName(Cactus2, "Cactus");
+		IntegratedLanguageFile.loadBetterDesertnames();
 	}
 
 	public void registerBlocks() 
@@ -404,6 +317,7 @@ public class RCBDM
 		GameRegistry.registerBlock(Cactus2, "Cactus2");
 		GameRegistry.registerBlock(CherryTreeLeaves, "CherryTreeLeaves");
 		GameRegistry.registerBlock(Cherrywood, "Cherrywood");
+		GameRegistry.registerBlock(RCBDM.CherryPlanks, "CherryPlanks");
 		GameRegistry.registerBlock(CherryTreeSapling, "CherryTreeSapling");
 		GameRegistry.registerBlock(BloodstoneBrick, "BloodstoneBrick");
 	}
@@ -412,10 +326,21 @@ public class RCBDM
 	{
 		GameRegistry.registerCraftingHandler(new CraftingHandler());
 		GameRegistry.registerWorldGenerator(new WorldGenHandler());	
+		GameRegistry.registerWorldGenerator(new CustomBiomeGenerator());
 		GameRegistry.registerFuelHandler(new FuelHandler());
 	}
+	
+		//allows get wood achievement for Highlands woods
+		@ForgeSubscribe
+		public void onItemPickupWood(EntityItemPickupEvent e)
+		{
+			if (e.item.getEntityItem().itemID == RCBDM.Cherrywood.blockID)
+			{
+				e.entityPlayer.triggerAchievement(AchievementList.mineWood);
+			}
+		}
 
-	@PostInit
+	@EventHandler
 	public void modsLoaded(FMLPostInitializationEvent evt)
 	{	
 		/**chisel Recipes**/

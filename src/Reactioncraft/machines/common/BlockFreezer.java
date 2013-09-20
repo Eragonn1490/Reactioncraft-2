@@ -118,9 +118,9 @@ public class BlockFreezer extends BlockContainer
      */
     public void registerIcons(IconRegister par1IconRegister)
     {
-        this.blockIcon = par1IconRegister.registerIcon("RCMM:ironside");
-        this.field_94459_cP = par1IconRegister.registerIcon(this.isActive ? "RCMM:freezerfront" : "RCMM:freezerfront");
-        this.field_94458_cO = par1IconRegister.registerIcon("RCMM:ironside");
+        this.blockIcon = par1IconRegister.registerIcon("rcmm:ironside");
+        this.field_94459_cP = par1IconRegister.registerIcon(this.isActive ? "rcmm:freezerfront" : "rcmm:freezerfront");
+        this.field_94458_cO = par1IconRegister.registerIcon("rcmm:ironside");
     }
 
     /**
@@ -138,7 +138,7 @@ public class BlockFreezer extends BlockContainer
 
             if (var10 != null)
             {
-            	par5EntityPlayer.openGui(RCMM.instance, 0, par1World, par2, par3, par4);
+            	par5EntityPlayer.openGui(RCMM.instance, 2, par1World, par2, par3, par4);
             }
 
             return true;

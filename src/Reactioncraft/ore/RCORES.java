@@ -1,15 +1,16 @@
 package Reactioncraft.ore;
 
+import Reactioncraft.ore.client.ClientProxy;
+import Reactioncraft.ore.common.CommonProxy;
+import Reactioncraft.ore.common.*;
+import ic2.api.item.Items;
 import java.io.File;
-import Reactioncraft.Integration.Integration;
+import Reactioncraft.integration.*;
 import Reactioncraft.basefiles.common.*;
 import Reactioncraft.basemod.RCB;
-import Reactioncraft.ore.client.ClientProxy;
-import Reactioncraft.ore.common.*;
 import net.minecraft.block.Block;
 import net.minecraft.block.material.Material;
-import net.minecraft.item.Item;
-import net.minecraft.item.ItemStack;
+import net.minecraft.item.*;
 import net.minecraft.item.crafting.FurnaceRecipes;
 import net.minecraft.util.WeightedRandomChestContent;
 import net.minecraftforge.common.ChestGenHooks;
@@ -19,6 +20,7 @@ import net.minecraftforge.common.Property;
 import net.minecraftforge.oredict.OreDictionary;
 import cpw.mods.fml.common.FMLLog;
 import cpw.mods.fml.common.Mod;
+import cpw.mods.fml.common.Mod.EventHandler;
 import cpw.mods.fml.common.Mod.Init;
 import cpw.mods.fml.common.Mod.Instance;
 import cpw.mods.fml.common.Mod.PostInit;
@@ -31,7 +33,7 @@ import cpw.mods.fml.common.network.NetworkMod;
 import cpw.mods.fml.common.registry.GameRegistry;
 import cpw.mods.fml.common.registry.LanguageRegistry;
 
-@Mod( modid = "RCORES", name="Reactioncraft ORES", version="[1.5.2] Reactioncraft Version 9.0", dependencies="after:RCBDM")
+@Mod( modid = "rcores", name="Reactioncraft ORES", version="[1.6.2] Reactioncraft 3 Version 1.1.2", dependencies="after:rcbdm")
 @NetworkMod(channels = { "RCORES" }, clientSideRequired = true, serverSideRequired = false, packetHandler = PacketHandler.class)
 
 public class RCORES
@@ -60,7 +62,8 @@ public class RCORES
 	public static int irondustIID;
 	public static int gemdragonstoneIID;
 	public static int superheatedironingotIID;
-	
+	public static int goldDustIID;
+
 
 	//Items
 	public static Item goldrod;
@@ -73,6 +76,7 @@ public class RCORES
 	public static Item irondust;
 	public static Item gemdragonstone;
 	public static Item superheatedironingot;
+	public static Item goldDust;
 
 	//Blocks
 	public static Block surfaceOres;
@@ -84,7 +88,9 @@ public class RCORES
 	public static Property genDragonstone;
 	public static Property genNethergold;
 	public static Property genNetherdiamond;
-	
+	public static Property genSilver;
+	public static Property genVentinite;
+
 	//Config
 	public static ReactioncraftConfiguration config;
 
@@ -92,7 +98,7 @@ public class RCORES
 	{
 		try
 		{
-			Class.forName("Reactioncraft.Desert.RCBDM");
+			Class.forName("Reactioncraft.desert.RCBDM");
 		}
 		catch (NoClassDefFoundError ex) 
 		{
@@ -113,11 +119,11 @@ public class RCORES
 	}
 
 
-	@PreInit
+	@EventHandler
 	public void preInit(FMLPreInitializationEvent var1)
 	{
 		System.out.println("[RCORES] Pre Initialization Loaded");
-		
+
 		config = new ReactioncraftConfiguration(new File(var1.getModConfigurationDirectory(), "Reactioncraft/Ores.cfg"));
 
 		try 
@@ -141,18 +147,23 @@ public class RCORES
 			irondustIID = config.getItem("Iron Dust", 10858).getInt();
 			gemdragonstoneIID = config.getItem("Gem Dragonstone", 10859).getInt();
 			superheatedironingotIID = config.getItem("Superheated Iron", 10860).getInt();
+			goldDustIID = config.getItem("Gold Dust", 10950).getInt();
 			
 			genBloodstone    = config.get("Ore Generation", "Generate Bloodstone", true);
 			genBlackdiamond  = config.get("Ore Generation", "Generate Black Diamond", true);
 			genDragonstone   = config.get("Ore Generation", "Generate Dragonstone", true);
 			genNethergold    = config.get("Ore Generation", "Generate Nether Gold", true);
 			genNetherdiamond = config.get("Ore Generation", "Generate Nether Diamond", true);
+			genSilver        = config.get("Ore Generation", "Generate Silver", true);
+			genVentinite     = config.get("Ore Generation", "Generate Ventinite", true);
 			
 			genBloodstone.comment    = "If this is true Bloodstone will appear in the nether, if false no other ores can generate :<";
 			genBlackdiamond.comment  = "If this is true Black diamond will appear in the nether (required for black diamond borehead)";
 			genDragonstone.comment   = "If this is true Dragonstone will appear in the nether (required for bloodstone sword)";
 			genNethergold.comment    = "If this is true Nether gold will appear in the nether";
 			genNetherdiamond.comment = "If this is true Nether Diamond will appear in the nether";
+			genSilver.comment        = "If this is true Silver Ore will appear on the surface";
+			genVentinite.comment     = "If this is true Ventinite will appear on the surface";
 		}
 
 		finally 
@@ -165,122 +176,19 @@ public class RCORES
 	}
 
 
-	@Init
+	@EventHandler
 	public void load(FMLInitializationEvent event)
 	{
 		ClientProxy.registerRenderInformation();
-
-		//Blocks
-		surfaceOres = new BlockSOMulti(surfaceOresID, Material.rock).setHardness(1.0F).setResistance(1.0F).setUnlocalizedName("surfaceOres");
-		netherOres = new BlockNOMulti(netherOresID, Material.rock).setHardness(80.0F).setResistance(2000.0F).setUnlocalizedName("netherOres");
-		endOres = new BlockEOMulti(endOresID, Material.rock).setHardness(1.0F).setResistance(1.0F).setUnlocalizedName("endOres");
-
-		//Items
-		goldrod = new ItemBasic(goldrodIID).setUnlocalizedName("RCORES:goldstick").setCreativeTab(RCB.ReactioncraftItems);
-		obsidianingot = new ItemBasic(obsidianingotIID).setUnlocalizedName("RCORES:obsidianingot").setCreativeTab(RCB.ReactioncraftItems);
-		ingotbloodstone = new ItemBasic(ingotbloodstoneIID).setUnlocalizedName("RCORES:bloodstoneingot").setCreativeTab(RCB.ReactioncraftItems);
-		ingotsilver = new ItemBasic(ingotsilverIID).setUnlocalizedName("RCORES:silveringot").setCreativeTab(RCB.ReactioncraftItems);
-		superheatedironingot = new ItemBasic(superheatedironingotIID).setUnlocalizedName("RCORES:shironingot").setCreativeTab(RCB.ReactioncraftItems);
-		bloodstonedust = new ItemBasic(bloodstonedustIID).setUnlocalizedName("RCORES:bloodstonedust").setCreativeTab(RCB.ReactioncraftItems);
-		blackdiamond = new ItemBasic(blackdiamondIID).setUnlocalizedName("RCORES:blackdiamond").setCreativeTab(RCB.ReactioncraftItems);
-		dragonstoneshard = new ItemBasic(dragonstoneshardIID).setUnlocalizedName("RCORES:dragonstoneshard").setCreativeTab(RCB.ReactioncraftItems);
-		irondust = new ItemBasic(irondustIID).setUnlocalizedName("RCORES:irondust").setCreativeTab(RCB.ReactioncraftItems);
-		gemdragonstone = new ItemBasic(gemdragonstoneIID).setUnlocalizedName("RCORES:gemdragonstone").setCreativeTab(RCB.ReactioncraftItems);
+		blocks();
+		registry();
+		items();
+		recipes();
+		language();
+		oreDictionary();
+		furnaceRecipes();
+		forgeevents();
 		
-		
-
-		//Recipes
-		GameRegistry.addRecipe(new ItemStack(goldrod, 1, 0), new Object[]{"D", "D", Character.valueOf('D'), Item.ingotGold});
-
-
-		//Ore Registration
-		GameRegistry.registerBlock(surfaceOres, ItemMulti.class, "surfaceOres");
-		GameRegistry.registerBlock(netherOres, ItemMulti.class, "netherOres");
-		GameRegistry.registerBlock(endOres, ItemMulti.class, "endOres");
-
-
-		//Ore Items
-		LanguageRegistry.addName(RCORES.goldrod, "Golden Rod"); 
-		LanguageRegistry.addName(RCORES.obsidianingot, "Obsidian Ingot"); 
-		LanguageRegistry.addName(RCORES.blackdiamond, "Black Diamond"); 
-		LanguageRegistry.addName(RCORES.ingotbloodstone, "Bloodstone Ingot"); 
-		LanguageRegistry.addName(RCORES.ingotsilver, "Silver Ingot"); 
-		//LanguageRegistry.addName(RCORES.OreItems, "End Gem");
-		LanguageRegistry.addName(RCORES.bloodstonedust, "Bloodstone Dust");  
-		LanguageRegistry.addName(RCORES.dragonstoneshard, "Dragonstone Shard");
-		LanguageRegistry.addName(RCORES.gemdragonstone, "Carved Dragonstone");
-		LanguageRegistry.addName(RCORES.superheatedironingot, "Superheated Iron Ingot"); 
-		LanguageRegistry.addName(RCORES.irondust, "Iron Dust");
-
-
-		//Surface Ores
-		LanguageRegistry.addName(new ItemStack(RCORES.surfaceOres, 1, 0), "Silver");
-		LanguageRegistry.addName(new ItemStack(RCORES.surfaceOres, 1, 1), "Magma");
-
-
-		//Nether Ores
-		LanguageRegistry.addName(new ItemStack(RCORES.netherOres, 1, 0), "Bloodstone");
-		LanguageRegistry.addName(new ItemStack(RCORES.netherOres, 1, 1), "Black Diamond");
-		LanguageRegistry.addName(new ItemStack(RCORES.netherOres, 1, 2), "Dragonstone");
-		LanguageRegistry.addName(new ItemStack(RCORES.netherOres, 1, 3), "Nether Diamond");
-		LanguageRegistry.addName(new ItemStack(RCORES.netherOres, 1, 4), "Nether Gold");
-
-		//End Ores
-		LanguageRegistry.addName(new ItemStack(RCORES.endOres, 1, 0), "Wizimite");
-
-		MinecraftForge.setBlockHarvestLevel(RCORES.netherOres, 0,   "pickaxe", 4);
-
-		//Ore Dictionary
-		//Items
-		OreDictionary.registerOre("goldRod", new ItemStack(RCORES.goldrod));
-		OreDictionary.registerOre("ingotObsidian", new ItemStack(RCORES.obsidianingot));
-		OreDictionary.registerOre("diamondBlack", new ItemStack(RCORES.blackdiamond));
-		OreDictionary.registerOre("ingotBloodstone", new ItemStack(RCORES.ingotbloodstone));
-		OreDictionary.registerOre("ingotSilver", new ItemStack(RCORES.ingotsilver));
-		OreDictionary.registerOre("ingotSuperheatediron", new ItemStack(superheatedironingot));
-		//OreDictionary.registerOre("gemWizimite", new ItemStack(OreItems,1, 5));
-		OreDictionary.registerOre("ironDust", new ItemStack(RCORES.irondust));
-		OreDictionary.registerOre("shardDragonstone", new ItemStack(RCORES.dragonstoneshard));
-		OreDictionary.registerOre("gemDragonstone", new ItemStack(RCORES.gemdragonstone));
-
-
-		//Blocks
-		OreDictionary.registerOre("oreBloodstone", new ItemStack(RCORES.netherOres, 1, 0));
-
-
-		ChestGenHooks.addItem(ChestGenHooks.STRONGHOLD_CORRIDOR, new WeightedRandomChestContent(new ItemStack(RCORES.dragonstoneshard), 1, 10, 25));			
-		
-		
-		//Furnace stuff 
-
-		//Silver to Silver Ingot
-		FurnaceRecipes.smelting().addSmelting(RCORES.surfaceOres.blockID, 0, new ItemStack(RCORES.ingotsilver.itemID, 1, 0), 0.5F);
-		
-		//Bloodstone to Bloodstone Ingot
-		FurnaceRecipes.smelting().addSmelting(RCORES.netherOres.blockID, 0, new ItemStack(RCORES.ingotbloodstone.itemID, 1, 0), 0.5F);
-
-		//Gold rod to gold ingot
-		GameRegistry.addSmelting(RCORES.goldrod.itemID, new ItemStack(Item.ingotGold.itemID, 2, 0), 0.5F);
-
-		//Bloodstone dust to bloodstone ingot
-		GameRegistry.addSmelting(RCORES.bloodstonedust.itemID, new ItemStack(RCORES.ingotbloodstone.itemID, 1, 0), 0.5F);
-		
-		//Obsidian to obsidian ingot
-		GameRegistry.addSmelting(Block.obsidian.blockID, new ItemStack(RCORES.obsidianingot.itemID, 1, 0), 0.5F);
-
-		//Nether Gold to Gold Ingot
-		FurnaceRecipes.smelting().addSmelting(RCORES.netherOres.blockID, 4, new ItemStack(Item.ingotGold.itemID, 1, 1), 0.5F);
-
-		//Iron Dust to Superheated Iron
-		GameRegistry.addSmelting(RCORES.irondust.itemID, new ItemStack(RCORES.superheatedironingot.itemID, 1, 0), 0.5F);
-
-
-		//World Gen Handlers
-		GameRegistry.registerWorldGenerator(new WorldGenHandler());
-
-		//Setting Harvest Level
-		MinecraftForge.setBlockHarvestLevel(RCORES.netherOres,     "pickaxe", 4);
-
 		//IC2 integration
 		try 
 		{
@@ -310,7 +218,118 @@ public class RCORES
 		}
 	}
 
-	@PostInit
+	private void forgeevents() 
+	{
+		MinecraftForge.setBlockHarvestLevel(RCORES.netherOres,  0,   "pickaxe", 4);
+		MinecraftForge.setBlockHarvestLevel(RCORES.surfaceOres, 1,   "pickaxe", 4);
+
+		ChestGenHooks.addItem(ChestGenHooks.STRONGHOLD_CORRIDOR, new WeightedRandomChestContent(new ItemStack(RCORES.dragonstoneshard), 1, 10, 25));			
+
+		//World Gen Handlers
+		GameRegistry.registerWorldGenerator(new WorldGenHandler());
+		GameRegistry.registerWorldGenerator(new WorldGenerator());
+
+		//Setting Harvest Level
+		MinecraftForge.setBlockHarvestLevel(RCORES.netherOres,     "pickaxe", 4);
+	}
+
+	private void furnaceRecipes() 
+	{		
+		//Furnace stuff 
+
+		//Silver to Silver Ingot
+		FurnaceRecipes.smelting().addSmelting(RCORES.surfaceOres.blockID, 0, new ItemStack(RCORES.ingotsilver.itemID, 1, 0), 0.5F);
+
+		//Bloodstone to Bloodstone Ingot
+		FurnaceRecipes.smelting().addSmelting(RCORES.netherOres.blockID, 0, new ItemStack(RCORES.ingotbloodstone.itemID, 1, 0), 0.5F);
+
+		//Gold rod to gold ingot
+		GameRegistry.addSmelting(RCORES.goldrod.itemID, new ItemStack(Item.ingotGold.itemID, 2, 0), 0.5F);
+
+		//Bloodstone dust to bloodstone ingot
+		GameRegistry.addSmelting(RCORES.bloodstonedust.itemID, new ItemStack(RCORES.ingotbloodstone.itemID, 1, 0), 0.5F);
+
+		//Obsidian to obsidian ingot
+		GameRegistry.addSmelting(Block.obsidian.blockID, new ItemStack(RCORES.obsidianingot.itemID, 1, 0), 0.5F);
+
+		//Nether Gold to Gold Ingot
+		FurnaceRecipes.smelting().addSmelting(RCORES.netherOres.blockID, 4, new ItemStack(Item.ingotGold.itemID, 1, 1), 0.5F);
+
+		//Iron Dust to Superheated Iron
+		GameRegistry.addSmelting(RCORES.irondust.itemID, new ItemStack(RCORES.superheatedironingot.itemID, 2, 0), 0.5F);
+	}
+
+	private void oreDictionary() 
+	{
+		//Ore Dictionary
+		//Items
+		OreDictionary.registerOre("goldRod", new ItemStack(RCORES.goldrod));
+		OreDictionary.registerOre("ingotObsidian", new ItemStack(RCORES.obsidianingot));
+		OreDictionary.registerOre("diamondBlack", new ItemStack(RCORES.blackdiamond));
+		OreDictionary.registerOre("ingotBloodstone", new ItemStack(RCORES.ingotbloodstone));
+		OreDictionary.registerOre("ingotSilver", new ItemStack(RCORES.ingotsilver));
+		OreDictionary.registerOre("ingotSuperheatediron", new ItemStack(superheatedironingot));
+		//OreDictionary.registerOre("gemWizimite", new ItemStack(OreItems,1, 5));
+		OreDictionary.registerOre("ironDust", new ItemStack(RCORES.irondust));
+		OreDictionary.registerOre("shardDragonstone", new ItemStack(RCORES.dragonstoneshard));
+		OreDictionary.registerOre("gemDragonstone", new ItemStack(RCORES.gemdragonstone));
+		OreDictionary.registerOre("dustGold", new ItemStack(RCORES.goldDust));
+
+		//For Dyes
+		OreDictionary.registerOre("dyePurple", new ItemStack(RCORES.dragonstoneshard));
+		
+		//Blocks
+		OreDictionary.registerOre("oreBloodstone", new ItemStack(RCORES.netherOres, 1, 0));
+		OreDictionary.registerOre("oreNetherBlackDiamond", new ItemStack(RCORES.netherOres, 1, 1));
+		OreDictionary.registerOre("oreNetherDragonstone", new ItemStack(RCORES.netherOres, 1, 2));
+		OreDictionary.registerOre("oreNetherDiamondOre", new ItemStack(RCORES.netherOres, 1, 3));
+		OreDictionary.registerOre("oreNetherGoldOre", new ItemStack(RCORES.netherOres, 1, 4));
+	}
+
+	private void registry() 
+	{
+		//Ore Registration
+		GameRegistry.registerBlock(surfaceOres, ItemMulti.class, "surfaceOres");
+		GameRegistry.registerBlock(netherOres, ItemMulti.class, "netherOres");
+		GameRegistry.registerBlock(endOres, ItemMulti.class, "endOres");
+	}
+
+	private void language() 
+	{
+		IntegratedLanguageFile.loadOrenames();
+	}
+
+	private void recipes() 
+	{	
+		//Recipes
+		GameRegistry.addRecipe(new ItemStack(goldrod, 1, 0), new Object[]{"D", "D", Character.valueOf('D'), Item.ingotGold});
+	}
+
+	private void blocks() 
+	{
+		//Blocks
+		surfaceOres = new BlockSOMulti(surfaceOresID, Material.rock).setHardness(1.0F).setResistance(1.0F).setUnlocalizedName("surfaceOres");
+		netherOres = new BlockNOMulti(netherOresID, Material.rock).setHardness(80.0F).setResistance(2000.0F).setUnlocalizedName("netherOres");
+		endOres = new BlockEOMulti(endOresID, Material.rock).setHardness(1.0F).setResistance(1.0F).setUnlocalizedName("endOres");
+	}
+
+	private void items() 
+	{
+		//Items
+		goldrod = new ItemBasic(goldrodIID).setUnlocalizedName("rcores:goldstick").setTextureName("rcores:goldstick").setCreativeTab(RCB.ReactioncraftItems);
+		obsidianingot = new ItemBasic(obsidianingotIID).setUnlocalizedName("rcores:obsidianingot").setTextureName("rcores:obsidianingot").setCreativeTab(RCB.ReactioncraftItems);
+		ingotbloodstone = new ItemBasic(ingotbloodstoneIID).setUnlocalizedName("rcores:bloodstoneingot").setTextureName("rcores:bloodstoneingot").setCreativeTab(RCB.ReactioncraftItems);
+		ingotsilver = new ItemBasic(ingotsilverIID).setUnlocalizedName("rcores:silveringot").setTextureName("rcores:silveringot").setCreativeTab(RCB.ReactioncraftItems);
+		superheatedironingot = new ItemBasic(superheatedironingotIID).setUnlocalizedName("rcores:shironingot").setTextureName("rcores:shironingot").setCreativeTab(RCB.ReactioncraftItems);
+		bloodstonedust = new ItemBasic(bloodstonedustIID).setUnlocalizedName("rcores:bloodstonedust").setTextureName("rcores:bloodstonedust").setCreativeTab(RCB.ReactioncraftItems);
+		blackdiamond = new ItemBasic(blackdiamondIID).setUnlocalizedName("rcores:blackdiamond").setTextureName("rcores:blackdiamond").setCreativeTab(RCB.ReactioncraftItems);
+		dragonstoneshard = new ItemBasic(dragonstoneshardIID).setUnlocalizedName("rcores:dragonstoneshard").setTextureName("rcores:dragonstoneshard").setCreativeTab(RCB.ReactioncraftItems);
+		irondust = new ItemBasic(irondustIID).setUnlocalizedName("rcores:irondust").setTextureName("rcores:irondust").setCreativeTab(RCB.ReactioncraftItems);
+		gemdragonstone = new ItemBasic(gemdragonstoneIID).setUnlocalizedName("rcores:gemdragonstone").setTextureName("rcores:gemdragonstone").setCreativeTab(RCB.ReactioncraftItems);
+		goldDust = new ItemBasic(goldDustIID).setUnlocalizedName("rcores:golddust").setTextureName("rcores:golddust").setCreativeTab(RCB.ReactioncraftItems);
+	}
+
+	@EventHandler
 	public void modsLoaded(FMLPostInitializationEvent evt)
 	{
 		FMLLog.info("Reactioncraft Ores Has Fully loaded...Time to Mine!");

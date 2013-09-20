@@ -138,7 +138,7 @@ public class BlockBrickOven extends BlockContainer
 
             if (var10 != null)
             {
-            	par5EntityPlayer.openGui(RCMM.instance, 0, par1World, par2, par3, par4);
+            	par5EntityPlayer.openGui(RCMM.instance, 1, par1World, par2, par3, par4);
             }
 
             return true;

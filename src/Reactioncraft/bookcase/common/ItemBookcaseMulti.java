@@ -3,7 +3,6 @@ package Reactioncraft.bookcase.common;
 import java.util.List;
 
 import Reactioncraft.bookcase.RCBB;
-import net.minecraft.block.BlockCloth;
 import net.minecraft.item.ItemBlock;
 import net.minecraft.item.ItemDye;
 import net.minecraft.item.ItemStack;

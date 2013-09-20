@@ -2,14 +2,12 @@ package Reactioncraft.core.common;
 
 import java.util.Random;
 
-import Reactioncraft.basemod.RCB;
-import Reactioncraft.core.RCC;
 import net.minecraft.block.Block;
 import net.minecraft.block.material.Material;
-import net.minecraft.creativetab.CreativeTabs;
-import net.minecraft.src.ModLoader;
 import net.minecraft.world.Explosion;
 import net.minecraft.world.World;
+import Reactioncraft.basemod.RCB;
+import Reactioncraft.core.RCC;
 
 public class NewSponge extends Block
 {

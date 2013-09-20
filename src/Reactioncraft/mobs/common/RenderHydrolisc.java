@@ -2,17 +2,25 @@ package Reactioncraft.mobs.common;
 
 import org.lwjgl.opengl.GL11;
 
+import cpw.mods.fml.relauncher.Side;
+import cpw.mods.fml.relauncher.SideOnly;
+
 import net.minecraft.client.model.ModelBase;
 import net.minecraft.client.renderer.entity.RenderLiving;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityLiving;
+import net.minecraft.util.ResourceLocation;
 
-public class RenderHydrolisc extends RenderLiving {
-
+@SideOnly(Side.CLIENT)
+public class RenderHydrolisc extends RenderLiving 
+{
 	public ModelHydrolisc model;
 	private float scale = 1.0F;
 	
-	public RenderHydrolisc(ModelHydrolisc par1ModelBase, float par2, float par3) {
+	private static final ResourceLocation field_110833_a = new ResourceLocation("rcmobs", "textures/entity/hydrolisctexture.png");
+	
+	public RenderHydrolisc(ModelHydrolisc par1ModelBase, float par2, float par3) 
+	{
 		super(par1ModelBase, par2 * par3);
 		model = ((ModelHydrolisc)mainModel);
 		this.scale = par3;
@@ -20,7 +28,6 @@ public class RenderHydrolisc extends RenderLiving {
 	
     public void renderHydrolisc(EntityHydrolisc par1EntityHydrolisc, double par2, double par4, double par6, float par8, float par9)
     {
-    	//System.out.printf("Rendering Hydrolisc\n");
         super.doRenderLiving(par1EntityHydrolisc, par2, par4, par6, par8, par9);
     }
 
@@ -56,5 +63,13 @@ public class RenderHydrolisc extends RenderLiving {
     {
         this.preRenderScale((EntityHydrolisc)par1EntityLiving, par2);
     }
-
+    
+    /**
+     * Returns the location of an entity's texture. Doesn't seem to be called unless you call Render.bindEntityTexture.
+     */
+    @Override
+    protected ResourceLocation getEntityTexture(Entity par1Entity)
+    {
+    	return (new ResourceLocation("rcmobs:textures/entity/hydrolisctexture.png"));
+    }
 }

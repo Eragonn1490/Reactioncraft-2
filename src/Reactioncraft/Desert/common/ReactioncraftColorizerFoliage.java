@@ -1,4 +1,4 @@
-package Reactioncraft.Desert.common;
+package Reactioncraft.desert.common;
 
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;

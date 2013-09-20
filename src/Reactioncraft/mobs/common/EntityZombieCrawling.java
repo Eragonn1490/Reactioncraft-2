@@ -4,12 +4,13 @@ import Reactioncraft.mobs.RCmobs;
 import Reactioncraft.mobs.client.ClientProxy;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EnumCreatureAttribute;
+import net.minecraft.entity.SharedMonsterAttributes;
 import net.minecraft.entity.ai.EntityAIAttackOnCollide;
 import net.minecraft.entity.ai.EntityAIBreakDoor;
 import net.minecraft.entity.ai.EntityAIHurtByTarget;
 import net.minecraft.entity.ai.EntityAILookIdle;
 import net.minecraft.entity.ai.EntityAIMoveThroughVillage;
-import net.minecraft.entity.ai.EntityAIMoveTwardsRestriction;
+import net.minecraft.entity.ai.EntityAIMoveTowardsRestriction;
 import net.minecraft.entity.ai.EntityAINearestAttackableTarget;
 import net.minecraft.entity.ai.EntityAISwimming;
 import net.minecraft.entity.ai.EntityAIWander;
@@ -28,38 +29,30 @@ public class EntityZombieCrawling extends EntityMob
 {
 	public EntityZombieCrawling(World world)
 	{
-		super(world);
-		this.texture = (ClientProxy.MODEL_TEXTURE + "quadzombie.png");
-		this.moveSpeed = 0.25F;
-		this.getNavigator().setBreakDoors(true);
-		this.tasks.addTask(0, new EntityAISwimming(this));
-		this.tasks.addTask(1, new EntityAIBreakDoor(this));
-		this.tasks.addTask(2, new EntityAIAttackOnCollide(this, EntityPlayer.class, this.moveSpeed, false));
-		this.tasks.addTask(3, new EntityAIAttackOnCollide(this, EntityVillager.class, this.moveSpeed, true));
-		this.tasks.addTask(4, new EntityAIMoveTwardsRestriction(this, this.moveSpeed));
-		this.tasks.addTask(5, new EntityAIMoveThroughVillage(this, this.moveSpeed, false));
-		this.tasks.addTask(6, new EntityAIWander(this, this.moveSpeed));
-		this.tasks.addTask(7, new EntityAIWatchClosest(this, EntityPlayer.class, 8.0F));
-		this.tasks.addTask(7, new EntityAILookIdle(this));
-		this.targetTasks.addTask(1, new EntityAIHurtByTarget(this, true));
-		this.targetTasks.addTask(2, new EntityAINearestAttackableTarget(this, EntityPlayer.class, 16.0F, 0, true));
-		this.targetTasks.addTask(2, new EntityAINearestAttackableTarget(this, EntityVillager.class, 16.0F, 0, false));
-		this.targetTasks.addTask(3, new EntityAINearestAttackableTarget(this, EntitySheep.class, 16.0F, 0, true));
-	}
+        super(world);
+        this.getNavigator().setBreakDoors(true);
+        this.tasks.addTask(0, new EntityAISwimming(this));
+        this.tasks.addTask(1, new EntityAIBreakDoor(this));
+        this.tasks.addTask(2, new EntityAIAttackOnCollide(this, EntityPlayer.class, 1.0D, false));
+        this.tasks.addTask(3, new EntityAIAttackOnCollide(this, EntityVillager.class, 1.0D, true));
+        this.tasks.addTask(4, new EntityAIMoveTowardsRestriction(this, 1.0D));
+        this.tasks.addTask(5, new EntityAIMoveThroughVillage(this, 1.0D, false));
+        this.tasks.addTask(6, new EntityAIWander(this, 1.0D));
+        this.tasks.addTask(7, new EntityAIWatchClosest(this, EntityPlayer.class, 8.0F));
+        this.tasks.addTask(7, new EntityAILookIdle(this));
+        this.targetTasks.addTask(1, new EntityAIHurtByTarget(this, true));
+        this.targetTasks.addTask(2, new EntityAINearestAttackableTarget(this, EntityPlayer.class, 0, true));
+        this.targetTasks.addTask(2, new EntityAINearestAttackableTarget(this, EntityVillager.class, 0, false));
+    }
 
-	public int getMaxHealth()
-	{
-		return 20;
-	}
-
-	/**
-	 * This method returns a value to be applied directly to entity speed, this factor is less than 1 when a slowdown
-	 * potion effect is applied, more than 1 when a haste potion effect is applied and 2 for fleeing entities.
-	 */
-	public float getSpeedModifier()
-	{
-		return super.getSpeedModifier() * (this.isChild() ? 1.5F : 1.0F);
-	}
+	protected void applyEntityAttributes()
+    {
+        super.applyEntityAttributes();
+        this.getEntityAttribute(SharedMonsterAttributes.maxHealth).setAttribute(18.0D);
+        this.getEntityAttribute(SharedMonsterAttributes.followRange).setAttribute(40.0D);
+        this.getEntityAttribute(SharedMonsterAttributes.movementSpeed).setAttribute(0.23000000417232513D);
+        this.getEntityAttribute(SharedMonsterAttributes.attackDamage).setAttribute(3.0D);
+    }
 
 	/**
 	 * Returns the current armor value as determined by a call to InventoryPlayer.getTotalArmorValue
@@ -123,22 +116,6 @@ public class EntityZombieCrawling extends EntityMob
 		}
 
 		super.onLivingUpdate();
-	}
-
-	/**
-	 * Returns the amount of damage a mob should deal.
-	 */
-	public int getAttackStrength(Entity par1Entity)
-	{
-		ItemStack var2 = this.getHeldItem();
-		int var3 = 4;
-
-		if (var2 != null)
-		{
-			var3 += var2.getDamageVsEntity(this);
-		}
-
-		return var3;
 	}
 
 	/**

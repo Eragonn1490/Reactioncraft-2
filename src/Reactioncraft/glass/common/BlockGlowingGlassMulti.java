@@ -253,132 +253,132 @@ public class BlockGlowingGlassMulti extends BlockGlassMulti
 		iconBuffer = new Icon[16][12]; // 3 machines, 6 sides each, in ON and OFF states
 
 		// meta 0, Empty Bookshelf
-		iconBuffer[0][0] = par1IconRegister.registerIcon("RCG:YellowGlass"); // bottom
-		iconBuffer[0][1] = par1IconRegister.registerIcon("RCG:YellowGlass"); // top
-		iconBuffer[0][2] = par1IconRegister.registerIcon("RCG:YellowGlass"); // north
-		iconBuffer[0][3] = par1IconRegister.registerIcon("RCG:YellowGlass"); // east
-		iconBuffer[0][4] = par1IconRegister.registerIcon("RCG:YellowGlass"); // south
-		iconBuffer[0][5] = par1IconRegister.registerIcon("RCG:YellowGlass"); // west
+		iconBuffer[0][0] = par1IconRegister.registerIcon("rcg:YellowGlass"); // bottom
+		iconBuffer[0][1] = par1IconRegister.registerIcon("rcg:YellowGlass"); // top
+		iconBuffer[0][2] = par1IconRegister.registerIcon("rcg:YellowGlass"); // north
+		iconBuffer[0][3] = par1IconRegister.registerIcon("rcg:YellowGlass"); // east
+		iconBuffer[0][4] = par1IconRegister.registerIcon("rcg:YellowGlass"); // south
+		iconBuffer[0][5] = par1IconRegister.registerIcon("rcg:YellowGlass"); // west
 
 		// meta 0, Empty Bookshelf
-		iconBuffer[1][0] = par1IconRegister.registerIcon("RCG:redglass"); // bottom
-		iconBuffer[1][1] = par1IconRegister.registerIcon("RCG:redglass"); // top
-		iconBuffer[1][2] = par1IconRegister.registerIcon("RCG:redglass"); // north
-		iconBuffer[1][3] = par1IconRegister.registerIcon("RCG:redglass"); // east
-		iconBuffer[1][4] = par1IconRegister.registerIcon("RCG:redglass"); // south
-		iconBuffer[1][5] = par1IconRegister.registerIcon("RCG:redglass"); // west
+		iconBuffer[1][0] = par1IconRegister.registerIcon("rcg:redglass"); // bottom
+		iconBuffer[1][1] = par1IconRegister.registerIcon("rcg:redglass"); // top
+		iconBuffer[1][2] = par1IconRegister.registerIcon("rcg:redglass"); // north
+		iconBuffer[1][3] = par1IconRegister.registerIcon("rcg:redglass"); // east
+		iconBuffer[1][4] = par1IconRegister.registerIcon("rcg:redglass"); // south
+		iconBuffer[1][5] = par1IconRegister.registerIcon("rcg:redglass"); // west
 
 		// meta 0, Empty Bookshelf
-		iconBuffer[2][0] = par1IconRegister.registerIcon("RCG:BlackGlass"); // bottom
-		iconBuffer[2][1] = par1IconRegister.registerIcon("RCG:BlackGlass"); // top
-		iconBuffer[2][2] = par1IconRegister.registerIcon("RCG:BlackGlass"); // north
-		iconBuffer[2][3] = par1IconRegister.registerIcon("RCG:BlackGlass"); // east
-		iconBuffer[2][4] = par1IconRegister.registerIcon("RCG:BlackGlass"); // south
-		iconBuffer[2][5] = par1IconRegister.registerIcon("RCG:BlackGlass"); // west
+		iconBuffer[2][0] = par1IconRegister.registerIcon("rcg:BlackGlass"); // bottom
+		iconBuffer[2][1] = par1IconRegister.registerIcon("rcg:BlackGlass"); // top
+		iconBuffer[2][2] = par1IconRegister.registerIcon("rcg:BlackGlass"); // north
+		iconBuffer[2][3] = par1IconRegister.registerIcon("rcg:BlackGlass"); // east
+		iconBuffer[2][4] = par1IconRegister.registerIcon("rcg:BlackGlass"); // south
+		iconBuffer[2][5] = par1IconRegister.registerIcon("rcg:BlackGlass"); // west
 
 		// meta 0, Empty Bookshelf
-		iconBuffer[3][0] = par1IconRegister.registerIcon("RCG:BlueGlass"); // bottom
-		iconBuffer[3][1] = par1IconRegister.registerIcon("RCG:BlueGlass"); // top
-		iconBuffer[3][2] = par1IconRegister.registerIcon("RCG:BlueGlass"); // north
-		iconBuffer[3][3] = par1IconRegister.registerIcon("RCG:BlueGlass"); // east
-		iconBuffer[3][4] = par1IconRegister.registerIcon("RCG:BlueGlass"); // south
-		iconBuffer[3][5] = par1IconRegister.registerIcon("RCG:BlueGlass"); // west
+		iconBuffer[3][0] = par1IconRegister.registerIcon("rcg:BlueGlass"); // bottom
+		iconBuffer[3][1] = par1IconRegister.registerIcon("rcg:BlueGlass"); // top
+		iconBuffer[3][2] = par1IconRegister.registerIcon("rcg:BlueGlass"); // north
+		iconBuffer[3][3] = par1IconRegister.registerIcon("rcg:BlueGlass"); // east
+		iconBuffer[3][4] = par1IconRegister.registerIcon("rcg:BlueGlass"); // south
+		iconBuffer[3][5] = par1IconRegister.registerIcon("rcg:BlueGlass"); // west
 
 		// meta 0, Empty Bookshelf
-		iconBuffer[4][0] = par1IconRegister.registerIcon("RCG:BrownGlass"); // bottom
-		iconBuffer[4][1] = par1IconRegister.registerIcon("RCG:BrownGlass"); // top
-		iconBuffer[4][2] = par1IconRegister.registerIcon("RCG:BrownGlass"); // north
-		iconBuffer[4][3] = par1IconRegister.registerIcon("RCG:BrownGlass"); // east
-		iconBuffer[4][4] = par1IconRegister.registerIcon("RCG:BrownGlass"); // south
-		iconBuffer[4][5] = par1IconRegister.registerIcon("RCG:BrownGlass"); // west
+		iconBuffer[4][0] = par1IconRegister.registerIcon("rcg:BrownGlass"); // bottom
+		iconBuffer[4][1] = par1IconRegister.registerIcon("rcg:BrownGlass"); // top
+		iconBuffer[4][2] = par1IconRegister.registerIcon("rcg:BrownGlass"); // north
+		iconBuffer[4][3] = par1IconRegister.registerIcon("rcg:BrownGlass"); // east
+		iconBuffer[4][4] = par1IconRegister.registerIcon("rcg:BrownGlass"); // south
+		iconBuffer[4][5] = par1IconRegister.registerIcon("rcg:BrownGlass"); // west
 
 		// meta 0, Empty Bookshelf
-		iconBuffer[5][0] = par1IconRegister.registerIcon("RCG:cyanglass"); // bottom
-		iconBuffer[5][1] = par1IconRegister.registerIcon("RCG:cyanglass"); // top
-		iconBuffer[5][2] = par1IconRegister.registerIcon("RCG:cyanglass"); // north
-		iconBuffer[5][3] = par1IconRegister.registerIcon("RCG:cyanglass"); // east
-		iconBuffer[5][4] = par1IconRegister.registerIcon("RCG:cyanglass"); // south
-		iconBuffer[5][5] = par1IconRegister.registerIcon("RCG:cyanglass"); // west
+		iconBuffer[5][0] = par1IconRegister.registerIcon("rcg:cyanglass"); // bottom
+		iconBuffer[5][1] = par1IconRegister.registerIcon("rcg:cyanglass"); // top
+		iconBuffer[5][2] = par1IconRegister.registerIcon("rcg:cyanglass"); // north
+		iconBuffer[5][3] = par1IconRegister.registerIcon("rcg:cyanglass"); // east
+		iconBuffer[5][4] = par1IconRegister.registerIcon("rcg:cyanglass"); // south
+		iconBuffer[5][5] = par1IconRegister.registerIcon("rcg:cyanglass"); // west
 
 		// meta 0, Empty Bookshelf
-		iconBuffer[6][0] = par1IconRegister.registerIcon("RCG:GreyGlass"); // bottom
-		iconBuffer[6][1] = par1IconRegister.registerIcon("RCG:GreyGlass"); // top
-		iconBuffer[6][2] = par1IconRegister.registerIcon("RCG:GreyGlass"); // north
-		iconBuffer[6][3] = par1IconRegister.registerIcon("RCG:GreyGlass"); // east
-		iconBuffer[6][4] = par1IconRegister.registerIcon("RCG:GreyGlass"); // south
-		iconBuffer[6][5] = par1IconRegister.registerIcon("RCG:GreyGlass"); // west
+		iconBuffer[6][0] = par1IconRegister.registerIcon("rcg:GreyGlass"); // bottom
+		iconBuffer[6][1] = par1IconRegister.registerIcon("rcg:GreyGlass"); // top
+		iconBuffer[6][2] = par1IconRegister.registerIcon("rcg:GreyGlass"); // north
+		iconBuffer[6][3] = par1IconRegister.registerIcon("rcg:GreyGlass"); // east
+		iconBuffer[6][4] = par1IconRegister.registerIcon("rcg:GreyGlass"); // south
+		iconBuffer[6][5] = par1IconRegister.registerIcon("rcg:GreyGlass"); // west
 
 		// meta 0, Empty Bookshelf
-		iconBuffer[7][0] = par1IconRegister.registerIcon("RCG:GreenGlass"); // bottom
-		iconBuffer[7][1] = par1IconRegister.registerIcon("RCG:GreenGlass"); // top
-		iconBuffer[7][2] = par1IconRegister.registerIcon("RCG:GreenGlass"); // north
-		iconBuffer[7][3] = par1IconRegister.registerIcon("RCG:GreenGlass"); // east
-		iconBuffer[7][4] = par1IconRegister.registerIcon("RCG:GreenGlass"); // south
-		iconBuffer[7][5] = par1IconRegister.registerIcon("RCG:GreenGlass"); // west
+		iconBuffer[7][0] = par1IconRegister.registerIcon("rcg:GreenGlass"); // bottom
+		iconBuffer[7][1] = par1IconRegister.registerIcon("rcg:GreenGlass"); // top
+		iconBuffer[7][2] = par1IconRegister.registerIcon("rcg:GreenGlass"); // north
+		iconBuffer[7][3] = par1IconRegister.registerIcon("rcg:GreenGlass"); // east
+		iconBuffer[7][4] = par1IconRegister.registerIcon("rcg:GreenGlass"); // south
+		iconBuffer[7][5] = par1IconRegister.registerIcon("rcg:GreenGlass"); // west
 
 		// meta 0, Empty Bookshelf
-		iconBuffer[8][0] = par1IconRegister.registerIcon("RCG:lightblueglass"); // bottom
-		iconBuffer[8][1] = par1IconRegister.registerIcon("RCG:lightblueglass"); // top
-		iconBuffer[8][2] = par1IconRegister.registerIcon("RCG:lightblueglass"); // north
-		iconBuffer[8][3] = par1IconRegister.registerIcon("RCG:lightblueglass"); // east
-		iconBuffer[8][4] = par1IconRegister.registerIcon("RCG:lightblueglass"); // south
-		iconBuffer[8][5] = par1IconRegister.registerIcon("RCG:lightblueglass"); // west
+		iconBuffer[8][0] = par1IconRegister.registerIcon("rcg:lightblueglass"); // bottom
+		iconBuffer[8][1] = par1IconRegister.registerIcon("rcg:lightblueglass"); // top
+		iconBuffer[8][2] = par1IconRegister.registerIcon("rcg:lightblueglass"); // north
+		iconBuffer[8][3] = par1IconRegister.registerIcon("rcg:lightblueglass"); // east
+		iconBuffer[8][4] = par1IconRegister.registerIcon("rcg:lightblueglass"); // south
+		iconBuffer[8][5] = par1IconRegister.registerIcon("rcg:lightblueglass"); // west
 
 		// meta 0, Empty Bookshelf
-		iconBuffer[9][0] = par1IconRegister.registerIcon("RCG:LightGreyGlass"); // bottom
-		iconBuffer[9][1] = par1IconRegister.registerIcon("RCG:LightGreyGlass"); // top
-		iconBuffer[9][2] = par1IconRegister.registerIcon("RCG:LightGreyGlass"); // north
-		iconBuffer[9][3] = par1IconRegister.registerIcon("RCG:LightGreyGlass"); // east
-		iconBuffer[9][4] = par1IconRegister.registerIcon("RCG:LightGreyGlass"); // south
-		iconBuffer[9][5] = par1IconRegister.registerIcon("RCG:LightGreyGlass"); // west
+		iconBuffer[9][0] = par1IconRegister.registerIcon("rcg:LightGreyGlass"); // bottom
+		iconBuffer[9][1] = par1IconRegister.registerIcon("rcg:LightGreyGlass"); // top
+		iconBuffer[9][2] = par1IconRegister.registerIcon("rcg:LightGreyGlass"); // north
+		iconBuffer[9][3] = par1IconRegister.registerIcon("rcg:LightGreyGlass"); // east
+		iconBuffer[9][4] = par1IconRegister.registerIcon("rcg:LightGreyGlass"); // south
+		iconBuffer[9][5] = par1IconRegister.registerIcon("rcg:LightGreyGlass"); // west
 
 		// meta 0, Empty Bookshelf
-		iconBuffer[10][0] = par1IconRegister.registerIcon("RCG:limegreenglass"); // bottom
-		iconBuffer[10][1] = par1IconRegister.registerIcon("RCG:limegreenglass"); // top
-		iconBuffer[10][2] = par1IconRegister.registerIcon("RCG:limegreenglass"); // north
-		iconBuffer[10][3] = par1IconRegister.registerIcon("RCG:limegreenglass"); // east
-		iconBuffer[10][4] = par1IconRegister.registerIcon("RCG:limegreenglass"); // south
-		iconBuffer[10][5] = par1IconRegister.registerIcon("RCG:limegreenglass"); // west
+		iconBuffer[10][0] = par1IconRegister.registerIcon("rcg:limegreenglass"); // bottom
+		iconBuffer[10][1] = par1IconRegister.registerIcon("rcg:limegreenglass"); // top
+		iconBuffer[10][2] = par1IconRegister.registerIcon("rcg:limegreenglass"); // north
+		iconBuffer[10][3] = par1IconRegister.registerIcon("rcg:limegreenglass"); // east
+		iconBuffer[10][4] = par1IconRegister.registerIcon("rcg:limegreenglass"); // south
+		iconBuffer[10][5] = par1IconRegister.registerIcon("rcg:limegreenglass"); // west
 
 		// meta 0, Empty Bookshelf
-		iconBuffer[11][0] = par1IconRegister.registerIcon("RCG:magentaglass"); // bottom
-		iconBuffer[11][1] = par1IconRegister.registerIcon("RCG:magentaglass"); // top
-		iconBuffer[11][2] = par1IconRegister.registerIcon("RCG:magentaglass"); // north
-		iconBuffer[11][3] = par1IconRegister.registerIcon("RCG:magentaglass"); // east
-		iconBuffer[11][4] = par1IconRegister.registerIcon("RCG:magentaglass"); // south
-		iconBuffer[11][5] = par1IconRegister.registerIcon("RCG:magentaglass"); // west
+		iconBuffer[11][0] = par1IconRegister.registerIcon("rcg:magentaglass"); // bottom
+		iconBuffer[11][1] = par1IconRegister.registerIcon("rcg:magentaglass"); // top
+		iconBuffer[11][2] = par1IconRegister.registerIcon("rcg:magentaglass"); // north
+		iconBuffer[11][3] = par1IconRegister.registerIcon("rcg:magentaglass"); // east
+		iconBuffer[11][4] = par1IconRegister.registerIcon("rcg:magentaglass"); // south
+		iconBuffer[11][5] = par1IconRegister.registerIcon("rcg:magentaglass"); // west
 
 		// meta 0, Empty Bookshelf
-		iconBuffer[12][0] = par1IconRegister.registerIcon("RCG:OrangeGlass"); // bottom
-		iconBuffer[12][1] = par1IconRegister.registerIcon("RCG:OrangeGlass"); // top
-		iconBuffer[12][2] = par1IconRegister.registerIcon("RCG:OrangeGlass"); // north
-		iconBuffer[12][3] = par1IconRegister.registerIcon("RCG:OrangeGlass"); // east
-		iconBuffer[12][4] = par1IconRegister.registerIcon("RCG:OrangeGlass"); // south
-		iconBuffer[12][5] = par1IconRegister.registerIcon("RCG:OrangeGlass"); // west
+		iconBuffer[12][0] = par1IconRegister.registerIcon("rcg:OrangeGlass"); // bottom
+		iconBuffer[12][1] = par1IconRegister.registerIcon("rcg:OrangeGlass"); // top
+		iconBuffer[12][2] = par1IconRegister.registerIcon("rcg:OrangeGlass"); // north
+		iconBuffer[12][3] = par1IconRegister.registerIcon("rcg:OrangeGlass"); // east
+		iconBuffer[12][4] = par1IconRegister.registerIcon("rcg:OrangeGlass"); // south
+		iconBuffer[12][5] = par1IconRegister.registerIcon("rcg:OrangeGlass"); // west
 
 		// meta 0, Empty Bookshelf
-		iconBuffer[13][0] = par1IconRegister.registerIcon("RCG:pinkglass"); // bottom
-		iconBuffer[13][1] = par1IconRegister.registerIcon("RCG:pinkglass"); // top
-		iconBuffer[13][2] = par1IconRegister.registerIcon("RCG:pinkglass"); // north
-		iconBuffer[13][3] = par1IconRegister.registerIcon("RCG:pinkglass"); // east
-		iconBuffer[13][4] = par1IconRegister.registerIcon("RCG:pinkglass"); // south
-		iconBuffer[13][5] = par1IconRegister.registerIcon("RCG:pinkglass"); // west
+		iconBuffer[13][0] = par1IconRegister.registerIcon("rcg:pinkglass"); // bottom
+		iconBuffer[13][1] = par1IconRegister.registerIcon("rcg:pinkglass"); // top
+		iconBuffer[13][2] = par1IconRegister.registerIcon("rcg:pinkglass"); // north
+		iconBuffer[13][3] = par1IconRegister.registerIcon("rcg:pinkglass"); // east
+		iconBuffer[13][4] = par1IconRegister.registerIcon("rcg:pinkglass"); // south
+		iconBuffer[13][5] = par1IconRegister.registerIcon("rcg:pinkglass"); // west
 
 		// meta 0, Empty Bookshelf
-		iconBuffer[14][0] = par1IconRegister.registerIcon("RCG:purpleglass"); // bottom
-		iconBuffer[14][1] = par1IconRegister.registerIcon("RCG:purpleglass"); // top
-		iconBuffer[14][2] = par1IconRegister.registerIcon("RCG:purpleglass"); // north
-		iconBuffer[14][3] = par1IconRegister.registerIcon("RCG:purpleglass"); // east
-		iconBuffer[14][4] = par1IconRegister.registerIcon("RCG:purpleglass"); // south
-		iconBuffer[14][5] = par1IconRegister.registerIcon("RCG:purpleglass"); // west
+		iconBuffer[14][0] = par1IconRegister.registerIcon("rcg:purpleglass"); // bottom
+		iconBuffer[14][1] = par1IconRegister.registerIcon("rcg:purpleglass"); // top
+		iconBuffer[14][2] = par1IconRegister.registerIcon("rcg:purpleglass"); // north
+		iconBuffer[14][3] = par1IconRegister.registerIcon("rcg:purpleglass"); // east
+		iconBuffer[14][4] = par1IconRegister.registerIcon("rcg:purpleglass"); // south
+		iconBuffer[14][5] = par1IconRegister.registerIcon("rcg:purpleglass"); // west
 
 		// meta 0, Empty Bookshelf
-		iconBuffer[15][0] = par1IconRegister.registerIcon("RCG:WhiteGlass"); // bottom
-		iconBuffer[15][1] = par1IconRegister.registerIcon("RCG:WhiteGlass"); // top
-		iconBuffer[15][2] = par1IconRegister.registerIcon("RCG:WhiteGlass"); // north
-		iconBuffer[15][3] = par1IconRegister.registerIcon("RCG:WhiteGlass"); // east
-		iconBuffer[15][4] = par1IconRegister.registerIcon("RCG:WhiteGlass"); // south
-		iconBuffer[15][5] = par1IconRegister.registerIcon("RCG:WhiteGlass"); // west
+		iconBuffer[15][0] = par1IconRegister.registerIcon("rcg:WhiteGlass"); // bottom
+		iconBuffer[15][1] = par1IconRegister.registerIcon("rcg:WhiteGlass"); // top
+		iconBuffer[15][2] = par1IconRegister.registerIcon("rcg:WhiteGlass"); // north
+		iconBuffer[15][3] = par1IconRegister.registerIcon("rcg:WhiteGlass"); // east
+		iconBuffer[15][4] = par1IconRegister.registerIcon("rcg:WhiteGlass"); // south
+		iconBuffer[15][5] = par1IconRegister.registerIcon("rcg:WhiteGlass"); // west
 	}
 
 	public Icon getBlockTexture(IBlockAccess world, int x, int y, int z, int blockMeta, int blockSide)

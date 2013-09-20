@@ -9,7 +9,7 @@ public class ItemKnife extends ItemSword
 
 	public ItemKnife(int par1) 
 	{
-		super(par1, EnumToolMaterial.EMERALD);
+		super(par1, EnumToolMaterial.WOOD);
 		this.setMaxStackSize(1);
 		this.setMaxDamage(25);
 		this.setCreativeTab(RCB.ReactioncraftItems);

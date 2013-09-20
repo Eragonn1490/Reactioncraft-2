@@ -1,6 +1,7 @@
-package Reactioncraft.Net.client;
+package Reactioncraft.net.client;
 
-import Reactioncraft.Net.Common.EntityPlayerClone;
+import Reactioncraft.net.Common.CommonProxy;
+import Reactioncraft.net.Common.EntityPlayerClone;
 import net.minecraft.client.model.ModelBiped;
 import net.minecraft.client.renderer.entity.RenderBiped;
 import net.minecraftforge.client.MinecraftForgeClient;

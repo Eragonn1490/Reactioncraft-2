@@ -2,6 +2,7 @@ package Reactioncraft.core.common;
 
 import mods.railcraft.api.carts.bore.IBoreHead;
 import net.minecraft.item.Item;
+import net.minecraft.util.ResourceLocation;
 
 public class IBloodstoneBH extends Item implements IBoreHead
 {
@@ -12,9 +13,9 @@ public class IBloodstoneBH extends Item implements IBoreHead
         setMaxDamage(10000);
     }
 
-    public String getBoreTexture()
+    public ResourceLocation getBoreTexture()
     {
-        return "/mods/RCC/textures/railcraft/tunnel_bore_bloodstone.png";
+        return new ResourceLocation("rcc", "textures/railcraft/tunnel_bore_bloodstone.png");
     }
 
     public int getHarvestLevel()

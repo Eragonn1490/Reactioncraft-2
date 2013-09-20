@@ -1,18 +1,16 @@
-package Reactioncraft.Desert.common;
+package Reactioncraft.desert.common;
 
 import java.util.Random;
 
-import Reactioncraft.Desert.RCBDM;
-import Reactioncraft.core.RCC;
-import cpw.mods.fml.common.IWorldGenerator;
 import net.minecraft.block.Block;
-import net.minecraft.block.BlockSapling;
 import net.minecraft.util.Direction;
 import net.minecraft.world.World;
 import net.minecraft.world.chunk.IChunkProvider;
-import net.minecraft.world.gen.feature.WorldGenMinable;
 import net.minecraft.world.gen.feature.WorldGenerator;
 import net.minecraftforge.common.ForgeDirection;
+import Reactioncraft.core.RCC;
+import Reactioncraft.desert.RCBDM;
+import cpw.mods.fml.common.IWorldGenerator;
 
 public class WorldGenReactionCraftTree extends WorldGenerator implements IWorldGenerator
 {
@@ -147,8 +145,8 @@ public class WorldGenReactionCraftTree extends WorldGenerator implements IWorldG
 							{
 								if (par2Random.nextInt(4 - j1) == 0)
 								{
-									i2 = par2Random.nextInt(3);
-									this.setBlockAndMetadata(par1World, par3 + Direction.offsetX[Direction.rotateOpposite[k1]], par4 + l - 5 + j1, par5 + Direction.offsetZ[Direction.rotateOpposite[k1]], Block.cocoaPlant.blockID, i2 << 2 | k1);
+									i2 = par2Random.nextInt(3);																																					//Fruit
+									this.setBlockAndMetadata(par1World, par3 + Direction.offsetX[Direction.rotateOpposite[k1]], par4 + l - 5 + j1, par5 + Direction.offsetZ[Direction.rotateOpposite[k1]], RCBDM.CherryTreeLeaves.blockID, i2 << 2 | k1);
 								}
 							}
 						}

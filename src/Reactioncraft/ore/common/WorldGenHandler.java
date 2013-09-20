@@ -4,6 +4,7 @@ import java.util.Random;
 import Reactioncraft.ore.RCORES;
 import Reactioncraft.ore.common.*;
 import net.minecraft.block.Block;
+import net.minecraft.item.ItemStack;
 import net.minecraft.world.World;
 import net.minecraft.world.chunk.IChunkProvider;
 import net.minecraft.world.gen.feature.WorldGenMinable;
@@ -26,19 +27,12 @@ public class WorldGenHandler implements IWorldGenerator
 		}
 
 	}
-
-	private void generateSurface(World world, Random random, int chunkX,int chunkZ)
+	
+	public void generateSurface(World world, Random random, int blockX, int blockZ)
 	{
-		for(int i = 0; i < 15; i++)
-		{
-			int xCoord = chunkX + random.nextInt(16);
-			int yCoord = random.nextInt(64);
-			int zCoord = chunkZ + random.nextInt(16);
-
-			(new WorldGenMinable(RCORES.surfaceOres.blockID, 5, 0, Block.stone.blockID)).generate(world, random, xCoord, yCoord, zCoord);
-		}
+		
 	}
-
+	
 	public void generateNether(World world, Random random, int blockX, int blockZ) 
 	{
 		if(RCORES.genBloodstone.getBoolean(true))
@@ -56,7 +50,7 @@ public class WorldGenHandler implements IWorldGenerator
 			int XCoord1 = blockX + random.nextInt(16);
 			int YCoord1 = random.nextInt(128);
 			int ZCoord1 = blockZ + random.nextInt(16);
-			(new WorldGenNetherMinable(RCORES.netherOres.blockID, 1, 6, RCORES.netherOres.blockID)).generate(world, random, XCoord1, YCoord1, ZCoord1);
+			(new WorldGenNetherMinable(RCORES.netherOres.blockID, 1, 5, Block.netherrack.blockID)).generate(world, random, XCoord1, YCoord1, ZCoord1);
 		}
 
 		if(RCORES.genDragonstone.getBoolean(true))
@@ -65,7 +59,7 @@ public class WorldGenHandler implements IWorldGenerator
 			int XCoord2 = blockX + random.nextInt(16);
 			int YCoord2 = random.nextInt(128);
 			int ZCoord2 = blockZ + random.nextInt(16);
-			(new WorldGenNetherMinable(RCORES.netherOres.blockID, 2, 6, RCORES.netherOres.blockID)).generate(world, random, XCoord2, YCoord2, ZCoord2);
+			(new WorldGenNetherMinable(RCORES.netherOres.blockID, 2, 5, Block.netherrack.blockID)).generate(world, random, XCoord2, YCoord2, ZCoord2);
 		}
 
 		if(RCORES.genNetherdiamond.getBoolean(true))
@@ -74,7 +68,7 @@ public class WorldGenHandler implements IWorldGenerator
 			int XCoord3 = blockX + random.nextInt(16);
 			int YCoord3 = random.nextInt(128);
 			int ZCoord3 = blockZ + random.nextInt(16);
-			(new WorldGenNetherMinable(RCORES.netherOres.blockID, 3, 6, RCORES.netherOres.blockID)).generate(world, random, XCoord3, YCoord3, ZCoord3);
+			(new WorldGenNetherMinable(RCORES.netherOres.blockID, 3, 5, Block.netherrack.blockID)).generate(world, random, XCoord3, YCoord3, ZCoord3);
 		}
 
 		if(RCORES.genNethergold.getBoolean(true))
@@ -83,7 +77,7 @@ public class WorldGenHandler implements IWorldGenerator
 			int XCoord4 = blockX + random.nextInt(16);
 			int YCoord4 = random.nextInt(128);
 			int ZCoord4 = blockZ + random.nextInt(16);
-			(new WorldGenNetherMinable(RCORES.netherOres.blockID, 4, 6, RCORES.netherOres.blockID)).generate(world, random, XCoord4, YCoord4, ZCoord4);
+			(new WorldGenNetherMinable(RCORES.netherOres.blockID, 4, 5, Block.netherrack.blockID)).generate(world, random, XCoord4, YCoord4, ZCoord4);
 		}	
 	}
 
@@ -92,6 +86,6 @@ public class WorldGenHandler implements IWorldGenerator
 		int xCoord = blockX + random.nextInt(16);
 		int yCoord = random.nextInt(64);
 		int zCoord = blockZ + random.nextInt(16);
-		(new WorldGenMinable(RCORES.endOres.blockID, 10, 0, Block.whiteStone.blockID)).generate(world, random, xCoord, yCoord, zCoord);
+		(new WorldGenMinable(RCORES.endOres.blockID, 0, 10, Block.whiteStone.blockID)).generate(world, random, xCoord, yCoord, zCoord);
 	}
 }

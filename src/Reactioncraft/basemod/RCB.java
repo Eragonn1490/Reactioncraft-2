@@ -1,7 +1,7 @@
 package Reactioncraft.basemod;
 
 import java.io.File;
-import Reactioncraft.Integration.Integration;
+import Reactioncraft.integration.*;
 import Reactioncraft.basemod.client.ClientProxy;
 import Reactioncraft.basemod.common.CommonProxy;
 import Reactioncraft.basefiles.common.PacketHandler;
@@ -18,6 +18,7 @@ import net.minecraftforge.common.DungeonHooks;
 import net.minecraftforge.common.MinecraftForge;
 import cpw.mods.fml.common.FMLLog;
 import cpw.mods.fml.common.Mod;
+import cpw.mods.fml.common.Mod.EventHandler;
 import cpw.mods.fml.common.Mod.Init;
 import cpw.mods.fml.common.Mod.Instance;
 import cpw.mods.fml.common.Mod.PostInit;
@@ -30,7 +31,7 @@ import cpw.mods.fml.common.network.NetworkMod;
 import cpw.mods.fml.common.registry.GameRegistry;
 import cpw.mods.fml.common.registry.LanguageRegistry;
 
-@Mod( modid = "RCB", name="Reactioncraft Base Mod", version="[1.5.2] Reactioncraft Version 9.0")
+@Mod( modid = "rcb", name="Reactioncraft Base Mod", version="[1.6.2] Reactioncraft 3 Version 1.1.2")
 @NetworkMod(channels = { "RCB" }, clientSideRequired = true, serverSideRequired = false, packetHandler = PacketHandler.class, connectionHandler = ConnectionHandler.class)
 
 public class RCB
@@ -42,6 +43,53 @@ public class RCB
 	@Instance("RCB")
 	public static RCB instance;
 
+	
+	public static CreativeTabs ReactioncraftItems = new CreativeTabs("ReactioncraftItems") 
+	{
+		public CreativeTabs setBackgroundImageName(String par1Str)
+	    {
+	        return this.setBackgroundImageName("item_search.png");
+	    }
+		
+		public ItemStack getIconItemStack() 
+        {
+                return new ItemStack(RCB.Mask, 1, 0);
+        }
+        
+        public boolean hasSearchBar()
+        {
+            return true;
+        }
+	};
+	
+
+	public static CreativeTabs Reactioncraft = new CreativeTabs("Reactioncraft") 
+	{		
+        public ItemStack getIconItemStack() 
+        {
+                return new ItemStack(RCB.Mask, 1, 0);
+        }
+        
+        public boolean hasSearchBar()
+        {
+            return true;
+        }
+	};
+	
+	
+	public static CreativeTabs Reactioncraftfood = new CreativeTabs("Reactioncraftfood") 
+	{	
+        public ItemStack getIconItemStack() 
+        {
+                return new ItemStack(RCB.Mask, 1, 0);
+        }
+        
+        public boolean hasSearchBar()
+        {
+            return true;
+        }
+	};
+
 	// Config Starts Here
 	public static int MaskIID;
 
@@ -50,19 +98,16 @@ public class RCB
 	//Item Code
 	public static Item Mask;
 
-	// creative tab
-	public static CreativeTabs Reactioncraft;
-	public static CreativeTabs ReactioncraftItems;
-	public static CreativeTabs Reactioncraftfood;
-
 	//Manual
-	public boolean manualEnabled;
+	public static boolean manualEnabled;
 
+	
 	public static RCB instance()
 	{
 		return instance;
 	}
 
+	
 	public static boolean Railcraft() throws ClassNotFoundException 
 	{
 		try{
@@ -75,10 +120,12 @@ public class RCB
 		return true ;
 	}
 	
+	
 	//Config
 	public static ReactioncraftConfiguration config;
 
-	@PreInit
+	
+	@EventHandler
 	public void preInit(FMLPreInitializationEvent evt)
 	{
 		System.out.println("[RCB] Pre Initialization Loaded");
@@ -104,12 +151,11 @@ public class RCB
 	}
 
 
-	@Init 
+	@EventHandler 
 	public void load(FMLInitializationEvent event)
 	{
 		ClientProxy.registerRenderInformation();
 		itemCode();
-		tabs();
 		chestgenHooks();
 		handlers();
 		languageRegistry();
@@ -129,13 +175,14 @@ public class RCB
 		}
 	}
 
-	private void handlers() 
+	
+	public void handlers() 
 	{
 		GameRegistry.registerFuelHandler(new FuelHandler());
 	}
 
 
-	private void chestgenHooks() 
+	public void chestgenHooks() 
 	{
 		//after 1.4.6 ChestGenHooks
 		//ChestGenHooks.addItem(ChestGenHooks.VILLAGE_BLACKSMITH, new WeightedRandomChestContent(lootStack, minStackSize, maxStackSize, chance));
@@ -144,35 +191,27 @@ public class RCB
 	}
 
 
-	private void languageRegistry() 
+	public void languageRegistry() 
 	{
-		LanguageRegistry.addName(Mask, "Mask");
+		IntegratedLanguageFile.loadBasenames();
 	}
 
 
 	public void itemCode() 
 	{
-		Mask = new ItemBasic(MaskIID).setUnlocalizedName("RCB:Mask").setCreativeTab(RCB.ReactioncraftItems);
+		Mask = new ItemBasic(MaskIID).setUnlocalizedName("rcb:Mask").setTextureName("rcb:Mask").setCreativeTab(RCB.ReactioncraftItems);
 	}
+	
 
-
-	public void tabs() 
-	{
-		Reactioncraft = new CreativeTabReactioncraft();
-		ReactioncraftItems = new CreativeTabReactioncraftItems();
-		Reactioncraftfood = new CreativeTabReactioncraftfood();
-
-	}
-
-	@PostInit
+	@EventHandler
 	public void modsLoaded(FMLPostInitializationEvent evt)
 	{
-		FMLLog.info("RCB telling those who may be concerned.. CreativeTabs made now!"); 
+		FMLLog.info("[RCB] basemod fully initialized!"); 
 	}
+	
 
-	public boolean getRCManualEnabled()
+	public static boolean getRCManualEnabled()
 	{
 		return manualEnabled;
 	}
-
 }

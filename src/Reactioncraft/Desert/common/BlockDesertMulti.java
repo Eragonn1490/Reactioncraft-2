@@ -1,18 +1,17 @@
-package Reactioncraft.Desert.common;
+package Reactioncraft.desert.common;
 
 import java.util.List;
 import java.util.Random;
-import Reactioncraft.Desert.RCBDM;
-import Reactioncraft.basemod.RCB;
+
 import net.minecraft.block.Block;
 import net.minecraft.block.material.Material;
 import net.minecraft.client.renderer.texture.IconRegister;
 import net.minecraft.creativetab.CreativeTabs;
 import net.minecraft.item.ItemStack;
-import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.Icon;
 import net.minecraft.world.IBlockAccess;
-import net.minecraft.world.World;
+import Reactioncraft.basemod.RCB;
+import Reactioncraft.desert.RCBDM;
 
 public class BlockDesertMulti extends Block
 {
@@ -106,7 +105,6 @@ public class BlockDesertMulti extends Block
         {
             default:
                 return 0;
-
             case 1:
                 return 1;
 
@@ -125,8 +123,8 @@ public class BlockDesertMulti extends Block
             case 6:
                 return 6;
                 
-//            case 7:
-//                return 7;
+            case 7:
+                return 7;
                 
             case 11:
             	 return 11;
@@ -159,100 +157,100 @@ public class BlockDesertMulti extends Block
 		iconBuffer = new Icon[16][12]; // 3 machines, 6 sides each, in ON and OFF states
 
 		// meta 0, Carved Dark Stone
-		iconBuffer[0][0] = par1IconRegister.registerIcon("RCBDM:css"); // bottom
-		iconBuffer[0][1] = par1IconRegister.registerIcon("RCBDM:css"); // top
-		iconBuffer[0][2] = par1IconRegister.registerIcon("RCBDM:css"); // north
-		iconBuffer[0][3] = par1IconRegister.registerIcon("RCBDM:css"); // east
-		iconBuffer[0][4] = par1IconRegister.registerIcon("RCBDM:css"); // south
-		iconBuffer[0][5] = par1IconRegister.registerIcon("RCBDM:css"); // west
+		iconBuffer[0][0] = par1IconRegister.registerIcon("rcbdm:css"); // bottom
+		iconBuffer[0][1] = par1IconRegister.registerIcon("rcbdm:css"); // top
+		iconBuffer[0][2] = par1IconRegister.registerIcon("rcbdm:css"); // north
+		iconBuffer[0][3] = par1IconRegister.registerIcon("rcbdm:css"); // east
+		iconBuffer[0][4] = par1IconRegister.registerIcon("rcbdm:css"); // south
+		iconBuffer[0][5] = par1IconRegister.registerIcon("rcbdm:css"); // west
 
 		// meta 1, Cracked Dark Stone
-		iconBuffer[1][0] = par1IconRegister.registerIcon("RCBDM:Chiseled1"); // bottom
-		iconBuffer[1][1] = par1IconRegister.registerIcon("RCBDM:Chiseled1"); // top
-		iconBuffer[1][2] = par1IconRegister.registerIcon("RCBDM:Chiseled1"); // north
-		iconBuffer[1][3] = par1IconRegister.registerIcon("RCBDM:Chiseled1"); // east
-		iconBuffer[1][4] = par1IconRegister.registerIcon("RCBDM:Chiseled1"); // south
-		iconBuffer[1][5] = par1IconRegister.registerIcon("RCBDM:Chiseled1"); // west
+		iconBuffer[1][0] = par1IconRegister.registerIcon("rcbdm:Chiseled1"); // bottom
+		iconBuffer[1][1] = par1IconRegister.registerIcon("rcbdm:Chiseled1"); // top
+		iconBuffer[1][2] = par1IconRegister.registerIcon("rcbdm:Chiseled1"); // north
+		iconBuffer[1][3] = par1IconRegister.registerIcon("rcbdm:Chiseled1"); // east
+		iconBuffer[1][4] = par1IconRegister.registerIcon("rcbdm:Chiseled1"); // south
+		iconBuffer[1][5] = par1IconRegister.registerIcon("rcbdm:Chiseled1"); // west
 
 		// meta 2, Dark Stone
-		iconBuffer[2][0] = par1IconRegister.registerIcon("RCBDM:SandStone"); // bottom
-		iconBuffer[2][1] = par1IconRegister.registerIcon("RCBDM:SandStone"); // top
-		iconBuffer[2][2] = par1IconRegister.registerIcon("RCBDM:SandStone"); // north
-		iconBuffer[2][3] = par1IconRegister.registerIcon("RCBDM:SandStone"); // east
-		iconBuffer[2][4] = par1IconRegister.registerIcon("RCBDM:SandStone"); // south
-		iconBuffer[2][5] = par1IconRegister.registerIcon("RCBDM:SandStone"); // west
+		iconBuffer[2][0] = par1IconRegister.registerIcon("rcbdm:SandStone"); // bottom
+		iconBuffer[2][1] = par1IconRegister.registerIcon("rcbdm:SandStone"); // top
+		iconBuffer[2][2] = par1IconRegister.registerIcon("rcbdm:SandStone"); // north
+		iconBuffer[2][3] = par1IconRegister.registerIcon("rcbdm:SandStone"); // east
+		iconBuffer[2][4] = par1IconRegister.registerIcon("rcbdm:SandStone"); // south
+		iconBuffer[2][5] = par1IconRegister.registerIcon("rcbdm:SandStone"); // west
 
 		// meta 3, Dark Stone Bricks
-		iconBuffer[3][0] = par1IconRegister.registerIcon("RCBDM:SandBrick"); // bottom
-		iconBuffer[3][1] = par1IconRegister.registerIcon("RCBDM:SandBrick"); // top
-		iconBuffer[3][2] = par1IconRegister.registerIcon("RCBDM:SandBrick"); // north
-		iconBuffer[3][3] = par1IconRegister.registerIcon("RCBDM:SandBrick"); // east
-		iconBuffer[3][4] = par1IconRegister.registerIcon("RCBDM:SandBrick"); // south
-		iconBuffer[3][5] = par1IconRegister.registerIcon("RCBDM:SandBrick"); // west
+		iconBuffer[3][0] = par1IconRegister.registerIcon("rcbdm:SandBrick"); // bottom
+		iconBuffer[3][1] = par1IconRegister.registerIcon("rcbdm:SandBrick"); // top
+		iconBuffer[3][2] = par1IconRegister.registerIcon("rcbdm:SandBrick"); // north
+		iconBuffer[3][3] = par1IconRegister.registerIcon("rcbdm:SandBrick"); // east
+		iconBuffer[3][4] = par1IconRegister.registerIcon("rcbdm:SandBrick"); // south
+		iconBuffer[3][5] = par1IconRegister.registerIcon("rcbdm:SandBrick"); // west
 
 		// meta 4, Cracked Bricks
-		iconBuffer[4][0] = par1IconRegister.registerIcon("RCBDM:MudBrick"); // bottom
-		iconBuffer[4][1] = par1IconRegister.registerIcon("RCBDM:MudBrick"); // top
-		iconBuffer[4][2] = par1IconRegister.registerIcon("RCBDM:MudBrick"); // north
-		iconBuffer[4][3] = par1IconRegister.registerIcon("RCBDM:MudBrick"); // east
-		iconBuffer[4][4] = par1IconRegister.registerIcon("RCBDM:MudBrick"); // south
-		iconBuffer[4][5] = par1IconRegister.registerIcon("RCBDM:MudBrick"); // west
+		iconBuffer[4][0] = par1IconRegister.registerIcon("rcbdm:MudBrick"); // bottom
+		iconBuffer[4][1] = par1IconRegister.registerIcon("rcbdm:MudBrick"); // top
+		iconBuffer[4][2] = par1IconRegister.registerIcon("rcbdm:MudBrick"); // north
+		iconBuffer[4][3] = par1IconRegister.registerIcon("rcbdm:MudBrick"); // east
+		iconBuffer[4][4] = par1IconRegister.registerIcon("rcbdm:MudBrick"); // south
+		iconBuffer[4][5] = par1IconRegister.registerIcon("rcbdm:MudBrick"); // west
 
 		// meta 5, Desert Bricks
-		iconBuffer[5][0] = par1IconRegister.registerIcon("RCBDM:MutiBrick"); // bottom
-		iconBuffer[5][1] = par1IconRegister.registerIcon("RCBDM:MutiBrick"); // top
-		iconBuffer[5][2] = par1IconRegister.registerIcon("RCBDM:MutiBrick"); // north
-		iconBuffer[5][3] = par1IconRegister.registerIcon("RCBDM:MutiBrick"); // east
-		iconBuffer[5][4] = par1IconRegister.registerIcon("RCBDM:MutiBrick"); // south
-		iconBuffer[5][5] = par1IconRegister.registerIcon("RCBDM:MutiBrick"); // west
+		iconBuffer[5][0] = par1IconRegister.registerIcon("rcbdm:MutiBrick"); // bottom
+		iconBuffer[5][1] = par1IconRegister.registerIcon("rcbdm:MutiBrick"); // top
+		iconBuffer[5][2] = par1IconRegister.registerIcon("rcbdm:MutiBrick"); // north
+		iconBuffer[5][3] = par1IconRegister.registerIcon("rcbdm:MutiBrick"); // east
+		iconBuffer[5][4] = par1IconRegister.registerIcon("rcbdm:MutiBrick"); // south
+		iconBuffer[5][5] = par1IconRegister.registerIcon("rcbdm:MutiBrick"); // west
 
 		// meta 6, Limestone
-		iconBuffer[6][0] = par1IconRegister.registerIcon("RCBDM:limestone"); // bottom
-		iconBuffer[6][1] = par1IconRegister.registerIcon("RCBDM:limestone"); // top
-		iconBuffer[6][2] = par1IconRegister.registerIcon("RCBDM:limestone"); // north
-		iconBuffer[6][3] = par1IconRegister.registerIcon("RCBDM:limestone"); // east
-		iconBuffer[6][4] = par1IconRegister.registerIcon("RCBDM:limestone"); // south
-		iconBuffer[6][5] = par1IconRegister.registerIcon("RCBDM:limestone"); // west
+		iconBuffer[6][0] = par1IconRegister.registerIcon("rcbdm:limestone"); // bottom
+		iconBuffer[6][1] = par1IconRegister.registerIcon("rcbdm:limestone"); // top
+		iconBuffer[6][2] = par1IconRegister.registerIcon("rcbdm:limestone"); // north
+		iconBuffer[6][3] = par1IconRegister.registerIcon("rcbdm:limestone"); // east
+		iconBuffer[6][4] = par1IconRegister.registerIcon("rcbdm:limestone"); // south
+		iconBuffer[6][5] = par1IconRegister.registerIcon("rcbdm:limestone"); // west
 
 		// meta 7, Carved Limestone
-		iconBuffer[7][0] = par1IconRegister.registerIcon("RCBDM:Quartz"); // bottom
-		iconBuffer[7][1] = par1IconRegister.registerIcon("RCBDM:Quartz"); // top
-		iconBuffer[7][2] = par1IconRegister.registerIcon("RCBDM:Quartz"); // north
-		iconBuffer[7][3] = par1IconRegister.registerIcon("RCBDM:Quartz"); // east
-		iconBuffer[7][4] = par1IconRegister.registerIcon("RCBDM:Quartz"); // south
-		iconBuffer[7][5] = par1IconRegister.registerIcon("RCBDM:Quartz"); // west
+		iconBuffer[7][0] = par1IconRegister.registerIcon("rcbdm:Quartz"); // bottom
+		iconBuffer[7][1] = par1IconRegister.registerIcon("rcbdm:Quartz"); // top
+		iconBuffer[7][2] = par1IconRegister.registerIcon("rcbdm:Quartz"); // north
+		iconBuffer[7][3] = par1IconRegister.registerIcon("rcbdm:Quartz"); // east
+		iconBuffer[7][4] = par1IconRegister.registerIcon("rcbdm:Quartz"); // south
+		iconBuffer[7][5] = par1IconRegister.registerIcon("rcbdm:Quartz"); // west
 
 		// meta 0, Empty Bookshelf
-		iconBuffer[8][0] = par1IconRegister.registerIcon("RCBDM:desertgemstone1"); // bottom
-		iconBuffer[8][1] = par1IconRegister.registerIcon("RCBDM:desertgemstone1"); // top
-		iconBuffer[8][2] = par1IconRegister.registerIcon("RCBDM:desertgemstone1"); // north
-		iconBuffer[8][3] = par1IconRegister.registerIcon("RCBDM:desertgemstone1"); // east
-		iconBuffer[8][4] = par1IconRegister.registerIcon("RCBDM:desertgemstone1"); // south
-		iconBuffer[8][5] = par1IconRegister.registerIcon("RCBDM:desertgemstone1"); // west
+		iconBuffer[8][0] = par1IconRegister.registerIcon("rcbdm:desertgemstone1"); // bottom
+		iconBuffer[8][1] = par1IconRegister.registerIcon("rcbdm:desertgemstone1"); // top
+		iconBuffer[8][2] = par1IconRegister.registerIcon("rcbdm:desertgemstone1"); // north
+		iconBuffer[8][3] = par1IconRegister.registerIcon("rcbdm:desertgemstone1"); // east
+		iconBuffer[8][4] = par1IconRegister.registerIcon("rcbdm:desertgemstone1"); // south
+		iconBuffer[8][5] = par1IconRegister.registerIcon("rcbdm:desertgemstone1"); // west
 
 		// meta 0, Empty Bookshelf
-		iconBuffer[9][0] = par1IconRegister.registerIcon("RCBDM:desertgemstone2"); // bottom
-		iconBuffer[9][1] = par1IconRegister.registerIcon("RCBDM:desertgemstone2"); // top
-		iconBuffer[9][2] = par1IconRegister.registerIcon("RCBDM:desertgemstone2"); // north
-		iconBuffer[9][3] = par1IconRegister.registerIcon("RCBDM:desertgemstone2"); // east
-		iconBuffer[9][4] = par1IconRegister.registerIcon("RCBDM:desertgemstone2"); // south
-		iconBuffer[9][5] = par1IconRegister.registerIcon("RCBDM:desertgemstone2"); // west
+		iconBuffer[9][0] = par1IconRegister.registerIcon("rcbdm:desertgemstone2"); // bottom
+		iconBuffer[9][1] = par1IconRegister.registerIcon("rcbdm:desertgemstone2"); // top
+		iconBuffer[9][2] = par1IconRegister.registerIcon("rcbdm:desertgemstone2"); // north
+		iconBuffer[9][3] = par1IconRegister.registerIcon("rcbdm:desertgemstone2"); // east
+		iconBuffer[9][4] = par1IconRegister.registerIcon("rcbdm:desertgemstone2"); // south
+		iconBuffer[9][5] = par1IconRegister.registerIcon("rcbdm:desertgemstone2"); // west
 
 		// meta 0, Empty Bookshelf
-		iconBuffer[10][0] = par1IconRegister.registerIcon("RCBDM:desertgold"); // bottom
-		iconBuffer[10][1] = par1IconRegister.registerIcon("RCBDM:desertgold"); // top
-		iconBuffer[10][2] = par1IconRegister.registerIcon("RCBDM:desertgold"); // north
-		iconBuffer[10][3] = par1IconRegister.registerIcon("RCBDM:desertgold"); // east
-		iconBuffer[10][4] = par1IconRegister.registerIcon("RCBDM:desertgold"); // south
-		iconBuffer[10][5] = par1IconRegister.registerIcon("RCBDM:desertgold"); // west
+		iconBuffer[10][0] = par1IconRegister.registerIcon("rcbdm:desertgold"); // bottom
+		iconBuffer[10][1] = par1IconRegister.registerIcon("rcbdm:desertgold"); // top
+		iconBuffer[10][2] = par1IconRegister.registerIcon("rcbdm:desertgold"); // north
+		iconBuffer[10][3] = par1IconRegister.registerIcon("rcbdm:desertgold"); // east
+		iconBuffer[10][4] = par1IconRegister.registerIcon("rcbdm:desertgold"); // south
+		iconBuffer[10][5] = par1IconRegister.registerIcon("rcbdm:desertgold"); // west
 
-		// meta 11, cherry tree planks
-		iconBuffer[11][0] = par1IconRegister.registerIcon("RCBDM:cherryplanks"); // bottom
-		iconBuffer[11][1] = par1IconRegister.registerIcon("RCBDM:cherryplanks"); // top
-		iconBuffer[11][2] = par1IconRegister.registerIcon("RCBDM:cherryplanks"); // north
-		iconBuffer[11][3] = par1IconRegister.registerIcon("RCBDM:cherryplanks"); // east
-		iconBuffer[11][4] = par1IconRegister.registerIcon("RCBDM:cherryplanks"); // south
-		iconBuffer[11][5] = par1IconRegister.registerIcon("RCBDM:cherryplanks"); // west
+		// meta 11, Mossy Dark Stone Bricks
+		iconBuffer[11][0] = par1IconRegister.registerIcon("rcbdm:mossydsbrick"); // bottom
+		iconBuffer[11][1] = par1IconRegister.registerIcon("rcbdm:mossydsbrick"); // top
+		iconBuffer[11][2] = par1IconRegister.registerIcon("rcbdm:mossydsbrick"); // north
+		iconBuffer[11][3] = par1IconRegister.registerIcon("rcbdm:mossydsbrick"); // east
+		iconBuffer[11][4] = par1IconRegister.registerIcon("rcbdm:mossydsbrick"); // south
+		iconBuffer[11][5] = par1IconRegister.registerIcon("rcbdm:mossydsbrick"); // west
 
 //		// meta 0, Empty Bookshelf
 //		iconBuffer[12][0] = par1IconRegister.registerIcon("RCBDM:OrangeGlass"); // bottom

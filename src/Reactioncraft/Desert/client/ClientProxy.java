@@ -1,6 +1,6 @@
-package Reactioncraft.Desert.client;
+package Reactioncraft.desert.client;
 
-import Reactioncraft.Desert.common.CommonProxy;
+import Reactioncraft.desert.common.CommonProxy;
 import net.minecraftforge.client.MinecraftForgeClient;
 import cpw.mods.fml.client.registry.RenderingRegistry;
 import cpw.mods.fml.relauncher.Side;

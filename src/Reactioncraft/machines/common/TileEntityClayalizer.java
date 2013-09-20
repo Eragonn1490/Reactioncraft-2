@@ -20,7 +20,7 @@ import net.minecraft.tileentity.TileEntity;
 import net.minecraftforge.common.ForgeDirection;
 import net.minecraftforge.common.ForgeDummyContainer;
 
-public class TileEntityClayalizer extends TileEntity implements ISidedInventory, net.minecraftforge.common.ISidedInventory
+public class TileEntityClayalizer extends TileEntity implements ISidedInventory
 {
     private static final int[] field_102010_d = new int[] {0};
     private static final int[] field_102011_e = new int[] {2, 1};
@@ -452,49 +452,9 @@ public class TileEntityClayalizer extends TileEntity implements ISidedInventory,
         return par3 != 0 || par1 != 1 || par2ItemStack.itemID == Item.bucketEmpty.itemID;
     }
 
-    /***********************************************************************************
-     * This function is here for compatibilities sake, Modders should Check for
-     * Sided before ContainerWorldly, Vanilla Minecraft does not follow the sided standard
-     * that Modding has for a while.
-     *
-     * In vanilla:
-     *
-     *   Top: Ores
-     *   Sides: Fuel
-     *   Bottom: Output
-     *
-     * Standard Modding:
-     *   Top: Ores
-     *   Sides: Output
-     *   Bottom: Fuel
-     *
-     * The Modding one is designed after the GUI, the vanilla one is designed because its
-     * intended use is for the hopper, which logically would take things in from the top.
-     *
-     * This will possibly be removed in future updates, and make vanilla the definitive
-     * standard.
-     */
-
-    @Override
-    public int getStartInventorySide(ForgeDirection side)
-    {
-        if (ForgeDummyContainer.legacyFurnaceSides)
-        {
-            if (side == ForgeDirection.DOWN) return 1;
-            if (side == ForgeDirection.UP) return 0;
-            return 2;
-        }
-        else
-        {
-            if (side == ForgeDirection.DOWN) return 2;
-            if (side == ForgeDirection.UP) return 0;
-            return 1;
-        }
-    }
-
-    @Override
-    public int getSizeInventorySide(ForgeDirection side)
-    {
-        return 1;
-    }
+	@Override
+	public boolean isItemValidForSlot(int i, ItemStack itemstack) 
+	{
+		return false;
+	}
 }

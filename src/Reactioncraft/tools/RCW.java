@@ -1,24 +1,21 @@
 package Reactioncraft.tools;
 
 import java.io.File;
-
-import net.minecraft.item.EnumToolMaterial;
-import net.minecraft.item.Item;
-import net.minecraft.item.ItemStack;
+import net.minecraft.item.*;
 import net.minecraft.item.crafting.CraftingManager;
-import net.minecraft.nbt.NBTTagCompound;
-import net.minecraft.nbt.NBTTagList;
+import net.minecraft.nbt.*;
 import net.minecraftforge.common.Configuration;
 import net.minecraftforge.common.EnumHelper;
 import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.oredict.ShapedOreRecipe;
 import Reactioncraft.tools.common.*;
-import Reactioncraft.Integration.Integration;
+import Reactioncraft.integration.*;
 import Reactioncraft.basefiles.common.*;
 import Reactioncraft.tools.common.CommonProxy;
 import cpw.mods.fml.common.FMLLog;
 import cpw.mods.fml.common.Loader;
 import cpw.mods.fml.common.Mod;
+import cpw.mods.fml.common.Mod.EventHandler;
 import cpw.mods.fml.common.Mod.Init;
 import cpw.mods.fml.common.Mod.Instance;
 import cpw.mods.fml.common.Mod.PostInit;
@@ -32,7 +29,7 @@ import cpw.mods.fml.common.network.NetworkMod;
 import cpw.mods.fml.common.registry.GameRegistry;
 import cpw.mods.fml.common.registry.LanguageRegistry;
 
-@Mod( modid = "RCW", name="Reactioncraft Weapons", version="[1.5.2] Reactioncraft Version 9.0", dependencies="after:RCORES")
+@Mod( modid = "rcw", name="Reactioncraft Weapons", version="[1.6.2] Reactioncraft 3 Version 1.1.2", dependencies="after:rcores")
 @NetworkMod(channels = { "RCW" }, clientSideRequired = true, serverSideRequired = false, packetHandler = PacketHandler.class)
 
 public class RCW
@@ -90,7 +87,7 @@ public class RCW
 	//Config
 	public static ReactioncraftConfiguration config;
 
-	@PreInit
+	@EventHandler
 	public void preInit(FMLPreInitializationEvent var1)
 	{
 		System.out.println("[RCW] Pre Initialization Loaded");
@@ -101,7 +98,7 @@ public class RCW
 		{
 			config.load();
 
-			//Claimed Item IDS 10931 - 10950 (10951 is molten glass in RCG)
+			//Claimed Item IDS 10931 - 10949 (10950 given to RCORES but not reoraginzed) (10951 is molten glass in RCG)
 			this.ObbyPickID = config.getItem("Obsidian Pick", 10931).getInt();
 			this.ObbySwordID = config.getItem("Obsidian Sword", 10932).getInt();
 			this.ObbyShovelID = config.getItem("Obsidian Shovel", 10933).getInt();
@@ -129,7 +126,7 @@ public class RCW
 		}
 	}
 
-	@Init
+	@EventHandler
 	public void init(FMLInitializationEvent var1)
 	{
 		proxy.registerRenderInformation();
@@ -169,45 +166,33 @@ public class RCW
 
 	private void LanguageRegistry() 
 	{
-		LanguageRegistry.addName(UnbindedSword, "UnBinded Sword");
-		LanguageRegistry.addName(ObbySword, "Obsidian Sword");
-		LanguageRegistry.addName(ObbyPick, "Obsidian Pickaxe");
-		LanguageRegistry.addName(ObbyShovel, "Obsidian Shovel");
-		LanguageRegistry.addName(ObbyAxe, "Obsidian Axe");
-		LanguageRegistry.addName(ObbyHoe, "Obsidian Hoe");
-		LanguageRegistry.addName(BloodstoneSword, "Bloodstone Sword");
-		LanguageRegistry.addName(BloodstonePick, "Bloodstone Pickaxe");
-		LanguageRegistry.addName(BloodstoneShovel, "Bloodstone Shovel");
-		LanguageRegistry.addName(BloodstoneAxe, "Bloodstone Axe");
-		LanguageRegistry.addName(BloodstoneHoe, "Bloodstone Hoe");
-		LanguageRegistry.addName(BloodstoneBlade, "Bloodstone Blade");
-		LanguageRegistry.addName(GoldenSwordFragment, "Gold Sword Fragment");
+		IntegratedLanguageFile.loadWeaponnames();
 	}
 
 	private void ItemCode() 
 	{
 		//Tool Parts
-		BloodstoneBlade = (new ItemBasic(BloodstoneBladeIID)).setUnlocalizedName("RCW:BloodstoneBlade");
-		GoldenSwordFragment = (new ItemBasic(GoldenSwordFragmentIID)).setUnlocalizedName("RCW:GoldenSwordFragment");
-		UnbindedSword = (new ItemBasic(UnbindedSwordIID)).setUnlocalizedName("RCW:BloodstoneSword");
+		BloodstoneBlade = (new ItemBasic(BloodstoneBladeIID)).setUnlocalizedName("rcw:BloodstoneBlade").setTextureName("rcw:BloodstoneBlade");
+		GoldenSwordFragment = (new ItemBasic(GoldenSwordFragmentIID)).setUnlocalizedName("rcw:GoldenSwordFragment").setTextureName("rcw:GoldenSwordFragment");
+		UnbindedSword = (new ItemBasic(UnbindedSwordIID)).setUnlocalizedName("rcw:BloodstoneSword").setTextureName("rcw:BloodstoneSword");
 
 		//Obsidian
-		ObbySword = (new BasicSword(this.ObbyPickID, EnumToolMaterialObby)).setUnlocalizedName("RCW:ObbySword");
-		ObbyPick = (new BasicPick(this.ObbySwordID, EnumToolMaterialObby)).setUnlocalizedName("RCW:ObbyPick");
-		ObbyShovel = (new BasicShovel(this.ObbyShovelID, EnumToolMaterialObby)).setUnlocalizedName("RCW:ObbyShovel");
-		ObbyAxe = (new BasicAxe(this.ObbyAxeID, EnumToolMaterialObby)).setUnlocalizedName("RCW:ObbyAxe");
-		ObbyHoe = (new BasicHoe(this.ObbyHoeID, EnumToolMaterialObby)).setUnlocalizedName("RCW:ObbyHoe");
+		ObbySword = (new BasicSword(this.ObbyPickID, EnumToolMaterialObby)).setUnlocalizedName("rcw:ObbySword").setTextureName("rcw:ObbySword");
+		ObbyPick = (new BasicPick(this.ObbySwordID, EnumToolMaterialObby)).setUnlocalizedName("rcw:ObbyPick").setTextureName("rcw:ObbyPick");
+		ObbyShovel = (new BasicShovel(this.ObbyShovelID, EnumToolMaterialObby)).setUnlocalizedName("rcw:ObbyShovel").setTextureName("rcw:ObbyShovel");
+		ObbyAxe = (new BasicAxe(this.ObbyAxeID, EnumToolMaterialObby)).setUnlocalizedName("rcw:ObbyAxe").setTextureName("rcw:ObbyAxe");
+		ObbyHoe = (new BasicHoe(this.ObbyHoeID, EnumToolMaterialObby)).setUnlocalizedName("rcw:ObbyHoe").setTextureName("rcw:ObbyHoe");
 
 		//Bloodstone
-		BloodstoneSword = (new BasicSword(this.BloodstonePickID, EnumToolMaterialBloodstone)).setUnlocalizedName("RCW:BloodstoneSword");
-		BloodstonePick = (new BasicPick(this.BloodstoneSwordID, EnumToolMaterialBloodstone)).setUnlocalizedName("RCW:BloodstonePick");
-		BloodstoneShovel = (new BasicShovel(this.BloodstoneShovelID, EnumToolMaterialBloodstone)).setUnlocalizedName("RCW:BloodstoneShovel");
-		BloodstoneAxe = (new BasicAxe(this.BloodstoneAxeID, EnumToolMaterialBloodstone)).setUnlocalizedName("RCW:BloodstoneAxe");
-		BloodstoneHoe = (new BasicHoe(this.BloodstoneHoeID, EnumToolMaterialBloodstone)).setUnlocalizedName("RCW:BloodstoneHoe");
+		BloodstoneSword = (new BasicSword(this.BloodstonePickID, EnumToolMaterialBloodstone)).setUnlocalizedName("rcw:BloodstoneSword").setTextureName("rcw:BloodstoneSword");
+		BloodstonePick = (new BasicPick(this.BloodstoneSwordID, EnumToolMaterialBloodstone)).setUnlocalizedName("rcw:BloodstonePick").setTextureName("rcw:BloodstonePick");
+		BloodstoneShovel = (new BasicShovel(this.BloodstoneShovelID, EnumToolMaterialBloodstone)).setUnlocalizedName("rcw:BloodstoneShovel").setTextureName("rcw:BloodstoneShovel");
+		BloodstoneAxe = (new BasicAxe(this.BloodstoneAxeID, EnumToolMaterialBloodstone)).setUnlocalizedName("rcw:BloodstoneAxe").setTextureName("rcw:BloodstoneAxe");
+		BloodstoneHoe = (new BasicHoe(this.BloodstoneHoeID, EnumToolMaterialBloodstone)).setUnlocalizedName("rcw:BloodstoneHoe").setTextureName("rcw:BloodstoneHoe");
 	}
 
 
-	@PostInit
+	@EventHandler
 	public static void postInit(FMLPostInitializationEvent var0) 
 	{
 		//Obsidian Tools

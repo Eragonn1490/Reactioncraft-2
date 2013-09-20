@@ -211,36 +211,36 @@ public class BlockBookcaseMulti extends Block
         iconBuffer = new Icon[4][12]; // 3 machines, 6 sides each, in ON and OFF states
         
         // meta 0, Empty Bookshelf
-        iconBuffer[0][0] = par1IconRegister.registerIcon("RCBB:wood"); // bottom
-        iconBuffer[0][1] = par1IconRegister.registerIcon("RCBB:wood"); // top
-        iconBuffer[0][2] = par1IconRegister.registerIcon("RCBB:empty"); // north
-        iconBuffer[0][3] = par1IconRegister.registerIcon("RCBB:empty"); // east
-        iconBuffer[0][4] = par1IconRegister.registerIcon("RCBB:empty"); // south
-        iconBuffer[0][5] = par1IconRegister.registerIcon("RCBB:empty"); // west
+        iconBuffer[0][0] = par1IconRegister.registerIcon("rcbb:wood"); // bottom
+        iconBuffer[0][1] = par1IconRegister.registerIcon("rcbb:wood"); // top
+        iconBuffer[0][2] = par1IconRegister.registerIcon("rcbb:empty"); // north
+        iconBuffer[0][3] = par1IconRegister.registerIcon("rcbb:empty"); // east
+        iconBuffer[0][4] = par1IconRegister.registerIcon("rcbb:empty"); // south
+        iconBuffer[0][5] = par1IconRegister.registerIcon("rcbb:empty"); // west
         
         // meta 1, Webbed Bookshelf with books
-        iconBuffer[1][0] = par1IconRegister.registerIcon("RCBB:wood"); // bottom
-        iconBuffer[1][1] = par1IconRegister.registerIcon("RCBB:wood"); // top
+        iconBuffer[1][0] = par1IconRegister.registerIcon("rcbb:wood"); // bottom
+        iconBuffer[1][1] = par1IconRegister.registerIcon("rcbb:wood"); // top
         iconBuffer[1][2] = par1IconRegister.registerIcon("bookshelf"); // north
         iconBuffer[1][3] = par1IconRegister.registerIcon("bookshelf"); // east
         iconBuffer[1][4] = par1IconRegister.registerIcon("bookshelf"); // south
         iconBuffer[1][5] = par1IconRegister.registerIcon("bookshelf"); // west
         
         // meta 2, Webbed Bookshelf without books
-        iconBuffer[2][0] = par1IconRegister.registerIcon("RCBB:wood"); // bottom
-        iconBuffer[2][1] = par1IconRegister.registerIcon("RCBB:wood"); // top
-        iconBuffer[2][2] = par1IconRegister.registerIcon("RCBB:web"); // north
-        iconBuffer[2][3] = par1IconRegister.registerIcon("RCBB:web"); // east
-        iconBuffer[2][4] = par1IconRegister.registerIcon("RCBB:web"); // south
-        iconBuffer[2][5] = par1IconRegister.registerIcon("RCBB:web"); // west
+        iconBuffer[2][0] = par1IconRegister.registerIcon("rcbb:wood"); // bottom
+        iconBuffer[2][1] = par1IconRegister.registerIcon("rcbb:wood"); // top
+        iconBuffer[2][2] = par1IconRegister.registerIcon("rcbb:web"); // north
+        iconBuffer[2][3] = par1IconRegister.registerIcon("rcbb:web"); // east
+        iconBuffer[2][4] = par1IconRegister.registerIcon("rcbb:web"); // south
+        iconBuffer[2][5] = par1IconRegister.registerIcon("rcbb:web"); // west
         
         // meta 3, Scroll Shelf
-        iconBuffer[3][0] = par1IconRegister.registerIcon("RCBB:css"); // bottom
-        iconBuffer[3][1] = par1IconRegister.registerIcon("RCBB:css"); // top
-        iconBuffer[3][2] = par1IconRegister.registerIcon("RCBB:shelf"); // north
-        iconBuffer[3][3] = par1IconRegister.registerIcon("RCBB:shelf"); // east
-        iconBuffer[3][4] = par1IconRegister.registerIcon("RCBB:shelf"); // south
-        iconBuffer[3][5] = par1IconRegister.registerIcon("RCBB:shelf"); // west
+        iconBuffer[3][0] = par1IconRegister.registerIcon("rcbb:css"); // bottom
+        iconBuffer[3][1] = par1IconRegister.registerIcon("rcbb:css"); // top
+        iconBuffer[3][2] = par1IconRegister.registerIcon("rcbb:shelf"); // north
+        iconBuffer[3][3] = par1IconRegister.registerIcon("rcbb:shelf"); // east
+        iconBuffer[3][4] = par1IconRegister.registerIcon("rcbb:shelf"); // south
+        iconBuffer[3][5] = par1IconRegister.registerIcon("rcbb:shelf"); // west
         
 //        // meta 2, extractor
 //        // first the 6 sides in OFF state

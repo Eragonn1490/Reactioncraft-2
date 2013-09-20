@@ -1,26 +1,25 @@
-package Reactioncraft.Desert.common;
+package Reactioncraft.desert.common;
 
-import Reactioncraft.Desert.RCBDM;
-import Reactioncraft.basemod.RCB;
-import cpw.mods.fml.relauncher.Side;
-import cpw.mods.fml.relauncher.SideOnly;
 import java.util.List;
 import java.util.Random;
 
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockLog;
-import net.minecraft.block.material.Material;
 import net.minecraft.client.renderer.texture.IconRegister;
 import net.minecraft.creativetab.CreativeTabs;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.Icon;
 import net.minecraft.world.World;
+import Reactioncraft.basemod.RCB;
+import Reactioncraft.desert.RCBDM;
+import cpw.mods.fml.relauncher.Side;
+import cpw.mods.fml.relauncher.SideOnly;
 
 public class BlockCherryTreeLog extends BlockLog
 {
     /** The type of tree this log came from. */
-    public static final String[] woodType = new String[] {"oak", "spruce", "birch", "jungle"};
-    public static final String[] treeTextureTypes = new String[] {"RCBDM:woodside", "RCBDM:woodside", "RCBDM:woodside", "RCBDM:woodside"};
+    public static final String[] woodType = new String[] {"rccherry"};
+    public static final String[] treeTextureTypes = new String[] {"rcbdm:woodside", "rcbdm:woodside", "rcbdm:woodside", "rcbdm:woodside"};
     @SideOnly(Side.CLIENT)
     private Icon[] iconArray;
     @SideOnly(Side.CLIENT)

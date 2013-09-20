@@ -1,4 +1,4 @@
-package Reactioncraft.Net.ltd.genuine.database;
+package Reactioncraft.net.ltd.genuine.database;
 
 import java.util.ArrayList;
 import java.util.Collection;

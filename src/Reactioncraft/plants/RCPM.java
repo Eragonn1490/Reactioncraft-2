@@ -1,19 +1,16 @@
 package Reactioncraft.plants;
 
 import java.io.File;
-
 import Reactioncraft.plants.client.ClientProxy;
 import Reactioncraft.plants.common.CommonProxy;
+import Reactioncraft.integration.*;
 import Reactioncraft.basefiles.common.PacketHandler;
 import Reactioncraft.basefiles.common.*;
 import Reactioncraft.basemod.RCB;
 import Reactioncraft.plants.common.*;
-import net.minecraft.block.Block;
-import net.minecraft.block.BlockReed;
+import net.minecraft.block.*;
 import net.minecraft.creativetab.CreativeTabs;
-import net.minecraft.item.Item;
-import net.minecraft.item.ItemReed;
-import net.minecraft.item.ItemStack;
+import net.minecraft.item.*;
 import net.minecraft.item.crafting.CraftingManager;
 import net.minecraft.util.WeightedRandomChestContent;
 import net.minecraftforge.common.ChestGenHooks;
@@ -23,6 +20,7 @@ import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.oredict.OreDictionary;
 import net.minecraftforge.oredict.ShapedOreRecipe;
 import cpw.mods.fml.common.Mod;
+import cpw.mods.fml.common.Mod.EventHandler;
 import cpw.mods.fml.common.Mod.Init;
 import cpw.mods.fml.common.Mod.Instance;
 import cpw.mods.fml.common.Mod.PostInit;
@@ -35,7 +33,7 @@ import cpw.mods.fml.common.network.NetworkMod;
 import cpw.mods.fml.common.registry.GameRegistry;
 import cpw.mods.fml.common.registry.LanguageRegistry;
 
-@Mod( modid = "RCPM", name="Reactioncraft Plants", version="[1.5.2] Reactioncraft Version 9.0")
+@Mod( modid = "rcpm", name="Reactioncraft Plants", version="[1.6.2] Reactioncraft 3 Version 1.1.2")
 @NetworkMod(channels = { "RCPM" }, clientSideRequired = true, serverSideRequired = false, packetHandler = PacketHandler.class)
 
 public class RCPM
@@ -93,7 +91,7 @@ public class RCPM
 	//Config
 	public static ReactioncraftConfiguration config;
 
-	@PreInit
+	@EventHandler
 	public void preInit(FMLPreInitializationEvent evt)
 	{
 		System.out.println("[RCPM] Pre Initialization Loaded");
@@ -106,7 +104,7 @@ public class RCPM
 		{
 			config.load();
 
-			//Claimed IDs 3081 - 3090
+			//Claimed IDs 3081 - 3089 (3090 given to mobs mod for tracker jacker hive)
 			//CocoCropID = config.getBlock("Coco Crop", 3081).getInt();
 			AncientPlantID = config.getBlock("Ancient Plant", 3082).getInt();
 			sugarcaneBlockID = config.getBlock("Sugar Cane", 3083).getInt();
@@ -128,7 +126,6 @@ public class RCPM
 			AncientFlowerIID = config.getItem("Ancient Flower", 10871).getInt();
 
 			//Claimed Item ids 10301 - 10400 
-
 		}
 
 		finally 
@@ -141,62 +138,60 @@ public class RCPM
 	}
 
 
-	@Init
+	@EventHandler
 	public void load(FMLInitializationEvent event)
 	{
 		//the meat of the mod
 		//Claimed Block Ids 3081 - 3099
 		proxy.registerRenderInformation();
-
-		//Blocks
-		//CocoCrop = new BlockCocoPlant(CocoCropID).setHardness(0.0F).setResistance(1.0F).setUnlocalizedName("CocoCrop");
-		AncientPlant = new BlockAncientPlant(AncientPlantID).setHardness(0.0F).setResistance(1.0F);
-		sugarcaneBlock = (new BlockReed1(sugarcaneBlockID, 73)).setHardness(0.0F).setStepSound(Block.soundGrassFootstep);
-		cornBlock = new BlockCorn(cornBlockID, 40).setHardness(0.0F).setStepSound(Block.soundGrassFootstep);
-		cornStalk = new BlockCornStalk(cornStalkID).setHardness(0.0F).setStepSound(Block.soundGrassFootstep);
-
-
-		//Items
-		AncientFlower = new ItemBasic(AncientFlowerIID).setUnlocalizedName("RCPM:AncientFlower").setCreativeTab(RCB.Reactioncraft).setCreativeTab(RCB.ReactioncraftItems);
-		CornSeed = new ItemBasicSeed(CornSeedIID, RCPM.cornStalk.blockID, Block.tilledField.blockID).setUnlocalizedName("RCPM:CornSeed").setCreativeTab(RCB.ReactioncraftItems);
-		AncientSeeds = new ItemBasicSeed(AncientSeedsIID, RCPM.AncientPlant.blockID, Block.tilledField.blockID).setUnlocalizedName("RCPM:AncientSeeds").setCreativeTab(RCB.ReactioncraftItems);
-		AncientFruit = new ItemBasicFood(AncientFruitIID, 8, true).setUnlocalizedName("RCPM:AncientFruit").setCreativeTab(RCB.Reactioncraftfood);
-		//CocoSeed = new ItemBasicSeed(CocoSeedIID, RCPM.CocoCrop.blockID, Block.tilledField.blockID).setUnlocalizedName("CocoSeed");
-		//CocoBean = new ItemBasic(CocoBeanIID).setUnlocalizedName("CocoBean");
-		//VanillaSeed= new ItemBasic(VanillaSeedIID).setUnlocalizedName("VanillaSeed");
-		//VanillaBean= new ItemBasic(VanillaBeanIID).setUnlocalizedName("VanillaBean");
-		sugarcaneItem = (new Itemsugarcane(sugarcaneItemIID, RCPM.sugarcaneBlock)).setUnlocalizedName("RCPM:sugarcaneItem").setCreativeTab(RCB.ReactioncraftItems);
-		stalksItem = (new ItemStalks(stalksItemIID, RCPM.cornBlock)).setUnlocalizedName("RCPM:Stalks").setCreativeTab(RCB.ReactioncraftItems);
-		Wrappedcorn = new ItemBasic(WrappedcornIID).setUnlocalizedName("RCPM:Wrappedcorn").setCreativeTab(RCB.Reactioncraftfood);
+		blocks();
+		registry();
+		items();
+		recipes();
+		lang();
+		forgeevents();
+		smelting();
+	}
 
 
-		//Registry Code
-		GameRegistry.registerBlock(cornStalk, "cornStalk");
-		GameRegistry.registerBlock(cornBlock, "Corn Block");
-		//GameRegistry.registerBlock(CocoCrop, "CocoCrop");
-		GameRegistry.registerBlock(AncientPlant, "AncientPlant");
-		GameRegistry.registerBlock(sugarcaneBlock, "SugarcaneBlock");
-		GameRegistry.registerItem(sugarcaneItem, "sugarcaneItem");
-
-
+	private void smelting() 
+	{
 		//GameRegistry.addSmelting(CocoSeed.itemID, new ItemStack(CocoBean), 0.1F); 
-
-		//Block Code
-		LanguageRegistry.addName(cornBlock, "Corn Plant");
-		LanguageRegistry.addName(cornStalk, "Corn Stalk");
+	}
 
 
-		//Item Code
-		LanguageRegistry.addName(CornSeed, "Corn Seed");
-		LanguageRegistry.addName(AncientSeeds, "Ancient Seeds");
-		LanguageRegistry.addName(AncientFruit, "Ancient Fruit");
-		//LanguageRegistry.addName(CocoSeed, "Coco Seed");
-		//LanguageRegistry.addName(CocoBean, "Coco Bean");
-		LanguageRegistry.addName(sugarcaneItem, "GM Sugar Canes");
-		LanguageRegistry.addName(AncientFlower, "Ancient Flower");
-		LanguageRegistry.addName(Wrappedcorn, "Wrapped Corn");
-		LanguageRegistry.addName(stalksItem, "Corn Stalks");
+	private void forgeevents() 
+	{
+		//Ore Dict
+		//OreDictionary.registerOre("cocoBean", new ItemStack(CocoBean));
+		OreDictionary.registerOre("wrappedCorn", new ItemStack(Wrappedcorn));
 
+		//To aquire ancient plant seeds
+		//ChestGenHooks.addItem(ChestGenHooks.VILLAGE_BLACKSMITH, new WeightedRandomChestContent(lootStack, minStackSize, maxStackSize, chance));
+		ChestGenHooks.addItem(ChestGenHooks.BONUS_CHEST, new WeightedRandomChestContent(new ItemStack(RCPM.AncientFruit), 1, 2, 5));
+		ChestGenHooks.addItem(ChestGenHooks.MINESHAFT_CORRIDOR, new WeightedRandomChestContent(new ItemStack(RCPM.AncientFruit), 1, 5, 15));
+		ChestGenHooks.addItem(ChestGenHooks.PYRAMID_JUNGLE_CHEST, new WeightedRandomChestContent(new ItemStack(RCPM.AncientFruit), 1, 5, 15));
+
+		//Ancient Flower
+		ChestGenHooks.addItem(ChestGenHooks.BONUS_CHEST, new WeightedRandomChestContent(new ItemStack(RCPM.AncientFlower), 1, 2, 5));
+		ChestGenHooks.addItem(ChestGenHooks.MINESHAFT_CORRIDOR, new WeightedRandomChestContent(new ItemStack(RCPM.AncientFlower), 1, 5, 15));
+		ChestGenHooks.addItem(ChestGenHooks.PYRAMID_JUNGLE_CHEST, new WeightedRandomChestContent(new ItemStack(RCPM.AncientFlower), 1, 5, 15));
+
+		//Corn
+		MinecraftForge.addGrassSeed(new ItemStack(RCPM.CornSeed), 1);
+		ChestGenHooks.addItem(ChestGenHooks.BONUS_CHEST, new WeightedRandomChestContent(new ItemStack(RCPM.CornSeed), 1, 2, 5));
+		ChestGenHooks.addItem(ChestGenHooks.MINESHAFT_CORRIDOR, new WeightedRandomChestContent(new ItemStack(RCPM.CornSeed), 1, 5, 15));
+		ChestGenHooks.addItem(ChestGenHooks.PYRAMID_JUNGLE_CHEST, new WeightedRandomChestContent(new ItemStack(RCPM.CornSeed), 1, 5, 15));
+
+		//Sugarcane
+		ChestGenHooks.addItem(ChestGenHooks.BONUS_CHEST, new WeightedRandomChestContent(new ItemStack(RCPM.sugarcaneItem), 1, 2, 5));
+		ChestGenHooks.addItem(ChestGenHooks.MINESHAFT_CORRIDOR, new WeightedRandomChestContent(new ItemStack(RCPM.sugarcaneItem), 1, 5, 15));
+		ChestGenHooks.addItem(ChestGenHooks.PYRAMID_JUNGLE_CHEST, new WeightedRandomChestContent(new ItemStack(RCPM.sugarcaneItem), 1, 5, 15));
+	}
+
+
+	private void recipes() 
+	{
 		//MY Taller Sugarcane to Paper & sugar
 		GameRegistry.addRecipe(new ItemStack(Item.paper, 3), new Object[] {"###", '#', RCPM.sugarcaneItem});
 		GameRegistry.addRecipe(new ItemStack(Item.sugar, 1), new Object[] {"#", '#', RCPM.sugarcaneItem});
@@ -216,35 +211,57 @@ public class RCPM
 		//GameRegistry.addRecipe(new ItemStack(CocoSeed, 1), new Object[]{"#", Character.valueOf('#'), new ItemStack(Item.dyePowder, 1, 3)});
 		//GameRegistry.addRecipe(new ItemStack(Item.cookie, 12), new Object[]{"D#D", Character.valueOf('#'), CocoBean, Character.valueOf('D'), Item.wheat});
 
-		//Ore Dict
-		//OreDictionary.registerOre("cocoBean", new ItemStack(CocoBean));
-		OreDictionary.registerOre("wrappedCorn", new ItemStack(Wrappedcorn));
-
-		//To aquire ancient plant seeds
-		//ChestGenHooks.addItem(ChestGenHooks.VILLAGE_BLACKSMITH, new WeightedRandomChestContent(lootStack, minStackSize, maxStackSize, chance));
-		ChestGenHooks.addItem(ChestGenHooks.BONUS_CHEST, new WeightedRandomChestContent(new ItemStack(RCPM.AncientFruit), 1, 2, 5));
-		ChestGenHooks.addItem(ChestGenHooks.MINESHAFT_CORRIDOR, new WeightedRandomChestContent(new ItemStack(RCPM.AncientFruit), 1, 5, 15));
-		ChestGenHooks.addItem(ChestGenHooks.PYRAMID_JUNGLE_CHEST, new WeightedRandomChestContent(new ItemStack(RCPM.AncientFruit), 1, 5, 15));
-
-		//Ancient Flower
-		ChestGenHooks.addItem(ChestGenHooks.BONUS_CHEST, new WeightedRandomChestContent(new ItemStack(RCPM.AncientFlower), 1, 2, 5));
-		ChestGenHooks.addItem(ChestGenHooks.MINESHAFT_CORRIDOR, new WeightedRandomChestContent(new ItemStack(RCPM.AncientFlower), 1, 5, 15));
-		ChestGenHooks.addItem(ChestGenHooks.PYRAMID_JUNGLE_CHEST, new WeightedRandomChestContent(new ItemStack(RCPM.AncientFlower), 1, 5, 15));
-
-		//Corn
-		MinecraftForge.addGrassSeed(new ItemStack(RCPM.CornSeed), 5);
-		ChestGenHooks.addItem(ChestGenHooks.BONUS_CHEST, new WeightedRandomChestContent(new ItemStack(RCPM.CornSeed), 1, 2, 5));
-		ChestGenHooks.addItem(ChestGenHooks.MINESHAFT_CORRIDOR, new WeightedRandomChestContent(new ItemStack(RCPM.CornSeed), 1, 5, 15));
-		ChestGenHooks.addItem(ChestGenHooks.PYRAMID_JUNGLE_CHEST, new WeightedRandomChestContent(new ItemStack(RCPM.CornSeed), 1, 5, 15));
-
-		//Sugarcane
-		ChestGenHooks.addItem(ChestGenHooks.BONUS_CHEST, new WeightedRandomChestContent(new ItemStack(RCPM.sugarcaneItem), 1, 2, 5));
-		ChestGenHooks.addItem(ChestGenHooks.MINESHAFT_CORRIDOR, new WeightedRandomChestContent(new ItemStack(RCPM.sugarcaneItem), 1, 5, 15));
-		ChestGenHooks.addItem(ChestGenHooks.PYRAMID_JUNGLE_CHEST, new WeightedRandomChestContent(new ItemStack(RCPM.sugarcaneItem), 1, 5, 15));
 	}
 
 
-	@PostInit
+	private void registry() 
+	{
+		//Registry Code
+		GameRegistry.registerBlock(cornStalk, "cornStalk");
+		GameRegistry.registerBlock(cornBlock, "Corn Block");
+		//GameRegistry.registerBlock(CocoCrop, "CocoCrop");
+		GameRegistry.registerBlock(AncientPlant, "AncientPlant");
+		GameRegistry.registerBlock(sugarcaneBlock, "SugarcaneBlock");
+		//GameRegistry.registerItem(sugarcaneItem, "sugarcaneItem"); Never Register Items?
+	}
+
+
+	private void items() 
+	{
+		//Items
+		AncientFlower = new ItemBasic(AncientFlowerIID).setUnlocalizedName("rcpm:AncientFlower").setTextureName("rcpm:AncientFlower").setCreativeTab(RCB.ReactioncraftItems);
+		CornSeed = new ItemBasicSeed(CornSeedIID, RCPM.cornStalk.blockID, Block.tilledField.blockID).setUnlocalizedName("rcpm:CornSeed").setTextureName("rcpm:CornSeed").setCreativeTab(RCB.ReactioncraftItems);
+		AncientSeeds = new ItemBasicSeed(AncientSeedsIID, RCPM.AncientPlant.blockID, Block.tilledField.blockID).setUnlocalizedName("rcpm:AncientSeeds").setTextureName("rcpm:AncientSeeds").setCreativeTab(RCB.ReactioncraftItems);
+		AncientFruit = new ItemBasicFood(AncientFruitIID, 8, true).setUnlocalizedName("rcpm:AncientFruit").setTextureName("rcpm:AncientFruit").setCreativeTab(RCB.Reactioncraftfood);
+		//CocoSeed = new ItemBasicSeed(CocoSeedIID, RCPM.CocoCrop.blockID, Block.tilledField.blockID).setUnlocalizedName("CocoSeed");
+		//CocoBean = new ItemBasic(CocoBeanIID).setUnlocalizedName("CocoBean");
+		//VanillaSeed= new ItemBasic(VanillaSeedIID).setUnlocalizedName("VanillaSeed");
+		//VanillaBean= new ItemBasic(VanillaBeanIID).setUnlocalizedName("VanillaBean");
+		sugarcaneItem = (new Itemsugarcane(sugarcaneItemIID, RCPM.sugarcaneBlock)).setUnlocalizedName("rcpm:sugarcaneItem").setTextureName("rcpm:sugarcaneItem").setCreativeTab(RCB.ReactioncraftItems);
+		stalksItem = (new ItemStalks(stalksItemIID, RCPM.cornBlock)).setUnlocalizedName("rcpm:Stalks").setTextureName("rcpm:Stalks").setCreativeTab(RCB.ReactioncraftItems);
+		Wrappedcorn = new ItemBasic(WrappedcornIID).setUnlocalizedName("rcpm:Wrappedcorn").setTextureName("rcpm:Wrappedcorn").setCreativeTab(RCB.Reactioncraftfood);
+
+	}
+
+
+	private void blocks() 
+	{
+		//Blocks
+		//CocoCrop = new BlockCocoPlant(CocoCropID).setHardness(0.0F).setResistance(1.0F).setUnlocalizedName("CocoCrop");
+		AncientPlant = new BlockAncientPlant(AncientPlantID).setHardness(0.0F).setResistance(1.0F);
+		sugarcaneBlock = (new BlockReed1(sugarcaneBlockID, 73)).setHardness(0.0F).setStepSound(Block.soundGrassFootstep);
+		cornBlock = new BlockCorn(cornBlockID, 40).setHardness(0.0F).setStepSound(Block.soundGrassFootstep);
+		cornStalk = new BlockCornStalk(cornStalkID).setHardness(0.0F).setStepSound(Block.soundGrassFootstep);
+	}
+
+
+	private void lang() 
+	{
+		IntegratedLanguageFile.loadPlantsnames();
+	}
+
+
+	@EventHandler
 	public void modsLoaded(FMLPostInitializationEvent evt)
 	{
 		//new as well! How about that stuff after the mods are loaded/initialized?

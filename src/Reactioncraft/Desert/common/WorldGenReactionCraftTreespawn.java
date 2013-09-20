@@ -1,13 +1,12 @@
-package Reactioncraft.Desert.common;
+package Reactioncraft.desert.common;
 
 import java.util.Random;
-
-import Reactioncraft.Desert.RCBDM;
-import Reactioncraft.core.RCC;
 
 import net.minecraft.block.Block;
 import net.minecraft.world.World;
 import net.minecraft.world.gen.feature.WorldGenerator;
+import Reactioncraft.core.RCC;
+import Reactioncraft.desert.RCBDM;
 
 
 public class WorldGenReactionCraftTreespawn extends WorldGenerator

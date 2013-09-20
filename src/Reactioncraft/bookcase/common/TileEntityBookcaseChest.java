@@ -507,4 +507,10 @@ public class TileEntityBookcaseChest extends TileEntity implements IInventory
 
         return this.field_94046_i;
     }
+
+	@Override
+	public boolean isItemValidForSlot(int i, ItemStack itemstack) 
+	{
+		return false;
+	}
 }

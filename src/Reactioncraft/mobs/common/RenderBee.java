@@ -1,27 +1,35 @@
 package Reactioncraft.mobs.common;
 
+import org.lwjgl.opengl.GL11;
+
 import net.minecraft.client.model.ModelBase;
 import net.minecraft.client.renderer.entity.RenderLiving;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityLiving;
+import net.minecraft.entity.EntityLivingBase;
+import net.minecraft.util.ResourceLocation;
 
-import org.lwjgl.opengl.GL11;
-
-public class RenderBee extends RenderLiving
+public class RenderBee extends RenderLiving 
 {
-    public RenderBee(ModelBase modelbase, float f)
+	protected ModelBee model;
+	private float scale = 1.0F;
+	
+	public RenderBee(ModelBee par1ModelBase, float par2, float par3) 
+	{
+		super(par1ModelBase, par2 * par3);
+		model = ((ModelBee)mainModel);
+		this.scale = par3;
+	}
+	
+    public void renderEntityBee(EntityBee par1EntityEntityBee, double par2, double par4, double par6, float par8, float par9)
     {
-        super(modelbase, f);
+    	//System.out.printf("Rendering EntityTJ\n");
+        super.doRenderLiving(par1EntityEntityBee, par2, par4, par6, par8, par9);
     }
 
-    public void renderBee(EntityBee entitybee, double d, double d1, double d2, float f, float f1)
+    public void doRenderLiving(EntityLiving par1EntityLiving, double par2, double par4, double par6, float par8, float par9)
     {
-        super.doRenderLiving(entitybee, d, d1, d2, f, f1);
-    }
-
-    public void doRenderLiving(EntityLiving entityliving, double d, double d1, double d2, float f, float f1)
-    {
-        renderBee((EntityBee)entityliving, d, d1, d2, f, f1);
+        this.renderEntityBee((EntityBee)par1EntityLiving, par2, par4, par6, par8, par9);
     }
 
     /**
@@ -30,27 +38,34 @@ public class RenderBee extends RenderLiving
      * (Render<T extends Entity) and this method has signature public void doRender(T entity, double d, double d1,
      * double d2, float f, float f1). But JAD is pre 1.5 so doesn't do that.
      */
-    public void doRender(Entity entity, double d, double d1, double d2, float f, float f1)
+    public void doRender(Entity par1Entity, double par2, double par4, double par6, float par8, float par9)
     {
-        renderBee((EntityBee)entity, d, d1, d2, f, f1);
+        this.renderEntityBee((EntityBee)par1Entity, par2, par4, par6, par8, par9);
     }
-
-    public void preRenderScale(EntityBee entitybee, float f)
+    
+    /**
+     * Applies the scale to the transform matrix
+     */
+    protected void preRenderScale(EntityBee par1Entity, float par2)
     {
-        GL11.glScalef(1.0F, 1.0F, 1.0F);
+        GL11.glScalef(this.scale, this.scale, this.scale);
     }
 
     /**
      * Allows the render to do any OpenGL state modifications necessary before the model is rendered. Args:
      * entityLiving, partialTickTime
      */
-    public void preRenderCallback(EntityLiving entityliving, float f)
+    protected void preRenderCallback(EntityLivingBase par1EntityLiving, float par2)
     {
-        preRenderScale((EntityBee)entityliving, f);
+        this.preRenderScale((EntityBee)par1EntityLiving, par2);
     }
 
-    public void rotateAnimal(EntityLiving entityliving)
+    /**
+     * Returns the location of an entity's texture. Doesn't seem to be called unless you call Render.bindEntityTexture.
+     **/
+    @Override
+    protected ResourceLocation getEntityTexture(Entity par1Entity)
     {
-        GL11.glRotatef(90F, -1F, 0.0F, 0.0F);
+    	return (new ResourceLocation("rcmobs:textures/entity/tjtexture.png"));
     }
 }

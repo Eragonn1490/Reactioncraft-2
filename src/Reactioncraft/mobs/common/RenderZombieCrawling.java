@@ -4,11 +4,12 @@ import net.minecraft.client.model.ModelBase;
 import net.minecraft.client.renderer.entity.RenderLiving;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityLiving;
+import net.minecraft.util.ResourceLocation;
 
 import org.lwjgl.opengl.GL11;
 
 public class RenderZombieCrawling extends RenderLiving
-{
+{																				///assets/rcmobs/textures/entity/quadzombie.png
     public RenderZombieCrawling(ModelBase modelbase, float f)
     {
         super(modelbase, f);
@@ -52,5 +53,14 @@ public class RenderZombieCrawling extends RenderLiving
     public void rotateAnimal(EntityLiving entityliving)
     {
         GL11.glRotatef(90F, -1F, 0.0F, 0.0F);
+    }
+    
+    /**
+     * Returns the location of an entity's texture. Doesn't seem to be called unless you call Render.bindEntityTexture.
+     */
+    @Override
+    protected ResourceLocation getEntityTexture(Entity par1Entity)
+    {
+    	return (new ResourceLocation("rcmobs:textures/entity/quadzombie.png"));
     }
 }

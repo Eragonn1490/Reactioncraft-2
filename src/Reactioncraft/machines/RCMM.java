@@ -4,18 +4,18 @@ import java.io.File;
 import net.minecraft.block.*;
 import net.minecraft.block.material.Material;
 import net.minecraft.creativetab.CreativeTabs;
-import net.minecraft.item.Item;
-import net.minecraft.item.ItemStack;
+import net.minecraft.item.*;
 import net.minecraftforge.common.Configuration;
 import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.oredict.OreDictionary;
 import Reactioncraft.machines.client.ClientProxy;
 import Reactioncraft.machines.common.*;
-import Reactioncraft.Integration.Integration;
+import Reactioncraft.integration.*;
 import Reactioncraft.api.common.*;
 import Reactioncraft.basefiles.common.*;
 import Reactioncraft.basemod.RCB;
 import cpw.mods.fml.common.Mod;
+import cpw.mods.fml.common.Mod.EventHandler;
 import cpw.mods.fml.common.Mod.Init;
 import cpw.mods.fml.common.Mod.Instance;
 import cpw.mods.fml.common.Mod.PostInit;
@@ -30,7 +30,7 @@ import cpw.mods.fml.common.registry.GameRegistry;
 import cpw.mods.fml.common.registry.LanguageRegistry;
 
 
-@Mod( modid = "RCMM", name="Reactioncraft Mobs Mod", version="[1.5.2] Reactioncraft Version 9.0", dependencies="after:RCBDM")
+@Mod( modid = "rcmm", name="Reactioncraft Mobs Mod", version="[1.6.2] Reactioncraft 3 Version 1.1.2", dependencies="after:rcbdm")
 @NetworkMod(channels = { "RCMM" }, clientSideRequired = true, serverSideRequired = false, packetHandler = PacketHandler.class)
 
 public class RCMM
@@ -91,7 +91,7 @@ public class RCMM
 	public static boolean RCBDM() throws ClassNotFoundException 
 	{
 		try{
-			Class.forName("Reactioncraft.Desert.RCBDM");
+			Class.forName("Reactioncraft.desert.RCBDM");
 		}
 		catch (NoClassDefFoundError ex) 
 		{
@@ -103,7 +103,7 @@ public class RCMM
 	//Config
 	public static ReactioncraftConfiguration config;
 
-	@PreInit
+	@EventHandler
 	public void preInit(FMLPreInitializationEvent evt)
 	{
 		instance = this;
@@ -145,13 +145,16 @@ public class RCMM
 
 	}
 
-	@Init 
+	@EventHandler 
 	public void load(FMLInitializationEvent event)
 	{
 		ClientProxy.registerRenderInformation();
 		BlockCode();
 		ItemCode();
-		NetworkRegistry.instance().registerGuiHandler(this, proxy);
+		
+		instance = this;
+		NetworkRegistry.instance().registerGuiHandler(instance, proxy);
+		
 		GameRegistry();
 		LanguageRegistry();
 		FreezerRecipes();
@@ -183,14 +186,14 @@ public class RCMM
 		}
 		catch (ClassNotFoundException e)
 		{
-			System.out.println("Reactioncraft Machines did not find Better Desert Mod, Brick Oven disabled");
+			System.out.println("Reactioncraft: Machines, did not find Better Desert Mod, Brick Oven disabled");
 		}
 	}
 
 	private void ItemCode() 
 	{
-		IceBucket = (new ItemBasic(IceBucketIID)).setMaxStackSize(1).setUnlocalizedName("RCMM:IceBucket").setContainerItem(Item.bucketEmpty);
-		ObsidianBucket = (new ItemBasic(ObsidianBucketIID)).setMaxStackSize(1).setUnlocalizedName("RCMM:ObsidianBucket").setContainerItem(Item.bucketEmpty);
+		IceBucket = (new ItemBasic(IceBucketIID)).setMaxStackSize(1).setUnlocalizedName("rcmm:IceBucket").setTextureName("rcmm:IceBucket").setContainerItem(Item.bucketEmpty);
+		ObsidianBucket = (new ItemBasic(ObsidianBucketIID)).setMaxStackSize(1).setUnlocalizedName("rcmm:ObsidianBucket").setTextureName("rcmm:ObsidianBucket").setContainerItem(Item.bucketEmpty);
 	}
 
 	private void BlockCode() 
@@ -203,21 +206,12 @@ public class RCMM
 		ClayalizerActive = (new BlockClayalizer(ClayalizerActiveID, true)).setHardness(3.5F).setLightValue(0.875F).setUnlocalizedName("ClayalizerActive");
 		
 		//BigCraftingTable = (new Block6X6(BigCraftingTableID)).setHardness(2.5F).setStepSound(Block.soundWoodFootstep).setUnlocalizedName("workbench");
-		
-		//MdGuiBlock       = (new BlockMachineMulti(MdGuiBlockID, Material.rock).setHardness(3.5F).setUnlocalizedName("MdGuiBlock"));
+		//MdGuiBlock       = (new Block6X6(MdGuiBlockID, Material.rock).setHardness(3.5F).setUnlocalizedName("MdGuiBlock")).setCreativeTab(RCB.Reactioncraft);
 	}
 
-	private void LanguageRegistry() 
+	public void LanguageRegistry() 
 	{
-		LanguageRegistry.addName(FreezerIdle, "Freezer");
-		LanguageRegistry.addName(BrickOvenIdle, "Brick Oven");
-		LanguageRegistry.addName(ClayalizerIdle, "Clayalizer");
-		LanguageRegistry.addName(ObsidianBucket, "Bucket Of Obsidian");
-		LanguageRegistry.addName(IceBucket, "\u00a79Bucket Of Ice");
-		
-		//LanguageRegistry.addName(BigCraftingTable, "Large Crafting Table");
-		
-		//LanguageRegistry.addName(MdGuiBlock, "");
+		IntegratedLanguageFile.loadMachinesnames();
 	}
 
 	private void GameRegistry() 
@@ -229,14 +223,13 @@ public class RCMM
 		GameRegistry.registerBlock(ClayalizerIdle, "ClayalizerIdle");
 		GameRegistry.registerBlock(ClayalizerActive, "ClayalizerActive");
 		//GameRegistry.registerBlock(BigCraftingTable, "BigCraftingTable");
-		
 		//GameRegistry.registerBlock(MdGuiBlock, ItemMulti.class, "MdGuiBlock");
 
 		GameRegistry.addSmelting(RCMM.IceBucket.itemID, new ItemStack(Item.bucketWater, 1), 0.5F);
 
-		GameRegistry.registerTileEntity(TileEntityFreezer.class, "Freezer");
-		GameRegistry.registerTileEntity(TileEntityBrickOven.class, "BrickOven");
-		GameRegistry.registerTileEntity(TileEntityClayalizer.class, "Clayalizer");
+		GameRegistry.registerTileEntity(TileEntityFreezer.class, "Reactioncraft-Freezer");
+		GameRegistry.registerTileEntity(TileEntityBrickOven.class, "Reactioncraft-BrickOven");
+		GameRegistry.registerTileEntity(TileEntityClayalizer.class, "Reactioncraft-Clayalizer");
 		//GameRegistry.registerTileEntity(TileEntity6X6.class, "6X6 CT");
 
 		GameRegistry.addRecipe(new ItemStack(FreezerIdle, 1), new Object[]{"RSR", "LOW", "RSR",  Character.valueOf('W'), Item.bucketWater ,Character.valueOf('L'), Block.lever ,Character.valueOf('S'), Block.blockIron ,Character.valueOf('O'), Block.furnaceIdle, Character.valueOf('R'), Item.redstone});
@@ -262,9 +255,8 @@ public class RCMM
 	{
 	}
 
-	@PostInit
+	@EventHandler
 	public void modsLoaded(FMLPostInitializationEvent evt)
 	{
-
 	}
 }

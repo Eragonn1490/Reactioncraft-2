@@ -1,16 +1,15 @@
 package Reactioncraft.core.common;
 
 import java.util.Random;
-import Reactioncraft.basemod.RCB;
-import Reactioncraft.core.RCC;
+
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockSand;
 import net.minecraft.block.material.Material;
-import net.minecraft.creativetab.CreativeTabs;
 import net.minecraft.entity.item.EntityFallingSand;
-import net.minecraft.tileentity.TileEntity;
 import net.minecraft.world.IBlockAccess;
 import net.minecraft.world.World;
+import Reactioncraft.basemod.RCB;
+import Reactioncraft.core.RCC;
 
 public class BlockSandRc extends BlockSand
 {

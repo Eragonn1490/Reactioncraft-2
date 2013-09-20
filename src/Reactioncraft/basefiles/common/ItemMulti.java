@@ -1,7 +1,6 @@
 package Reactioncraft.basefiles.common;
 
 import java.util.List;
-import net.minecraft.block.BlockCloth;
 import net.minecraft.item.ItemBlock;
 import net.minecraft.item.ItemDye;
 import net.minecraft.item.ItemStack;

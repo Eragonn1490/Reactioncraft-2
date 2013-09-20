@@ -1,28 +1,22 @@
-package Reactioncraft.Net;
+package Reactioncraft.net;
 
+import Reactioncraft.net.client.ClientProxy;
+import Reactioncraft.net.Common.CommonProxy;
 import java.io.File;
-
 import net.minecraft.block.Block;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.inventory.IInventory;
-import net.minecraft.item.EnumToolMaterial;
-import net.minecraft.item.Item;
-import net.minecraft.item.ItemStack;
+import net.minecraft.item.*;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraftforge.common.EnumHelper;
-import Reactioncraft.Net.Common.EntityPlayerClone;
-import Reactioncraft.Net.Common.ItemCaughtEntity;
-import Reactioncraft.Net.Common.ItemCaughtPlayer;
-import Reactioncraft.Net.Common.ItemNetCatcher;
-import Reactioncraft.Net.Common.ItemPieceHilt;
-import Reactioncraft.Net.Common.ItemPieceNet;
-import Reactioncraft.Net.client.ClientProxy;
-import Reactioncraft.Net.ltd.genuine.database.ExclusionList;
-import Reactioncraft.basefiles.common.PacketHandler;
-import Reactioncraft.basefiles.common.ReactioncraftConfiguration;
+import Reactioncraft.net.Common.*;
+import Reactioncraft.net.ltd.genuine.database.ExclusionList;
+import Reactioncraft.api.common.CatchList;
+import Reactioncraft.basefiles.common.*;
 import Reactioncraft.basemod.RCB;
 import cpw.mods.fml.common.ICraftingHandler;
 import cpw.mods.fml.common.Mod;
+import cpw.mods.fml.common.Mod.EventHandler;
 import cpw.mods.fml.common.Mod.Init;
 import cpw.mods.fml.common.Mod.Instance;
 import cpw.mods.fml.common.Mod.PreInit;
@@ -35,14 +29,14 @@ import cpw.mods.fml.common.registry.GameRegistry;
 import cpw.mods.fml.common.registry.LanguageRegistry;
 
 
-@Mod(modid = "RCN", name = "Reactioncraft Netting", version = "[1.5.2] Reactioncraft Version 9.0", dependencies = "required-after:RCC")
+@Mod(modid = "rcn", name = "Reactioncraft Netting", version = "[1.6.2] Reactioncraft 3 Version 1.1.2", dependencies = "required-after:rcc")
 @NetworkMod(channels = { "RCN" }, clientSideRequired = true, serverSideRequired = false, packetHandler = PacketHandler.class)
 
 public class RCN implements ICraftingHandler
 {
 
-	@SidedProxy(clientSide = "Reactioncraft.Net.client.ClientProxy", serverSide = "Reactioncraft.Net.client.CommonProxy")
-	public static Reactioncraft.Net.client.CommonProxy proxy;
+	@SidedProxy(clientSide = "Reactioncraft.net.client.ClientProxy", serverSide = "Reactioncraft.net.Common.CommonProxy")
+	public static CommonProxy proxy;
 
 	@Instance("RCN")
 	public static RCN instance;
@@ -76,8 +70,10 @@ public class RCN implements ICraftingHandler
 	public static ReactioncraftConfiguration config;
 	
 	public static ExclusionList exclusionList;
+	
+	public static CatchList catchlist;
 
-	@PreInit
+	@EventHandler
 	public void preInit(FMLPreInitializationEvent evt) 
 	{
 		System.out.println("[RCN] Pre Initialization Loaded");
@@ -106,7 +102,7 @@ public class RCN implements ICraftingHandler
 		}
 	}
 
-	@Init
+	@EventHandler
 	public void load(FMLInitializationEvent event) 
 	{
 		// The meat of the mod
@@ -129,7 +125,7 @@ public class RCN implements ICraftingHandler
 	public void itemRegistry() 
 	{
 	}
-
+  
 	public void recipes() 
 	{
 		Object[] levels = new Object[] { Block.planks, Item.leather, Item.ingotIron, Item.ingotGold, Item.diamond };
@@ -165,11 +161,11 @@ public class RCN implements ICraftingHandler
 
 	public void itemCode()
 	{
-		hilt = new ItemPieceHilt(hiltID).setUnlocalizedName("RCN:hilt").setCreativeTab(RCB.ReactioncraftItems);
-		net = new ItemPieceNet(netID).setUnlocalizedName("RCN:netpart").setCreativeTab(RCB.ReactioncraftItems);
-		completeNet = new ItemNetCatcher(completeNetID).setUnlocalizedName("RCN:fullnet").setCreativeTab(RCB.ReactioncraftItems);
-		caught = new ItemCaughtEntity(caughtID).setUnlocalizedName("RCN:caught");
-		caughtplayer = new ItemCaughtPlayer(caughtplayerID).setUnlocalizedName("RCN:caught");
+		hilt = new ItemPieceHilt(hiltID).setUnlocalizedName("RCN:hilt").setTextureName("RCN:hilt").setCreativeTab(RCB.ReactioncraftItems);
+		net = new ItemPieceNet(netID).setUnlocalizedName("RCN:netpart").setTextureName("RCN:netpart").setCreativeTab(RCB.ReactioncraftItems);
+		completeNet = new ItemNetCatcher(completeNetID).setUnlocalizedName("RCN:fullnet").setTextureName("RCN:fullnet").setCreativeTab(RCB.ReactioncraftItems);
+		caught = new ItemCaughtEntity(caughtID).setUnlocalizedName("RCN:caught").setTextureName("RCN:caught");
+		caughtplayer = new ItemCaughtPlayer(caughtplayerID).setUnlocalizedName("RCN:caught").setTextureName("RCN:caught");
 	}
 
 	public void craftingRegistry() 
