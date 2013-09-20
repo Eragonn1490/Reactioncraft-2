@@ -6,12 +6,15 @@ import net.minecraft.block.Block;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityList;
 import net.minecraft.entity.EntityLiving;
+import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.EnumToolMaterial;
 import net.minecraft.item.Item;
+import net.minecraft.item.ItemBow;
 import net.minecraft.item.ItemStack;
 import net.minecraft.item.ItemTool;
 import net.minecraft.nbt.NBTTagCompound;
+import net.minecraft.stats.StatList;
 import net.minecraft.world.World;
 import Reactioncraft.net.RCN;
 import Reactioncraft.basemod.RCB;
@@ -20,7 +23,6 @@ import cpw.mods.fml.relauncher.SideOnly;
 
 public class ItemNetCatcher extends ItemTool 
 {
-
 	public ItemNetCatcher(int par1) 
 	{
 		super(par1, 0, RCN.EnumToolMaterialNet, new Block[] {});
@@ -28,27 +30,19 @@ public class ItemNetCatcher extends ItemTool
 		this.setCreativeTab(RCB.Reactioncraft);
 		this.setMaxStackSize(1);
 	}
-	
-	 /**
-     * Returns the maximum damage an item can take.
-     */
+
+	/**
+	 * Returns the maximum damage an item can take.
+	 */
 	@Override
 	public int getMaxDamage(ItemStack stack)
-    {
+	{
 		NBTTagCompound compound = stack.stackTagCompound;
 		int hiltLevel = compound.getInteger("hilt");
 		int netLevel  = compound.getInteger("net");
 		return (hiltLevel + netLevel) * 10 - 1;
-    }
-    
-//	public int getItemMaxDamageFromStack(ItemStack stack)
-//	{
-//		NBTTagCompound compound = stack.stackTagCompound;
-//		int hiltLevel = compound.getInteger("hilt");
-//		int netLevel  = compound.getInteger("net");
-//		return (hiltLevel + netLevel) * 10 - 1;
-//	}
-	
+	}
+
 	@Override
 	public String getItemDisplayName(ItemStack par1ItemStack) 
 	{
@@ -112,17 +106,18 @@ public class ItemNetCatcher extends ItemTool
 			stack.damageItem(1, player);
 			entity.setDead();
 		}
-//
-//		if(stack.getItemDamage() >= (RCN.completeNet.getMaxDamage() - 1))
-//		{
-//			--stack.stackSize;
-//			return true;
-//		}
-//		if(stack.getItemDamage() >= (stack.getMaxDamage() - 1))
-//		{
-//			--stack.stackSize;
-//			return true;
-//		}
+
+		//Breaks the Net When the Net is at 0 Durability
+		if(stack.getItemDamage() >= (stack.getMaxDamage() - 1))
+		{
+			if (player instanceof EntityPlayer)
+			{
+				EntityPlayer entityplayer = (EntityPlayer)player;
+				--stack.stackSize;
+				entityplayer.destroyCurrentEquippedItem();
+			}
+		}
+
 		return true;
 	}
 
@@ -139,23 +134,20 @@ public class ItemNetCatcher extends ItemTool
 		super.addInformation(itemStack, player, list, par4);
 	}
 
-
-	@SideOnly(Side.CLIENT)
-
 	/**
 	 * Returns True is the item is renderer in full 3D when hold.
 	 */
+	@SideOnly(Side.CLIENT)
 	public boolean isFull3D()
 	{
 		return true;
 	}
 
-	@SideOnly(Side.CLIENT)
-
 	/**
 	 * Returns true if this item should be rotated by 180 degrees around the Y axis when being held in an entities
 	 * hands.
 	 */
+	@SideOnly(Side.CLIENT)
 	public boolean shouldRotateAroundWhenRendering()
 	{
 		return true;
