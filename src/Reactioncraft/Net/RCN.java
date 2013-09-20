@@ -144,7 +144,7 @@ public class RCN implements ICraftingHandler
 		}
 		GameRegistry.addShapelessRecipe(new ItemStack(completeNet), hilt, net);
 		
-		//Wool to string recipe! (Fixed to prevent dupe glitch 4 required)
+		//Wool to string recipe! (Fixed to prevent duplication 4 required)
 		GameRegistry.addRecipe(new ItemStack(Item.silk, 4), new Object[] {"X", 'X', Block.cloth});
 		netlevels();
 	}

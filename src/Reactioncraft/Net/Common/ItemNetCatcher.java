@@ -8,6 +8,7 @@ import net.minecraft.entity.EntityList;
 import net.minecraft.entity.EntityLiving;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.EnumToolMaterial;
+import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.item.ItemTool;
 import net.minecraft.nbt.NBTTagCompound;
@@ -28,13 +29,25 @@ public class ItemNetCatcher extends ItemTool
 		this.setMaxStackSize(1);
 	}
 	
-	public int getItemMaxDamageFromStack(ItemStack stack)
-	{
+	 /**
+     * Returns the maximum damage an item can take.
+     */
+	@Override
+	public int getMaxDamage(ItemStack stack)
+    {
 		NBTTagCompound compound = stack.stackTagCompound;
 		int hiltLevel = compound.getInteger("hilt");
 		int netLevel  = compound.getInteger("net");
 		return (hiltLevel + netLevel) * 10 - 1;
-	}
+    }
+    
+//	public int getItemMaxDamageFromStack(ItemStack stack)
+//	{
+//		NBTTagCompound compound = stack.stackTagCompound;
+//		int hiltLevel = compound.getInteger("hilt");
+//		int netLevel  = compound.getInteger("net");
+//		return (hiltLevel + netLevel) * 10 - 1;
+//	}
 	
 	@Override
 	public String getItemDisplayName(ItemStack par1ItemStack) 
@@ -105,11 +118,11 @@ public class ItemNetCatcher extends ItemTool
 //			--stack.stackSize;
 //			return true;
 //		}
-		if(stack.getItemDamage() >= (stack.getMaxDamage() - 1))
-		{
-			--stack.stackSize;
-			return true;
-		}
+//		if(stack.getItemDamage() >= (stack.getMaxDamage() - 1))
+//		{
+//			--stack.stackSize;
+//			return true;
+//		}
 		return true;
 	}
 
