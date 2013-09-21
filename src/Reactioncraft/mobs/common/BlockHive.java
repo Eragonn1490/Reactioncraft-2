@@ -1,6 +1,7 @@
 package Reactioncraft.mobs.common;
 
 import Reactioncraft.basemod.RCB;
+import Reactioncraft.desert.RCBDM;
 import cpw.mods.fml.client.registry.RenderingRegistry;
 import cpw.mods.fml.common.Loader;
 import cpw.mods.fml.relauncher.Side;
@@ -36,7 +37,16 @@ public class BlockHive extends BlockDragonEgg
     @Override
     public void updateTick(World par1World, int par2, int par3, int par4, Random par5Random)
     {
-    	
+    	return;
+    }
+    
+    /**
+     * Called upon block activation (right click on the block.)
+     */
+    @Override
+    public boolean onBlockActivated(World par1World, int par2, int par3, int par4, EntityPlayer par5EntityPlayer, int par6, float par7, float par8, float par9)
+    {
+        return false;
     }
     
     /**
@@ -45,7 +55,7 @@ public class BlockHive extends BlockDragonEgg
     @Override
     public void onBlockClicked(World par1World, int par2, int par3, int par4, EntityPlayer par5EntityPlayer)
     {
-        
+        return;
     }
     
     public static boolean canFallBelow(World par0World, int par1, int par2, int par3)
@@ -298,27 +308,51 @@ public class BlockHive extends BlockDragonEgg
 		 //    	list.add(new ItemStack(i,1,15));
 	 }
 	 
-	 public int idDropped(int i, Random random)
-     {
-		//return .itemID;
-		 if (Loader.isModLoaded("Forestry"))
-		 {
-			 ItemStack pollen = ItemInterface.getItem("beeComb");
-			 System.out.println("[Foresty] mod loaded"); 
-			 return pollen.itemID;
-		 }
-		 
-		 else return -1;
-     }
-    
-	 @Override
-     public int quantityDropped(Random random)
-     {
-		 if (Loader.isModLoaded("Forestry"))
-		 {
-			 return 2;
-		 }
-		 
-		 else return 0;
-     }
+	 /**
+	     * Returns the ID of the items to drop on destruction.
+	     */
+	    @Override
+	    public int idDropped(int i, Random random, int j)
+	    {
+	        switch (i)
+	        {
+	            default:
+	                return -1;
+
+	            case 1:
+	            	if (Loader.isModLoaded("Forestry"))
+	       		 	{
+	       			 ItemStack pollen = ItemInterface.getItem("beeComb");
+	       			 System.out.println("[Foresty] mod loaded"); 
+	       			 return pollen.itemID;
+	       		 	}
+
+	            case 2:
+	                return blockID;
+
+	            case 3:
+	                return blockID;
+
+	            case 4:
+	                return blockID;
+
+	            case 5:
+	                return blockID;
+
+	            case 6:
+	                return blockID;
+	                
+	            case 7:
+	                return blockID;
+	                
+//	            case 8:
+//	                return RCBDM.UncutLBGem.itemID;
+//	               
+//	            case 9:
+//	                return RCBDM.UncutDBGem.itemID;
+	            
+	            case 11:
+	            	return blockID;
+	        }
+	    }
 }
