@@ -295,6 +295,7 @@ public class IntegratedLanguageFile
 
 	public static void loadMobitemnames() 
 	{
+		LanguageRegistry.addName(RCmobs.hive, "Tracker Jacker Hive");
 		//LanguageRegistry.addName(Jellyfish, "Jellyfish");
 		//LanguageRegistry.addName(RcBee, "Bee");
 		LanguageRegistry.addName(RCmobs.bones, "Bones");

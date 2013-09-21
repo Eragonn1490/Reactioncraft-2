@@ -7,6 +7,7 @@ import Reactioncraft.basefiles.common.PacketHandler;
 import Reactioncraft.basemod.RCB;
 import Reactioncraft.mobs.client.ClientProxy;
 import Reactioncraft.mobs.common.*;
+import net.minecraft.block.Block;
 import net.minecraft.entity.EnumCreatureType;
 import net.minecraft.item.*;
 import net.minecraft.item.crafting.CraftingManager;
@@ -32,6 +33,7 @@ import cpw.mods.fml.common.event.FMLPostInitializationEvent;
 import cpw.mods.fml.common.event.FMLPreInitializationEvent;
 import cpw.mods.fml.common.network.NetworkMod;
 import cpw.mods.fml.common.registry.EntityRegistry;
+import cpw.mods.fml.common.registry.GameRegistry;
 import cpw.mods.fml.common.registry.LanguageRegistry;
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
@@ -52,9 +54,13 @@ public class RCmobs
 	//Config Start
 	//public static int JellyfishIID;
 	//public static int RcBeeIID;
+	public static int hiveID;
 	public static int bonesIID;
 	public static int scoopIID;
 	public static int frameBloodstoneIID;
+	
+	//Block start
+	public static Block hive;
 	
 	//Item Start
 	//public static Item Jellyfish;
@@ -62,7 +68,7 @@ public class RCmobs
 	public static Item bones;
 	public static Item scoop;
 	public static Item hiveframe;
-
+	
 	//Config
 	public static ReactioncraftConfiguration config;
 
@@ -78,6 +84,7 @@ public class RCmobs
 			config.load();
 			
 			//Blocks 3090 (Tracker Jacker Hive)
+			hiveID = config.getBlock("Hive Block", 3090).getInt();
 			
 			//10820 - 10840
 			//JellyfishIID = config.getItem("Jellyfish", 10820).getInt();
@@ -100,7 +107,8 @@ public class RCmobs
 	public void load(FMLInitializationEvent event)
 	{
 		//MinecraftForge.EVENT_BUS.register(new LivingDropsEvent());
-		ClientProxy.registerRenderInformation();		
+		ClientProxy.registerRenderInformation();
+		blocks();
 		registerGlobal();
 		registerEntities();
 		addSpawn();
@@ -109,6 +117,14 @@ public class RCmobs
 		recipes();
 		chestGenHooks();
 		MinecraftForge.EVENT_BUS.register(new Event_LivingBoneDrops());
+		GameRegistry.registerWorldGenerator(new WorldGenHiveTree());
+	}
+
+	private void blocks() 
+	{
+		hive = new BlockHive(hiveID).setHardness(1.0F).setResistance(15.0F).setStepSound(Block.soundWoodFootstep).setLightValue(0.001F).setUnlocalizedName("hive");
+		GameRegistry.registerBlock(hive, "hive");
+		MinecraftForge.setBlockHarvestLevel(RCmobs.hive, 0, "scoop", 0);
 	}
 
 	private void chestGenHooks() 
@@ -169,8 +185,8 @@ public class RCmobs
 		EntityRegistry.addSpawn(EntityZombieCrawling.class, 5, 1, 2, EnumCreatureType.monster, new BiomeGenBase[]{BiomeGenBase.plains, BiomeGenBase.forest, BiomeGenBase.forestHills, BiomeGenBase.taiga});
 		EntityRegistry.addSpawn(EntitySkeletonCrawling.class, 5, 1, 2, EnumCreatureType.monster, new BiomeGenBase[]{BiomeGenBase.plains, BiomeGenBase.forest, BiomeGenBase.forestHills, BiomeGenBase.taiga});
 		
-		//Special Mobs
-		EntityRegistry.addSpawn(EntityTJ.class, 5, 1, 2, EnumCreatureType.monster, new BiomeGenBase[]{BiomeGenBase.forest, BiomeGenBase.forestHills, BiomeGenBase.taiga});
+		//Special Mobs (Removed in favor of faster stracker jackers that can be spawned through messing with there hive)
+		//EntityRegistry.addSpawn(EntityTJ.class, 5, 1, 2, EnumCreatureType.monster, new BiomeGenBase[]{BiomeGenBase.forest, BiomeGenBase.forestHills, BiomeGenBase.taiga});
 		
 		//BiomeDictionary Spawning
 		BiomeGenBase[] biomes = BiomeDictionary.getBiomesForType(Type.FOREST);

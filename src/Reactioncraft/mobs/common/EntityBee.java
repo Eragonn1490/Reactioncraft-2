@@ -57,7 +57,7 @@ public class EntityBee extends EntityAnimal
 	 {
 		 super.applyEntityAttributes();
 		 this.getEntityAttribute(SharedMonsterAttributes.maxHealth).setAttribute(6.0D);
-		 this.getEntityAttribute(SharedMonsterAttributes.movementSpeed).setAttribute(0.20000000298023224D);
+		 this.getEntityAttribute(SharedMonsterAttributes.movementSpeed).setAttribute(0.30000000298023224D);
 	 }
 
 	 public void entityInit()

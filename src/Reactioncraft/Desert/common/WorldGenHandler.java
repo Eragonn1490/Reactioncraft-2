@@ -64,6 +64,5 @@ public class WorldGenHandler implements IWorldGenerator
 
 	public void generateNether(World world, Random random, int blockX, int blockZ) 
 	{
-
 	}
 }

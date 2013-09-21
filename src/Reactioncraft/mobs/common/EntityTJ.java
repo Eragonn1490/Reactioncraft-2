@@ -102,7 +102,7 @@ public class EntityTJ extends EntityMob
         super.applyEntityAttributes();
         this.getEntityAttribute(SharedMonsterAttributes.attackDamage).setAttribute(2.0D);
         this.getEntityAttribute(SharedMonsterAttributes.maxHealth).setAttribute(16.0D);
-        this.getEntityAttribute(SharedMonsterAttributes.movementSpeed).setAttribute(0.25D);
+        this.getEntityAttribute(SharedMonsterAttributes.movementSpeed).setAttribute(0.35D);
         this.getEntityAttribute(SharedMonsterAttributes.followRange).setAttribute(40.0D);
     }
 	
