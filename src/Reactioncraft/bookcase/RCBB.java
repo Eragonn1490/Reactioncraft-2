@@ -32,7 +32,7 @@ import cpw.mods.fml.common.registry.GameRegistry;
 import cpw.mods.fml.common.registry.LanguageRegistry;
 
 
-@Mod( modid = "rcbb", name="Reactioncraft Better Bookcases Mod", version="[1.6.2] Reactioncraft 3 Version 1.1.2", dependencies="after:rcbdm")
+@Mod( modid = "rcbb", name="Reactioncraft Better Bookcases Mod", version="[1.6.4] Reactioncraft 3 Version 1.1.4", dependencies="after:rcbdm")
 @NetworkMod(channels = { "RCBB" }, clientSideRequired = true, serverSideRequired = false, packetHandler = PacketHandler.class)
 
 public class RCBB

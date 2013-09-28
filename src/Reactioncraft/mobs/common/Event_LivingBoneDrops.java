@@ -138,13 +138,6 @@ public class Event_LivingBoneDrops
 					event.entityLiving.dropItem(RCmobs.bones.itemID, 1);
 				}
 			}
-			if (event.entityLiving instanceof EntitySkeleton) 
-			{ 
-				if (rand < 1D) 
-				{ 
-					event.entityLiving.dropItem(RCmobs.bones.itemID, 1);
-				}
-			}
 		}
 	}
 }

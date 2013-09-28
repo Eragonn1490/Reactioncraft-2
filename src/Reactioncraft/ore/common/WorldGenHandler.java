@@ -1,6 +1,8 @@
 package Reactioncraft.ore.common;
 
 import java.util.Random;
+
+import Reactioncraft.basefiles.common.WorldGenNetherMinable;
 import Reactioncraft.ore.RCORES;
 import Reactioncraft.ore.common.*;
 import net.minecraft.block.Block;

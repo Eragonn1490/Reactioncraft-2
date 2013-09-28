@@ -29,7 +29,7 @@ import cpw.mods.fml.common.network.NetworkMod;
 import cpw.mods.fml.common.registry.GameRegistry;
 import cpw.mods.fml.common.registry.LanguageRegistry;
 
-@Mod( modid = "rcw", name="Reactioncraft Weapons", version="[1.6.2] Reactioncraft 3 Version 1.1.2", dependencies="after:rcores")
+@Mod( modid = "rcw", name="Reactioncraft Weapons", version="[1.6.4] Reactioncraft 3 Version 1.1.4", dependencies="after:rcores")
 @NetworkMod(channels = { "RCW" }, clientSideRequired = true, serverSideRequired = false, packetHandler = PacketHandler.class)
 
 public class RCW

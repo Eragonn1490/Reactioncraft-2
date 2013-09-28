@@ -1,35 +1,33 @@
 package Reactioncraft.plants.common;
 
+import java.util.ArrayList;
 import java.util.Random;
 
 import Reactioncraft.core.RCC;
 import Reactioncraft.plants.RCPM;
-import net.minecraft.block.Block;
-import net.minecraft.block.BlockGrass;
+import net.minecraft.block.*;
 import net.minecraft.block.material.Material;
 import net.minecraft.client.renderer.texture.IconRegister;
-import net.minecraft.item.Item;
-import net.minecraft.item.ItemStack;
-import net.minecraft.util.AxisAlignedBB;
-import net.minecraft.util.Icon;
-import net.minecraft.world.IBlockAccess;
-import net.minecraft.world.World;
+import net.minecraft.item.*;
+import net.minecraft.util.*;
+import net.minecraft.world.*;
 
 public class BlockCorn extends Block
 {
-	private static final int GROWTH_TIME = 15;
+	//private static final int GROWTH_TIME = 10;
 
 	public BlockCorn(int i, int j)
 	{
 		super(i, Material.plants);
 		float f = 0.375F;
 		setBlockBounds(0.5F - f, 0.0F, 0.5F - f, 0.5F + f, 1.0F, 0.5F + f);
-		setTickRandomly(true);
+		this.setTickRandomly(true);
 	}
 
+	@Override
 	public void registerIcons(IconRegister par1IconRegister)
 	{
-		this.blockIcon = par1IconRegister.registerIcon("RCPM:tallcorn");
+		this.blockIcon = par1IconRegister.registerIcon("rcpm:tallcorn");
 	}
 
 	public Icon getBlockblockIcon(IBlockAccess world, int x, int y, int z, int blockSide)
@@ -42,25 +40,13 @@ public class BlockCorn extends Block
 		return RCPM.Wrappedcorn.itemID;
 	}
 
-	public int idDropped(int var1, Random var2)
-	{
-		return RCPM.Wrappedcorn.itemID;
-	}
-
-	/**
-	 * Returns the ID of the items to drop on destruction.
-	 */
-	public int idDropped(int var1, Random var2, int var3)
-	{
-		return RCPM.Wrappedcorn.itemID;
-	}
-
-
+	@Override
 	public int quantityDropped(Random random)
 	{
-		return 1;
+		return -1;
 	}
 
+	@Override
 	public void onNeighborBlockChange(World world, int i, int j, int k, int l)
 	{
 		checkBlockCoordValid(world, i, j, k);
@@ -75,22 +61,25 @@ public class BlockCorn extends Block
 		}
 	}
 
+	@Override
 	public boolean canBlockStay(World world, int i, int j, int k)
 	{
 		return canPlaceBlockAt(world, i, j, k);
 	}
 
+	@Override
 	public AxisAlignedBB getCollisionBoundingBoxFromPool(World world, int i, int j, int k)
 	{
 		return null;
 	}
 
+	@Override
 	public boolean canPlaceBlockAt(World world, int i, int j, int k)
 	{
 		boolean toReturn = false;
 		int l = world.getBlockId(i, j - 1, k);
 
-		if ((l == Block.grass.blockID) || (l == Block.dirt.blockID) || (l == Block.gravel.blockID) || (l == Block.sand.blockID) || (l == RCC.DarkSand.blockID) || (l == this.blockID))
+		if ((l == Block.grass.blockID) || (l == Block.dirt.blockID) || (l == Block.gravel.blockID) || (l == RCC.DarkSand.blockID) || (l == this.blockID))
 		{
 			toReturn = true;
 		}
@@ -98,11 +87,13 @@ public class BlockCorn extends Block
 		return toReturn;
 	}
 
+	@Override
 	public void updateTick(World world, int i, int j, int k, Random random)
 	{
+		int l = world.getBlockId(i, j - 1, k);
+
 		if (world.isAirBlock(i, j + 1, k))
 		{
-			int l;
 			for (l = 1; world.getBlockId(i, j - l, k) == this.blockID; l++);
 			if (l < 5)
 			{
@@ -113,6 +104,10 @@ public class BlockCorn extends Block
 					world.setBlockMetadataWithNotify(i, j, k, 0, 2);
 				}
 				else if ((world.getBlockLightValue(i, j + 1, k) >= 9) && (nearWater(world, i, j, k)))
+				{
+					world.setBlockMetadataWithNotify(i, j, k, i1 + 1, 2);
+				}
+				else if ((world.getBlockLightValue(i, j + 1, k) >= 9))
 				{
 					world.setBlockMetadataWithNotify(i, j, k, i1 + 1, 2);
 				}
@@ -140,6 +135,27 @@ public class BlockCorn extends Block
 		{
 			toReturn = true;
 		}
+		else if (world.getBlockMaterial(i, j - 1, k + 1) == Material.water)
+		{
+			toReturn = true;
+		}
+
+		if ((world.getBlockId(i, j - 1, k) == this.blockID))
+		{
+			toReturn = true;
+		}
+		else if (world.getBlockMaterial(i - 1, j - 1, k) == Material.air)
+		{
+			toReturn = true;
+		}
+		else if (world.getBlockMaterial(i + 1, j - 1, k) == Material.air)
+		{
+			toReturn = true;
+		}
+		else if (world.getBlockMaterial(i, j - 1, k - 1) == Material.air)
+		{
+			toReturn = true;
+		}
 		else if (world.getBlockMaterial(i, j - 1, k + 1) == Material.air)
 		{
 			toReturn = true;
@@ -148,18 +164,30 @@ public class BlockCorn extends Block
 		return toReturn;
 	}
 
+	@Override
 	public boolean isOpaqueCube()
 	{
 		return false;
 	}
 
+	@Override
 	public boolean renderAsNormalBlock()
 	{
 		return false;
 	}
 
+	@Override
 	public int getRenderType()
 	{
 		return 1;
+	}
+	
+	@Override
+	public ArrayList<ItemStack> getBlockDropped(World world, int x, int y, int z, int metadata, int fortune)
+	{
+	         ArrayList<ItemStack> ret = new ArrayList<ItemStack>();
+	         for(int i = 0; 0 < world.rand.nextInt(3); i++)
+	                 ret.add(new ItemStack(RCPM.Wrappedcorn, 1, 0));
+	         return ret;
 	}
 }

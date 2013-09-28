@@ -30,7 +30,7 @@ import cpw.mods.fml.common.registry.GameRegistry;
 import cpw.mods.fml.common.registry.LanguageRegistry;
 
 
-@Mod( modid = "rcmm", name="Reactioncraft Mobs Mod", version="[1.6.2] Reactioncraft 3 Version 1.1.2", dependencies="after:rcbdm")
+@Mod( modid = "rcmm", name="Reactioncraft Mobs Mod", version="[1.6.4] Reactioncraft 3 Version 1.1.4", dependencies="after:rcbdm")
 @NetworkMod(channels = { "RCMM" }, clientSideRequired = true, serverSideRequired = false, packetHandler = PacketHandler.class)
 
 public class RCMM

@@ -29,7 +29,7 @@ import cpw.mods.fml.common.registry.GameRegistry;
 import cpw.mods.fml.common.registry.LanguageRegistry;
 
 
-@Mod(modid = "rcn", name = "Reactioncraft Netting", version = "[1.6.2] Reactioncraft 3 Version 1.1.2", dependencies = "required-after:rcc")
+@Mod(modid = "rcn", name = "Reactioncraft Netting", version = "[1.6.4] Reactioncraft 3 Version 1.1.4", dependencies = "required-after:rcc")
 @NetworkMod(channels = { "RCN" }, clientSideRequired = true, serverSideRequired = false, packetHandler = PacketHandler.class)
 
 public class RCN implements ICraftingHandler

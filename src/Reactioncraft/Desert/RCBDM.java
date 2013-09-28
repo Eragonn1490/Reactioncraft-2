@@ -2,7 +2,6 @@ package Reactioncraft.desert;
 
 import java.io.File;
 import Reactioncraft.desert.client.ClientProxy;
-import Reactioncraft.desert.common.BlockPlank;
 import Reactioncraft.desert.common.CommonProxy;
 import Reactioncraft.basefiles.common.PacketHandler;
 import Reactioncraft.desert.common.*;
@@ -33,7 +32,7 @@ import cpw.mods.fml.common.event.FMLPreInitializationEvent;
 import cpw.mods.fml.common.network.NetworkMod;
 import cpw.mods.fml.common.registry.GameRegistry;
 
-@Mod( modid = "rcbdm", name="Reactioncraft Better Desert Mod", version="[1.6.2] Reactioncraft 3 Version 1.1.2", dependencies = "after:rcc")
+@Mod( modid = "rcbdm", name="Reactioncraft Better Desert Mod", version="[1.6.4] Reactioncraft 3 Version 1.1.4", dependencies = "after:rcc")
 @NetworkMod(channels = { "RCBDM" }, clientSideRequired = true, serverSideRequired = false, packetHandler = PacketHandler.class)
 
 public class RCBDM
@@ -97,6 +96,11 @@ public class RCBDM
 	//Cactus Properties
 	public static Property GenCactusGreen;
 	public static Property GenCactusRed;
+	public static Property darkstoneGenerator;
+	public static Property goldGenerator;
+	public static Property lightstoneGenerator;
+	public static Property darkgemstoneGenerator;
+	public static Property limestoneGenerator;
 	
 	public static final int WILDCARD_VALUE = Short.MAX_VALUE;
 
@@ -182,6 +186,15 @@ public class RCBDM
 		UncutDBGemIID = config.getItem("Uncut Dark Blue Gem", 10128).getInt();
 		CutDBGemIID = config.getItem("Cut Dark Blue Gem", 10129).getInt();
 		scrollIID = config.getItem("Scroll", 10131).getInt();
+		
+		
+		GenCactusGreen        = config.get("Darksand Desert Generation", "Generate Green Cactus", true);
+		GenCactusRed          = config.get("Darksand Desert Generation", "Generate Red Cactus", true);
+		darkstoneGenerator    = config.get("Darksand Desert Generation", "Generate Dark Stone", true);
+		goldGenerator         = config.get("Darksand Desert Generation", "Generate Desert Gold", true);
+		lightstoneGenerator   = config.get("Darksand Desert Generation", "Generate Darkstone Gem 1", true);
+		darkgemstoneGenerator = config.get("Darksand Desert Generation", "Generate Darkstone Gem 2", true);
+		limestoneGenerator    = config.get("Darksand Desert Generation", "Generate Limestone", true);
 
 		config.save();
 	}
@@ -198,6 +211,7 @@ public class RCBDM
 		addSmelting();
 		setHarvestinglevel();
 		chestgenhooks();
+		MinecraftForge.EVENT_BUS.register(new EventContainerClass());
 		
 		//RCORES integration
 		try 
@@ -205,7 +219,7 @@ public class RCBDM
 			if(RCORES())
 			{
 				//Integration.loadReactioncraftBDM();
-				System.out.println("Redpower World enabled");
+				//System.out.println("Redpower World enabled");
 			}
 		}
 		catch (ClassNotFoundException e)	
@@ -248,6 +262,10 @@ public class RCBDM
 		MinecraftForge.setBlockHarvestLevel(RCBDM.DesertBlockMulti, 5,   "pickaxe", 0);
 		MinecraftForge.setBlockHarvestLevel(RCBDM.DesertBlockMulti, 6,   "pickaxe", 0);
 		MinecraftForge.setBlockHarvestLevel(RCBDM.DesertBlockMulti, 11,  "pickaxe", 0);
+		
+		//Bloodstone Column Harvest Levels
+		MinecraftForge.setBlockHarvestLevel(RCBDM.ColumnMulti, 2,    "pickaxe", 4);
+		MinecraftForge.setBlockHarvestLevel(RCBDM.ColumnMulti2, 2,   "pickaxe", 4);
 	}
 
 	public void addSmelting() 
@@ -294,8 +312,8 @@ public class RCBDM
 		CherryTreeLeaves = new BlockCherryTreeLeaves(CherryTreeLeavesID).setStepSound(Block.soundGrassFootstep).setHardness(0.2F).setResistance(0.5F).setUnlocalizedName("rcbdm:CherryTreeLeaves").setTextureName("rcbdm:CherryTreeLeaves");
 		CherryTreeSapling = new BlockCherryTreeSapling(CherryTreeSaplingID, 0).setStepSound(Block.soundGrassFootstep).setHardness(0.0F).setResistance(0.5F).setUnlocalizedName("rcbdm:CherryTreeSapling").setTextureName("rcbdm:CherryTreeSapling");
 		HireoMulti = new BlockHireoMulti(HireoBlocksIID, Material.rock).setHardness(3.0F).setUnlocalizedName("HireoMulti");
-		ColumnMulti = new BlockColumnMulti(ColumnBlockID, Material.rock).setHardness(3.0F).setUnlocalizedName("ColumnMulti");
-		ColumnMulti2 = new BlockColumnMulti2(ColumnBlock2ID, Material.rock).setHardness(3.0F).setUnlocalizedName("ColumnMulti2");
+		ColumnMulti = new BlockColumnMulti(ColumnBlockID, Material.rock).setUnlocalizedName("ColumnMulti");
+		ColumnMulti2 = new BlockColumnMulti2(ColumnBlock2ID, Material.rock).setUnlocalizedName("ColumnMulti2");
 		CherryPlanks = new BlockPlank(CherryPlanksID).setHardness(2.0F).setResistance(5.0F).setStepSound(Block.soundWoodFootstep).setUnlocalizedName("rcbdm:cherryplanks").setTextureName("rcbdm:cherryplanks");
 		DesertBlockMulti = new BlockDesertMulti(DesertBlockMultiID, Material.rock).setHardness(2.5F).setResistance(15.0F).setUnlocalizedName("DesertBlockMulti");
 		Cactus1 = (new DesertFlower(Cactus1ID)).setHardness(0.0F).setStepSound(Block.soundGrassFootstep).setUnlocalizedName("rcbdm:Cactus1").setTextureName("rcbdm:Cactus1");
@@ -329,16 +347,6 @@ public class RCBDM
 		GameRegistry.registerWorldGenerator(new CustomBiomeGenerator());
 		GameRegistry.registerFuelHandler(new FuelHandler());
 	}
-	
-		//allows get wood achievement for Highlands woods
-		@ForgeSubscribe
-		public void onItemPickupWood(EntityItemPickupEvent e)
-		{
-			if (e.item.getEntityItem().itemID == RCBDM.Cherrywood.blockID)
-			{
-				e.entityPlayer.triggerAchievement(AchievementList.mineWood);
-			}
-		}
 
 	@EventHandler
 	public void modsLoaded(FMLPostInitializationEvent evt)

@@ -27,7 +27,7 @@ import cpw.mods.fml.common.registry.LanguageRegistry;
 import cpw.mods.fml.common.registry.VillagerRegistry;
 import cpw.mods.fml.relauncher.Side;
 
-@Mod(modid = "rccm", name="Reactioncraft Currency", version="[1.6.2] Reactioncraft 3 Version 1.1.2", dependencies = "required-after:rcc;after:rcw")
+@Mod(modid = "rccm", name="Reactioncraft Currency", version="[1.6.4] Reactioncraft 3 Version 1.1.4", dependencies = "required-after:rcc;after:rcw")
 @NetworkMod(channels = { "RCCM" }, clientSideRequired = true, serverSideRequired = false, packetHandler = PacketHandler.class)
 
 public class RCCM
@@ -200,7 +200,7 @@ public class RCCM
 	{
 		//To Share
 		OreDictionary.registerOre("ingotRefinedgold", new ItemStack(RCCM.ingotRefinedgold,1,0));
-		OreDictionary.registerOre("ingotBronze", new ItemStack(RCCM.ingotBronze, 1, 1));
+		OreDictionary.registerOre("ingotBronze", new ItemStack(RCCM.ingotBronze, 1, 0));
 		OreDictionary.registerOre("ingotSilver", new ItemStack(RCCM.ingotSilver, 1, 0));
 		OreDictionary.registerOre("ingotCopper", new ItemStack(RCCM.ingotCopper, 1, 0));
 	}

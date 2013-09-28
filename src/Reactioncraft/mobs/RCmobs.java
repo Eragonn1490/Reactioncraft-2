@@ -21,6 +21,7 @@ import net.minecraftforge.common.Configuration;
 import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.oredict.OreDictionary;
 import net.minecraftforge.oredict.ShapedOreRecipe;
+import cpw.mods.fml.common.Loader;
 import cpw.mods.fml.common.Mod;
 import cpw.mods.fml.common.Mod.EventHandler;
 import cpw.mods.fml.common.Mod.Init;
@@ -37,8 +38,10 @@ import cpw.mods.fml.common.registry.GameRegistry;
 import cpw.mods.fml.common.registry.LanguageRegistry;
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
+import forestry.api.core.ItemInterface;
+import forestry.api.recipes.RecipeManagers;
 
-@Mod(modid = "rcmobs", name="Reactioncraft Mobs Mod", version="[1.6.2] Reactioncraft 3 Version 1.1.2", dependencies="required-after:FML@[4.2.18,);after:Forestry")
+@Mod(modid = "rcmobs", name="Reactioncraft Mobs Mod", version="[1.6.4] Reactioncraft 3 Version 1.1.4", dependencies="required-after:FML@[4.2.18,);after:Forestry")
 
 @NetworkMod(channels = { "RCmobs" }, clientSideRequired = true, serverSideRequired = false, packetHandler = PacketHandler.class)
 
@@ -58,9 +61,11 @@ public class RCmobs
 	public static int bonesIID;
 	public static int scoopIID;
 	public static int frameBloodstoneIID;
+	public static int honeycombIID;
+	public static int pollencombIID;
 	
 	//Block start
-	public static Block hive;
+	public static Block rchive;
 	
 	//Item Start
 	//public static Item Jellyfish;
@@ -68,6 +73,8 @@ public class RCmobs
 	public static Item bones;
 	public static Item scoop;
 	public static Item hiveframe;
+	public static Item honeycomb;
+	public static Item pollencomb;
 	
 	//Config
 	public static ReactioncraftConfiguration config;
@@ -92,6 +99,8 @@ public class RCmobs
 			bonesIID = config.getItem("Bones", 10822).getInt();
 			scoopIID = config.getItem("Scoop", 10823).getInt();
 			frameBloodstoneIID = config.getItem("Bloodstone Frame", 10824).getInt();
+			honeycombIID = config.getItem("Honey Comb", 10825).getInt();
+			pollencombIID = config.getItem("Pollen Comb", 10826).getInt();
 		}
 
 		finally 
@@ -106,7 +115,6 @@ public class RCmobs
 	@EventHandler
 	public void load(FMLInitializationEvent event)
 	{
-		//MinecraftForge.EVENT_BUS.register(new LivingDropsEvent());
 		ClientProxy.registerRenderInformation();
 		blocks();
 		registerGlobal();
@@ -118,13 +126,14 @@ public class RCmobs
 		chestGenHooks();
 		MinecraftForge.EVENT_BUS.register(new Event_LivingBoneDrops());
 		GameRegistry.registerWorldGenerator(new WorldGenHiveTree());
+		MinecraftForge.EVENT_BUS.register(new EventHookContainerClass());
 	}
 
 	private void blocks() 
 	{
-		hive = new BlockHive(hiveID).setHardness(1.0F).setResistance(15.0F).setStepSound(Block.soundWoodFootstep).setLightValue(0.001F).setUnlocalizedName("hive");
-		GameRegistry.registerBlock(hive, "hive");
-		MinecraftForge.setBlockHarvestLevel(RCmobs.hive, 0, "scoop", 0);
+		rchive = new BlockHive(hiveID).setHardness(1.0F).setResistance(15.0F).setStepSound(Block.soundWoodFootstep).setLightValue(0.001F).setUnlocalizedName("hive");
+		GameRegistry.registerBlock(rchive, "rchive");
+		MinecraftForge.setBlockHarvestLevel(RCmobs.rchive, 0, "scoop", 0);
 	}
 
 	private void chestGenHooks() 
@@ -136,6 +145,18 @@ public class RCmobs
 	{
 		OreDictionary.registerOre("bones", new ItemStack(RCmobs.bones));
 		CraftingManager.getInstance().getRecipeList().add(new ShapedOreRecipe(new ItemStack(Item.dyePowder, 2, 15), true, new Object[]{"Y", Character.valueOf('Y'), "bones"}));
+		
+		//Forestry Support
+		 if (Loader.isModLoaded("Forestry"))
+		 {
+			 ItemStack pollen = ItemInterface.getItem("pollen");
+			 ItemStack honeyDrop = ItemInterface.getItem("honeyDrop");
+			 
+			 System.out.println("[Foresty] has loaded, [2] centrifuge recipes loaded");
+			 
+			 RecipeManagers.centrifugeManager.addRecipe(20, new ItemStack(RCmobs.honeycomb, 1, 0), new ItemStack(pollen.itemID, 1, 0), new ItemStack(honeyDrop.itemID, 1, 0), 90);
+			 RecipeManagers.centrifugeManager.addRecipe(20, new ItemStack(RCmobs.pollencomb, 1, 0), new ItemStack(pollen.itemID, 1, 0), new ItemStack(pollen.itemID, 1, 0), 90);
+		 }
 	}
 
 	public void langRegistry() 
@@ -149,6 +170,8 @@ public class RCmobs
 		//RcBee  = (new ItemBee(RcBeeIID)).setUnlocalizedName("RcBee");
 		//OreDictionary.registerOre("jellyfish", new ItemStack(Jellyfish));
 		bones = new ItemBasic(bonesIID).setUnlocalizedName("rcmobs:bones").setTextureName("rcmobs:bones").setCreativeTab(RCB.ReactioncraftItems);
+		honeycomb = new ItemBasic(honeycombIID).setUnlocalizedName("rcmobs:honeycomb").setTextureName("rcmobs:honeycomb").setCreativeTab(RCB.ReactioncraftItems);
+		pollencomb = new ItemBasic(pollencombIID).setUnlocalizedName("rcmobs:pollencomb").setTextureName("rcmobs:pollencomb").setCreativeTab(RCB.ReactioncraftItems);
 		scoop = new ItemScoop(scoopIID).setUnlocalizedName("rcmobs:bsscoop").setTextureName("rcmobs:bsscoop").setMaxStackSize(1);
 		MinecraftForge.setToolClass(RCmobs.scoop, "scoop", 3);
 		
@@ -185,7 +208,7 @@ public class RCmobs
 		EntityRegistry.addSpawn(EntityZombieCrawling.class, 5, 1, 2, EnumCreatureType.monster, new BiomeGenBase[]{BiomeGenBase.plains, BiomeGenBase.forest, BiomeGenBase.forestHills, BiomeGenBase.taiga});
 		EntityRegistry.addSpawn(EntitySkeletonCrawling.class, 5, 1, 2, EnumCreatureType.monster, new BiomeGenBase[]{BiomeGenBase.plains, BiomeGenBase.forest, BiomeGenBase.forestHills, BiomeGenBase.taiga});
 		
-		//Special Mobs (Removed in favor of faster stracker jackers that can be spawned through messing with there hive)
+		//Special Mobs (Removed in favor of faster stracker jackers that can be spawned through messing with there hives)
 		//EntityRegistry.addSpawn(EntityTJ.class, 5, 1, 2, EnumCreatureType.monster, new BiomeGenBase[]{BiomeGenBase.forest, BiomeGenBase.forestHills, BiomeGenBase.taiga});
 		
 		//BiomeDictionary Spawning
@@ -206,7 +229,7 @@ public class RCmobs
 	
 	@EventHandler
 	public void modsLoaded(FMLPostInitializationEvent evt)
-	{
+	{	
 		BiomeDictionary.registerAllBiomes();
 	}
 }

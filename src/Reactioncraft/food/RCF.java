@@ -26,7 +26,7 @@ import cpw.mods.fml.common.event.FMLPreInitializationEvent;
 import cpw.mods.fml.common.network.NetworkMod;
 import cpw.mods.fml.common.registry.GameRegistry;
 
-@Mod( modid = "rcf", name="Reactioncraft Food", version="[1.6.2] Reactioncraft 3 Version 1.1.2", dependencies = "required-after:rcc")
+@Mod( modid = "rcf", name="Reactioncraft Food", version="[1.6.4] Reactioncraft 3 Version 1.1.4", dependencies = "required-after:rcc")
 @NetworkMod(channels = { "RCF" }, clientSideRequired = true, serverSideRequired = false, packetHandler = PacketHandler.class)
 
 public class RCF
@@ -371,10 +371,10 @@ public class RCF
 		rawcorn = new ItemFoodMod(rawcornIID, 2, false).setUnlocalizedName("rcf:uncookedCorn").setTextureName("rcf:uncookedCorn").setCreativeTab(RCB.Reactioncraftfood);
 		UnwrappedCorn = new ItemFoodMod(UnwrappedCornIID, 2, false).setUnlocalizedName("rcf:UnwrappedCorn").setTextureName("rcf:UnwrappedCorn").setCreativeTab(RCB.Reactioncraftfood);
 		RawNuggets = new ItemFoodMod(RawNuggetsIID, 2, true).setPotionEffect(Potion.hunger.id, 30, 0, 0.8F).setUnlocalizedName("rcf:RawNuggets").setTextureName("rcf:RawNuggets").setCreativeTab(RCB.Reactioncraftfood);
-		ChickenNuggets = new ItemFoodMod(ChickenNuggetsIID, 7, true).setUnlocalizedName("rcf:ChickenNuggets").setTextureName("rcf:ChickenNuggets").setCreativeTab(RCB.Reactioncraftfood);
+		ChickenNuggets = new ItemFoodMod(ChickenNuggetsIID, 5, true).setUnlocalizedName("rcf:ChickenNuggets").setTextureName("rcf:ChickenNuggets").setCreativeTab(RCB.Reactioncraftfood);
 		SlicedBread = new ItemFoodMod(SlicedBreadIID, 4, false).setUnlocalizedName("rcf:SlicedBread").setTextureName("rcf:SlicedBread").setCreativeTab(RCB.Reactioncraftfood);
 		HamSandwich = new ItemFoodMod(HamSandwichIID, 8, false).setUnlocalizedName("rcf:HamSandwich").setTextureName("rcf:HamSandwich").setCreativeTab(RCB.Reactioncraftfood);
-		EdibleFlesh= new ItemBasicFood(EdibleFleshIID, 6, true).setUnlocalizedName("rcf:edibleflesh").setTextureName("rcf:edibleflesh").setCreativeTab(RCB.Reactioncraftfood);
+		EdibleFlesh= new ItemBasicFood(EdibleFleshIID, 3, true).setUnlocalizedName("rcf:edibleflesh").setTextureName("rcf:edibleflesh").setCreativeTab(RCB.Reactioncraftfood);
 		Hamburger = new ItemFoodMod(HamburgerIID, 8, true).setUnlocalizedName("rcf:hamburger").setTextureName("rcf:hamburger").setCreativeTab(RCB.Reactioncraftfood);
 		Cheeseburger = new ItemFoodMod(CheeseburgerIID, 14, true).setUnlocalizedName("rcf:cheeseburger").setTextureName("rcf:cheeseburger").setCreativeTab(RCB.Reactioncraftfood);
 		BaconRaw = new ItemFoodMod(BaconRawIID, 4, true).setPotionEffect(Potion.hunger.id, 30, 0, 0.8F).setUnlocalizedName("rcf:rawbacon").setTextureName("rcf:rawbacon").setUnlocalizedName("BaconRaw");

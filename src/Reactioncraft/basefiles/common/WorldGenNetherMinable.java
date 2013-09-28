@@ -1,4 +1,4 @@
-package Reactioncraft.ore.common;
+package Reactioncraft.basefiles.common;
 import java.util.Random;
 import net.minecraft.block.Block;
 import net.minecraft.util.MathHelper;

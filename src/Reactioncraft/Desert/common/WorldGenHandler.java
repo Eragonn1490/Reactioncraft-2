@@ -28,8 +28,8 @@ public class WorldGenHandler implements IWorldGenerator
 	{
 		BiomeGenBase biomegenbase = world.getWorldChunkManager().getBiomeGenAt(blockX, blockZ);
 
-		//if(RCBDM.GenCactusGreen.getBoolean(true))
-		//{
+		if(RCBDM.GenCactusGreen.getBoolean(true))
+		{
 			if(biomegenbase instanceof BiomeGenDesert || biomegenbase instanceof BiomeGenRcDesert)
 				for (int l = 0; l < 1; ++l)
 				{
@@ -38,10 +38,10 @@ public class WorldGenHandler implements IWorldGenerator
 					int randPosZ = blockZ + random.nextInt(16);
 					(new WorldGenFlowers(RCBDM.Cactus1.blockID)).generate(world, random, randPosX, randPosY, randPosZ);
 				}
-		//}
+		}
 
-		//if(RCBDM.GenCactusRed.getBoolean(true))
-		//{
+		if(RCBDM.GenCactusRed.getBoolean(true))
+		{
 			if(biomegenbase instanceof BiomeGenDesert || biomegenbase instanceof BiomeGenRcDesert)
 				for (int l = 0; l < 1; ++l)
 				{
@@ -50,7 +50,7 @@ public class WorldGenHandler implements IWorldGenerator
 					int randPosZ = blockZ + random.nextInt(16);
 					(new WorldGenFlowers(RCBDM.Cactus2.blockID)).generate(world, random, randPosX, randPosY, randPosZ);
 				}
-		//}
+		}
 
 		if(biomegenbase instanceof BiomeGenRcDesert)
 			for(int i = 0; i < 6; i++)

@@ -14,6 +14,15 @@ public class ItemKnife extends ItemSword
 		this.setMaxDamage(25);
 		this.setCreativeTab(RCB.ReactioncraftItems);
 	}
+	
+    /**
+     * Returns true if players can use this item to affect the world (e.g. placing blocks, placing ender eyes in portal)
+     * when not in creative
+     */
+    public boolean canItemEditBlocks()
+    {
+        return false;
+    }
 }
 
 

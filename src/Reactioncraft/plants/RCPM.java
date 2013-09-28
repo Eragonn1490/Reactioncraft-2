@@ -33,7 +33,7 @@ import cpw.mods.fml.common.network.NetworkMod;
 import cpw.mods.fml.common.registry.GameRegistry;
 import cpw.mods.fml.common.registry.LanguageRegistry;
 
-@Mod( modid = "rcpm", name="Reactioncraft Plants", version="[1.6.2] Reactioncraft 3 Version 1.1.2")
+@Mod( modid = "rcpm", name="Reactioncraft Plants", version="[1.6.4] Reactioncraft 3 Version 1.1.4")
 @NetworkMod(channels = { "RCPM" }, clientSideRequired = true, serverSideRequired = false, packetHandler = PacketHandler.class)
 
 public class RCPM

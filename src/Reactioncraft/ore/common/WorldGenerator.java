@@ -1,6 +1,7 @@
 package Reactioncraft.ore.common;
 
 import Reactioncraft.ore.RCORES;
+import Reactioncraft.basefiles.common.WorldGenMinableMeta;
 import cpw.mods.fml.common.IWorldGenerator;
 import forestry.api.core.IPlugin;
 import java.util.Random;
@@ -8,8 +9,7 @@ import net.minecraft.block.Block;
 import net.minecraft.world.World;
 import net.minecraft.world.chunk.IChunkProvider;
 
-public class WorldGenerator
-  implements IWorldGenerator
+public class WorldGenerator implements IWorldGenerator
 {
   private WorldGenMinableMeta apatiteGenerator;
   private WorldGenMinableMeta copperGenerator;

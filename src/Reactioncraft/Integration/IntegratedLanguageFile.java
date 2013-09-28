@@ -295,12 +295,14 @@ public class IntegratedLanguageFile
 
 	public static void loadMobitemnames() 
 	{
-		LanguageRegistry.addName(RCmobs.hive, "Tracker Jacker Hive");
+		LanguageRegistry.addName(RCmobs.rchive, "Tracker Jacker Hive");
 		//LanguageRegistry.addName(Jellyfish, "Jellyfish");
 		//LanguageRegistry.addName(RcBee, "Bee");
 		LanguageRegistry.addName(RCmobs.bones, "Bones");
 		LanguageRegistry.addName(RCmobs.hiveframe, "Bloodstone Frame");
 		LanguageRegistry.addName(RCmobs.scoop, "Bloodstone Scoop");
+		LanguageRegistry.addName(RCmobs.pollencomb, "Pollen Comb");
+		LanguageRegistry.addName(RCmobs.honeycomb, "Honey Comb");
 	}
 
 	public static void loadOrenames() 

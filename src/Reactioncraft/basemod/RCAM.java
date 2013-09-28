@@ -24,7 +24,7 @@ import cpw.mods.fml.common.network.NetworkMod;
 import cpw.mods.fml.common.registry.GameRegistry;
 import cpw.mods.fml.common.registry.LanguageRegistry;
 
-@Mod( modid = "rcam", name="Reactioncraft Achievements Mod", version="[1.6.2] Reactioncraft 3 Version 1.1.2", dependencies = "required-after:rcc;after:rcw;after:rccm;")
+@Mod( modid = "rcam", name="Reactioncraft Achievements Mod", version="[1.6.4] Reactioncraft 3 Version 1.1.4", dependencies = "required-after:rcc;after:rcw;after:rccm;")
 @NetworkMod(channels = { "RCAM" }, clientSideRequired = false, serverSideRequired = false, packetHandler = PacketHandler.class, connectionHandler = ConnectionHandler.class)
 
 public class RCAM

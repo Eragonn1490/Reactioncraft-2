@@ -23,7 +23,7 @@ import cpw.mods.fml.common.event.FMLPreInitializationEvent;
 import cpw.mods.fml.common.network.NetworkMod;
 import cpw.mods.fml.common.registry.GameRegistry;
 
-@Mod( modid = "rcg", name="Reactioncraft Glass", version="[1.6.2] Reactioncraft 3 Version 1.1.2", dependencies = "required-after:rcc")
+@Mod( modid = "rcg", name="Reactioncraft Glass", version="[1.6.4] Reactioncraft 3 Version 1.1.4", dependencies = "required-after:rcc")
 @NetworkMod(channels = { "RCG" }, clientSideRequired = true, serverSideRequired = false, packetHandler = PacketHandler.class)
 
 public class RCG

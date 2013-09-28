@@ -44,33 +44,6 @@ public class BlockColumnMulti2 extends BlockColumnMulti
         return false;
     }
 
-    public float getHardness(int i)
-    {
-        switch (i)
-        {
-            default:
-                return 3F;
-
-            case 1:
-                return 3F;
-
-            case 2:
-                return 70F;
-
-            case 3:
-                return 1.5F;
-
-            case 4:
-                return 2.0F;
-
-            case 5:
-                return 3F;
-
-            case 6:
-                return 0.8F;
-        }
-    }
-
     /**
      * Returns the ID of the items to drop on destruction.
      */
