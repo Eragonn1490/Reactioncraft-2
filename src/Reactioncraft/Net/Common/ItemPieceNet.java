@@ -29,7 +29,8 @@ public class ItemPieceNet extends Item
 		if (itemStack.stackTagCompound != null)
 			list.add("Level: " + itemStack.stackTagCompound.getInteger("str"));
 		else
-			list.add("Please craft to see results");
+			list.add("Creative Net: Don't Use Me");
+			list.add("i dont have an NBTT Value");
 		super.addInformation(itemStack, player, list, par4);
 	}
 }

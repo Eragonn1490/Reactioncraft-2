@@ -4,9 +4,7 @@ import static net.minecraftforge.common.ChestGenHooks.VILLAGE_BLACKSMITH;
 
 import java.util.List;
 import java.util.Random;
-
-import Reactioncraft.api.common.VillagerTradeHandler;
-
+import Reactioncraft.core.common.*;
 import net.minecraft.block.Block;
 import net.minecraft.item.Item;
 import net.minecraft.util.WeightedRandomChestContent;
@@ -223,7 +221,7 @@ public class ComponentRCVillageHouse extends ComponentVillage
 	// TODO: make a bar wench
     protected int getVillagerType(int par1)
     {
-        return VillagerTradeHandler.Reactioncraft_Trader;
+        return CommonVillageHandler.Reactioncraft_Trader;
     }
 
 	// TODO: identify desert biome to return sand, possibly others

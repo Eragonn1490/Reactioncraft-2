@@ -3,10 +3,8 @@ package Reactioncraft.mobs.common;
 import java.util.Collections;
 import java.util.Iterator;
 import java.util.List;
-
 import cpw.mods.fml.common.Loader;
 import forestry.api.core.ItemInterface;
-
 import net.minecraft.block.Block;
 import net.minecraft.command.IEntitySelector;
 import net.minecraft.entity.Entity;

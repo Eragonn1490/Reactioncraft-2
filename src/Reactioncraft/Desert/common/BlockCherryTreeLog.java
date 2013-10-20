@@ -2,16 +2,14 @@ package Reactioncraft.desert.common;
 
 import java.util.List;
 import java.util.Random;
-
-import net.minecraft.block.Block;
-import net.minecraft.block.BlockLog;
+import net.minecraft.block.*;
 import net.minecraft.client.renderer.texture.IconRegister;
 import net.minecraft.creativetab.CreativeTabs;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.Icon;
 import net.minecraft.world.World;
 import Reactioncraft.basemod.RCB;
-import Reactioncraft.desert.RCBDM;
+import Reactioncraft.integration.*;
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
 
@@ -43,6 +41,7 @@ public class BlockCherryTreeLog extends BlockLog
     /**
      * Returns the quantity of items to drop on block destruction.
      */
+    @Override
     public int quantityDropped(Random par1Random)
     {
         return 1;
@@ -51,9 +50,10 @@ public class BlockCherryTreeLog extends BlockLog
     /**
      * Returns the ID of the items to drop on destruction.
      */
+    @Override
     public int idDropped(int par1, Random par2Random, int par3)
     {
-        return RCBDM.Cherrywood.blockID;
+        return IntegratedBlocks.Cherrywood.blockID;
     }
 
     /**

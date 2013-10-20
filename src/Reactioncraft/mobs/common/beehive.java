@@ -5,8 +5,7 @@
 package Reactioncraft.mobs.common;
 
 import java.util.Random;
-
-import Reactioncraft.mobs.RCmobs;
+import Reactioncraft.integration.*;
 import net.minecraft.block.Block;
 import net.minecraft.world.World;
 import net.minecraft.world.gen.feature.WorldGenerator;
@@ -109,7 +108,7 @@ public class beehive extends WorldGenerator
 		world.setBlock(i + 1, j + 1, k + 0, 0);
 		world.setBlock(i + 1, j + 1, k + 1, 0);
 		world.setBlock(i + 1, j + 1, k + 2, 0);
-		world.setBlock(i + 1, j + 1, k + 3, RCmobs.rchive.blockID);
+		world.setBlock(i + 1, j + 1, k + 3, IntegratedBlocks.rchive.blockID);
 		world.setBlock(i + 1, j + 1, k + 4, 0);
 		world.setBlock(i + 1, j + 1, k + 5, 0);
 		world.setBlock(i + 1, j + 1, k + 6, 0);

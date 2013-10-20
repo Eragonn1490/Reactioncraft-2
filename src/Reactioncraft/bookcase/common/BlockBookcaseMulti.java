@@ -3,7 +3,7 @@ package Reactioncraft.bookcase.common;
 import java.util.List;
 import java.util.Random;
 import Reactioncraft.basemod.RCB;
-import Reactioncraft.bookcase.RCBB;
+import Reactioncraft.integration.*;
 import net.minecraft.block.Block;
 import net.minecraft.block.material.Material;
 import net.minecraft.client.renderer.texture.IconRegister;
@@ -31,60 +31,61 @@ public class BlockBookcaseMulti extends Block
     /**
      * Returns the ID of the items to drop on destruction.
      */
+    @Override
     public int idDropped(int var1, Random var2, int var3)
     {
         switch (var1)
         {
             case 0:
-                return RCBB.bookcasemeta.blockID;
+                return IntegratedBlocks.bookcasemeta.blockID;
 
             case 1:
-                return RCBB.bookcasemeta.blockID;
+                return IntegratedBlocks.bookcasemeta.blockID;
 
             case 2:
-                return RCBB.bookcasemeta.blockID;
+                return IntegratedBlocks.bookcasemeta.blockID;
 
             case 3:
-                return RCBB.bookcasemeta.blockID;
+                return IntegratedBlocks.bookcasemeta.blockID;
 
             case 4:
-                return RCBB.bookcasemeta.blockID;
+                return IntegratedBlocks.bookcasemeta.blockID;
 
             case 5:
-                return RCBB.bookcasemeta.blockID;
+                return IntegratedBlocks.bookcasemeta.blockID;
 
             case 6:
-                return RCBB.bookcasemeta.blockID;
+                return IntegratedBlocks.bookcasemeta.blockID;
 
             case 7:
-                return RCBB.bookcasemeta.blockID;
+                return IntegratedBlocks.bookcasemeta.blockID;
 
             case 8:
-                return RCBB.bookcasemeta.blockID;
+                return IntegratedBlocks.bookcasemeta.blockID;
 
             case 9:
-                return RCBB.bookcasemeta.blockID;
+                return IntegratedBlocks.bookcasemeta.blockID;
 
             case 10:
-                return RCBB.bookcasemeta.blockID;
+                return IntegratedBlocks.bookcasemeta.blockID;
 
             case 11:
-                return RCBB.bookcasemeta.blockID;
+                return IntegratedBlocks.bookcasemeta.blockID;
 
             case 12:
-                return RCBB.bookcasemeta.blockID;
+                return IntegratedBlocks.bookcasemeta.blockID;
 
             case 13:
-                return RCBB.bookcasemeta.blockID;
+                return IntegratedBlocks.bookcasemeta.blockID;
 
             case 14:
-                return RCBB.bookcasemeta.blockID;
+                return IntegratedBlocks.bookcasemeta.blockID;
 
             case 15:
-                return RCBB.bookcasemeta.blockID;
+                return IntegratedBlocks.bookcasemeta.blockID;
 
             default:
-                return RCBB.bookcasemeta.blockID;
+                return IntegratedBlocks.bookcasemeta.blockID;
         }
     }
     
@@ -283,6 +284,6 @@ public class BlockBookcaseMulti extends Block
     
     public int getEnchantPower(World world, int x, int y, int z)
     {
-        return blockID == RCBB.bookcasemeta.blockID ? 1 : 1;
+        return blockID == IntegratedBlocks.bookcasemeta.blockID ? 1 : 1;
     }
 }

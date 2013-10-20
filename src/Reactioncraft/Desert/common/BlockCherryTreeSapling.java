@@ -1,7 +1,6 @@
 package Reactioncraft.desert.common;
 
 import java.util.Random;
-
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockFlower;
 import net.minecraft.world.World;
@@ -11,7 +10,8 @@ import net.minecraft.world.gen.feature.WorldGenTaiga2;
 import net.minecraft.world.gen.feature.WorldGenerator;
 import net.minecraftforge.event.terraingen.TerrainGen;
 import Reactioncraft.basemod.RCB;
-import Reactioncraft.core.RCC;
+import Reactioncraft.integration.*;
+
 public class BlockCherryTreeSapling extends BlockFlower
 {
 	/** change the name to your sapling name **/
@@ -41,7 +41,7 @@ public class BlockCherryTreeSapling extends BlockFlower
 	{
 		int l = par1World.getBlockMetadata(par2, par3, par4);
 		/** change this block to your custom grass block **/
-		if ((l & 8) == RCC.DarkSand.blockID)
+		if ((l & 8) == IntegratedBlocks.DarkSand.blockID)
 		{
 			par1World.setBlockMetadataWithNotify(par2, par3, par4, l | 8, 4);
 		}
@@ -142,6 +142,6 @@ public class BlockCherryTreeSapling extends BlockFlower
 	@Override
 	protected boolean canThisPlantGrowOnThisBlockID(int par1)
 	{
-		return par1 == RCC.DarkSand.blockID || par1 == Block.sand.blockID|| par1 == Block.dirt.blockID || par1 == Block.tilledField.blockID;
+		return par1 == IntegratedBlocks.DarkSand.blockID || par1 == Block.sand.blockID|| par1 == Block.dirt.blockID || par1 == Block.tilledField.blockID;
 	}
 }

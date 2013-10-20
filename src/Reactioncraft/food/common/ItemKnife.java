@@ -2,17 +2,19 @@ package Reactioncraft.food.common;
 
 import Reactioncraft.basemod.RCB;
 import net.minecraft.item.EnumToolMaterial;
+import net.minecraft.item.Item;
+import net.minecraft.item.ItemStack;
 import net.minecraft.item.ItemSword;
 
 public class ItemKnife extends ItemSword 
 {
-
 	public ItemKnife(int par1) 
 	{
 		super(par1, EnumToolMaterial.WOOD);
 		this.setMaxStackSize(1);
 		this.setMaxDamage(25);
 		this.setCreativeTab(RCB.ReactioncraftItems);
+		this.setNoRepair();
 	}
 	
     /**
@@ -24,5 +26,3 @@ public class ItemKnife extends ItemSword
         return false;
     }
 }
-
-

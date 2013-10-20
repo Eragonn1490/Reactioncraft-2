@@ -1,13 +1,11 @@
 package Reactioncraft.currency.common;
 
 import java.util.List;
-
 import Reactioncraft.basemod.RCB;
-import Reactioncraft.currency.RCCM;
+import Reactioncraft.integration.IntegratedItems;
 import net.minecraft.client.renderer.texture.IconRegister;
 import net.minecraft.creativetab.CreativeTabs;
-import net.minecraft.item.Item;
-import net.minecraft.item.ItemStack;
+import net.minecraft.item.*;
 import net.minecraft.util.Icon;
 import net.minecraft.util.MathHelper;
 import cpw.mods.fml.relauncher.Side;
@@ -45,43 +43,45 @@ public class CoinMetaItem extends Item
 		
 		if(par1ItemStack.getItemDamage() == 15)
 		{
-			setContainerItem(RCCM.Bag);
+			setContainerItem(IntegratedItems.Bag);
 		}
 		
 		if(par1ItemStack.getItemDamage() == 14)
 		{
-			setContainerItem(RCCM.Sack);
+			setContainerItem(IntegratedItems.Sack);
 		}
 		
 		if(par1ItemStack.getItemDamage() == 10)
 		{
-			setContainerItem(RCCM.Bag);
+			setContainerItem(IntegratedItems.Bag);
 		}
 		
 		if(par1ItemStack.getItemDamage() == 9)
 		{
-			setContainerItem(RCCM.Sack);
+			setContainerItem(IntegratedItems.Sack);
 		}
 		
 		if(par1ItemStack.getItemDamage() == 5)
 		{
-			setContainerItem(RCCM.Bag);
+			setContainerItem(IntegratedItems.Bag);
 		}
 		
 		if(par1ItemStack.getItemDamage() == 4)
 		{
-			setContainerItem(RCCM.Sack);
+			setContainerItem(IntegratedItems.Sack);
 		}
 		
 		return super.getUnlocalizedName() + "." + names[i];
 	}
-
+	
+	@Override
 	public Icon getIconFromDamage(int par1)
 	{
 		return icons[par1];
 	}
 	
 	@SideOnly(Side.CLIENT)
+	@Override
 	public void getSubItems(int itemID, CreativeTabs tab, List itemList) //Adds the metadata items to the creative inventory
 	{
 		for(int i=0;i<16;i++)

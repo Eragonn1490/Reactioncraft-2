@@ -1,8 +1,6 @@
 package Reactioncraft.bookcase.common;
 
 import java.util.List;
-
-import Reactioncraft.bookcase.RCBB;
 import net.minecraft.item.ItemBlock;
 import net.minecraft.item.ItemDye;
 import net.minecraft.item.ItemStack;
@@ -24,6 +22,7 @@ public class ItemBookcaseMulti extends ItemBlock
 //		//return Class3.asphalt.getBlockTextureFromSideAndMetadata(1, par1);
 //	}
 	
+	@Override
 	public int getMetadata(int par1) //Returns the metadata value
 	{
 		return par1;
@@ -33,6 +32,7 @@ public class ItemBookcaseMulti extends ItemBlock
      * Returns the unlocalized name of this item. This version accepts an ItemStack so different stacks can have
      * different names based on their damage or NBT.
      */
+	@Override
     public String getUnlocalizedName(ItemStack par1ItemStack)
     {
     	String[] types = {"asphalt","asphaltlineyellow","asphaltlineyellowtwo","asphaltlinewhite","asphaltlinewhitetwo","asphaltlinewhiteright","asphaltlinewhiterighttwo","asphaltlinewhiteleft","asphaltlinewhitelefttwo"};

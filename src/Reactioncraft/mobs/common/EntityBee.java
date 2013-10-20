@@ -2,20 +2,9 @@ package Reactioncraft.mobs.common;
 
 import cpw.mods.fml.common.Loader;
 import ic2.api.item.Items;
-import forestry.api.core.ForestryAPI;
-import forestry.api.core.ItemInterface;
-import Reactioncraft.mobs.RCmobs;
-import Reactioncraft.mobs.client.ClientProxy;
-import net.minecraft.entity.EntityAgeable;
-import net.minecraft.entity.SharedMonsterAttributes;
-import net.minecraft.entity.ai.EntityAIAvoidEntity;
-import net.minecraft.entity.ai.EntityAIFollowParent;
-import net.minecraft.entity.ai.EntityAILookIdle;
-import net.minecraft.entity.ai.EntityAIPanic;
-import net.minecraft.entity.ai.EntityAISwimming;
-import net.minecraft.entity.ai.EntityAITempt;
-import net.minecraft.entity.ai.EntityAIWander;
-import net.minecraft.entity.ai.EntityAIWatchClosest;
+import forestry.api.core.*;
+import net.minecraft.entity.*;
+import net.minecraft.entity.ai.*;
 import net.minecraft.entity.effect.EntityLightningBolt;
 import net.minecraft.entity.passive.EntityAnimal;
 import net.minecraft.entity.player.EntityPlayer;
@@ -69,6 +58,7 @@ public class EntityBee extends EntityAnimal
 	 /**
 	  * Returns the item ID for the item the mob drops on death.
 	  */
+	 @Override
 	 public int getDropItemId()
 	 {
 		 //return .itemID;

@@ -1,7 +1,6 @@
 package Reactioncraft.core.common;
 
 import java.util.Random;
-
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockSand;
 import net.minecraft.block.material.Material;
@@ -9,7 +8,7 @@ import net.minecraft.entity.item.EntityFallingSand;
 import net.minecraft.world.IBlockAccess;
 import net.minecraft.world.World;
 import Reactioncraft.basemod.RCB;
-import Reactioncraft.core.RCC;
+import Reactioncraft.integration.*;
 
 public class BlockSandRc extends BlockSand
 {
@@ -22,6 +21,7 @@ public class BlockSandRc extends BlockSand
         this.setCreativeTab(RCB.Reactioncraft);
     }
    
+    @Override
     public boolean getBlocksMovement(IBlockAccess par1IBlockAccess, int par2, int par3, int par4)
     {
         return !this.blockMaterial.blocksMovement();
@@ -31,6 +31,7 @@ public class BlockSandRc extends BlockSand
     /**
      * Called whenever the block is added into the world. Args: world, x, y, z
      */
+    @Override
     public void onBlockAdded(World par1World, int par2, int par3, int par4)
     {
         par1World.scheduleBlockUpdate(par2, par3, par4, this.blockID, this.tickRate(par1World));
@@ -40,6 +41,7 @@ public class BlockSandRc extends BlockSand
      * Lets the block know when one of its neighbor changes. Doesn't know which neighbor changed (coordinates passed are
      * their own) Args: x, y, z, neighbor blockID
      */
+    @Override
     public void onNeighborBlockChange(World par1World, int par2, int par3, int par4, int par5)
     {
         par1World.scheduleBlockUpdate(par2, par3, par4, this.blockID, this.tickRate(par1World));
@@ -48,6 +50,7 @@ public class BlockSandRc extends BlockSand
     /**
      * Ticks the block if it's been scheduled
      */
+    @Override
     public void updateTick(World par1World, int par2, int par3, int par4, Random par5Random)
     {
         if (!par1World.isRemote)
@@ -94,11 +97,13 @@ public class BlockSandRc extends BlockSand
     /**
      * Called when the falling block entity for this block is created
      */
+    @Override
     public void onStartFalling(EntityFallingSand par1EntityFallingSand) {}
 
     /**
      * How many world ticks before ticking
      */
+    @Override
     public int tickRate(World par1World)
     {
         return 2;
@@ -139,7 +144,7 @@ public class BlockSandRc extends BlockSand
      */
     public boolean isGenMineableReplaceable(World world, int x, int y, int z, int target)
     {
-        return RCC.DarkSand.blockID == target;
+        return IntegratedBlocks.DarkSand.blockID == target;
     }
 
     /**

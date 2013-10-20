@@ -1,12 +1,12 @@
 package Reactioncraft.desert.common;
 
 import net.minecraft.item.EnumToolMaterial;
+import net.minecraft.item.ItemStack;
 import net.minecraft.item.ItemSword;
 import Reactioncraft.basemod.RCB;
 
 public class ItemChisel extends ItemSword 
 {
-
 	public ItemChisel(int par1) 
 	{
 		super(par1, EnumToolMaterial.WOOD);
@@ -14,6 +14,7 @@ public class ItemChisel extends ItemSword
 		this.setMaxDamage(10);
 		this.setUnlocalizedName("Chisel");
 		this.setCreativeTab(RCB.ReactioncraftItems);
+		this.setNoRepair();
 	}
 	
     /**
@@ -25,5 +26,3 @@ public class ItemChisel extends ItemSword
         return false;
     }
 }
-
-

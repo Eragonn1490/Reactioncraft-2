@@ -2,9 +2,7 @@ package Reactioncraft.plants.common;
 
 import java.util.ArrayList;
 import java.util.Random;
-
-import Reactioncraft.core.RCC;
-import Reactioncraft.plants.RCPM;
+import Reactioncraft.integration.*;
 import net.minecraft.block.*;
 import net.minecraft.block.material.Material;
 import net.minecraft.client.renderer.texture.IconRegister;
@@ -37,7 +35,7 @@ public class BlockCorn extends Block
 
 	public int idDropped(int var1, int var2, Random var3)
 	{
-		return RCPM.Wrappedcorn.itemID;
+		return IntegratedItems.Wrappedcorn.itemID;
 	}
 
 	@Override
@@ -56,7 +54,7 @@ public class BlockCorn extends Block
 	{
 		if (!canBlockStay(world, i, j, k))
 		{
-			dropBlockAsItem_do(world, i, j, k, new ItemStack(RCPM.Wrappedcorn, 1));
+			dropBlockAsItem_do(world, i, j, k, new ItemStack(IntegratedItems.Wrappedcorn, 1));
 			world.setBlock(i, j, k, 0, 0, 2);
 		}
 	}
@@ -79,7 +77,7 @@ public class BlockCorn extends Block
 		boolean toReturn = false;
 		int l = world.getBlockId(i, j - 1, k);
 
-		if ((l == Block.grass.blockID) || (l == Block.dirt.blockID) || (l == Block.gravel.blockID) || (l == RCC.DarkSand.blockID) || (l == this.blockID))
+		if ((l == Block.grass.blockID) || (l == Block.dirt.blockID) || (l == Block.gravel.blockID) || (l == IntegratedBlocks.DarkSand.blockID) || (l == this.blockID))
 		{
 			toReturn = true;
 		}
@@ -187,7 +185,7 @@ public class BlockCorn extends Block
 	{
 	         ArrayList<ItemStack> ret = new ArrayList<ItemStack>();
 	         for(int i = 0; 0 < world.rand.nextInt(3); i++)
-	                 ret.add(new ItemStack(RCPM.Wrappedcorn, 1, 0));
+	                 ret.add(new ItemStack(IntegratedItems.Wrappedcorn, 1, 0));
 	         return ret;
 	}
 }

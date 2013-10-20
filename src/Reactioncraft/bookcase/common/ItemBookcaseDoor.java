@@ -1,7 +1,7 @@
 package Reactioncraft.bookcase.common;
 
 import Reactioncraft.basemod.RCB;
-import Reactioncraft.bookcase.RCBB;
+import Reactioncraft.integration.*;
 import net.minecraft.block.Block;
 import net.minecraft.block.material.Material;
 import net.minecraft.creativetab.CreativeTabs;
@@ -40,11 +40,11 @@ public class ItemBookcaseDoor extends Item
 
             if (this.doorMaterial == Material.wood)
             {
-                block = RCBB.WoodenBookcasedoorBlock;
+                block = IntegratedBlocks.WoodenBookcasedoorBlock;
             }
             else
             {
-                block = RCBB.IronBookcasedoorBlock;
+                block = IntegratedBlocks.IronBookcasedoorBlock;
             }
 
             if (par2EntityPlayer.canPlayerEdit(par4, par5, par6, par7, par1ItemStack) && par2EntityPlayer.canPlayerEdit(par4, par5 + 1, par6, par7, par1ItemStack))

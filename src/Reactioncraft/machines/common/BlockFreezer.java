@@ -1,6 +1,7 @@
 package Reactioncraft.machines.common;
 
-import Reactioncraft.machines.RCMM;
+import Reactioncraft.core.Reactioncraft;
+import Reactioncraft.integration.IntegratedBlocks;
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
 import java.util.Random;
@@ -9,6 +10,7 @@ import net.minecraft.block.BlockContainer;
 import net.minecraft.block.material.Material;
 import net.minecraft.client.renderer.texture.IconRegister;
 import net.minecraft.entity.EntityLiving;
+import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.item.EntityItem;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.inventory.Container;
@@ -35,10 +37,11 @@ public class BlockFreezer extends BlockContainer
      * furnace block changes from idle to active and vice-versa.
      */
     private static boolean keepFurnaceInventory = false;
+    
     @SideOnly(Side.CLIENT)
-    private Icon field_94458_cO;
+    private Icon furnaceIconTop;
     @SideOnly(Side.CLIENT)
-    private Icon field_94459_cP;
+    private Icon furnaceIconFront;
 
     public BlockFreezer(int par1, boolean par2)
     {
@@ -51,12 +54,13 @@ public class BlockFreezer extends BlockContainer
      */
     public int idDropped(int par1, Random par2Random, int par3)
     {
-        return RCMM.FreezerIdle.blockID;
+        return IntegratedBlocks.FreezerIdle.blockID;
     }
-
+    
     /**
      * Called whenever the block is added into the world. Args: world, x, y, z
      */
+    @Override
     public void onBlockAdded(World par1World, int par2, int par3, int par4)
     {
         super.onBlockAdded(par1World, par2, par3, par4);
@@ -99,7 +103,7 @@ public class BlockFreezer extends BlockContainer
             par1World.setBlockMetadataWithNotify(par2, par3, par4, b0, 2);
         }
     }
-
+    
     @SideOnly(Side.CLIENT)
 
     /**
@@ -107,7 +111,7 @@ public class BlockFreezer extends BlockContainer
      */
     public Icon getIcon(int par1, int par2)
     {
-        return par1 == 1 ? this.field_94458_cO : (par1 == 0 ? this.field_94458_cO : (par1 != par2 ? this.blockIcon : this.field_94459_cP));
+        return par1 == 1 ? this.furnaceIconTop : (par1 == 0 ? this.furnaceIconTop : (par1 != par2 ? this.blockIcon : this.furnaceIconFront));
     }
 
     @SideOnly(Side.CLIENT)
@@ -119,8 +123,8 @@ public class BlockFreezer extends BlockContainer
     public void registerIcons(IconRegister par1IconRegister)
     {
         this.blockIcon = par1IconRegister.registerIcon("rcmm:ironside");
-        this.field_94459_cP = par1IconRegister.registerIcon(this.isActive ? "rcmm:freezerfront" : "rcmm:freezerfront");
-        this.field_94458_cO = par1IconRegister.registerIcon("rcmm:ironside");
+        this.furnaceIconFront = par1IconRegister.registerIcon(this.isActive ? "rcmm:freezerfront" : "rcmm:freezerfront");
+        this.furnaceIconTop = par1IconRegister.registerIcon("rcmm:ironside");
     }
 
     /**
@@ -138,7 +142,7 @@ public class BlockFreezer extends BlockContainer
 
             if (var10 != null)
             {
-            	par5EntityPlayer.openGui(RCMM.instance, 2, par1World, par2, par3, par4);
+            	par5EntityPlayer.openGui(Reactioncraft.instance, 2, par1World, par2, par3, par4);
             }
 
             return true;
@@ -156,11 +160,11 @@ public class BlockFreezer extends BlockContainer
 
         if (par0)
         {
-            par1World.setBlock(par2, par3, par4, RCMM.FreezerActive.blockID);
+            par1World.setBlock(par2, par3, par4, IntegratedBlocks.FreezerActive.blockID);
         }
         else
         {
-            par1World.setBlock(par2, par3, par4, RCMM.FreezerIdle.blockID);
+            par1World.setBlock(par2, par3, par4, IntegratedBlocks.FreezerIdle.blockID);
         }
 
         keepFurnaceInventory = false;

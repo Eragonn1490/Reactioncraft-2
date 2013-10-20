@@ -1,12 +1,11 @@
 package Reactioncraft.mobs.common;
 
 import Reactioncraft.basemod.RCB;
-import Reactioncraft.mobs.RCmobs;
+import Reactioncraft.integration.*;
 import cpw.mods.fml.client.registry.RenderingRegistry;
 import cpw.mods.fml.common.Loader;
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
-
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
@@ -31,6 +30,7 @@ public class BlockHive extends BlockDragonEgg
 	{
 		super(par1);
 		this.setBlockBounds(0.0625F, 0.0F, 0.0625F, 0.9375F, 1.0F, 0.9375F);
+		this.setBurnProperties(this.blockID, 30, 60);
 		this.setCreativeTab(RCB.Reactioncraft);
 	}
 
@@ -359,9 +359,9 @@ public class BlockHive extends BlockDragonEgg
 	{
 	         ArrayList<ItemStack> ret = new ArrayList<ItemStack>();
 	         for(int i = 0; 0 < world.rand.nextInt(3); i++)
-	                 ret.add(new ItemStack(RCmobs.pollencomb, 1, 0));
+	                 ret.add(new ItemStack(IntegratedItems.pollencomb, 1, 0));
 	         for(int i = 0; i < world.rand.nextInt(3); i++)
-	                 ret.add(new ItemStack(RCmobs.honeycomb, 1, 0));
+	                 ret.add(new ItemStack(IntegratedItems.honeycomb, 1, 0));
 	         return ret;
 	}
 }

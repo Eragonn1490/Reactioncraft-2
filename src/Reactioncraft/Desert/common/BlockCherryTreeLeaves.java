@@ -1,7 +1,7 @@
 package Reactioncraft.desert.common;
 
 import Reactioncraft.basemod.RCB;
-import Reactioncraft.desert.RCBDM;
+import Reactioncraft.integration.*;
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
 import java.util.ArrayList;
@@ -13,15 +13,13 @@ import net.minecraft.creativetab.CreativeTabs;
 import net.minecraft.entity.EntityEggInfo;
 import net.minecraft.entity.EntityList;
 import net.minecraft.entity.player.EntityPlayer;
-import net.minecraft.item.Item;
-import net.minecraft.item.ItemStack;
+import net.minecraft.item.*;
 import net.minecraft.stats.StatList;
 import net.minecraft.util.Icon;
 import net.minecraft.world.ColorizerFoliage;
 import net.minecraft.world.IBlockAccess;
 import net.minecraft.world.World;
-import net.minecraft.block.Block;
-import net.minecraft.block.BlockLeavesBase;
+import net.minecraft.block.*;
 
 import net.minecraftforge.common.IShearable;
 
@@ -82,6 +80,7 @@ public class BlockCherryTreeLeaves extends BlockLeavesBase implements IShearable
   /**
    * Returns the color this block should be rendered. Used by leaves.
    */
+  @Override
   public int getRenderColor(int par1)
   {
   	EntityEggInfo entityegginfo = (EntityEggInfo)EntityList.entityEggs.get(90);
@@ -93,6 +92,7 @@ public class BlockCherryTreeLeaves extends BlockLeavesBase implements IShearable
      * different metadata value, but before the new metadata value is set. Args: World, x, y, z, old block ID, old
      * metadata
      */
+  	@Override
     public void breakBlock(World par1World, int par2, int par3, int par4, int par5, int par6)
     {
         byte b0 = 1;
@@ -121,6 +121,7 @@ public class BlockCherryTreeLeaves extends BlockLeavesBase implements IShearable
     /**
      * Ticks the block if it's been scheduled
      */
+    @Override
     public void updateTick(World par1World, int par2, int par3, int par4, Random par5Random)
     {
         if (!par1World.isRemote)
@@ -270,7 +271,7 @@ public class BlockCherryTreeLeaves extends BlockLeavesBase implements IShearable
     @Override
     public int idDropped(int par1, Random par2Random, int par3)
     {
-        return RCBDM.CherryTreeSapling.blockID;
+        return IntegratedBlocks.CherryTreeSapling.blockID;
     }
 
     /**

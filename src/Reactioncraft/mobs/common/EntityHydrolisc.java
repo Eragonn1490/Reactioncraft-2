@@ -1,7 +1,5 @@
 package Reactioncraft.mobs.common;
 
-import Reactioncraft.mobs.RCmobs;
-import Reactioncraft.mobs.client.ClientProxy;
 import net.minecraft.enchantment.Enchantment;
 import net.minecraft.enchantment.EnchantmentHelper;
 import net.minecraft.entity.Entity;

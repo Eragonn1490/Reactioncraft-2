@@ -1,6 +1,6 @@
 package Reactioncraft.vanillaclasses;
 
-import Reactioncraft.bookcase.RCBB;
+import Reactioncraft.integration.*;
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
 import java.util.Random;
@@ -35,6 +35,7 @@ public class BlockReactioncraftEnchantmentTable extends BlockEnchantmentTable
 	/**
 	 * If this block doesn't render as an ordinary block it will return False (examples: signs, buttons, stairs, etc)
 	 */
+	@Override
 	public boolean renderAsNormalBlock()
 	{
 		return false;
@@ -45,6 +46,7 @@ public class BlockReactioncraftEnchantmentTable extends BlockEnchantmentTable
 	/**
 	 * A randomly called display update to be able to add particles or other items for display
 	 */
+	@Override
 	public void randomDisplayTick(World par1World, int par2, int par3, int par4, Random par5Random)
 	{
 		super.randomDisplayTick(par1World, par2, par3, par4, par5Random);
@@ -75,7 +77,7 @@ public class BlockReactioncraftEnchantmentTable extends BlockEnchantmentTable
 						}
 
 						//Lever Bookcases
-						if (par1World.getBlockId(l, j1, i1) == RCBB.leverbookcase.blockID)
+						if (par1World.getBlockId(l, j1, i1) == IntegratedBlocks.leverbookcase.blockID)
 						{
 							if (!par1World.isAirBlock((l - par2) / 2 + par2, j1, (i1 - par4) / 2 + par4))
 							{
@@ -86,7 +88,7 @@ public class BlockReactioncraftEnchantmentTable extends BlockEnchantmentTable
 						}
 
 						//Metadata Bookcases
-						if (par1World.getBlockId(l, j1, i1) == RCBB.bookcasemeta.blockID)
+						if (par1World.getBlockId(l, j1, i1) == IntegratedBlocks.bookcasemeta.blockID)
 						{
 							if (!par1World.isAirBlock((l - par2) / 2 + par2, j1, (i1 - par4) / 2 + par4))
 							{
@@ -97,7 +99,7 @@ public class BlockReactioncraftEnchantmentTable extends BlockEnchantmentTable
 						}
 
 						//Bookcase Chest
-						if (par1World.getBlockId(l, j1, i1) == RCBB.Bookcasechest.blockID)
+						if (par1World.getBlockId(l, j1, i1) == IntegratedBlocks.Bookcasechest.blockID)
 						{
 							if (!par1World.isAirBlock((l - par2) / 2 + par2, j1, (i1 - par4) / 2 + par4))
 							{
@@ -108,7 +110,7 @@ public class BlockReactioncraftEnchantmentTable extends BlockEnchantmentTable
 						}
 
 						//Bookcase Doors
-						if (par1World.getBlockId(l, j1, i1) == RCBB.IronBookcasedoorBlock.blockID)
+						if (par1World.getBlockId(l, j1, i1) == IntegratedBlocks.IronBookcasedoorBlock.blockID)
 						{
 							if (!par1World.isAirBlock((l - par2) / 2 + par2, j1, (i1 - par4) / 2 + par4))
 							{
@@ -118,7 +120,7 @@ public class BlockReactioncraftEnchantmentTable extends BlockEnchantmentTable
 							par1World.spawnParticle("enchantmenttable", (double)par2 + 0.5D, (double)par3 + 2.0D, (double)par4 + 0.5D, (double)((float)(l - par2) + par5Random.nextFloat()) - 0.5D, (double)((float)(j1 - par3) - par5Random.nextFloat() - 1.0F), (double)((float)(i1 - par4) + par5Random.nextFloat()) - 0.5D);
 						}
 
-						if (par1World.getBlockId(l, j1, i1) == RCBB.WoodenBookcasedoorBlock.blockID)
+						if (par1World.getBlockId(l, j1, i1) == IntegratedBlocks.WoodenBookcasedoorBlock.blockID)
 						{
 							if (!par1World.isAirBlock((l - par2) / 2 + par2, j1, (i1 - par4) / 2 + par4))
 							{
@@ -137,6 +139,7 @@ public class BlockReactioncraftEnchantmentTable extends BlockEnchantmentTable
 	 * Is this block (a) opaque and (b) a full 1m cube?  This determines whether or not to render the shared face of two
 	 * adjacent blocks and also whether the player can attach torches, redstone wire, etc to this block.
 	 */
+	@Override
 	public boolean isOpaqueCube()
 	{
 		return false;
@@ -147,6 +150,7 @@ public class BlockReactioncraftEnchantmentTable extends BlockEnchantmentTable
 	/**
 	 * From the specified side and block metadata retrieves the blocks texture. Args: side, metadata
 	 */
+	@Override
 	public Icon getIcon(int par1, int par2)
 	{
 		return par1 == 0 ? this.field_94460_b : (par1 == 1 ? this.field_94461_a : this.blockIcon);
@@ -155,6 +159,7 @@ public class BlockReactioncraftEnchantmentTable extends BlockEnchantmentTable
 	/**
 	 * Returns a new instance of a block's tile entity class. Called on placing the block.
 	 */
+	@Override
 	public TileEntity createNewTileEntity(World par1World)
 	{
 		return new TileEntityEnchantmentTable();
@@ -163,6 +168,7 @@ public class BlockReactioncraftEnchantmentTable extends BlockEnchantmentTable
 	/**
 	 * Called upon block activation (right click on the block.)
 	 */
+	@Override
 	public boolean onBlockActivated(World par1World, int par2, int par3, int par4, EntityPlayer par5EntityPlayer, int par6, float par7, float par8, float par9)
 	{
 		if (par1World.isRemote)
@@ -180,6 +186,7 @@ public class BlockReactioncraftEnchantmentTable extends BlockEnchantmentTable
 	/**
 	 * Called when the block is placed in the world.
 	 */
+	@Override
 	public void onBlockPlacedBy(World par1World, int par2, int par3, int par4, EntityLivingBase par5EntityLivingBase, ItemStack par6ItemStack)
 	{
 		super.onBlockPlacedBy(par1World, par2, par3, par4, par5EntityLivingBase, par6ItemStack);
@@ -196,6 +203,7 @@ public class BlockReactioncraftEnchantmentTable extends BlockEnchantmentTable
 	     * When this method is called, your block should register all the icons it needs with the given IconRegister. This
 	     * is the only chance you get to register icons.
 	     */
+	 	@Override
 	    public void registerIcons(IconRegister par1IconRegister)
 	    {
 	        this.blockIcon = par1IconRegister.registerIcon(this.getTextureName() + "_" + "side");

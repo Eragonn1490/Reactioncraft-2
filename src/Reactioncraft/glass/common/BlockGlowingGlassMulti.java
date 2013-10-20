@@ -3,7 +3,7 @@ package Reactioncraft.glass.common;
 import java.util.List;
 import java.util.Random;
 import Reactioncraft.basemod.RCB;
-import Reactioncraft.glass.RCG;
+import Reactioncraft.integration.*;
 import net.minecraft.block.Block;
 import net.minecraft.block.material.Material;
 import net.minecraft.client.renderer.texture.IconRegister;
@@ -61,55 +61,55 @@ public class BlockGlowingGlassMulti extends BlockGlassMulti
 		switch (i)
 		{
 		case 0:
-			return RCG.GlowingGlassMulti.blockID;
+			return IntegratedBlocks.GlowingGlassMulti.blockID;
 
 		case 1:
-			return RCG.GlowingGlassMulti.blockID;
+			return IntegratedBlocks.GlowingGlassMulti.blockID;
 
 		case 2:
-			return RCG.GlowingGlassMulti.blockID;
+			return IntegratedBlocks.GlowingGlassMulti.blockID;
 
 		case 3:
-			return RCG.GlowingGlassMulti.blockID;
+			return IntegratedBlocks.GlowingGlassMulti.blockID;
 
 		case 4:
-			return RCG.GlowingGlassMulti.blockID;
+			return IntegratedBlocks.GlowingGlassMulti.blockID;
 
 		case 5:
-			return RCG.GlowingGlassMulti.blockID;
+			return IntegratedBlocks.GlowingGlassMulti.blockID;
 
 		case 6:
-			return RCG.GlowingGlassMulti.blockID;
+			return IntegratedBlocks.GlowingGlassMulti.blockID;
 
 		case 7:
-			return RCG.GlowingGlassMulti.blockID;
+			return IntegratedBlocks.GlowingGlassMulti.blockID;
 
 		case 8:
-			return RCG.GlowingGlassMulti.blockID;
+			return IntegratedBlocks.GlowingGlassMulti.blockID;
 
 		case 9:
-			return RCG.GlowingGlassMulti.blockID;
+			return IntegratedBlocks.GlowingGlassMulti.blockID;
 
 		case 10:
-			return RCG.GlowingGlassMulti.blockID;
+			return IntegratedBlocks.GlowingGlassMulti.blockID;
 
 		case 11:
-			return RCG.GlowingGlassMulti.blockID;
+			return IntegratedBlocks.GlowingGlassMulti.blockID;
 
 		case 12:
-			return RCG.GlowingGlassMulti.blockID;
+			return IntegratedBlocks.GlowingGlassMulti.blockID;
 
 		case 13:
-			return RCG.GlowingGlassMulti.blockID;
+			return IntegratedBlocks.GlowingGlassMulti.blockID;
 
 		case 14:
-			return RCG.GlowingGlassMulti.blockID;
+			return IntegratedBlocks.GlowingGlassMulti.blockID;
 
 		case 15:
-			return RCG.GlowingGlassMulti.blockID;
+			return IntegratedBlocks.GlowingGlassMulti.blockID;
 		}
 
-		return RCG.GlowingGlassMulti.blockID;
+		return IntegratedBlocks.GlowingGlassMulti.blockID;
 	}
 
 	public int quantityDropped(int i, int j, Random random)
@@ -411,7 +411,7 @@ public class BlockGlowingGlassMulti extends BlockGlassMulti
         else
         {
             int id = world.getBlockId(x, y, z);
-            return id == Block.fence.blockID || id == Block.netherFence.blockID || id == Block.glass.blockID || id == Block.cobblestoneWall.blockID || id == RCG.GlassMulti.blockID || id == RCG.GlowingGlassMulti.blockID;
+            return id == Block.fence.blockID || id == Block.netherFence.blockID || id == Block.glass.blockID || id == Block.cobblestoneWall.blockID || id == IntegratedBlocks.GlassMulti.blockID || id == IntegratedBlocks.GlowingGlassMulti.blockID;
         }
     }
 }

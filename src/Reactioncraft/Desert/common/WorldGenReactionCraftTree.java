@@ -1,15 +1,13 @@
 package Reactioncraft.desert.common;
 
 import java.util.Random;
-
 import net.minecraft.block.Block;
 import net.minecraft.util.Direction;
 import net.minecraft.world.World;
 import net.minecraft.world.chunk.IChunkProvider;
 import net.minecraft.world.gen.feature.WorldGenerator;
 import net.minecraftforge.common.ForgeDirection;
-import Reactioncraft.core.RCC;
-import Reactioncraft.desert.RCBDM;
+import Reactioncraft.integration.*;
 import cpw.mods.fml.common.IWorldGenerator;
 
 public class WorldGenReactionCraftTree extends WorldGenerator implements IWorldGenerator
@@ -63,11 +61,11 @@ public class WorldGenReactionCraftTree extends WorldGenerator implements IWorldG
 						{
 							k1 = par1World.getBlockId(l1, i1 -1, j1);
 							/** Custom grass block **/
-							Block block = RCC.DarkSand;
+							Block block = IntegratedBlocks.DarkSand;
 							if (k1 != 0 && !block.isLeaves(par1World, l1, i1, j1)
 
 									/** Custom grass block **/
-									&& k1 != RCC.DarkSand.blockID
+									&& k1 != IntegratedBlocks.DarkSand.blockID
 									&& k1 != Block.dirt.blockID
 									&& k1 != Block.grass.blockID
 									&& k1 != Block.sand.blockID
@@ -92,10 +90,10 @@ public class WorldGenReactionCraftTree extends WorldGenerator implements IWorldG
 				i1 = par1World.getBlockId(par3, par4 - 1, par5);
 
 				/** Custom grass block **/
-				Block soil = RCC.DarkSand;//, Block.dirt, Block.sand, Block.grass;
+				Block soil = IntegratedBlocks.DarkSand;//, Block.dirt, Block.sand, Block.grass;
 				
 				/** Custom Sapling block **/
-				boolean isSoil = (soil != null && soil.canSustainPlant(par1World, par3, par4 - 1, par5, ForgeDirection.UP, (BlockCherryTreeSapling)RCBDM.CherryTreeSapling));
+				boolean isSoil = (soil != null && soil.canSustainPlant(par1World, par3, par4 - 1, par5, ForgeDirection.UP, (BlockCherryTreeSapling)IntegratedBlocks.CherryTreeSapling));
 				if (isSoil && par4 < 256 - l - 1)
 				{
 					soil.onPlantGrow(par1World, par3, par4 - 1, par5, par3, par4, par5);
@@ -121,7 +119,7 @@ public class WorldGenReactionCraftTree extends WorldGenerator implements IWorldG
 									if (block == null || block.canBeReplacedByLeaves(par1World, j2, j1, l2))
 									{
 										/** Custom leaf block **/
-										this.setBlockAndMetadata(par1World, j2, j1, l2, RCBDM.CherryTreeLeaves.blockID, this.metaLeaves);
+										this.setBlockAndMetadata(par1World, j2, j1, l2, IntegratedBlocks.CherryTreeLeaves.blockID, this.metaLeaves);
 									}
 								}
 							}
@@ -134,7 +132,7 @@ public class WorldGenReactionCraftTree extends WorldGenerator implements IWorldG
 						if (k1 == 0 || block == null || block.isLeaves(par1World, par3, par4 + j1, par5))
 						{
 							/** Custom Log block **/
-							this.setBlockAndMetadata(par1World, par3, par4 + j1, par5, RCBDM.Cherrywood.blockID, this.metaWood);
+							this.setBlockAndMetadata(par1World, par3, par4 + j1, par5, IntegratedBlocks.Cherrywood.blockID, this.metaWood);
 						}
 					}
 					if (par2Random.nextInt(5) == 0 && l > 5)
@@ -146,7 +144,7 @@ public class WorldGenReactionCraftTree extends WorldGenerator implements IWorldG
 								if (par2Random.nextInt(4 - j1) == 0)
 								{
 									i2 = par2Random.nextInt(3);																																					//Fruit
-									this.setBlockAndMetadata(par1World, par3 + Direction.offsetX[Direction.rotateOpposite[k1]], par4 + l - 5 + j1, par5 + Direction.offsetZ[Direction.rotateOpposite[k1]], RCBDM.CherryTreeLeaves.blockID, i2 << 2 | k1);
+									this.setBlockAndMetadata(par1World, par3 + Direction.offsetX[Direction.rotateOpposite[k1]], par4 + l - 5 + j1, par5 + Direction.offsetZ[Direction.rotateOpposite[k1]], IntegratedBlocks.CherryTreeLeaves.blockID, i2 << 2 | k1);
 								}
 							}
 						}

@@ -1,7 +1,5 @@
 package Reactioncraft.mobs.common;
 
-import Reactioncraft.mobs.RCmobs;
-import Reactioncraft.mobs.client.ClientProxy;
 import net.minecraft.block.material.Material;
 import net.minecraft.entity.SharedMonsterAttributes;
 import net.minecraft.entity.passive.EntityWaterMob;
@@ -10,6 +8,7 @@ import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.util.MathHelper;
+import net.minecraft.village.MerchantRecipeList;
 import net.minecraft.world.World;
 
 public class EntityJellyfish extends EntityWaterMob
@@ -29,9 +28,15 @@ public class EntityJellyfish extends EntityWaterMob
     private float randomMotionVecY;
     private float randomMotionVecZ;
 
-    public EntityJellyfish(World world)
+    public EntityJellyfish(World par1World)
     {
-        super(world);
+        this(par1World, 0);
+    }
+
+    public EntityJellyfish(World par1World, int par2)
+    {
+        super(par1World);
+        this.setProfession(par2);
         field_21089_a = 0.0F;
         field_21088_b = 0.0F;
         field_21087_c = 0.0F;
@@ -56,23 +61,42 @@ public class EntityJellyfish extends EntityWaterMob
         this.getEntityAttribute(SharedMonsterAttributes.maxHealth).setAttribute(8.0D);
         this.getEntityAttribute(SharedMonsterAttributes.movementSpeed).setAttribute(0.20000000298023224D);
     }
-
-    /**
-     * (abstract) public helper method to write subclass entity data to NBT.
-     */
-    public void writeEntityToNBT(NBTTagCompound nbttagcompound)
+    
+    protected void entityInit()
     {
-        super.writeEntityToNBT(nbttagcompound);
+        super.entityInit();
+        this.dataWatcher.addObject(16, Integer.valueOf(0));
+    }
+    
+    /**
+     * (abstract) Protected helper method to write subclass entity data to NBT.
+     */
+    public void writeEntityToNBT(NBTTagCompound par1NBTTagCompound)
+    {
+        super.writeEntityToNBT(par1NBTTagCompound);
+        par1NBTTagCompound.setInteger("Profession", this.getProfession());
     }
 
     /**
-     * (abstract) public helper method to read subclass entity data from NBT.
+     * (abstract) Protected helper method to read subclass entity data from NBT.
      */
-    public void readEntityFromNBT(NBTTagCompound nbttagcompound)
+    public void readEntityFromNBT(NBTTagCompound par1NBTTagCompound)
     {
-        super.readEntityFromNBT(nbttagcompound);
+        super.readEntityFromNBT(par1NBTTagCompound);
+        this.setProfession(par1NBTTagCompound.getInteger("Profession"));
     }
 
+    public void setProfession(int par1)
+    {
+        this.dataWatcher.updateObject(16, Integer.valueOf(par1));
+    }
+
+    public int getProfession()
+    {
+        return this.dataWatcher.getWatchableObjectInt(16);
+    }
+
+    
     /**
      * Returns the sound this mob makes while it's alive.
      */
@@ -255,4 +279,19 @@ public class EntityJellyfish extends EntityWaterMob
     {
         return posY > 45D && posY < 63D && super.getCanSpawnHere();
     }
+
+	public int getSkin() 
+	{
+		if(rand.nextInt(5) == 0)
+		{
+			return 1;
+		}
+		
+		if(rand.nextInt(5) == 1)
+		{
+			return 1;
+		}
+		
+		else return 0;
+	}
 }

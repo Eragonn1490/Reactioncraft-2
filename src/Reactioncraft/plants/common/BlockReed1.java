@@ -1,9 +1,7 @@
 package Reactioncraft.plants.common;
 
 import java.util.Random;
-
-import Reactioncraft.core.RCC;
-import Reactioncraft.plants.RCPM;
+import Reactioncraft.integration.*;
 import net.minecraft.block.*;
 import net.minecraft.block.material.Material;
 import net.minecraft.client.renderer.texture.IconRegister;
@@ -57,15 +55,15 @@ public class BlockReed1 extends Block
             }
             if (w == 40)
             {
-                return  RCPM.sugarcaneItem.itemID;
+                return  IntegratedItems.sugarcaneItem.itemID;
             }
             if (w == 55)
             {
-                return  RCPM.sugarcaneItem.itemID;
+                return  IntegratedItems.sugarcaneItem.itemID;
             }
             if (w == 60)
             {
-                return  RCPM.sugarcaneItem.itemID;
+                return  IntegratedItems.sugarcaneItem.itemID;
             }
             else
             {
@@ -112,7 +110,7 @@ public class BlockReed1 extends Block
 		boolean toReturn = false;
 		int l = world.getBlockId(i, j - 1, k);
 
-		if ((l == Block.grass.blockID) || (l == Block.dirt.blockID) || (l == Block.gravel.blockID) || (l == Block.sand.blockID) || (l == RCC.DarkSand.blockID) || (l == this.blockID))
+		if ((l == Block.grass.blockID) || (l == Block.dirt.blockID) || (l == Block.gravel.blockID) || (l == Block.sand.blockID) || (l == IntegratedBlocks.DarkSand.blockID) || (l == this.blockID))
 		{
 			toReturn = true;
 		}

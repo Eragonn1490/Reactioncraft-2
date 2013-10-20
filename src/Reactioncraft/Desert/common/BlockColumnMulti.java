@@ -13,7 +13,7 @@ import net.minecraft.util.Icon;
 import net.minecraft.world.IBlockAccess;
 import net.minecraft.world.World;
 import Reactioncraft.basemod.RCB;
-import Reactioncraft.desert.RCBDM;
+import Reactioncraft.integration.*;
 
 public class BlockColumnMulti extends Block
 {
@@ -96,25 +96,25 @@ public class BlockColumnMulti extends Block
 		switch (i)
 		{
 		default:
-			return RCBDM.ColumnMulti.blockID;
+			return IntegratedBlocks.ColumnMulti.blockID;
 
 		case 1:
-			return RCBDM.ColumnMulti.blockID;
+			return IntegratedBlocks.ColumnMulti.blockID;
 
 		case 2:
-			return RCBDM.ColumnMulti.blockID;
+			return IntegratedBlocks.ColumnMulti.blockID;
 
 		case 3:
-			return RCBDM.ColumnMulti.blockID;
+			return IntegratedBlocks.ColumnMulti.blockID;
 
 		case 4:
-			return RCBDM.ColumnMulti.blockID;
+			return IntegratedBlocks.ColumnMulti.blockID;
 
 		case 5:
-			return RCBDM.ColumnMulti.blockID;
+			return IntegratedBlocks.ColumnMulti.blockID;
 
 		case 6:
-			return RCBDM.ColumnMulti.blockID;
+			return IntegratedBlocks.ColumnMulti.blockID;
 		}
 	}
 
@@ -284,6 +284,7 @@ public class BlockColumnMulti extends Block
 	   * @param z Z Position
 	   * @return True to allow the torch to be placed
 	   */
+	  @Override
 	  public boolean canPlaceTorchOnTop(World world, int x, int y, int z)
 	  {
 		  if (world.doesBlockHaveSolidTopSurface(x, y, z))
@@ -293,7 +294,7 @@ public class BlockColumnMulti extends Block
 		  else
 		  {
 			  int id = world.getBlockId(x, y, z);
-			  return id == Block.fence.blockID || id == Block.netherFence.blockID || id == Block.glass.blockID || id == Block.cobblestoneWall.blockID || id == RCBDM.ColumnMulti.blockID || id == RCBDM.ColumnMulti2.blockID;
+			  return id == Block.fence.blockID || id == Block.netherFence.blockID || id == Block.glass.blockID || id == Block.cobblestoneWall.blockID || id == IntegratedBlocks.ColumnMulti.blockID || id == IntegratedBlocks.ColumnMulti2.blockID;
 		  }
 	  }
 }

@@ -2,7 +2,6 @@ package Reactioncraft.desert.common;
 
 import java.util.List;
 import java.util.Random;
-
 import net.minecraft.block.Block;
 import net.minecraft.block.material.Material;
 import net.minecraft.client.renderer.texture.IconRegister;
@@ -13,7 +12,7 @@ import net.minecraft.util.Icon;
 import net.minecraft.world.IBlockAccess;
 import net.minecraft.world.World;
 import Reactioncraft.basemod.RCB;
-import Reactioncraft.desert.RCBDM;
+import Reactioncraft.integration.*;
 
 public class BlockHireoMulti extends Block
 {
@@ -34,55 +33,55 @@ public class BlockHireoMulti extends Block
         switch (i)
         {
             case 0:
-                return RCBDM.HireoMulti.blockID;
+                return IntegratedBlocks.HireoMulti.blockID;
 
             case 1:
-                return RCBDM.HireoMulti.blockID;
+                return IntegratedBlocks.HireoMulti.blockID;
 
             case 2:
-                return RCBDM.HireoMulti.blockID;
+                return IntegratedBlocks.HireoMulti.blockID;
 
             case 3:
-                return RCBDM.HireoMulti.blockID;
+                return IntegratedBlocks.HireoMulti.blockID;
 
             case 4:
-                return RCBDM.HireoMulti.blockID;
+                return IntegratedBlocks.HireoMulti.blockID;
 
             case 5:
-                return RCBDM.HireoMulti.blockID;
+                return IntegratedBlocks.HireoMulti.blockID;
 
             case 6:
-                return RCBDM.HireoMulti.blockID;
+                return IntegratedBlocks.HireoMulti.blockID;
 
             case 7:
-                return RCBDM.HireoMulti.blockID;
+                return IntegratedBlocks.HireoMulti.blockID;
 
             case 8:
-                return RCBDM.HireoMulti.blockID;
+                return IntegratedBlocks.HireoMulti.blockID;
 
             case 9:
-                return RCBDM.HireoMulti.blockID;
+                return IntegratedBlocks.HireoMulti.blockID;
 
             case 10:
-                return RCBDM.HireoMulti.blockID;
+                return IntegratedBlocks.HireoMulti.blockID;
 
             case 11:
-                return RCBDM.HireoMulti.blockID;
+                return IntegratedBlocks.HireoMulti.blockID;
 
             case 12:
-                return RCBDM.HireoMulti.blockID;
+                return IntegratedBlocks.HireoMulti.blockID;
 
             case 13:
-                return RCBDM.HireoMulti.blockID;
+                return IntegratedBlocks.HireoMulti.blockID;
                 
             case 14:
-                return RCBDM.HireoMulti.blockID;
+                return IntegratedBlocks.HireoMulti.blockID;
                 
             case 15:
-                return RCBDM.HireoMulti.blockID;
+                return IntegratedBlocks.HireoMulti.blockID;
         }
 
-        return RCBDM.HireoMulti.blockID;
+        return IntegratedBlocks.HireoMulti.blockID;
     }
 
     public int quantityDropped(int i, int j, Random random)

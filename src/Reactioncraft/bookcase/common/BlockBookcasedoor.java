@@ -1,6 +1,6 @@
 package Reactioncraft.bookcase.common;
 
-import Reactioncraft.bookcase.RCBB;
+import Reactioncraft.integration.*;
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
 import java.util.Random;
@@ -423,7 +423,7 @@ public class BlockBookcasedoor extends Block
      */
     public int idDropped(int par1, Random par2Random, int par3)
     {
-        return (par1 & 8) != 0 ? 0 : (this.blockMaterial == Material.iron ? RCBB.IronBookcasedoor.itemID : RCBB.WoodenBookcasedoor.itemID);
+        return (par1 & 8) != 0 ? 0 : (this.blockMaterial == Material.iron ? IntegratedItems.IronBookcasedoor.itemID : IntegratedItems.WoodenBookcasedoor.itemID);
     }
 
     /**
@@ -485,7 +485,7 @@ public class BlockBookcasedoor extends Block
      */
     public int idPicked(World par1World, int par2, int par3, int par4)
     {
-        return this.blockMaterial == Material.iron ? RCBB.IronBookcasedoor.itemID : RCBB.WoodenBookcasedoor.itemID;
+        return this.blockMaterial == Material.iron ? IntegratedItems.IronBookcasedoor.itemID : IntegratedItems.WoodenBookcasedoor.itemID;
     }
 
     /**
@@ -501,6 +501,6 @@ public class BlockBookcasedoor extends Block
     
     public int getEnchantPower(World world, int x, int y, int z)
     {
-        return blockID == (RCBB.IronBookcasedoorBlock.blockID & RCBB.WoodenBookcasedoorBlock.blockID)? 1 : 1;
+        return blockID == (IntegratedBlocks.IronBookcasedoorBlock.blockID & IntegratedBlocks.WoodenBookcasedoorBlock.blockID)? 1 : 1;
     }
 }

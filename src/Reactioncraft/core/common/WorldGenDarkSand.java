@@ -6,7 +6,7 @@ import net.minecraft.block.Block;
 import net.minecraft.block.material.Material;
 import net.minecraft.world.World;
 import net.minecraft.world.gen.feature.WorldGenerator;
-import Reactioncraft.core.RCC;
+import Reactioncraft.integration.*;
 
 
 public class WorldGenDarkSand extends WorldGenerator
@@ -19,7 +19,7 @@ public class WorldGenDarkSand extends WorldGenerator
 
     public WorldGenDarkSand(int par1)
     {
-        this.spoungeBlockId = RCC.DarkSand.blockID;
+        this.spoungeBlockId = IntegratedBlocks.DarkSand.blockID;
         this.numberOfBlocks = par1;
     }
 

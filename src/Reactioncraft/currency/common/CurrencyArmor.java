@@ -1,6 +1,6 @@
 package Reactioncraft.currency.common;
 
-import Reactioncraft.currency.RCCM;
+import Reactioncraft.integration.*;
 import cpw.mods.fml.client.registry.RenderingRegistry;
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
@@ -28,9 +28,9 @@ public class CurrencyArmor extends ItemArmor
 	@Override
 	public String getArmorTexture(ItemStack itemstack, Entity entity, int slot, int layer)
 	{
-		if ((itemstack.itemID == RCCM.Crown.itemID || (itemstack.itemID == RCCM.KinglyChest.itemID || itemstack.itemID == RCCM.KinglyBoots.itemID)))
+		if ((itemstack.itemID == IntegratedItems.Crown.itemID || (itemstack.itemID == IntegratedItems.KinglyChest.itemID || itemstack.itemID == IntegratedItems.KinglyBoots.itemID)))
 			return "rccm:textures/models/Emerald_1.png";
-		if (itemstack.itemID == RCCM.KinglyLegs.itemID){
+		if (itemstack.itemID == IntegratedItems.KinglyLegs.itemID){
 			return "rccm:textures/models/Emerald_2.png";
 		}
 		else return null;
@@ -39,25 +39,25 @@ public class CurrencyArmor extends ItemArmor
 	@Override
 	public void registerIcons(IconRegister par1IconRegister)
 	{
-		if(itemID == RCCM.Crown.itemID)
+		if(itemID == IntegratedItems.Crown.itemID)
 			this.itemIcon = par1IconRegister.registerIcon("rccm:crown");
 		this.canRepair = true;
 		this.setMaxStackSize(1);
 		this.isRepairable();
 		RenderingRegistry.addNewArmourRendererPrefix("Emerald");
-		if(itemID == RCCM.KinglyChest.itemID)
+		if(itemID == IntegratedItems.KinglyChest.itemID)
 			this.itemIcon = par1IconRegister.registerIcon("rccm:kingchest");
 		this.canRepair = true;
 		this.setMaxStackSize(1);
 		this.isRepairable();
 		RenderingRegistry.addNewArmourRendererPrefix("Emerald");
-		if(itemID == RCCM.KinglyLegs.itemID)
+		if(itemID == IntegratedItems.KinglyLegs.itemID)
 			this.itemIcon = par1IconRegister.registerIcon("rccm:kingpants");
 		this.canRepair = true;
 		this.setMaxStackSize(1);
 		this.isRepairable();
 		RenderingRegistry.addNewArmourRendererPrefix("Emerald");
-		if(itemID == RCCM.KinglyBoots.itemID)
+		if(itemID == IntegratedItems.KinglyBoots.itemID)
 			this.itemIcon = par1IconRegister.registerIcon("rccm:kingboots");
 		this.canRepair = true;
 		this.setMaxStackSize(1);

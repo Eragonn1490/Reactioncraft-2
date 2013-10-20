@@ -1,12 +1,10 @@
 package Reactioncraft.desert.common;
 
 import java.util.Random;
-
 import net.minecraft.block.Block;
 import net.minecraft.world.World;
 import net.minecraft.world.gen.feature.WorldGenerator;
-import Reactioncraft.core.RCC;
-import Reactioncraft.desert.RCBDM;
+import Reactioncraft.integration.*;
 
 
 public class WorldGenReactionCraftTreespawn extends WorldGenerator
@@ -37,7 +35,7 @@ public class WorldGenReactionCraftTreespawn extends WorldGenerator
                     if(i1 >= 0)
                     {
                         int j3 = world.getBlockId(i2, i1, l2);
-                        if(j3 != 0 && j3 != RCBDM.CherryTreeLeaves.blockID)  /////Leaf/////
+                        if(j3 != 0 && j3 != IntegratedBlocks.CherryTreeLeaves.blockID)  /////Leaf/////
                         {
                             flag = false;
                         }
@@ -56,12 +54,12 @@ public class WorldGenReactionCraftTreespawn extends WorldGenerator
             return false;
         }
         int j1 = world.getBlockId(i, j - 1, k);
-        if(j1 != Block.dirt.blockID && j1 != RCC.DarkSand.blockID)
+        if(j1 != Block.dirt.blockID && j1 != IntegratedBlocks.DarkSand.blockID)
         	//sand = which block CAN the tree spawn on
         {
             return false;
         }
-        world.setBlock(i, j - 1, k, RCC.DarkSand.blockID);   //sand = block created underneath the tree
+        world.setBlock(i, j - 1, k, IntegratedBlocks.DarkSand.blockID);   //sand = block created underneath the tree
         for(int k1 = (j - 3) + l; k1 <= j + l; k1++)
         {
             int j2 = k1 - (j + l);
@@ -74,7 +72,7 @@ public class WorldGenReactionCraftTreespawn extends WorldGenerator
                     int j4 = i4 - k;
                     if((Math.abs(l3) != i3 || Math.abs(j4) != i3 || random.nextInt(2) != 0 && j2 != 0) && !Block.opaqueCubeLookup[world.getBlockId(k3, k1, i4)])
                     {
-                    	setBlockAndMetadata(world, k3, k1, i4, RCBDM.CherryTreeLeaves.blockID, 0);  //Leaf////
+                    	setBlockAndMetadata(world, k3, k1, i4, IntegratedBlocks.CherryTreeLeaves.blockID, 0);  //Leaf////
                     }
                 }
 
@@ -85,9 +83,9 @@ public class WorldGenReactionCraftTreespawn extends WorldGenerator
         for(int l1 = 0; l1 < l; l1++)
         {
             int k2 = world.getBlockId(i, j + l1, k);
-            if(k2 == 0 || k2 == RCBDM.CherryTreeLeaves.blockID) ////Leaf/////
+            if(k2 == 0 || k2 == IntegratedBlocks.CherryTreeLeaves.blockID) ////Leaf/////
             {
-            	setBlockAndMetadata(world, i, j + l1, k, RCBDM.Cherrywood.blockID, 0);   //////Log////
+            	setBlockAndMetadata(world, i, j + l1, k, IntegratedBlocks.Cherrywood.blockID, 0);   //////Log////
             }
         }
 

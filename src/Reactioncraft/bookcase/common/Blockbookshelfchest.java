@@ -1,30 +1,23 @@
 package Reactioncraft.bookcase.common;
 
 import Reactioncraft.basemod.RCB;
-import Reactioncraft.bookcase.RCBB;
+import Reactioncraft.integration.*;
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
 import java.util.Iterator;
 import java.util.Random;
-
-import net.minecraft.block.Block;
-import net.minecraft.block.BlockContainer;
+import net.minecraft.block.*;
 import net.minecraft.block.material.Material;
 import net.minecraft.client.renderer.texture.IconRegister;
-import net.minecraft.creativetab.CreativeTabs;
 import net.minecraft.entity.EntityLiving;
 import net.minecraft.entity.item.EntityItem;
 import net.minecraft.entity.passive.EntityOcelot;
 import net.minecraft.entity.player.EntityPlayer;
-import net.minecraft.inventory.Container;
-import net.minecraft.inventory.IInventory;
-import net.minecraft.inventory.InventoryLargeChest;
+import net.minecraft.inventory.*;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.tileentity.TileEntity;
-import net.minecraft.util.AxisAlignedBB;
-import net.minecraft.util.Icon;
-import net.minecraft.util.MathHelper;
+import net.minecraft.util.*;
 import net.minecraft.world.IBlockAccess;
 import net.minecraft.world.World;
 import static net.minecraftforge.common.ForgeDirection.*;
@@ -567,6 +560,6 @@ public class Blockbookshelfchest extends BlockContainer
     
     public int getEnchantPower(World world, int x, int y, int z)
     {
-        return blockID == RCBB.Bookcasechest.blockID ? 1 : 1;
+        return blockID == IntegratedBlocks.Bookcasechest.blockID ? 1 : 1;
     }
 }

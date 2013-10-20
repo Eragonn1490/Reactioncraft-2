@@ -1,7 +1,7 @@
 package Reactioncraft.core.common;
 
 import net.minecraft.world.biome.BiomeGenBase;
-import Reactioncraft.core.RCC;
+import Reactioncraft.integration.*;
 
 public class BiomeGenRcDesert extends BiomeGenBase
 {
@@ -9,7 +9,7 @@ public class BiomeGenRcDesert extends BiomeGenBase
 	{
 		super(par1);
 		this.spawnableCreatureList.clear();
-		this.topBlock = (byte)RCC.DarkSand.blockID;
-		this.fillerBlock = (byte)RCC.DarkSand.blockID;
+		this.topBlock = (byte)IntegratedBlocks.DarkSand.blockID;
+		this.fillerBlock = (byte)IntegratedBlocks.DarkSand.blockID;
 	}
 }

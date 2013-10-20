@@ -6,21 +6,20 @@ import static net.minecraftforge.common.EnumPlantType.Desert;
 import static net.minecraftforge.common.EnumPlantType.Nether;
 import static net.minecraftforge.common.EnumPlantType.Plains;
 import static net.minecraftforge.common.EnumPlantType.Water;
-
 import java.util.Random;
-
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockCactus;
 import net.minecraft.block.BlockFlower;
 import net.minecraft.block.material.Material;
 import net.minecraft.entity.Entity;
+import net.minecraft.util.AxisAlignedBB;
 import net.minecraft.util.DamageSource;
 import net.minecraft.world.World;
 import net.minecraftforge.common.EnumPlantType;
 import net.minecraftforge.common.ForgeDirection;
 import net.minecraftforge.common.IPlantable;
 import Reactioncraft.basemod.RCB;
-import Reactioncraft.core.RCC;
+import Reactioncraft.integration.*;
 
 public class DesertFlower extends BlockFlower implements IPlantable
 {
@@ -44,10 +43,21 @@ public class DesertFlower extends BlockFlower implements IPlantable
        this.setBlockBounds(0.5F - f, 0.0F, 0.5F - f, 0.5F + f, f * 3.0F, 0.5F + f);
    }
   
+   /**
+    * Returns a bounding box from the pool of bounding boxes (this means this box can change after the pool has been
+    * cleared to be reused)
+    */
+   @Override
+   public AxisAlignedBB getCollisionBoundingBoxFromPool(World par1World, int par2, int par3, int par4)
+   {
+       float f = 0.0625F;
+       return AxisAlignedBB.getAABBPool().getAABB((double)((float)par2 + f), (double)par3, (double)((float)par4 + f), (double)((float)(par2 + 1) - f), (double)((float)(par3 + 1) - f), (double)((float)(par4 + 1) - f));
+   }
    
     /**
      * Checks to see if its valid to put this block at the specified coordinates. Args: world, x, y, z
      */
+   @Override
     public boolean canPlaceBlockAt(World par1World, int par2, int par3, int par4)
     {
         return super.canPlaceBlockAt(par1World, par2, par3, par4) && canBlockStay(par1World, par2, par3, par4);
@@ -57,9 +67,10 @@ public class DesertFlower extends BlockFlower implements IPlantable
      * Gets passed in the blockID of the block below and supposed to return true if its allowed to grow on the type of
      * blockID passed in. Args: blockID
      */
+   @Override
     public boolean canThisPlantGrowOnThisBlockID(int par1)
     {
-        return par1 == Block.grass.blockID || par1 == Block.dirt.blockID || par1 == Block.tilledField.blockID || par1 == RCC.DarkSand.blockID || par1 == Block.sand.blockID;
+        return par1 == Block.grass.blockID || par1 == Block.dirt.blockID || par1 == Block.tilledField.blockID || par1 == IntegratedBlocks.DarkSand.blockID || par1 == Block.sand.blockID;
     }
 
     /**
@@ -82,6 +93,7 @@ public class DesertFlower extends BlockFlower implements IPlantable
         this.checkFlowerChange(par1World, par2, par3, par4);
     }
     
+    @Override
     public boolean canBlockStay(World par1World, int par2, int par3, int par4)
     {
         Block soil = blocksList[par1World.getBlockId(par2, par3 - 1, par4)];
@@ -94,6 +106,7 @@ public class DesertFlower extends BlockFlower implements IPlantable
      * Is this block (a) opaque and (b) a full 1m cube?  This determines whether or not to render the shared face of two
      * adjacent blocks and also whether the player can attach torches, redstone wire, etc to this block.
      */
+    @Override
     public boolean isOpaqueCube()
     {
         return false;
@@ -102,6 +115,7 @@ public class DesertFlower extends BlockFlower implements IPlantable
     /**
      * If this block doesn't render as an ordinary block it will return False (examples: signs, buttons, stairs, etc)
      */
+    @Override
     public boolean renderAsNormalBlock()
     {
         return false;
@@ -110,6 +124,7 @@ public class DesertFlower extends BlockFlower implements IPlantable
     /**
      * The type of render function that is called for this block
      */
+    @Override
     public int getRenderType()
     {
         return 1;
@@ -118,6 +133,7 @@ public class DesertFlower extends BlockFlower implements IPlantable
     /**
      * Triggered whenever an entity collides with this block (enters into the block). Args: world, x, y, z, entity
      */
+    @Override
     public void onEntityCollidedWithBlock(World par1World, int par2, int par3, int par4, Entity par5Entity)
     {
         par5Entity.attackEntityFrom(DamageSource.cactus, 1);

@@ -3,7 +3,7 @@ package Reactioncraft.glass.common;
 import java.util.List;
 import java.util.Random;
 import Reactioncraft.basemod.RCB;
-import Reactioncraft.glass.RCG;
+import Reactioncraft.integration.*;
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockGlass;
 import net.minecraft.block.material.Material;
@@ -62,55 +62,55 @@ public class BlockGlassMulti extends Block
 		switch (i)
 		{
 		case 0:
-			return RCG.GlassMulti.blockID;
+			return IntegratedBlocks.GlassMulti.blockID;
 
 		case 1:
-			return RCG.GlassMulti.blockID;
+			return IntegratedBlocks.GlassMulti.blockID;
 
 		case 2:
-			return RCG.GlassMulti.blockID;
+			return IntegratedBlocks.GlassMulti.blockID;
 
 		case 3:
-			return RCG.GlassMulti.blockID;
+			return IntegratedBlocks.GlassMulti.blockID;
 
 		case 4:
-			return RCG.GlassMulti.blockID;
+			return IntegratedBlocks.GlassMulti.blockID;
 
 		case 5:
-			return RCG.GlassMulti.blockID;
+			return IntegratedBlocks.GlassMulti.blockID;
 
 		case 6:
-			return RCG.GlassMulti.blockID;
+			return IntegratedBlocks.GlassMulti.blockID;
 
 		case 7:
-			return RCG.GlassMulti.blockID;
+			return IntegratedBlocks.GlassMulti.blockID;
 
 		case 8:
-			return RCG.GlassMulti.blockID;
+			return IntegratedBlocks.GlassMulti.blockID;
 
 		case 9:
-			return RCG.GlassMulti.blockID;
+			return IntegratedBlocks.GlassMulti.blockID;
 
 		case 10:
-			return RCG.GlassMulti.blockID;
+			return IntegratedBlocks.GlassMulti.blockID;
 
 		case 11:
-			return RCG.GlassMulti.blockID;
+			return IntegratedBlocks.GlassMulti.blockID;
 
 		case 12:
-			return RCG.GlassMulti.blockID;
+			return IntegratedBlocks.GlassMulti.blockID;
 
 		case 13:
-			return RCG.GlassMulti.blockID;
+			return IntegratedBlocks.GlassMulti.blockID;
 
 		case 14:
-			return RCG.GlassMulti.blockID;
+			return IntegratedBlocks.GlassMulti.blockID;
 
 		case 15:
-			return RCG.GlassMulti.blockID;
+			return IntegratedBlocks.GlassMulti.blockID;
 		}
 
-		return RCG.GlassMulti.blockID;
+		return IntegratedBlocks.GlassMulti.blockID;
 	}
 
 	public int quantityDropped(int i, int j, Random random)
@@ -412,7 +412,7 @@ public class BlockGlassMulti extends Block
         else
         {
             int id = world.getBlockId(x, y, z);
-            return id == Block.fence.blockID || id == Block.netherFence.blockID || id == Block.glass.blockID || id == Block.cobblestoneWall.blockID || id == RCG.GlassMulti.blockID || id == RCG.GlowingGlassMulti.blockID;
+            return id == Block.fence.blockID || id == Block.netherFence.blockID || id == Block.glass.blockID || id == Block.cobblestoneWall.blockID || id == IntegratedBlocks.GlassMulti.blockID || id == IntegratedBlocks.GlowingGlassMulti.blockID;
         }
     }
 }
