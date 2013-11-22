@@ -10,7 +10,7 @@ public class IBloodstoneBH extends Item implements IBoreHead
     {
         super(i);
         maxStackSize = 1;
-        setMaxDamage(10000);
+        setMaxDamage(7500);
     }
 
     public ResourceLocation getBoreTexture()
@@ -25,6 +25,6 @@ public class IBloodstoneBH extends Item implements IBoreHead
 
     public float getDigModifier()
     {
-        return 1.4F;
+        return 1.8F;
     }
 }

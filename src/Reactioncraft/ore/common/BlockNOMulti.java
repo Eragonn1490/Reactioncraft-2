@@ -9,6 +9,7 @@ import net.minecraft.block.material.Material;
 import net.minecraft.client.renderer.texture.IconRegister;
 import net.minecraft.creativetab.CreativeTabs;
 import net.minecraft.entity.item.EntityMinecart;
+import net.minecraft.entity.item.EntityXPOrb;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.Icon;
@@ -198,7 +199,30 @@ public class BlockNOMulti extends Block
 
 		return 0;
 	}
+	
+	/**
+	 * called by spawner, ore, redstoneOre blocks
+	 */
+	protected void dropXpOnBlockBreak(World par1World, int par2, int par3, int par4, int par5)
+	{
+		if (!par1World.isRemote)
+		{
 
+			par1World.getBlockMetadata(par2, par3, par4);
+
+			if(par1World.getBlockMetadata(par2, par3, par4) == 1 || par1World.getBlockMetadata(par2, par3, par4) == 2 || par1World.getBlockMetadata(par2, par3, par4) == 3 || par1World.getBlockMetadata(par2, par3, par4) == 4)
+			{
+
+				while (par5 > 0)
+				{
+					int i1 = EntityXPOrb.getXPSplit(par5);
+					par5 -= i1;
+					par1World.spawnEntityInWorld(new EntityXPOrb(par1World, (double)par2 + 0.5D, (double)par3 + 0.5D, (double)par4 + 0.5D, i1));
+				}
+			}
+		}
+	}
+	
 	@Override
 	public void registerIcons(IconRegister par1IconRegister)
 	{

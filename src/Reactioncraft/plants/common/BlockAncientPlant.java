@@ -187,7 +187,7 @@ public class BlockAncientPlant extends BlockFlower
     {
         ArrayList<ItemStack> ret = super.getBlockDropped(world, x, y, z, metadata, fortune);
 
-        if (metadata >= 7)
+        if (metadata == 7)
         {
             for (int n = 0; n < 3 + fortune; n++)
             {
@@ -206,7 +206,7 @@ public class BlockAncientPlant extends BlockFlower
      */
     public int idDropped(int par1, Random par2Random, int par3)
     {
-        return par1 == 7 ? this.getCropItem() : this.getSeedItem();
+        return par1 <= 7 ? this.getCropItem() : this.getSeedItem();
     }
 
     /**

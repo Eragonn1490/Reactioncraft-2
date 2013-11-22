@@ -17,9 +17,18 @@ public class BlockReed1 extends Block
 	{
 		super(i, Material.plants);
 		float f = 0.375F;
-		setBlockBounds(0.5F - f, 0.0F, 0.5F - f, 0.5F + f, 1.0F, 0.5F + f);
-		setTickRandomly(true);
+		this.setBlockBounds(0.5F - f, 0.0F, 0.5F - f, 0.5F + f, 1.0F, 0.5F + f);
+		this.setTickRandomly(true);
 	}
+	
+	/**
+     * How many world ticks before ticking
+     */
+    @Override
+    public int tickRate(World par1World)
+    {
+        return 15;
+    }
 	
 	@Override
 	public void registerIcons(IconRegister par1IconRegister)

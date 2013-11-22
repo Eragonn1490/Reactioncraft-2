@@ -1,8 +1,8 @@
 package Reactioncraft.integration;
 
-import net.minecraft.block.Block;
+import net.minecraft.block.*;
 import net.minecraft.block.material.Material;
-import net.minecraft.item.Item;
+import net.minecraft.item.*;
 import net.minecraft.potion.Potion;
 import net.minecraftforge.common.MinecraftForge;
 import Reactioncraft.bookcase.common.*;
@@ -14,6 +14,8 @@ import Reactioncraft.mobs.common.*;
 import Reactioncraft.net.Common.*;
 import Reactioncraft.food.common.*;
 import Reactioncraft.plants.common.*;
+import Reactioncraft.tools.common.*;
+import Reactioncraft.vanillaclasses.*;
 import Reactioncraft.basefiles.common.*;
 import Reactioncraft.basemod.RCB;
 
@@ -32,6 +34,9 @@ public class IntegratedItemCode
 		IntegratedItems.YellowTailCooked = (new ItemBasicFood(IntegratedConfigI.YellowTailCookedIID, 5, 0.6F, false)).setUnlocalizedName("rcc:yellowtailc").setTextureName("rcc:yellowtailc");
 		IntegratedItems.Mapinabottle = new ItemBasic(IntegratedConfigI.MapinabottleIID).setUnlocalizedName("rcc:mapinbottle").setTextureName("rcc:mapinbottle").setContainerItem(Item.glassBottle).setCreativeTab(RCB.ReactioncraftItems);
 		IntegratedItems.Shipinabottle = new ItemBasic(IntegratedConfigI.ShipinabottleIID).setUnlocalizedName("rcc:shipinbottle").setTextureName("rcc:shipinbottle").setCreativeTab(RCB.ReactioncraftItems);
+		IntegratedItems.rcendereye = (new RCItemEnderEye(IntegratedConfigI.rcendereyeIID)).setUnlocalizedName("eyeOfEnder").setTextureName("rcc:rcender_eye").setCreativeTab(RCB.ReactioncraftItems);
+		IntegratedItems.meltedventinite = new ItemBasic(IntegratedConfigI.meltedventiniteIID).setUnlocalizedName("rcc:meltedventinite").setTextureName("rcc:meltedventinite").setCreativeTab(RCB.ReactioncraftItems);
+		IntegratedItems.meltedwizimite = new ItemBasic(IntegratedConfigI.meltedwizimiteIID).setUnlocalizedName("rcc:meltedwizimite").setTextureName("rcc:meltedwizimite").setCreativeTab(RCB.ReactioncraftItems);
 	}
 
 	public static void loadRCBB()
@@ -117,11 +122,6 @@ public class IntegratedItemCode
 
 	public static void loadNet() 
 	{
-		IntegratedItems.hilt = new ItemPieceHilt(IntegratedConfigI.hiltIID).setUnlocalizedName("RCN:hilt").setTextureName("RCN:hilt").setCreativeTab(RCB.ReactioncraftItems);
-		IntegratedItems.net = new ItemPieceNet(IntegratedConfigI.netIID).setUnlocalizedName("RCN:netpart").setTextureName("RCN:netpart").setCreativeTab(RCB.ReactioncraftItems);
-		IntegratedItems.completeNet = new ItemNetCatcher(IntegratedConfigI.completeNetIID).setUnlocalizedName("RCN:fullnet").setTextureName("RCN:fullnet");
-		IntegratedItems.caught = new ItemCaughtEntity(IntegratedConfigI.caughtIID).setUnlocalizedName("RCN:caught").setTextureName("RCN:caught");
-		IntegratedItems.caughtplayer = new ItemCaughtPlayer(IntegratedConfigI.caughtplayerIID).setUnlocalizedName("RCN:caught").setTextureName("RCN:caught");
 		IntegratedItems.creativeNet = new ItemCreativeNet(IntegratedConfigI.creativeNetIID).setUnlocalizedName("RCN:fullnet").setTextureName("RCN:fullnet").setCreativeTab(RCB.ReactioncraftItems);
 	}
 
@@ -158,17 +158,19 @@ public class IntegratedItemCode
 		IntegratedItems.GoldenSwordFragment = (new ItemBasic(IntegratedConfigI.GoldenSwordFragmentIID)).setUnlocalizedName("rcw:GoldenSwordFragment").setTextureName("rcw:GoldenSwordFragment");
 		IntegratedItems.UnbindedSword = (new ItemBasic(IntegratedConfigI.UnbindedSwordIID)).setUnlocalizedName("rcw:BloodstoneSword").setTextureName("rcw:BloodstoneSword");
 		//Obsidian
-		IntegratedItems.ObbySword = (new BasicSword(IntegratedConfigI.ObbyPickID, IntegratedMaterials.EnumToolMaterialObby)).setUnlocalizedName("rcw:ObbySword").setTextureName("rcw:ObbySword");
-		IntegratedItems.ObbyPick = (new BasicPick(IntegratedConfigI.ObbySwordID, IntegratedMaterials.EnumToolMaterialObby)).setUnlocalizedName("rcw:ObbyPick").setTextureName("rcw:ObbyPick");
-		IntegratedItems.ObbyShovel = (new BasicShovel(IntegratedConfigI.ObbyShovelID, IntegratedMaterials.EnumToolMaterialObby)).setUnlocalizedName("rcw:ObbyShovel").setTextureName("rcw:ObbyShovel");
-		IntegratedItems.ObbyAxe = (new BasicAxe(IntegratedConfigI.ObbyAxeID, IntegratedMaterials.EnumToolMaterialObby)).setUnlocalizedName("rcw:ObbyAxe").setTextureName("rcw:ObbyAxe");
-		IntegratedItems.ObbyHoe = (new BasicHoe(IntegratedConfigI.ObbyHoeID, IntegratedMaterials.EnumToolMaterialObby)).setUnlocalizedName("rcw:ObbyHoe").setTextureName("rcw:ObbyHoe");
+		IntegratedItems.ObbySword = (new ItemObsidanSword(IntegratedConfigI.ObbyPickID, IntegratedMaterials.EnumToolMaterialObby)).setUnlocalizedName("rcw:ObbySword").setTextureName("rcw:ObbySword");
+		IntegratedItems.ObbyPick = (new ItemObsidanPick(IntegratedConfigI.ObbySwordID, IntegratedMaterials.EnumToolMaterialObby)).setUnlocalizedName("rcw:ObbyPick").setTextureName("rcw:ObbyPick");
+		IntegratedItems.ObbyShovel = (new ItemObsidianShovel(IntegratedConfigI.ObbyShovelID, IntegratedMaterials.EnumToolMaterialObby)).setUnlocalizedName("rcw:ObbyShovel").setTextureName("rcw:ObbyShovel");
+		IntegratedItems.ObbyAxe = (new ItemObsidianAxe(IntegratedConfigI.ObbyAxeID, IntegratedMaterials.EnumToolMaterialObby)).setUnlocalizedName("rcw:ObbyAxe").setTextureName("rcw:ObbyAxe");
+		IntegratedItems.ObbyHoe = (new ItemObsidianHoe(IntegratedConfigI.ObbyHoeID, IntegratedMaterials.EnumToolMaterialObby)).setUnlocalizedName("rcw:ObbyHoe").setTextureName("rcw:ObbyHoe");
 		//Bloodstone
-		IntegratedItems.BloodstoneSword = (new BasicSword(IntegratedConfigI.BloodstonePickID, IntegratedMaterials.EnumToolMaterialBloodstone)).setUnlocalizedName("rcw:BloodstoneSword").setTextureName("rcw:BloodstoneSword");
-		IntegratedItems.BloodstonePick = (new BasicPick(IntegratedConfigI.BloodstoneSwordID, IntegratedMaterials.EnumToolMaterialBloodstone)).setUnlocalizedName("rcw:BloodstonePick").setTextureName("rcw:BloodstonePick");
-		IntegratedItems.BloodstoneShovel = (new BasicShovel(IntegratedConfigI.BloodstoneShovelID, IntegratedMaterials.EnumToolMaterialBloodstone)).setUnlocalizedName("rcw:BloodstoneShovel").setTextureName("rcw:BloodstoneShovel");
-		IntegratedItems.BloodstoneAxe = (new BasicAxe(IntegratedConfigI.BloodstoneAxeID, IntegratedMaterials.EnumToolMaterialBloodstone)).setUnlocalizedName("rcw:BloodstoneAxe").setTextureName("rcw:BloodstoneAxe");
-		IntegratedItems.BloodstoneHoe = (new BasicHoe(IntegratedConfigI.BloodstoneHoeID, IntegratedMaterials.EnumToolMaterialBloodstone)).setUnlocalizedName("rcw:BloodstoneHoe").setTextureName("rcw:BloodstoneHoe");
+		IntegratedItems.BloodstoneSword = (new ItemBloodstoneSword(IntegratedConfigI.BloodstonePickID, IntegratedMaterials.EnumToolMaterialBloodstone)).setUnlocalizedName("rcw:BloodstoneSword").setTextureName("rcw:BloodstoneSword");
+		IntegratedItems.BloodstonePick = (new ItemBloodstonePick(IntegratedConfigI.BloodstoneSwordID, IntegratedMaterials.EnumToolMaterialBloodstone)).setUnlocalizedName("rcw:BloodstonePick").setTextureName("rcw:BloodstonePick");
+		IntegratedItems.BloodstoneShovel = (new ItemBloodstoneShovel(IntegratedConfigI.BloodstoneShovelID, IntegratedMaterials.EnumToolMaterialBloodstone)).setUnlocalizedName("rcw:BloodstoneShovel").setTextureName("rcw:BloodstoneShovel");
+		IntegratedItems.BloodstoneAxe = (new ItemBloodstoneAxe(IntegratedConfigI.BloodstoneAxeID, IntegratedMaterials.EnumToolMaterialBloodstone)).setUnlocalizedName("rcw:BloodstoneAxe").setTextureName("rcw:BloodstoneAxe");
+		IntegratedItems.BloodstoneHoe = (new ItemBloodstoneHoe(IntegratedConfigI.BloodstoneHoeID, IntegratedMaterials.EnumToolMaterialBloodstone)).setUnlocalizedName("rcw:BloodstoneHoe").setTextureName("rcw:BloodstoneHoe");
+		//Teir 3 Black Diamond
+		IntegratedItems.BloodstoneDiamondPick = (new ItemBlackdiamondPick(IntegratedConfigI.BloodstoneDiamondPickIID, IntegratedMaterials.EnumToolMaterialBloodstone2)).setUnlocalizedName("rcw:BloodstonePick2").setTextureName("rcw:BloodstonePick2");
 	}
 
 	public static void loadRCF() 

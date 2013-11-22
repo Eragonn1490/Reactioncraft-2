@@ -1,26 +1,37 @@
 package Reactioncraft.net.Common;
 
 import java.util.List;
+
 import net.minecraft.block.Block;
-import net.minecraft.creativetab.CreativeTabs;
-import net.minecraft.entity.*;
+import net.minecraft.entity.Entity;
+import net.minecraft.entity.EntityList;
+import net.minecraft.entity.EntityLiving;
+import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.player.EntityPlayer;
-import net.minecraft.item.*;
+import net.minecraft.item.EnumToolMaterial;
+import net.minecraft.item.Item;
+import net.minecraft.item.ItemBow;
+import net.minecraft.item.ItemStack;
+import net.minecraft.item.ItemTool;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.stats.StatList;
 import net.minecraft.world.World;
-import Reactioncraft.integration.*;
+import Reactioncraft.integration.IntegratedMaterials;
+import Reactioncraft.net.RCN;
 import Reactioncraft.basemod.RCB;
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
 
 public class ItemNetCatcher extends ItemTool 
 {
+	private int test = 0;
+	
 	public ItemNetCatcher(int par1) 
 	{
 		super(par1, 0, IntegratedMaterials.EnumToolMaterialNet, new Block[] {});
 		this.setUnlocalizedName("completeNet");
-		this.setCreativeTab((CreativeTabs)null);
+		//this.setCreativeTab(RCB.ReactioncraftItems);
+		this.setCreativeTab(null);
 		this.setMaxStackSize(1);
 	}
 
@@ -31,9 +42,9 @@ public class ItemNetCatcher extends ItemTool
 	public int getMaxDamage(ItemStack stack)
 	{
 		NBTTagCompound compound = stack.stackTagCompound;
-		int hiltLevel = compound.getInteger("hilt");
-		int netLevel  = compound.getInteger("net");
-		return (hiltLevel + netLevel) * 10 - 1;
+		int hiltLevel = compound.getInteger("str");
+		int netLevel  = compound.getInteger("str");
+		return (1) + (hiltLevel + netLevel) * 10;
 	}
 
 	@Override
@@ -45,7 +56,7 @@ public class ItemNetCatcher extends ItemTool
 	@Override
 	public boolean onLeftClickEntity(ItemStack stack, EntityPlayer player, Entity entity)
 	{
-		if (entity == null || IntegratedProperties.exclusionList.isExcluded(entity) || !(entity instanceof EntityLiving))
+		if (entity == null || RCN.exclusionList.isExcluded(entity) || !(entity instanceof EntityLiving))
 			return false;
 
 		else if(entity instanceof EntityPlayer)
@@ -91,7 +102,7 @@ public class ItemNetCatcher extends ItemTool
 			nbt.removeTag("HurtTime");
 			nbt.removeTag("DeathTime");
 			nbt.removeTag("AttackTime");		
-			ItemStack is = new ItemStack(IntegratedItems.caught);
+			ItemStack is = new ItemStack(RCN.caught);
 			is.stackTagCompound = new NBTTagCompound();
 			is.stackTagCompound.setString("entity", EntityList.getEntityString(entity));
 			is.stackTagCompound.setCompoundTag("entityData", nbt);

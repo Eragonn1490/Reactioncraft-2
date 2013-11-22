@@ -19,8 +19,18 @@ public class BlockSandRc extends BlockSand
     {
         super(par1, Material.sand);
         this.setCreativeTab(RCB.Reactioncraft);
+        this.setTickRandomly(true);
     }
-   
+    
+    /**
+     * How many world ticks before ticking
+     */
+    @Override
+    public int tickRate(World par1World)
+    {
+        return 30;
+    }
+    
     @Override
     public boolean getBlocksMovement(IBlockAccess par1IBlockAccess, int par2, int par3, int par4)
     {
@@ -99,15 +109,6 @@ public class BlockSandRc extends BlockSand
      */
     @Override
     public void onStartFalling(EntityFallingSand par1EntityFallingSand) {}
-
-    /**
-     * How many world ticks before ticking
-     */
-    @Override
-    public int tickRate(World par1World)
-    {
-        return 2;
-    }
 
     /**
      * Checks to see if the sand can fall into the block below it

@@ -17,6 +17,9 @@ public class IntegratedConfigI
 	public static int YellowTailCookedIID;
 	public static int MapinabottleIID;
 	public static int ShipinabottleIID;
+	public static int rcendereyeIID;
+	public static int meltedventiniteIID;
+	public static int meltedwizimiteIID;
 	
 	/** From RCBB **/
 	public static int WoodenBookcasedoorIID;
@@ -138,6 +141,7 @@ public class IntegratedConfigI
 	public static int ObbyShovelID;
 	public static int ObbyAxeID;
 	public static int ObbyHoeID;
+	public static int BloodstoneDiamondPickIID;
 	public static int BloodstonePickID;
 	public static int BloodstoneSwordID;
 	public static int BloodstoneShovelID;

@@ -11,7 +11,7 @@ public class IBlackDiamondBH extends Item implements IBoreHead
     {
         super(i);
         maxStackSize = 1;
-        setMaxDamage(6500);
+        setMaxDamage(9000);
     }
 
     public ResourceLocation getBoreTexture()
@@ -26,6 +26,6 @@ public class IBlackDiamondBH extends Item implements IBoreHead
 
     public float getDigModifier()
     {
-        return 1.4F;
+        return 2.0F;
     }
 }

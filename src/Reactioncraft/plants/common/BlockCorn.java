@@ -77,7 +77,7 @@ public class BlockCorn extends Block
 		boolean toReturn = false;
 		int l = world.getBlockId(i, j - 1, k);
 
-		if ((l == Block.grass.blockID) || (l == Block.dirt.blockID) || (l == Block.gravel.blockID) || (l == IntegratedBlocks.DarkSand.blockID) || (l == this.blockID))
+		if ((l == Block.grass.blockID) || (l == Block.tilledField.blockID)|| (l == Block.dirt.blockID) || (l == Block.gravel.blockID) || (l == IntegratedBlocks.DarkSand.blockID) || (l == this.blockID))
 		{
 			toReturn = true;
 		}

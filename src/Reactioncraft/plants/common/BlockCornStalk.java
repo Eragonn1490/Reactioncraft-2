@@ -7,6 +7,7 @@ import net.minecraft.block.Block;
 import net.minecraft.block.BlockFlower;
 import net.minecraft.client.renderer.texture.IconRegister;
 import net.minecraft.creativetab.CreativeTabs;
+import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.Icon;
@@ -80,6 +81,36 @@ public class BlockCornStalk extends BlockFlower
 
         par1World.setBlockMetadataWithNotify(par2, par3, par4, l, 2);
     }
+
+/**
+	 * Called upon block activation (right click on the block.)
+	 */
+	@Override
+	public boolean onBlockActivated(World par1World, int par2, int par3,int par4, EntityPlayer par5EntityPlayer, int par6, float par7, float par8, float par9)
+	{
+		ItemStack bonemeal = new ItemStack(Item.dyePowder, 1, 15);
+
+		if(!(par5EntityPlayer.getHeldItem() == null))
+		{
+			if(par1World.getBlockMetadata(par2, par3, par4) == 7)
+			{
+				if(par5EntityPlayer.getHeldItem().itemID == bonemeal.itemID)
+				{
+					par5EntityPlayer.getHeldItem().stackSize -= 1; //only if you want to use the item when you do this.
+
+					if(par1World.isRemote)
+					{
+						par1World.setBlock(par2, par3, par4, IntegratedBlocks.cornBlock.blockID);
+					}
+					if(!par1World.isRemote)
+					{
+						par1World.setBlock(par2, par3, par4, IntegratedBlocks.cornBlock.blockID);
+					}
+				}
+			}
+		}
+		return super.onBlockActivated(par1World, par2, par3, par4, par5EntityPlayer, par6, par7, par8, par9);
+	}
 
     /**
      * Gets the growth rate for the crop. Setup to encourage rows by halving growth rate if there is diagonals, crops on
@@ -163,7 +194,7 @@ public class BlockCornStalk extends BlockFlower
      */
     public int getSeedItem()
     {
-        return IntegratedBlocks.cornBlock.blockID;
+        return -1;
     }
 
     /**
@@ -171,7 +202,7 @@ public class BlockCornStalk extends BlockFlower
      */
     public int getCropItem()
     {
-        return IntegratedBlocks.cornBlock.blockID;
+        return -1;
     }
 
     /**

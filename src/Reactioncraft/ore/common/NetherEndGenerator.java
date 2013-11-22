@@ -88,5 +88,13 @@ public class NetherEndGenerator implements IWorldGenerator
 		int yCoord = random.nextInt(64);
 		int zCoord = blockZ + random.nextInt(16);
 		(new WorldGenMinable(IntegratedBlocks.endOres.blockID, 0, 10, Block.whiteStone.blockID)).generate(world, random, xCoord, yCoord, zCoord);
+		
+		if(IntegratedProperties.genVentinite.getBoolean(true))
+		{
+			int xCoord1 = blockX + random.nextInt(16);
+			int yCoord1 = random.nextInt(64);
+			int zCoord1 = blockZ + random.nextInt(16);
+			(new WorldGenMinable(IntegratedBlocks.endOres.blockID, 1, 10, Block.whiteStone.blockID)).generate(world, random, xCoord, yCoord, zCoord);
+		}
 	}
 }

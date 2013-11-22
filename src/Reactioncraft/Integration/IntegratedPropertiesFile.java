@@ -30,6 +30,9 @@ public class IntegratedPropertiesFile
 		IntegratedProperties.vanillaOverrideFishingrod = config.get("Vanilla Overrides", "Override Fishing Rod", false);
 		IntegratedProperties.vanillaOverrideFishingrod.comment = "If this is true item fishing rod is overwrote to catch mutiple fish and items, to play regular vanilla servers set to false and restart your game!";
 		
+		IntegratedProperties.enderportalActive = config.get("Hardcore", "Ender Portal Active", true);
+		IntegratedProperties.enderportalActive.comment = "If this is 'true' that means that you can craft a custom end portal block";
+		
 		/** RCBB **/
 		IntegratedProperties.vanillaOverrideBookcase = config.get("Vanilla Overrides", "Override Enchantment Table", true);
 		IntegratedProperties.vanillaOverrideBookcase.comment = "If this is true Vanilla Enchantment Table is slightly overwritten";

@@ -81,7 +81,7 @@ public class IntegratedLanguageFile
 
 
 		//Hireoglyphics
-		LanguageRegistry.addName(new ItemStack(IntegratedBlocks.HireoMulti, 1, 0),     "Hireoglyphics");
+		LanguageRegistry.addName(new ItemStack(IntegratedBlocks.HireoMulti, 1, 0),  "Hireoglyphics");
 		LanguageRegistry.addName(new ItemStack(IntegratedBlocks.HireoMulti, 1, 1), 	"Hireoglyphics");
 		LanguageRegistry.addName(new ItemStack(IntegratedBlocks.HireoMulti, 1, 2), 	"Hireoglyphics");
 
@@ -153,6 +153,13 @@ public class IntegratedLanguageFile
 		LanguageRegistry.addName(IntegratedItems.YellowTailCooked, "Cooked Yellowtail");
 		LanguageRegistry.addName(IntegratedItems.Mapinabottle, "Map in a bottle");
 		LanguageRegistry.addName(IntegratedItems.Shipinabottle, "Ship in a bottle");
+		
+		//Melted End Ores
+		LanguageRegistry.addName(IntegratedItems.meltedventinite, "Melted Ventinite");
+		LanguageRegistry.addName(IntegratedItems.meltedwizimite, "Melted Wizimite");
+		
+		//End Portal
+		LanguageRegistry.addName(IntegratedBlocks.enderportal, "End Portal Frame");
 	}
 
 	public static void loadFoodnames() 
@@ -324,6 +331,8 @@ public class IntegratedLanguageFile
 
 		//End Ores
 		LanguageRegistry.addName(new ItemStack(IntegratedBlocks.endOres, 1, 0), "Wizimite");
+		LanguageRegistry.addName(new ItemStack(IntegratedBlocks.endOres, 1, 1), "Ventinite");
+		LanguageRegistry.addName(new ItemStack(IntegratedBlocks.endOres, 1, 2), "Infused Whitestone");
 	}
 
 	public static void loadPlantsnames() 
@@ -360,6 +369,7 @@ public class IntegratedLanguageFile
 		LanguageRegistry.addName(IntegratedItems.BloodstoneHoe, "Bloodstone Hoe");
 		LanguageRegistry.addName(IntegratedItems.BloodstoneBlade, "Bloodstone Blade");
 		LanguageRegistry.addName(IntegratedItems.GoldenSwordFragment, "Gold Sword Fragment");
+		LanguageRegistry.addName(IntegratedItems.BloodstoneDiamondPick, "Black Diamond Pickaxe");
 	}
 
 	public static void loadCurrencynames() 

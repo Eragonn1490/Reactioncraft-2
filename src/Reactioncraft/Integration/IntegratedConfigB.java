@@ -11,6 +11,8 @@ public class IntegratedConfigB
 	public static int clearBlockId;
 	public static int newSpongeId;
 	public static int spongeAbsorbtion;
+	public static int enderportalID;
+	public static int enderportalpID;
 	
 	/** From RCBB **/
 	public static int bookcasemetaID;

@@ -25,6 +25,15 @@ public class CurrencyArmor3 extends ItemArmor
 		enchantability = 30;
 	}
 
+	/**
+     * Return whether this item is repairable in an anvil.
+     */
+    @Override
+    public boolean getIsRepairable(ItemStack par1ItemStack, ItemStack par2ItemStack)
+    {
+        return IntegratedItems.ingotbloodstone.itemID ==  par2ItemStack.itemID? true : super.getIsRepairable(par1ItemStack, par2ItemStack);
+    }
+	
 	@Override
 	public String getArmorTexture(ItemStack itemstack, Entity entity, int slot, int layer)
 	{

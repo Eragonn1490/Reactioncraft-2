@@ -14,6 +14,8 @@ public class IntegratedConfigBlock
 		IntegratedConfigB.clearBlockId = Reactioncraft.config.getBlock("Clear Block", 3021).getInt();
 		IntegratedConfigB.snowblockBlockID = Reactioncraft.config.getBlock("Snow Block", 3022).getInt();
 		IntegratedConfigB.chainladderID = Reactioncraft.config.getBlock("chain ladder", 3023).getInt();
+		IntegratedConfigB.enderportalID = Reactioncraft.config.getBlock("Ender Portal", 3024).getInt();
+		IntegratedConfigB.enderportalpID = Reactioncraft.config.getBlock("Ender Portal Portal", 3025).getInt();
 	}
 
 	public static void loadRCBB() 

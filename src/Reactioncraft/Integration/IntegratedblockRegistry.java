@@ -13,6 +13,8 @@ public class IntegratedblockRegistry
 		GameRegistry.registerBlock(IntegratedBlocks.newSponge, "newSponge");
 		GameRegistry.registerBlock(IntegratedBlocks.clearBlock, "clearBlock");
 		GameRegistry.registerBlock(IntegratedBlocks.DarkSand, "DarkSand");
+		GameRegistry.registerBlock(IntegratedBlocks.enderportal, "RC-Enderportal");
+		GameRegistry.registerBlock(IntegratedBlocks.enderportalp, "RC-Portal");
 	}
 
 	public static void loadRCBB() 

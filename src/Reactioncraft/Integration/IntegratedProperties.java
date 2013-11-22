@@ -14,6 +14,7 @@ public class IntegratedProperties
 	public static Property vanillaOverrideFishingrod;
 	public static Property hardcorerailcraft;
 	public static Property hardcoreIC2;
+	public static Property enderportalActive;
 	
 	/** RCBB **/
 	public static Property vanillaOverrideBookcase;

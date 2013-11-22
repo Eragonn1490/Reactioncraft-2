@@ -20,9 +20,12 @@ public class IntegratedConfigItem
 		IntegratedConfigI.SamonIID = Reactioncraft.config.getItem("Cooked Samon", 10037).getInt();
 		IntegratedConfigI.YellowTailRawIID = Reactioncraft.config.getItem("Raw Yellowtail", 10038).getInt();
 		IntegratedConfigI.YellowTailCookedIID = Reactioncraft.config.getItem("Cooked Yellowtail", 10039).getInt();
-		IntegratedConfigI.MapinabottleIID = Reactioncraft.config.getItem("Map in a bottle", 10041).getInt();
-		IntegratedConfigI.ShipinabottleIID = Reactioncraft.config.getItem("Ship in a bottle", 10040).getInt();
-
+		IntegratedConfigI.MapinabottleIID = Reactioncraft.config.getItem("Map in a bottle", 10040).getInt();
+		IntegratedConfigI.ShipinabottleIID = Reactioncraft.config.getItem("Ship in a bottle", 10041).getInt();
+		IntegratedConfigI.meltedventiniteIID = Reactioncraft.config.getItem("Melted Ventinite", 10088).getInt();
+		IntegratedConfigI.meltedwizimiteIID = Reactioncraft.config.getItem("Melted Wizimite", 10089).getInt();
+		IntegratedConfigI.rcendereyeIID = Reactioncraft.config.getItem("Ender Eye 2", 10090).getInt();
+		
 		if(IntegratedProperties.vanillaOverrideCake.getBoolean(true))
 		{
 			int cakeId = Item.cake.itemID;
@@ -158,12 +161,7 @@ public class IntegratedConfigItem
 
 	public static void loadNet() 
 	{
-		//10841 - 10850
-		IntegratedConfigI.caughtIID = Reactioncraft.config.getItem("Caught", 10841).getInt();
-		IntegratedConfigI.caughtplayerIID = Reactioncraft.config.getItem("Caught Player", 10845).getInt();
-		IntegratedConfigI.hiltIID = Reactioncraft.config.getItem("Hilt Item", 10842).getInt();
-		IntegratedConfigI.netIID = Reactioncraft.config.getItem("Net Item", 10843).getInt();
-		IntegratedConfigI.completeNetIID = Reactioncraft.config.getItem("Complete Item", 10844).getInt();
+		//10841 - 10850 (RCN OWNS all but 10845)
 		IntegratedConfigI.creativeNetIID = Reactioncraft.config.getItem("Creative Net Item", 10845).getInt();
 	}
 
@@ -196,5 +194,6 @@ public class IntegratedConfigItem
 		IntegratedConfigI.BloodstoneBladeIID = Reactioncraft.config.getItem("Bloodstone Blade", 10941).getInt();
 		IntegratedConfigI.GoldenSwordFragmentIID = Reactioncraft.config.getItem("Golden Sword Fragment", 10942).getInt();
 		IntegratedConfigI.UnbindedSwordIID = Reactioncraft.config.getItem("Unbinded Sword", 10943).getInt();
+		IntegratedConfigI.BloodstoneDiamondPickIID = Reactioncraft.config.getItem("Black Diamond Pick", 10944).getInt();
 	}
 }

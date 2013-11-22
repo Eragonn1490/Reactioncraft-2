@@ -1,6 +1,7 @@
 package Reactioncraft.integration;
 
 import net.minecraft.item.Item;
+import net.minecraft.item.ItemStack;
 
 public class IntegratedItems 
 {
@@ -19,7 +20,11 @@ public class IntegratedItems
 	//Railcraft Items
 	public static Item Blackdiamondbore;
 	public static Item Bloodstonebore;
-
+	//Ender Stuff
+	public static Item rcendereye;
+	public static Item meltedventinite;
+	public static Item meltedwizimite;
+		
 	/** From RCBB **/
 	public static Item WoodenBookcasedoor;
 	public static Item IronBookcasedoor;
@@ -105,8 +110,6 @@ public class IntegratedItems
 	public static Item pollencomb;
 	
 	/** From RCN **/
-	public static Item hilt;
-	public static Item net;
 	public static Item completeNet;
 	public static Item caught;
 	public static Item caughtplayer;
@@ -149,4 +152,5 @@ public class IntegratedItems
 	public static Item BloodstoneBlade;
 	public static Item GoldenSwordFragment;
 	public static Item UnbindedSword;
+	public static Item BloodstoneDiamondPick;
 }

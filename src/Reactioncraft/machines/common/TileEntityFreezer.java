@@ -22,6 +22,7 @@ import net.minecraftforge.common.ForgeDummyContainer;
 
 public class TileEntityFreezer extends TileEntity implements ISidedInventory
 {
+	private byte directionFacing = 0;
     private static final int[] field_102010_d = new int[] {0};
     private static final int[] field_102011_e = new int[] {2, 1};
     private static final int[] field_102009_f = new int[] {1};
@@ -463,4 +464,11 @@ public class TileEntityFreezer extends TileEntity implements ISidedInventory
 		// TODO Auto-generated method stub
 		return false;
 	}
+
+	public void setDirection(byte dir) {
+        directionFacing = dir;
+}
+public byte getDirection(){
+        return directionFacing;
+}
 }

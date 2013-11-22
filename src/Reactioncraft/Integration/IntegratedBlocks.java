@@ -10,7 +10,9 @@ public class IntegratedBlocks
 	public static Block clearBlock; 
 	public static Block snowblock;
 	public static Block chainladder;
-
+	public static Block enderportal;
+	public static Block enderportalp;
+	
 	/** From RCBB **/
 	public static Block bookcasemeta;
 	public static Block Bookcasechest;

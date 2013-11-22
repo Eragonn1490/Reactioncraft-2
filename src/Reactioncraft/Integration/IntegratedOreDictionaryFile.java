@@ -1,8 +1,11 @@
 package Reactioncraft.integration;
 
+import cpw.mods.fml.common.registry.GameRegistry;
 import Reactioncraft.integration.*;
 import net.minecraft.item.ItemStack;
+import net.minecraft.item.crafting.CraftingManager;
 import net.minecraftforge.oredict.OreDictionary;
+import net.minecraftforge.oredict.ShapedOreRecipe;
 
 public class IntegratedOreDictionaryFile 
 {
@@ -19,17 +22,27 @@ public class IntegratedOreDictionaryFile
 		OreDictionary.registerOre("gemRuby",                new ItemStack(IntegratedItems.ruby, 1, 0));
 		
 		/** RCBDM **/
+		OreDictionary.registerOre("DarkCobble",             new ItemStack(IntegratedBlocks.DesertBlockMulti, 1, 1));
+		OreDictionary.registerOre("DarkStone",              new ItemStack(IntegratedBlocks.DesertBlockMulti, 1, 2));
 		OreDictionary.registerOre("BloodstoneBrick", 		new ItemStack(IntegratedBlocks.BloodstoneBrick));
 		OreDictionary.registerOre("carveddarkstone", 		new ItemStack(IntegratedBlocks.DesertBlockMulti, 1, 0));
 		OreDictionary.registerOre("darkstonebrick", 		new ItemStack(IntegratedBlocks.DesertBlockMulti, 1, 3));
 		OreDictionary.registerOre("plankWood", 				new ItemStack(IntegratedBlocks.CherryPlanks));
 		OreDictionary.registerOre("CherryWood", 			new ItemStack(IntegratedBlocks.Cherrywood));
 		OreDictionary.registerOre("scroll",					new ItemStack(IntegratedItems.scroll));
-		OreDictionary.registerOre("chisel", 				new ItemStack(IntegratedItems.FlintChisel,      1, 0));
-		OreDictionary.registerOre("chisel", 				new ItemStack(IntegratedItems.CopperChisel,     1, 0));
-		OreDictionary.registerOre("chisel", 				new ItemStack(IntegratedItems.GoldChisel,       1, 0));
-		OreDictionary.registerOre("chisel", 				new ItemStack(IntegratedItems.DiamondChisel,    1, 0));
-		OreDictionary.registerOre("chisel",					new ItemStack(IntegratedItems.BloodstoneChisel, 1, 0));
+		//Teir 1 Chisels
+		OreDictionary.registerOre("chisel", 				new ItemStack(IntegratedItems.FlintChisel,      1, OreDictionary.WILDCARD_VALUE));
+		OreDictionary.registerOre("chisel", 				new ItemStack(IntegratedItems.CopperChisel,     1, OreDictionary.WILDCARD_VALUE));
+		OreDictionary.registerOre("chisel", 				new ItemStack(IntegratedItems.GoldChisel,       1, OreDictionary.WILDCARD_VALUE));
+		OreDictionary.registerOre("chisel", 				new ItemStack(IntegratedItems.DiamondChisel,    1, OreDictionary.WILDCARD_VALUE));
+		OreDictionary.registerOre("chisel",					new ItemStack(IntegratedItems.BloodstoneChisel, 1, OreDictionary.WILDCARD_VALUE));
+		//Teir 2 Chisels
+		OreDictionary.registerOre("chisel1", 				new ItemStack(IntegratedItems.GoldChisel,       1, OreDictionary.WILDCARD_VALUE));
+		OreDictionary.registerOre("chisel1", 				new ItemStack(IntegratedItems.DiamondChisel,    1, OreDictionary.WILDCARD_VALUE));
+		OreDictionary.registerOre("chisel1",				new ItemStack(IntegratedItems.BloodstoneChisel, 1, OreDictionary.WILDCARD_VALUE));
+		//Teir 3 Chisels
+		OreDictionary.registerOre("chisel2", 				new ItemStack(IntegratedItems.DiamondChisel,    1, OreDictionary.WILDCARD_VALUE));
+		OreDictionary.registerOre("chisel2",				new ItemStack(IntegratedItems.BloodstoneChisel, 1, OreDictionary.WILDCARD_VALUE));
 		
 		/** RCF **/
 		OreDictionary.registerOre("rawCorn",		    	new ItemStack(IntegratedItems.rawcorn));

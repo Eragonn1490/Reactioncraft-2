@@ -2,6 +2,7 @@ package Reactioncraft.integration;
 
 import net.minecraft.block.*;
 import net.minecraft.block.material.Material;
+import net.minecraft.creativetab.CreativeTabs;
 import Reactioncraft.glass.common.*;
 import Reactioncraft.integration.*;
 import Reactioncraft.machines.common.*;
@@ -13,6 +14,8 @@ import Reactioncraft.plants.common.BlockAncientPlant;
 import Reactioncraft.plants.common.BlockCorn;
 import Reactioncraft.plants.common.BlockCornStalk;
 import Reactioncraft.plants.common.BlockReed1;
+import Reactioncraft.vanillaclasses.RCBlockEndPortalBlock;
+import Reactioncraft.vanillaclasses.RCBlockEndPortalFrame;
 import Reactioncraft.basefiles.common.*;
 import Reactioncraft.basemod.RCB;
 import Reactioncraft.bookcase.common.*;
@@ -28,6 +31,8 @@ public class IntegratedBlockCode
 		IntegratedBlocks.DarkSand = new BlockSandRc(IntegratedConfigB.DarkSandID).setHardness(0.5F).setResistance(5.0F).setStepSound(Block.soundSandFootstep).setUnlocalizedName("rcc:sand").setTextureName("rcc:sand");
 		IntegratedBlocks.chainladder = new BlockChainLadder(IntegratedConfigB.chainladderID).setHardness(3.0F).setResistance(5.0F).setStepSound(Block.soundStoneFootstep).setUnlocalizedName("rcc:chains").setTextureName("rcc:chains");
 		IntegratedBlocks.snowblock = new BlockBasic(IntegratedConfigB.snowblockBlockID).setHardness(3.0F).setResistance(5.0F).setUnlocalizedName("rcc:SnowBrick").setTextureName("rcc:SnowBrick");
+		IntegratedBlocks.enderportal = new RCBlockEndPortalFrame(IntegratedConfigB.enderportalID).setStepSound(Block.soundGlassFootstep).setLightValue(0.125F).setHardness(80.0F).setUnlocalizedName("endPortalFrame").setResistance(6000000.0F).setCreativeTab(RCB.Reactioncraft).setTextureName("RCORES:endframe");
+		IntegratedBlocks.enderportalp = new RCBlockEndPortalBlock(IntegratedConfigB.enderportalpID, Material.portal).setHardness(-1.0F).setResistance(6000000.0F);
 	}
 
 	public static void loadRCBB() 

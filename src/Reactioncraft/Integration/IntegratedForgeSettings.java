@@ -1,6 +1,7 @@
 package Reactioncraft.integration;
 
 import Reactioncraft.integration.*;
+import net.minecraft.block.Block;
 import net.minecraftforge.common.MinecraftForge;
 
 public class IntegratedForgeSettings 
@@ -9,6 +10,7 @@ public class IntegratedForgeSettings
 	{
 		/** RCC **/
 		MinecraftForge.setBlockHarvestLevel(IntegratedBlocks.DarkSand, "shovel", 0);
+		MinecraftForge.setBlockHarvestLevel(IntegratedBlocks.enderportal, "pickaxe", 5);
 		
 		/** RCBB **/
 		MinecraftForge.setBlockHarvestLevel(IntegratedBlocks.Bookcasechest,     "axe", 0);
@@ -48,5 +50,9 @@ public class IntegratedForgeSettings
 		MinecraftForge.setToolClass(IntegratedItems.BloodstonePick,    "pickaxe", 5);
 		MinecraftForge.setToolClass(IntegratedItems.BloodstoneShovel,  "shovel", 5);
 		MinecraftForge.setToolClass(IntegratedItems.BloodstoneAxe,     "axe", 5);
+		MinecraftForge.setToolClass(IntegratedItems.BloodstoneDiamondPick, "pickaxe", 5);
+		
+		/** Vanilla Blocks **/
+		MinecraftForge.setBlockHarvestLevel(Block.melon, 0, "axe", 0);
 	}
 }
