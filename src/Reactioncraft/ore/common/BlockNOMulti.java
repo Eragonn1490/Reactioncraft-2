@@ -229,44 +229,44 @@ public class BlockNOMulti extends Block
 		iconBuffer = new Icon[16][12]; // 3 machines, 6 sides each, in ON and OFF states
 
 		// meta 0, Bloodstone
-		iconBuffer[0][0] = par1IconRegister.registerIcon("RCORES:NetherStone"); // bottom
-		iconBuffer[0][1] = par1IconRegister.registerIcon("RCORES:NetherStone"); // top
-		iconBuffer[0][2] = par1IconRegister.registerIcon("RCORES:NetherStone"); // north
-		iconBuffer[0][3] = par1IconRegister.registerIcon("RCORES:NetherStone"); // east
-		iconBuffer[0][4] = par1IconRegister.registerIcon("RCORES:NetherStone"); // south
-		iconBuffer[0][5] = par1IconRegister.registerIcon("RCORES:NetherStone"); // west
+		iconBuffer[0][0] = par1IconRegister.registerIcon("reactioncraft:NetherStone"); // bottom
+		iconBuffer[0][1] = par1IconRegister.registerIcon("reactioncraft:NetherStone"); // top
+		iconBuffer[0][2] = par1IconRegister.registerIcon("reactioncraft:NetherStone"); // north
+		iconBuffer[0][3] = par1IconRegister.registerIcon("reactioncraft:NetherStone"); // east
+		iconBuffer[0][4] = par1IconRegister.registerIcon("reactioncraft:NetherStone"); // south
+		iconBuffer[0][5] = par1IconRegister.registerIcon("reactioncraft:NetherStone"); // west
 
 		// meta 1, Black Diamond
-		iconBuffer[1][0] = par1IconRegister.registerIcon("RCORES:NetherBlackDiamond"); // bottom
-		iconBuffer[1][1] = par1IconRegister.registerIcon("RCORES:NetherBlackDiamond"); // top
-		iconBuffer[1][2] = par1IconRegister.registerIcon("RCORES:NetherBlackDiamond"); // north
-		iconBuffer[1][3] = par1IconRegister.registerIcon("RCORES:NetherBlackDiamond"); // east
-		iconBuffer[1][4] = par1IconRegister.registerIcon("RCORES:NetherBlackDiamond"); // south
-		iconBuffer[1][5] = par1IconRegister.registerIcon("RCORES:NetherBlackDiamond"); // west
+		iconBuffer[1][0] = par1IconRegister.registerIcon("reactioncraft:NetherBlackDiamond"); // bottom
+		iconBuffer[1][1] = par1IconRegister.registerIcon("reactioncraft:NetherBlackDiamond"); // top
+		iconBuffer[1][2] = par1IconRegister.registerIcon("reactioncraft:NetherBlackDiamond"); // north
+		iconBuffer[1][3] = par1IconRegister.registerIcon("reactioncraft:NetherBlackDiamond"); // east
+		iconBuffer[1][4] = par1IconRegister.registerIcon("reactioncraft:NetherBlackDiamond"); // south
+		iconBuffer[1][5] = par1IconRegister.registerIcon("reactioncraft:NetherBlackDiamond"); // west
 
 		// meta 2, Dragonstone
-		iconBuffer[2][0] = par1IconRegister.registerIcon("RCORES:NetherDragonstone"); // bottom
-		iconBuffer[2][1] = par1IconRegister.registerIcon("RCORES:NetherDragonstone"); // top
-		iconBuffer[2][2] = par1IconRegister.registerIcon("RCORES:NetherDragonstone"); // north
-		iconBuffer[2][3] = par1IconRegister.registerIcon("RCORES:NetherDragonstone"); // east
-		iconBuffer[2][4] = par1IconRegister.registerIcon("RCORES:NetherDragonstone"); // south
-		iconBuffer[2][5] = par1IconRegister.registerIcon("RCORES:NetherDragonstone"); // west
+		iconBuffer[2][0] = par1IconRegister.registerIcon("reactioncraft:NetherDragonstone"); // bottom
+		iconBuffer[2][1] = par1IconRegister.registerIcon("reactioncraft:NetherDragonstone"); // top
+		iconBuffer[2][2] = par1IconRegister.registerIcon("reactioncraft:NetherDragonstone"); // north
+		iconBuffer[2][3] = par1IconRegister.registerIcon("reactioncraft:NetherDragonstone"); // east
+		iconBuffer[2][4] = par1IconRegister.registerIcon("reactioncraft:NetherDragonstone"); // south
+		iconBuffer[2][5] = par1IconRegister.registerIcon("reactioncraft:NetherDragonstone"); // west
 
 		// meta 3, Diamond
-		iconBuffer[3][0] = par1IconRegister.registerIcon("RCORES:NetherDimeOre"); // bottom
-		iconBuffer[3][1] = par1IconRegister.registerIcon("RCORES:NetherDimeOre"); // top
-		iconBuffer[3][2] = par1IconRegister.registerIcon("RCORES:NetherDimeOre"); // north
-		iconBuffer[3][3] = par1IconRegister.registerIcon("RCORES:NetherDimeOre"); // east
-		iconBuffer[3][4] = par1IconRegister.registerIcon("RCORES:NetherDimeOre"); // south
-		iconBuffer[3][5] = par1IconRegister.registerIcon("RCORES:NetherDimeOre"); // west
+		iconBuffer[3][0] = par1IconRegister.registerIcon("reactioncraft:NetherDimeOre"); // bottom
+		iconBuffer[3][1] = par1IconRegister.registerIcon("reactioncraft:NetherDimeOre"); // top
+		iconBuffer[3][2] = par1IconRegister.registerIcon("reactioncraft:NetherDimeOre"); // north
+		iconBuffer[3][3] = par1IconRegister.registerIcon("reactioncraft:NetherDimeOre"); // east
+		iconBuffer[3][4] = par1IconRegister.registerIcon("reactioncraft:NetherDimeOre"); // south
+		iconBuffer[3][5] = par1IconRegister.registerIcon("reactioncraft:NetherDimeOre"); // west
 
 		// meta 4, Gold
-		iconBuffer[4][0] = par1IconRegister.registerIcon("RCORES:NetherGoldOre1"); // bottom
-		iconBuffer[4][1] = par1IconRegister.registerIcon("RCORES:NetherGoldOre1"); // top
-		iconBuffer[4][2] = par1IconRegister.registerIcon("RCORES:NetherGoldOre1"); // north
-		iconBuffer[4][3] = par1IconRegister.registerIcon("RCORES:NetherGoldOre1"); // east
-		iconBuffer[4][4] = par1IconRegister.registerIcon("RCORES:NetherGoldOre1"); // south
-		iconBuffer[4][5] = par1IconRegister.registerIcon("RCORES:NetherGoldOre1"); // west
+		iconBuffer[4][0] = par1IconRegister.registerIcon("reactioncraft:NetherGoldOre1"); // bottom
+		iconBuffer[4][1] = par1IconRegister.registerIcon("reactioncraft:NetherGoldOre1"); // top
+		iconBuffer[4][2] = par1IconRegister.registerIcon("reactioncraft:NetherGoldOre1"); // north
+		iconBuffer[4][3] = par1IconRegister.registerIcon("reactioncraft:NetherGoldOre1"); // east
+		iconBuffer[4][4] = par1IconRegister.registerIcon("reactioncraft:NetherGoldOre1"); // south
+		iconBuffer[4][5] = par1IconRegister.registerIcon("reactioncraft:NetherGoldOre1"); // west
 
 		//		 //below here not used yet!
 		//		 // meta 0, Empty Bookshelf

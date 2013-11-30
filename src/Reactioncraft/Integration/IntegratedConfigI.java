@@ -1,7 +1,5 @@
 package Reactioncraft.integration;
 
-import net.minecraft.block.Block;
-
 public class IntegratedConfigI 
 {
 	/** From RCC **/
@@ -20,6 +18,8 @@ public class IntegratedConfigI
 	public static int rcendereyeIID;
 	public static int meltedventiniteIID;
 	public static int meltedwizimiteIID;
+	public static int bloodstoneHammerIID;
+	public static int bloodstoneclumpIID;
 	
 	/** From RCBB **/
 	public static int WoodenBookcasedoorIID;
@@ -89,6 +89,18 @@ public class IntegratedConfigI
 	public static int cheeseIID;
 	public static int EdibleFleshIID;
 	public static int knifeIID;
+	public static int meatcleaverIID;
+	public static int churnIID;
+	public static int rawhumanIID;
+	public static int cookedhumanIID;
+	public static int rawlambIID;
+	public static int cookedlambIID;
+	public static int rawhorseIID;
+	public static int cookedhorseIID;
+	public static int chickenHeadIID;
+	public static int beefChunkIID;
+	public static int porkChunkIID;
+	public static int bunsIID;
 	
 	/** From RCG **/
 	public static int moltenglassIID;
@@ -106,6 +118,7 @@ public class IntegratedConfigI
 	
 	/** From RCN **/
 	public static int caughtIID;
+	public static int caught2IID;
 	public static int caughtplayerIID;
 	public static int hiltIID;
 	public static int netIID;
@@ -150,4 +163,5 @@ public class IntegratedConfigI
 	public static int BloodstoneBladeIID;
 	public static int GoldenSwordFragmentIID;
 	public static int UnbindedSwordIID;
+	public static int batIID;
 }

@@ -106,7 +106,7 @@ public class IntegratedLanguageFile
 		LanguageRegistry.addName(new ItemStack(IntegratedBlocks.HireoMulti, 1, 15),  "Hireoglyphics"); 
 
 
-		LanguageRegistry.addName(new ItemStack(IntegratedBlocks.ColumnMulti, 1, 0), "Dark Sandstone Column");
+		LanguageRegistry.addName(new ItemStack(IntegratedBlocks.ColumnMulti, 1, 0), "Dark Sandstone Brick Column");
 		LanguageRegistry.addName(new ItemStack(IntegratedBlocks.ColumnMulti, 1, 1), "Marble Column");
 		LanguageRegistry.addName(new ItemStack(IntegratedBlocks.ColumnMulti, 1, 2), "Bloodstone Column");
 		LanguageRegistry.addName(new ItemStack(IntegratedBlocks.ColumnMulti, 1, 3), "Stone Column");
@@ -115,8 +115,9 @@ public class IntegratedLanguageFile
 		LanguageRegistry.addName(new ItemStack(IntegratedBlocks.ColumnMulti, 1, 6), "Diamond Column");
 		LanguageRegistry.addName(new ItemStack(IntegratedBlocks.ColumnMulti, 1, 7), "Stonebrick Column");
 		LanguageRegistry.addName(new ItemStack(IntegratedBlocks.ColumnMulti, 1, 8), "Limestone Column");
+		LanguageRegistry.addName(new ItemStack(IntegratedBlocks.ColumnMulti, 1, 9), "Dark Sandstone Column");
 
-		LanguageRegistry.addName(new ItemStack(IntegratedBlocks.ColumnMulti2, 1, 0), "Dark Sandstone Column");
+		LanguageRegistry.addName(new ItemStack(IntegratedBlocks.ColumnMulti2, 1, 0), "Dark Sandstone Brick Column");
 		LanguageRegistry.addName(new ItemStack(IntegratedBlocks.ColumnMulti2, 1, 1), "Marble Column");
 		LanguageRegistry.addName(new ItemStack(IntegratedBlocks.ColumnMulti2, 1, 2), "Bloodstone Column");
 		LanguageRegistry.addName(new ItemStack(IntegratedBlocks.ColumnMulti2, 1, 3), "Stone Column");
@@ -125,6 +126,7 @@ public class IntegratedLanguageFile
 		LanguageRegistry.addName(new ItemStack(IntegratedBlocks.ColumnMulti2, 1, 6), "Diamond Column");
 		LanguageRegistry.addName(new ItemStack(IntegratedBlocks.ColumnMulti2, 1, 7), "Stonebrick Column");
 		LanguageRegistry.addName(new ItemStack(IntegratedBlocks.ColumnMulti2, 1, 8), "Limestone Column");
+		LanguageRegistry.addName(new ItemStack(IntegratedBlocks.ColumnMulti2, 1, 9), "Dark Sandstone Column");
 
 		//Cactus's
 		LanguageRegistry.addName(IntegratedBlocks.Cactus1, "Cactus");
@@ -160,6 +162,10 @@ public class IntegratedLanguageFile
 		
 		//End Portal
 		LanguageRegistry.addName(IntegratedBlocks.enderportal, "End Portal Frame");
+		
+		//IC2 Independent Items
+		LanguageRegistry.addName(IntegratedItems.bloodstoneclump, "Bloodstone Clump");
+		LanguageRegistry.addName(IntegratedItems.bloodstoneHammer, "Bloodstone Hammer");
 	}
 
 	public static void loadFoodnames() 
@@ -219,6 +225,19 @@ public class IntegratedLanguageFile
 		LanguageRegistry.addName(IntegratedItems.Bacon, "Bacon");
 		LanguageRegistry.addName(IntegratedItems.BaconRaw, "Raw Bacon");
 		LanguageRegistry.addName(IntegratedItems.cheese, "Cheese");
+		LanguageRegistry.addName(IntegratedItems.meatcleaver, "Meat Cleaver");
+		LanguageRegistry.addName(IntegratedItems.churn, "Churn");
+		LanguageRegistry.addName(IntegratedItems.rawHuman, "Raw Human Shoulder");
+		LanguageRegistry.addName(IntegratedItems.cookedHuman, "Cooked Human Shoulder");
+		LanguageRegistry.addName(IntegratedItems.rawLamb, "Raw Lamb");
+		LanguageRegistry.addName(IntegratedItems.cookedLamb, "Cooked Lamb");
+		//Language Registry
+		LanguageRegistry.addName(IntegratedItems.rawHorse, "Raw Horse");
+		LanguageRegistry.addName(IntegratedItems.cookedHorse, "Cooked Horse");
+		LanguageRegistry.addName(IntegratedItems.chickenHead, "Chicken Head");
+		LanguageRegistry.addName(IntegratedItems.beefChunk, "Chunk of Beef");
+		LanguageRegistry.addName(IntegratedItems.porkChunk, "Chunk of Pork");
+		LanguageRegistry.addName(IntegratedItems.buns, "Buns");
 	}
 
 	public static void loadGlassnames() 
@@ -314,7 +333,7 @@ public class IntegratedLanguageFile
 		LanguageRegistry.addName(IntegratedItems.gemdragonstone, "Carved Dragonstone");
 		LanguageRegistry.addName(IntegratedItems.superheatedironingot, "Superheated Iron Ingot"); 
 		LanguageRegistry.addName(IntegratedItems.irondust, "Iron Dust");
-		LanguageRegistry.addName(IntegratedItems.goldDust, "Gold Dust");
+		LanguageRegistry.addName(IntegratedItems.goldDust, "Nether Gold Clump");
 
 
 		//Surface Ores
@@ -370,6 +389,7 @@ public class IntegratedLanguageFile
 		LanguageRegistry.addName(IntegratedItems.BloodstoneBlade, "Bloodstone Blade");
 		LanguageRegistry.addName(IntegratedItems.GoldenSwordFragment, "Gold Sword Fragment");
 		LanguageRegistry.addName(IntegratedItems.BloodstoneDiamondPick, "Black Diamond Pickaxe");
+		LanguageRegistry.addName(IntegratedItems.Bat, "Bat");
 	}
 
 	public static void loadCurrencynames() 

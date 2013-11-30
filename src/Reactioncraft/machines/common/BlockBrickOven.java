@@ -38,9 +38,9 @@ public class BlockBrickOven extends BlockContainer
      */
     private static boolean keepFurnaceInventory = false;
     @SideOnly(Side.CLIENT)
-    private Icon field_94458_cO;
+    private Icon furnaceIconTop;
     @SideOnly(Side.CLIENT)
-    private Icon field_94459_cP;
+    private Icon furnaceIconFront;
 
     public BlockBrickOven(int par1, boolean par2)
     {
@@ -57,13 +57,50 @@ public class BlockBrickOven extends BlockContainer
     }
 
     /**
-     * Called when the block is placed in the world.
+     * Called whenever the block is added into the world. Args: world, x, y, z
      */
     @Override
-    public void onBlockPlacedBy(World par1World, int par2, int par3, int par4, EntityLivingBase par5EntityLivingBase, ItemStack par6ItemStack)
+    public void onBlockAdded(World par1World, int par2, int par3, int par4)
     {
-        int l = MathHelper.floor_double((double)(par5EntityLivingBase.rotationYaw * 4.0F / 360.0F) + 2.5D) & 3;
-        par1World.setBlockMetadataWithNotify(par2, par3, par4, l, 2);
+        super.onBlockAdded(par1World, par2, par3, par4);
+        this.setDefaultDirection(par1World, par2, par3, par4);
+    }
+    
+    /**
+     * set a blocks direction
+     */
+    private void setDefaultDirection(World par1World, int par2, int par3, int par4)
+    {
+        if (!par1World.isRemote)
+        {
+            int l = par1World.getBlockId(par2, par3, par4 - 1);
+            int i1 = par1World.getBlockId(par2, par3, par4 + 1);
+            int j1 = par1World.getBlockId(par2 - 1, par3, par4);
+            int k1 = par1World.getBlockId(par2 + 1, par3, par4);
+            byte b0 = 3;
+
+            if (Block.opaqueCubeLookup[l] && !Block.opaqueCubeLookup[i1])
+            {
+                b0 = 3;
+            }
+
+            if (Block.opaqueCubeLookup[i1] && !Block.opaqueCubeLookup[l])
+            {
+                b0 = 2;
+            }
+
+            if (Block.opaqueCubeLookup[j1] && !Block.opaqueCubeLookup[k1])
+            {
+                b0 = 5;
+            }
+
+            if (Block.opaqueCubeLookup[k1] && !Block.opaqueCubeLookup[j1])
+            {
+                b0 = 4;
+            }
+
+            par1World.setBlockMetadataWithNotify(par2, par3, par4, b0, 2);
+        }
     }
 
     @SideOnly(Side.CLIENT)
@@ -73,7 +110,7 @@ public class BlockBrickOven extends BlockContainer
      */
     public Icon getIcon(int par1, int par2)
     {
-        return par1 == 1 ? this.field_94458_cO : (par1 == 0 ? this.field_94458_cO : (par1 != par2 ? this.blockIcon : this.field_94459_cP));
+        return par1 == 1 ? this.furnaceIconTop : (par1 == 0 ? this.furnaceIconTop : (par1 != par2 ? this.blockIcon : this.furnaceIconFront));
     }
 
     @SideOnly(Side.CLIENT)
@@ -84,9 +121,9 @@ public class BlockBrickOven extends BlockContainer
      */
     public void registerIcons(IconRegister par1IconRegister)
     {
-        this.blockIcon = par1IconRegister.registerIcon("RCMM:SandBrick");
-        this.field_94459_cP = par1IconRegister.registerIcon(this.isActive ? "RCMM:boa" : "RCMM:boi");
-        this.field_94458_cO = par1IconRegister.registerIcon("RCMM:SandBrick");
+        this.blockIcon = par1IconRegister.registerIcon("reactioncraft:SandBrick");
+        this.furnaceIconFront = par1IconRegister.registerIcon(this.isActive ? "reactioncraft:boa" : "reactioncraft:boi");
+        this.furnaceIconTop = par1IconRegister.registerIcon("reactioncraft:SandBrick");
     }
 
     /**

@@ -122,9 +122,9 @@ public class BlockFreezer extends BlockContainer
      */
     public void registerIcons(IconRegister par1IconRegister)
     {
-        this.blockIcon = par1IconRegister.registerIcon("rcmm:ironside");
-        this.furnaceIconFront = par1IconRegister.registerIcon(this.isActive ? "rcmm:freezerfront" : "rcmm:freezerfront");
-        this.furnaceIconTop = par1IconRegister.registerIcon("rcmm:ironside");
+        this.blockIcon = par1IconRegister.registerIcon("reactioncraft:ironside");
+        this.furnaceIconFront = par1IconRegister.registerIcon(this.isActive ? "reactioncraft:freezerfront" : "reactioncraft:freezerfront");
+        this.furnaceIconTop = par1IconRegister.registerIcon("reactioncraft:ironside");
     }
 
     /**

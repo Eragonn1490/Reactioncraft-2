@@ -31,6 +31,9 @@ public class IntegratedProperties
 	public static Property limestoneGenerator;
 	public static Property desertcoalGenerator;
 	
+	/** RCMM **/
+	public static Property brickoventobrickblock;
+	
 	/** RCG **/
 	public static Property VanillaDyeGlassRecipes;
 	public static Property OreDictionaryGlassRecipes;

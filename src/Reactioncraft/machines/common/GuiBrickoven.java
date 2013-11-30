@@ -13,7 +13,7 @@ import org.lwjgl.opengl.GL11;
 @SideOnly(Side.CLIENT)
 public class GuiBrickoven extends GuiContainer
 {
-	private static final ResourceLocation furnaceGuiTextures = new ResourceLocation("rcmm", "textures/gui/brickoven.png");
+	private static final ResourceLocation furnaceGuiTextures = new ResourceLocation("reactioncraft", "textures/gui/brickoven.png");
 	
     private TileEntityBrickOven furnaceInventory;
 

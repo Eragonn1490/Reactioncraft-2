@@ -77,9 +77,9 @@ public class RenderJellyfish extends RenderLiving
         switch (par1EntityVillager.getProfession())
         {
             case 0:
-                return (new ResourceLocation("rcmobs:textures/entity/Jellyfish.png"));
+                return (new ResourceLocation("reactioncraft::textures/entity/Jellyfish.png"));
             case 1:
-                return (new ResourceLocation("rcmobs:textures/entity/Jellyfish2.png"));
+                return (new ResourceLocation("reactioncraft::textures/entity/Jellyfish2.png"));
 /*            case 2:
                 return priestVillagerTextures;
             case 3:
@@ -87,12 +87,12 @@ public class RenderJellyfish extends RenderLiving
             case 4:
                 return butcherVillagerTextures;*/
             default:
-                return (new ResourceLocation("rcmobs:textures/entity/Jellyfish.png"));
+                return (new ResourceLocation("reactioncraft:textures/entity/Jellyfish.png"));
         }
     }
     
 //    protected ResourceLocation getEntityTexture(Entity par1Entity)
 //    {
-//    	return (new ResourceLocation("rcmobs:textures/entity/Jellyfish.png"));
+//    	return (new ResourceLocation("reactioncraft:textures/entity/Jellyfish.png"));
 //    }
 }

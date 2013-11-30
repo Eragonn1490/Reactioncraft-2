@@ -26,12 +26,12 @@ public class IntegratedBlockCode
 {
 	public static void loadRCC() 
 	{
-		IntegratedBlocks.newSponge = new NewSponge(IntegratedConfigB.newSpongeId, IntegratedConfigB.spongeAbsorbtion).setHardness(0.6F).setStepSound(Block.soundGrassFootstep).setUnlocalizedName("rcc:sponge").setTextureName("rcc:sponge");
-		IntegratedBlocks.clearBlock = new ClearBlock(IntegratedConfigB.clearBlockId).setTextureName("rcc:clear");
-		IntegratedBlocks.DarkSand = new BlockSandRc(IntegratedConfigB.DarkSandID).setHardness(0.5F).setResistance(5.0F).setStepSound(Block.soundSandFootstep).setUnlocalizedName("rcc:sand").setTextureName("rcc:sand");
-		IntegratedBlocks.chainladder = new BlockChainLadder(IntegratedConfigB.chainladderID).setHardness(3.0F).setResistance(5.0F).setStepSound(Block.soundStoneFootstep).setUnlocalizedName("rcc:chains").setTextureName("rcc:chains");
-		IntegratedBlocks.snowblock = new BlockBasic(IntegratedConfigB.snowblockBlockID).setHardness(3.0F).setResistance(5.0F).setUnlocalizedName("rcc:SnowBrick").setTextureName("rcc:SnowBrick");
-		IntegratedBlocks.enderportal = new RCBlockEndPortalFrame(IntegratedConfigB.enderportalID).setStepSound(Block.soundGlassFootstep).setLightValue(0.125F).setHardness(80.0F).setUnlocalizedName("endPortalFrame").setResistance(6000000.0F).setCreativeTab(RCB.Reactioncraft).setTextureName("RCORES:endframe");
+		IntegratedBlocks.newSponge = new NewSponge(IntegratedConfigB.newSpongeId, IntegratedConfigB.spongeAbsorbtion).setHardness(0.6F).setStepSound(Block.soundGrassFootstep).setUnlocalizedName("reactioncraft:sponge").setTextureName("reactioncraft:sponge");
+		IntegratedBlocks.clearBlock = new ClearBlock(IntegratedConfigB.clearBlockId).setTextureName("reactioncraft:clear");
+		IntegratedBlocks.DarkSand = new BlockSandRc(IntegratedConfigB.DarkSandID).setHardness(0.5F).setResistance(5.0F).setStepSound(Block.soundSandFootstep).setUnlocalizedName("reactioncraft:sand").setTextureName("reactioncraft:sand");
+		IntegratedBlocks.chainladder = new BlockChainLadder(IntegratedConfigB.chainladderID).setHardness(3.0F).setResistance(5.0F).setStepSound(Block.soundStoneFootstep).setUnlocalizedName("reactioncraft:chains").setTextureName("reactioncraft:chains");
+		IntegratedBlocks.snowblock = new BlockBasic(IntegratedConfigB.snowblockBlockID).setHardness(3.0F).setResistance(5.0F).setUnlocalizedName("reactioncraft:SnowBrick").setTextureName("reactioncraft:SnowBrick");
+		IntegratedBlocks.enderportal = new RCBlockEndPortalFrame(IntegratedConfigB.enderportalID).setStepSound(Block.soundGlassFootstep).setLightValue(0.125F).setHardness(80.0F).setUnlocalizedName("endPortalFrame").setResistance(6000000.0F).setCreativeTab(RCB.Reactioncraft).setTextureName("reactioncraft:endframe");
 		IntegratedBlocks.enderportalp = new RCBlockEndPortalBlock(IntegratedConfigB.enderportalpID, Material.portal).setHardness(-1.0F).setResistance(6000000.0F);
 	}
 
@@ -46,17 +46,17 @@ public class IntegratedBlockCode
 
 	public static void loadRCBDM() 
 	{
-		IntegratedBlocks.BloodstoneBrick = new BlockBasic(IntegratedConfigB.BloodstoneBrickID).setHardness(120.0F).setResistance(2000.0F).setLightValue(0.10F).setStepSound(Block.soundStoneFootstep).setUnlocalizedName("rcbdm:BloodStoneBrick").setTextureName("rcbdm:BloodStoneBrick").setCreativeTab(RCB.Reactioncraft);
-		IntegratedBlocks.Cherrywood = new BlockCherryTreeLog(IntegratedConfigB.CherrywoodID).setStepSound(Block.soundWoodFootstep).setHardness(2.0F).setResistance(0.5F).setUnlocalizedName("rcbdm:woodside");
-		IntegratedBlocks.CherryTreeLeaves = new BlockCherryTreeLeaves(IntegratedConfigB.CherryTreeLeavesID).setStepSound(Block.soundGrassFootstep).setHardness(0.2F).setResistance(0.5F).setUnlocalizedName("rcbdm:CherryTreeLeaves").setTextureName("rcbdm:CherryTreeLeaves");
-		IntegratedBlocks.CherryTreeSapling = new BlockCherryTreeSapling(IntegratedConfigB.CherryTreeSaplingID, 0).setStepSound(Block.soundGrassFootstep).setHardness(0.0F).setResistance(0.5F).setUnlocalizedName("rcbdm:CherryTreeSapling").setTextureName("rcbdm:CherryTreeSapling");
+		IntegratedBlocks.BloodstoneBrick = new BlockBasic(IntegratedConfigB.BloodstoneBrickID).setHardness(120.0F).setResistance(2000.0F).setLightValue(0.10F).setStepSound(Block.soundStoneFootstep).setUnlocalizedName("reactioncraft:BloodStoneBrick").setTextureName("reactioncraft:BloodStoneBrick").setCreativeTab(RCB.Reactioncraft);
+		IntegratedBlocks.Cherrywood = new BlockCherryTreeLog(IntegratedConfigB.CherrywoodID).setStepSound(Block.soundWoodFootstep).setHardness(2.0F).setResistance(0.5F).setUnlocalizedName("reactioncraft:woodside");
+		IntegratedBlocks.CherryTreeLeaves = new BlockCherryTreeLeaves(IntegratedConfigB.CherryTreeLeavesID).setStepSound(Block.soundGrassFootstep).setHardness(0.2F).setResistance(0.5F).setUnlocalizedName("reactioncraft:CherryTreeLeaves").setTextureName("reactioncraft:CherryTreeLeaves");
+		IntegratedBlocks.CherryTreeSapling = new BlockCherryTreeSapling(IntegratedConfigB.CherryTreeSaplingID, 0).setStepSound(Block.soundGrassFootstep).setHardness(0.0F).setResistance(0.5F).setUnlocalizedName("reactioncraft:CherryTreeSapling").setTextureName("reactioncraft:CherryTreeSapling");
 		IntegratedBlocks.HireoMulti = new BlockHireoMulti(IntegratedConfigB.HireoBlocksID, Material.rock).setHardness(3.0F).setUnlocalizedName("HireoMulti");
 		IntegratedBlocks.ColumnMulti = new BlockColumnMulti(IntegratedConfigB.ColumnBlockID, Material.rock).setUnlocalizedName("ColumnMulti");
 		IntegratedBlocks.ColumnMulti2 = new BlockColumnMulti2(IntegratedConfigB.ColumnBlock2ID, Material.rock).setUnlocalizedName("ColumnMulti2");
-		IntegratedBlocks.CherryPlanks = new BlockPlank(IntegratedConfigB.CherryPlanksID).setHardness(2.0F).setResistance(5.0F).setStepSound(Block.soundWoodFootstep).setUnlocalizedName("rcbdm:cherryplanks").setTextureName("rcbdm:cherryplanks");
+		IntegratedBlocks.CherryPlanks = new BlockPlank(IntegratedConfigB.CherryPlanksID).setHardness(2.0F).setResistance(5.0F).setStepSound(Block.soundWoodFootstep).setUnlocalizedName("reactioncraft:cherryplanks").setTextureName("reactioncraft:cherryplanks");
 		IntegratedBlocks.DesertBlockMulti = new BlockDesertMulti(IntegratedConfigB.DesertBlockMultiID, Material.rock).setHardness(2.5F).setResistance(15.0F).setUnlocalizedName("DesertBlockMulti");
-		IntegratedBlocks.Cactus1 = (new DesertFlower(IntegratedConfigB.Cactus1ID)).setHardness(0.0F).setStepSound(Block.soundGrassFootstep).setUnlocalizedName("rcbdm:Cactus1").setTextureName("rcbdm:Cactus1");
-		IntegratedBlocks.Cactus2 = (new DesertFlower(IntegratedConfigB.Cactus2ID)).setHardness(0.0F).setStepSound(Block.soundGrassFootstep).setUnlocalizedName("rcbdm:Cactus2").setTextureName("rcbdm:Cactus2");	
+		IntegratedBlocks.Cactus1 = (new DesertFlower(IntegratedConfigB.Cactus1ID)).setHardness(0.0F).setStepSound(Block.soundGrassFootstep).setUnlocalizedName("reactioncraft:Cactus1").setTextureName("reactioncraft:Cactus1");
+		IntegratedBlocks.Cactus2 = (new DesertFlower(IntegratedConfigB.Cactus2ID)).setHardness(0.0F).setStepSound(Block.soundGrassFootstep).setUnlocalizedName("reactioncraft:Cactus2").setTextureName("reactioncraft:Cactus2");	
 	}
 
 	public static void loadRCG() 

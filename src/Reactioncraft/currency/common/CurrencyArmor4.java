@@ -29,9 +29,9 @@ public class CurrencyArmor4 extends ItemArmor
 	public String getArmorTexture(ItemStack itemstack, Entity entity, int slot, int layer)
 	{
 		if ((itemstack.itemID == IntegratedItems.diamondcrown.itemID || (itemstack.itemID == IntegratedItems.KinglyChest.itemID || itemstack.itemID == IntegratedItems.KinglyBoots.itemID)))
-			return "rccm:textures/models/diamondcrown_1.png";
+			return "reactioncraft:textures/models/diamondcrown_1.png";
 		if (itemstack.itemID == IntegratedItems.KinglyLegs.itemID){
-			return "rccm:textures/models/Emerald_2.png";
+			return "reactioncraft:textures/models/Emerald_2.png";
 		}
 		else return null;
 	}
@@ -40,25 +40,25 @@ public class CurrencyArmor4 extends ItemArmor
 	public void registerIcons(IconRegister par1IconRegister)
 	{
 		if(itemID == IntegratedItems.diamondcrown.itemID)
-			this.itemIcon = par1IconRegister.registerIcon("rccm:diamondcrown");
+			this.itemIcon = par1IconRegister.registerIcon("reactioncraft:diamondcrown");
 		this.canRepair = true;
 		this.setMaxStackSize(1);
 		this.isRepairable();
 		RenderingRegistry.addNewArmourRendererPrefix("Emerald");
 		if(itemID == IntegratedItems.KinglyChest.itemID)
-			this.itemIcon = par1IconRegister.registerIcon("rccm:kingchest");
+			this.itemIcon = par1IconRegister.registerIcon("reactioncraft:kingchest");
 		this.canRepair = true;
 		this.setMaxStackSize(1);
 		this.isRepairable();
 		RenderingRegistry.addNewArmourRendererPrefix("Emerald");
 		if(itemID == IntegratedItems.KinglyLegs.itemID)
-			this.itemIcon = par1IconRegister.registerIcon("rccm:kingpants");
+			this.itemIcon = par1IconRegister.registerIcon("reactioncraft:kingpants");
 		this.canRepair = true;
 		this.setMaxStackSize(1);
 		this.isRepairable();
 		RenderingRegistry.addNewArmourRendererPrefix("Emerald");
 		if(itemID == IntegratedItems.KinglyBoots.itemID)
-			this.itemIcon = par1IconRegister.registerIcon("rccm:kingboots");
+			this.itemIcon = par1IconRegister.registerIcon("reactioncraft:kingboots");
 		this.canRepair = true;
 		this.setMaxStackSize(1);
 		this.isRepairable();

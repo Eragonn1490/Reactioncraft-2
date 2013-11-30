@@ -31,7 +31,7 @@ import cpw.mods.fml.common.network.NetworkMod;
 import cpw.mods.fml.common.registry.GameRegistry;
 import cpw.mods.fml.common.registry.LanguageRegistry;
 
-@Mod( modid = "rcb", name="Reactioncraft Base Mod", version="[1.6.4] Reactioncraft 3 Version 1.2.0")
+@Mod( modid = "rcb", name="Reactioncraft Base Mod", version="[1.6.4] Reactioncraft 3 Version 1.2.4")
 @NetworkMod(channels = { "RCB" }, clientSideRequired = true, serverSideRequired = false, packetHandler = PacketHandler.class, connectionHandler = ConnectionHandler.class)
 
 public class RCB
@@ -254,7 +254,7 @@ public class RCB
 
 	public void itemCode() 
 	{
-		Mask = new ItemBasic(MaskIID).setUnlocalizedName("rcb:Mask").setTextureName("rcb:Mask").setCreativeTab(RCB.ReactioncraftItems);
+		Mask = new ItemBasic(MaskIID).setUnlocalizedName("reactioncraft:Mask").setTextureName("reactioncraft:Mask").setCreativeTab(RCB.ReactioncraftItems);
 	}
 
 

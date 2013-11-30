@@ -30,12 +30,15 @@ public class NewSponge extends Block
 	@Override
 	public void onBlockDestroyedByPlayer(World world, int x, int y, int z, int meta) 
 	{
-		for(int xCount = -absorbtion; xCount<absorbtion+1; xCount++){
-			for(int yCount = -absorbtion; yCount<absorbtion+1; yCount++){
-				for(int zCount = -absorbtion; zCount<absorbtion+1; zCount++){
+		for(int xCount = -absorbtion; xCount<absorbtion+1; xCount++)
+		{
+			for(int yCount = -absorbtion; yCount<absorbtion+1; yCount++)
+			{
+				for(int zCount = -absorbtion; zCount<absorbtion+1; zCount++)
+				{
 					if(world.getBlockId(xCount+x, yCount+y, zCount+z) == IntegratedBlocks.clearBlock.blockID)
 					{
-						world.setBlock(xCount+x, yCount+y, zCount+z, Block.waterStill.blockID);
+						world.setBlockToAir(x, y, z);
 					}
 				}
 			}
@@ -43,7 +46,8 @@ public class NewSponge extends Block
 	}
 	
 	@Override
-	public void onBlockDestroyedByExplosion(World world, int x, int y, int z, Explosion par5Explosion) {
+	public void onBlockDestroyedByExplosion(World world, int x, int y, int z, Explosion par5Explosion) 
+	{
 		onBlockDestroyedByPlayer(world, x, y, z, 0);
 	}
 	
@@ -56,12 +60,16 @@ public class NewSponge extends Block
         }
     }
 	
-	private void suckUpWater(World world, int x, int y, int z){
-		for(int xCount = -absorbtion; xCount<absorbtion+1; xCount++){
-			for(int yCount = -absorbtion; yCount<absorbtion+1; yCount++){
-				for(int zCount = -absorbtion; zCount<absorbtion+1; zCount++){
-					if(world.getBlockId(xCount+x, yCount+y, zCount+z) == Block.waterMoving.blockID
-							|| world.getBlockId(xCount+x, yCount+y, zCount+z) == Block.waterStill.blockID){
+	private void suckUpWater(World world, int x, int y, int z)
+	{
+		for(int xCount = -absorbtion; xCount<absorbtion+1; xCount++)
+		{
+			for(int yCount = -absorbtion; yCount<absorbtion+1; yCount++)
+			{
+				for(int zCount = -absorbtion; zCount<absorbtion+1; zCount++)
+				{
+					if(world.getBlockId(xCount+x, yCount+y, zCount+z) == Block.waterMoving.blockID || world.getBlockId(xCount+x, yCount+y, zCount+z) == Block.waterStill.blockID)
+					{
 						world.setBlock(xCount+x, yCount+y, zCount+z, IntegratedBlocks.clearBlock.blockID);
 					}
 				}
@@ -75,12 +83,11 @@ public class NewSponge extends Block
 	}
 
 	@Override
-	public void updateTick(World world, int x, int y, int z, Random random){
+	public void updateTick(World world, int x, int y, int z, Random random)
+	{
 		suckUpWater(world,x,y,z);
-		//ModLoader.getMinecraftInstance().thePlayer.addChatMessage("Ticking block");
 		super.updateTick(world, x, y, z, random);
     }
-	
 	
 	 /**
      * Returns the quantity of items to drop on block destruction.
@@ -91,8 +98,9 @@ public class NewSponge extends Block
         return 1;
     }
     
-    public int idDropped(int i, Random random)
+	@Override
+    public int idDropped(int par1, Random par2Random, int par3)
     {
-            return Block.sponge.blockID;
+       return Block.sponge.blockID;
     }
 }

@@ -1,6 +1,6 @@
 package Reactioncraft.net;
 
-import Reactioncraft.integration.IntegratedConfigI;
+import Reactioncraft.integration.*;
 import Reactioncraft.net.client.ClientProxy;
 import Reactioncraft.net.Common.CommonProxy;
 import java.io.File;
@@ -31,7 +31,7 @@ import cpw.mods.fml.common.registry.GameRegistry;
 import cpw.mods.fml.common.registry.LanguageRegistry;
 
 
-@Mod(modid = "rcn", name = "Reactioncraft Netting", version = "[1.6.4] Reactioncraft 3 Version 1.2.0", dependencies = "required-after:reactioncraft")
+@Mod(modid = "rcn", name = "Reactioncraft Netting", version = "[1.6.4] Reactioncraft 3 Version 1.2.4", dependencies = "required-after:reactioncraft")
 @NetworkMod(channels = { "RCN" }, clientSideRequired = true, serverSideRequired = false, packetHandler = PacketHandler.class)
 
 public class RCN implements ICraftingHandler
@@ -45,20 +45,14 @@ public class RCN implements ICraftingHandler
 
 	// Items
 	public static Item hilt;
-
 	public static Item net;
-
 	public static Item completeNet;
-
 	public static Item caught;
-
 	public static Item caughtplayer;
 
 	//Config
 	public static ReactioncraftConfiguration config;
-
 	public static ExclusionList exclusionList;
-
 	public static CatchList catchlist;
 
 	@EventHandler
@@ -93,7 +87,6 @@ public class RCN implements ICraftingHandler
 	@EventHandler
 	public void load(FMLInitializationEvent event) 
 	{
-		// The meat of the mod
 		ClientProxy.registerRenderInformation();
 		itemCode();
 		itemRegistry();
@@ -111,8 +104,7 @@ public class RCN implements ICraftingHandler
 	}
 
 	public void itemRegistry() 
-	{
-	}
+	{}
 
 	public void recipes() 
 	{
@@ -126,7 +118,7 @@ public class RCN implements ICraftingHandler
 			hiltIs.stackTagCompound = new NBTTagCompound();
 			netIs.stackTagCompound = new NBTTagCompound();
 			hiltIs.stackTagCompound.setInteger("str", (i + 1));
-			netIs.stackTagCompound.setInteger("str", (i + 1));
+			netIs.stackTagCompound.setInteger("str1", (i + 1));
 			GameRegistry.addRecipe(hiltIs, hiltRec);
 			GameRegistry.addRecipe(netIs, netRec);
 		}
@@ -135,17 +127,15 @@ public class RCN implements ICraftingHandler
 
 	
 	public void names() 
-	{
-
-	}
+	{}
 
 	public void itemCode()
 	{
-		hilt = new ItemPieceHilt(IntegratedConfigI.hiltIID).setUnlocalizedName("RCN:hilt").setTextureName("RCN:hilt").setCreativeTab(RCB.ReactioncraftItems);
-		net = new ItemPieceNet(IntegratedConfigI.netIID).setUnlocalizedName("RCN:netpart").setTextureName("RCN:netpart").setCreativeTab(RCB.ReactioncraftItems);
-		completeNet = new ItemNetCatcher(IntegratedConfigI.completeNetIID).setUnlocalizedName("RCN:fullnet").setTextureName("RCN:fullnet");
-		caught = new ItemCaughtEntity(IntegratedConfigI.caughtIID).setUnlocalizedName("RCN:caught").setTextureName("RCN:caught");
-		caughtplayer = new ItemCaughtPlayer(IntegratedConfigI.caughtplayerIID).setUnlocalizedName("RCN:caught").setTextureName("RCN:caught");
+		hilt = new ItemPieceHilt(IntegratedConfigI.hiltIID).setUnlocalizedName("reactioncraft:hilt").setTextureName("reactioncraft:hilt").setCreativeTab(RCB.ReactioncraftItems);
+		net = new ItemPieceNet(IntegratedConfigI.netIID).setUnlocalizedName("reactioncraft:netpart").setTextureName("reactioncraft:netpart").setCreativeTab(RCB.ReactioncraftItems);
+		completeNet = new ItemNetCatcher(IntegratedConfigI.completeNetIID).setUnlocalizedName("reactioncraft:fullnet").setTextureName("reactioncraft:fullnet");
+		caught = new ItemCaughtEntity(IntegratedConfigI.caughtIID).setUnlocalizedName("reactioncraft:caught").setTextureName("reactioncraft:caught");
+		caughtplayer = new ItemCaughtPlayer(IntegratedConfigI.caughtplayerIID).setUnlocalizedName("reactioncraft:caught").setTextureName("reactioncraft:caught");
 	}
 
 	public void craftingRegistry() 
@@ -163,7 +153,6 @@ public class RCN implements ICraftingHandler
 			ItemStack net = null;
 			boolean hasHilt;
 			boolean hasNet;
-
 			for (int i = 0; i < craftMatrix.getSizeInventory(); i++) 
 			{
 				ItemStack is = craftMatrix.getStackInSlot(i);
@@ -173,18 +162,15 @@ public class RCN implements ICraftingHandler
 					else
 						net = is;
 			}
-
 			if (hilt != null && net != null) 
 			{
 				item.stackTagCompound.setInteger("hilt", hilt.stackTagCompound.getInteger("str"));
-				item.stackTagCompound.setInteger("net", net.stackTagCompound.getInteger("str"));
+				item.stackTagCompound.setInteger("net", net.stackTagCompound.getInteger("str1"));
 			}
-
 		}
 	}
 
 	@Override
 	public void onSmelting(EntityPlayer player, ItemStack item) 
-	{
-	}
+	{}
 }

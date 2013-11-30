@@ -10,7 +10,7 @@ public class IntegratedConfigItem
 {
 	public static void loadRCC() 
 	{
-		//Reserved 10031 - 10090 
+		//Reserved 10031 - 10090  (10134-10135 Given to RCC from RCBDM)
 		IntegratedConfigI.ChainLoopIID = Reactioncraft.config.getItem("Chain Loop", 10031).getInt();
 		IntegratedConfigI.HammerIID = Reactioncraft.config.getItem("Hammer", 10032).getInt();
 		IntegratedConfigI.BlackdiamondboreIID = Reactioncraft.config.getItem("Black Diamond Bore", 10033).getInt();
@@ -25,6 +25,8 @@ public class IntegratedConfigItem
 		IntegratedConfigI.meltedventiniteIID = Reactioncraft.config.getItem("Melted Ventinite", 10088).getInt();
 		IntegratedConfigI.meltedwizimiteIID = Reactioncraft.config.getItem("Melted Wizimite", 10089).getInt();
 		IntegratedConfigI.rcendereyeIID = Reactioncraft.config.getItem("Ender Eye 2", 10090).getInt();
+		IntegratedConfigI.bloodstoneclumpIID = Reactioncraft.config.getItem("Bloodstone Clump", 10134).getInt();
+		IntegratedConfigI.bloodstoneHammerIID = Reactioncraft.config.getItem("Bloodstone Hammer", 10135).getInt();
 		
 		if(IntegratedProperties.vanillaOverrideCake.getBoolean(true))
 		{
@@ -49,7 +51,7 @@ public class IntegratedConfigItem
 
 	public static void loadRCBDM() 
 	{
-		//Items... 10121 - 10220 (132-133 given to RCCM)
+		//Items... 10121 - 10220 (132-133 given to RCCM) (10134-10135 Given to RCC)
 		IntegratedConfigI.FlintChiselIID = Reactioncraft.config.getItem("Flint Chisel", 10121).getInt();
 		IntegratedConfigI.GoldChiselIID = Reactioncraft.config.getItem("Gold Chisel", 10122).getInt();
 		IntegratedConfigI.DiamondChiselIID = Reactioncraft.config.getItem("Diamond Chisel", 10123).getInt();
@@ -118,6 +120,19 @@ public class IntegratedConfigItem
 		IntegratedConfigI.BaconIID = Reactioncraft.config.getItem("Bacon", 10284).getInt();
 		IntegratedConfigI.BaconRawIID = Reactioncraft.config.getItem("Raw Bacon", 10285).getInt();
 		IntegratedConfigI.cheeseIID = Reactioncraft.config.getItem("cheese", 10286).getInt();
+		//ButcheryCraft
+		IntegratedConfigI.meatcleaverIID = Reactioncraft.config.getItem("Meat Cleaver", 10287).getInt();
+		IntegratedConfigI.churnIID = Reactioncraft.config.getItem("Chrun", 10288).getInt();
+		IntegratedConfigI.rawhumanIID = Reactioncraft.config.getItem("Raw Human", 10289).getInt();
+		IntegratedConfigI.cookedhumanIID = Reactioncraft.config.getItem("Cooked Human", 10290).getInt();
+		IntegratedConfigI.rawlambIID = Reactioncraft.config.getItem("Raw Lamb", 10291).getInt();
+		IntegratedConfigI.cookedlambIID = Reactioncraft.config.getItem("Cooked Lamb", 10292).getInt();
+		IntegratedConfigI.rawhorseIID = Reactioncraft.config.getItem("Raw Horse", 10293).getInt();
+		IntegratedConfigI.cookedhorseIID = Reactioncraft.config.getItem("Cooked Horse", 10294).getInt();
+		IntegratedConfigI.chickenHeadIID = Reactioncraft.config.getItem("Chicken Head", 10295).getInt();
+		IntegratedConfigI.beefChunkIID = Reactioncraft.config.getItem("Beef Chunk", 10296).getInt();
+		IntegratedConfigI.porkChunkIID = Reactioncraft.config.getItem("Pork Chunk", 10297).getInt();
+		IntegratedConfigI.bunsIID = Reactioncraft.config.getItem("Buns", 10298).getInt();
 	}
 
 	public static void loadRCG() 
@@ -161,8 +176,9 @@ public class IntegratedConfigItem
 
 	public static void loadNet() 
 	{
-		//10841 - 10850 (RCN OWNS all but 10845)
+		//10841 - 10850 (RCN OWNS all but 10845 & 10846)
 		IntegratedConfigI.creativeNetIID = Reactioncraft.config.getItem("Creative Net Item", 10845).getInt();
+		IntegratedConfigI.caught2IID = Reactioncraft.config.getItem("Caught 2", 10846).getInt();
 	}
 
 	public static void loadRCPM() 
@@ -195,5 +211,6 @@ public class IntegratedConfigItem
 		IntegratedConfigI.GoldenSwordFragmentIID = Reactioncraft.config.getItem("Golden Sword Fragment", 10942).getInt();
 		IntegratedConfigI.UnbindedSwordIID = Reactioncraft.config.getItem("Unbinded Sword", 10943).getInt();
 		IntegratedConfigI.BloodstoneDiamondPickIID = Reactioncraft.config.getItem("Black Diamond Pick", 10944).getInt();
+		IntegratedConfigI.batIID = Reactioncraft.config.getItem("Bat", 10945).getInt();
 	}
 }

@@ -66,6 +66,6 @@ public class RenderBee extends RenderLiving
     @Override
     protected ResourceLocation getEntityTexture(Entity par1Entity)
     {
-    	return (new ResourceLocation("rcmobs:textures/entity/tjtexture.png"));
+    	return (new ResourceLocation("reactioncraft:textures/entity/tjtexture.png"));
     }
 }

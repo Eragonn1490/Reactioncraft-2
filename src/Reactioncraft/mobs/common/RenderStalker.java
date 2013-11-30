@@ -65,6 +65,6 @@ public class RenderStalker extends RenderLiving
     @Override
     protected ResourceLocation getEntityTexture(Entity par1Entity)
     {
-    	return (new ResourceLocation("rcmobs:textures/entity/Stalker.png"));
+    	return (new ResourceLocation("reactioncraft:textures/entity/Stalker.png"));
     }
 }

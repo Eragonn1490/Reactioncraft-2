@@ -70,6 +70,6 @@ public class RenderHydrolisc extends RenderLiving
     @Override
     protected ResourceLocation getEntityTexture(Entity par1Entity)
     {
-    	return (new ResourceLocation("rcmobs:textures/entity/hydrolisctexture.png"));
+    	return (new ResourceLocation("reactioncraft:textures/entity/hydrolisctexture.png"));
     }
 }

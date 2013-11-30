@@ -11,7 +11,7 @@ import org.lwjgl.opengl.GL11;
 @SideOnly(Side.CLIENT)
 public class GuiClayalizer extends GuiContainer
 {
-	private static final ResourceLocation furnaceGuiTextures = new ResourceLocation("rcmm", "textures/gui/clayalizer.png");
+	private static final ResourceLocation furnaceGuiTextures = new ResourceLocation("reactioncraft", "textures/gui/clayalizer.png");
 	
     private TileEntityClayalizer furnaceInventory;
 

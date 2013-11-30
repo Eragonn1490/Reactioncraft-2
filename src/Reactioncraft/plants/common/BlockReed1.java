@@ -33,7 +33,7 @@ public class BlockReed1 extends Block
 	@Override
 	public void registerIcons(IconRegister par1IconRegister)
 	{
-		this.blockIcon = par1IconRegister.registerIcon("rcpm:sugarcane");
+		this.blockIcon = par1IconRegister.registerIcon("reactioncraft:sugarcane");
 	}
 
 	public Icon getBlockblockIcon(IBlockAccess world, int x, int y, int z, int blockSide)

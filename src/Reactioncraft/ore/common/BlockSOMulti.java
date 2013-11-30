@@ -228,20 +228,20 @@ public class BlockSOMulti extends Block
 		 iconBuffer = new Icon[16][12]; // 3 machines, 6 sides each, in ON and OFF states
 
 		 // meta 0, Silver
-		 iconBuffer[0][0] = par1IconRegister.registerIcon("RCORES:silver"); // bottom
-		 iconBuffer[0][1] = par1IconRegister.registerIcon("RCORES:silver"); // top
-		 iconBuffer[0][2] = par1IconRegister.registerIcon("RCORES:silver"); // north
-		 iconBuffer[0][3] = par1IconRegister.registerIcon("RCORES:silver"); // east
-		 iconBuffer[0][4] = par1IconRegister.registerIcon("RCORES:silver"); // south
-		 iconBuffer[0][5] = par1IconRegister.registerIcon("RCORES:silver"); // west
+		 iconBuffer[0][0] = par1IconRegister.registerIcon("reactioncraft:silver"); // bottom
+		 iconBuffer[0][1] = par1IconRegister.registerIcon("reactioncraft:silver"); // top
+		 iconBuffer[0][2] = par1IconRegister.registerIcon("reactioncraft:silver"); // north
+		 iconBuffer[0][3] = par1IconRegister.registerIcon("reactioncraft:silver"); // east
+		 iconBuffer[0][4] = par1IconRegister.registerIcon("reactioncraft:silver"); // south
+		 iconBuffer[0][5] = par1IconRegister.registerIcon("reactioncraft:silver"); // west
 
 		 // meta 1, Ventinite
-		 iconBuffer[1][0] = par1IconRegister.registerIcon("RCORES:Ventinite"); // bottom
-		 iconBuffer[1][1] = par1IconRegister.registerIcon("RCORES:Ventinite"); // top
-		 iconBuffer[1][2] = par1IconRegister.registerIcon("RCORES:Ventinite"); // north
-		 iconBuffer[1][3] = par1IconRegister.registerIcon("RCORES:Ventinite"); // east
-		 iconBuffer[1][4] = par1IconRegister.registerIcon("RCORES:Ventinite"); // south
-		 iconBuffer[1][5] = par1IconRegister.registerIcon("RCORES:Ventinite"); // west
+		 iconBuffer[1][0] = par1IconRegister.registerIcon("reactioncraft:Ventinite"); // bottom
+		 iconBuffer[1][1] = par1IconRegister.registerIcon("reactioncraft:Ventinite"); // top
+		 iconBuffer[1][2] = par1IconRegister.registerIcon("reactioncraft:Ventinite"); // north
+		 iconBuffer[1][3] = par1IconRegister.registerIcon("reactioncraft:Ventinite"); // east
+		 iconBuffer[1][4] = par1IconRegister.registerIcon("reactioncraft:Ventinite"); // south
+		 iconBuffer[1][5] = par1IconRegister.registerIcon("reactioncraft:Ventinite"); // west
 
 
 		 //below here not used yet!

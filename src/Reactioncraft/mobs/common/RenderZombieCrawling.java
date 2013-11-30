@@ -61,6 +61,6 @@ public class RenderZombieCrawling extends RenderLiving
     @Override
     protected ResourceLocation getEntityTexture(Entity par1Entity)
     {
-    	return (new ResourceLocation("rcmobs:textures/entity/quadzombie.png"));
+    	return (new ResourceLocation("reactioncraft:textures/entity/quadzombie.png"));
     }
 }

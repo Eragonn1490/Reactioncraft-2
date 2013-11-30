@@ -17,7 +17,7 @@ public class BlockCherryTreeLog extends BlockLog
 {
     /** The type of tree this log came from. */
     public static final String[] woodType = new String[] {"rccherry"};
-    public static final String[] treeTextureTypes = new String[] {"rcbdm:woodside", "rcbdm:woodside", "rcbdm:woodside", "rcbdm:woodside"};
+    public static final String[] treeTextureTypes = new String[] {"reactioncraft:woodside", "reactioncraft:woodside", "reactioncraft:woodside", "reactioncraft:woodside"};
     @SideOnly(Side.CLIENT)
     private Icon[] iconArray;
     @SideOnly(Side.CLIENT)
@@ -168,7 +168,7 @@ public class BlockCherryTreeLog extends BlockLog
      */
     public void registerIcons(IconRegister par1IconRegister)
     {
-        this.tree_top = par1IconRegister.registerIcon("RCBDM:woodtop");
+        this.tree_top = par1IconRegister.registerIcon("reactioncraft:woodtop");
         this.iconArray = new Icon[treeTextureTypes.length];
 
         for (int i = 0; i < this.iconArray.length; ++i)

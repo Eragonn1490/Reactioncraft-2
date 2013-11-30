@@ -30,9 +30,9 @@ public class ItemNetCatcher extends ItemTool
 	{
 		super(par1, 0, IntegratedMaterials.EnumToolMaterialNet, new Block[] {});
 		this.setUnlocalizedName("completeNet");
-		//this.setCreativeTab(RCB.ReactioncraftItems);
 		this.setCreativeTab(null);
 		this.setMaxStackSize(1);
+		this.setMaxDamage(getMaxDamage());
 	}
 
 	/**
@@ -42,9 +42,18 @@ public class ItemNetCatcher extends ItemTool
 	public int getMaxDamage(ItemStack stack)
 	{
 		NBTTagCompound compound = stack.stackTagCompound;
-		int hiltLevel = compound.getInteger("str");
-		int netLevel  = compound.getInteger("str");
-		return (1) + (hiltLevel + netLevel) * 10;
+		
+		try
+		{
+	        int hiltLevel = compound.getInteger("hilt");
+	        int netLevel  = compound.getInteger("net");
+	        
+	        return hiltLevel * 10 + netLevel * 10;
+		}
+		catch(NullPointerException e)
+		{
+			return 20;
+		}
 	}
 
 	@Override
@@ -121,7 +130,6 @@ public class ItemNetCatcher extends ItemTool
 				entityplayer.destroyCurrentEquippedItem();
 			}
 		}
-
 		return true;
 	}
 

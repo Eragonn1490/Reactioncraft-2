@@ -407,9 +407,9 @@ public class BlockLeverBookcase extends Block
 	@SideOnly(Side.CLIENT)
 	public void registerIcons(IconRegister par1IconRegister)
 	{
-	    textureSide = par1IconRegister.registerIcon("rcbb:IronBookcasedoorBlock_lower");
-        textureTop = par1IconRegister.registerIcon("rcbb:wood");
-        textureFront = par1IconRegister.registerIcon("rcbb:IronBookcasedoorBlock_lower");
+	    textureSide  = par1IconRegister.registerIcon("reactioncraft:IronBookcasedoorBlock_lower");
+        textureTop   = par1IconRegister.registerIcon("reactioncraft:wood");
+        textureFront = par1IconRegister.registerIcon("reactioncraft:IronBookcasedoorBlock_lower");
 	}
 
     

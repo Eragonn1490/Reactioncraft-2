@@ -13,6 +13,11 @@ public class IntegratedOreDictionaryFile
 	{
 		/** RCC **/
 		OreDictionary.registerOre("darkclay", 				new ItemStack(IntegratedItems.SandStonePaste));
+		//Teir 1 hammer
+		OreDictionary.registerOre("hammer",                 new ItemStack(IntegratedItems.Hammer, 1, OreDictionary.WILDCARD_VALUE));
+		OreDictionary.registerOre("hammer",                 new ItemStack(IntegratedItems.bloodstoneHammer, 1, OreDictionary.WILDCARD_VALUE));
+		//Teir 2 hammer
+		OreDictionary.registerOre("hammer1",                 new ItemStack(IntegratedItems.bloodstoneHammer, 1, OreDictionary.WILDCARD_VALUE));
 		
 		/** RCCM **/
 		OreDictionary.registerOre("ingotRefinedgold", 		new ItemStack(IntegratedItems.ingotRefinedgold,1,0));
@@ -24,6 +29,7 @@ public class IntegratedOreDictionaryFile
 		/** RCBDM **/
 		OreDictionary.registerOre("DarkCobble",             new ItemStack(IntegratedBlocks.DesertBlockMulti, 1, 1));
 		OreDictionary.registerOre("DarkStone",              new ItemStack(IntegratedBlocks.DesertBlockMulti, 1, 2));
+		OreDictionary.registerOre("oreDesertGold",          new ItemStack(IntegratedBlocks.DesertBlockMulti, 1, 10));
 		OreDictionary.registerOre("BloodstoneBrick", 		new ItemStack(IntegratedBlocks.BloodstoneBrick));
 		OreDictionary.registerOre("carveddarkstone", 		new ItemStack(IntegratedBlocks.DesertBlockMulti, 1, 0));
 		OreDictionary.registerOre("darkstonebrick", 		new ItemStack(IntegratedBlocks.DesertBlockMulti, 1, 3));
@@ -59,10 +65,10 @@ public class IntegratedOreDictionaryFile
 		OreDictionary.registerOre("ironDust", 				new ItemStack(IntegratedItems.irondust));
 		OreDictionary.registerOre("shardDragonstone",		new ItemStack(IntegratedItems.dragonstoneshard));
 		OreDictionary.registerOre("gemDragonstone", 		new ItemStack(IntegratedItems.gemdragonstone));
-		OreDictionary.registerOre("dustGold", 				new ItemStack(IntegratedItems.goldDust));
 		//For Dyes
 		OreDictionary.registerOre("dyePurple", 				new ItemStack(IntegratedItems.dragonstoneshard));
 		//Blocks
+		OreDictionary.registerOre("oreSilver",              new ItemStack(IntegratedBlocks.surfaceOres,1, 0));
 		OreDictionary.registerOre("oreBloodstone", 			new ItemStack(IntegratedBlocks.netherOres, 1, 0));
 		OreDictionary.registerOre("oreNetherBlackDiamond",  new ItemStack(IntegratedBlocks.netherOres, 1, 1));
 		OreDictionary.registerOre("oreNetherDragonstone", 	new ItemStack(IntegratedBlocks.netherOres, 1, 2));

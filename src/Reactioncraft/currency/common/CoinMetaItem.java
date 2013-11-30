@@ -31,7 +31,7 @@ public class CoinMetaItem extends Item
 
 		for (int i = 0; i < icons.length; i++)
 		{
-			icons[i] = par1IconRegister.registerIcon("rccm" + ":" + (this.getUnlocalizedName().substring(5)) + i);
+			icons[i] = par1IconRegister.registerIcon("reactioncraft" + ":" + (this.getUnlocalizedName().substring(5)) + i);
 		}
 	}
 

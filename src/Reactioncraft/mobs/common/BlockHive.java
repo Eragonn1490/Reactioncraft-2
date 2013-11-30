@@ -149,12 +149,12 @@ public class BlockHive extends BlockDragonEgg
 		iconBuffer = new Icon[16][12]; // 3 machines, 6 sides each, in ON and OFF states
 
 		// meta 0, Ender Ore
-		iconBuffer[0][0] = par1IconRegister.registerIcon("rcmobs:hive"); // bottom
-		iconBuffer[0][1] = par1IconRegister.registerIcon("rcmobs:hive"); // top
-		iconBuffer[0][2] = par1IconRegister.registerIcon("rcmobs:hivefront"); // north
-		iconBuffer[0][3] = par1IconRegister.registerIcon("rcmobs:hive"); // east
-		iconBuffer[0][4] = par1IconRegister.registerIcon("rcmobs:hive"); // south
-		iconBuffer[0][5] = par1IconRegister.registerIcon("rcmobs:hive"); // west
+		iconBuffer[0][0] = par1IconRegister.registerIcon("reactioncraft:hive"); // bottom
+		iconBuffer[0][1] = par1IconRegister.registerIcon("reactioncraft:hive"); // top
+		iconBuffer[0][2] = par1IconRegister.registerIcon("reactioncraft:hivefront"); // north
+		iconBuffer[0][3] = par1IconRegister.registerIcon("reactioncraft:hive"); // east
+		iconBuffer[0][4] = par1IconRegister.registerIcon("reactioncraft:hive"); // south
+		iconBuffer[0][5] = par1IconRegister.registerIcon("reactioncraft:hive"); // west
 
 		//below here not used yet!
 		//
@@ -294,21 +294,6 @@ public class BlockHive extends BlockDragonEgg
 	public void getSubBlocks(int i,CreativeTabs tab, List list)
 	{
 		list.add(new ItemStack(i,1,0));
-		//    	list.add(new ItemStack(i,1,1));
-		//    	list.add(new ItemStack(i,1,2));
-		//    	list.add(new ItemStack(i,1,3));
-		//    	list.add(new ItemStack(i,1,4));
-		//    	list.add(new ItemStack(i,1,5));
-		//    	list.add(new ItemStack(i,1,6));
-		//    	list.add(new ItemStack(i,1,7));
-		//    	list.add(new ItemStack(i,1,8));
-		//    	list.add(new ItemStack(i,1,9));
-		//    	list.add(new ItemStack(i,1,10));
-		//    	list.add(new ItemStack(i,1,11));
-		//    	list.add(new ItemStack(i,1,12));
-		//    	list.add(new ItemStack(i,1,13));
-		//    	list.add(new ItemStack(i,1,14));
-		//    	list.add(new ItemStack(i,1,15));
 	}
 
 	/**

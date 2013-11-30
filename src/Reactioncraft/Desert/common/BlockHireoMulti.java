@@ -226,132 +226,132 @@ public class BlockHireoMulti extends Block
 		iconBuffer = new Icon[16][12]; // 3 machines, 6 sides each, in ON and OFF states
 
 		// meta 0-2, Regular Hireoglyphics
-		iconBuffer[0][0] = par1IconRegister.registerIcon("rcbdm:css"); // bottom
-		iconBuffer[0][1] = par1IconRegister.registerIcon("rcbdm:css"); // top
-		iconBuffer[0][2] = par1IconRegister.registerIcon("rcbdm:BrownSymbol1"); // north
-		iconBuffer[0][3] = par1IconRegister.registerIcon("rcbdm:BrownSymbol1"); // east
-		iconBuffer[0][4] = par1IconRegister.registerIcon("rcbdm:BrownSymbol1"); // south
-		iconBuffer[0][5] = par1IconRegister.registerIcon("rcbdm:BrownSymbol1"); // west
+		iconBuffer[0][0] = par1IconRegister.registerIcon("reactioncraft:css"); // bottom
+		iconBuffer[0][1] = par1IconRegister.registerIcon("reactioncraft:css"); // top
+		iconBuffer[0][2] = par1IconRegister.registerIcon("reactioncraft:BrownSymbol1"); // north
+		iconBuffer[0][3] = par1IconRegister.registerIcon("reactioncraft:BrownSymbol1"); // east
+		iconBuffer[0][4] = par1IconRegister.registerIcon("reactioncraft:BrownSymbol1"); // south
+		iconBuffer[0][5] = par1IconRegister.registerIcon("reactioncraft:BrownSymbol1"); // west
 
 		// meta 1, 
-		iconBuffer[1][0] = par1IconRegister.registerIcon("rcbdm:css"); // bottom
-		iconBuffer[1][1] = par1IconRegister.registerIcon("rcbdm:css"); // top
-		iconBuffer[1][2] = par1IconRegister.registerIcon("rcbdm:BrownSymbol2"); // north
-		iconBuffer[1][3] = par1IconRegister.registerIcon("rcbdm:BrownSymbol2"); // east
-		iconBuffer[1][4] = par1IconRegister.registerIcon("rcbdm:BrownSymbol2"); // south
-		iconBuffer[1][5] = par1IconRegister.registerIcon("rcbdm:BrownSymbol2"); // west
+		iconBuffer[1][0] = par1IconRegister.registerIcon("reactioncraft:css"); // bottom
+		iconBuffer[1][1] = par1IconRegister.registerIcon("reactioncraft:css"); // top
+		iconBuffer[1][2] = par1IconRegister.registerIcon("reactioncraft:BrownSymbol2"); // north
+		iconBuffer[1][3] = par1IconRegister.registerIcon("reactioncraft:BrownSymbol2"); // east
+		iconBuffer[1][4] = par1IconRegister.registerIcon("reactioncraft:BrownSymbol2"); // south
+		iconBuffer[1][5] = par1IconRegister.registerIcon("reactioncraft:BrownSymbol2"); // west
 
 		// meta 2, 
-		iconBuffer[2][0] = par1IconRegister.registerIcon("rcbdm:css"); // bottom
-		iconBuffer[2][1] = par1IconRegister.registerIcon("rcbdm:css"); // top
-		iconBuffer[2][2] = par1IconRegister.registerIcon("rcbdm:BrownSymbol3"); // north
-		iconBuffer[2][3] = par1IconRegister.registerIcon("rcbdm:BrownSymbol3"); // east
-		iconBuffer[2][4] = par1IconRegister.registerIcon("rcbdm:BrownSymbol3"); // south
-		iconBuffer[2][5] = par1IconRegister.registerIcon("rcbdm:BrownSymbol3"); // west
+		iconBuffer[2][0] = par1IconRegister.registerIcon("reactioncraft:css"); // bottom
+		iconBuffer[2][1] = par1IconRegister.registerIcon("reactioncraft:css"); // top
+		iconBuffer[2][2] = par1IconRegister.registerIcon("reactioncraft:BrownSymbol3"); // north
+		iconBuffer[2][3] = par1IconRegister.registerIcon("reactioncraft:BrownSymbol3"); // east
+		iconBuffer[2][4] = par1IconRegister.registerIcon("reactioncraft:BrownSymbol3"); // south
+		iconBuffer[2][5] = par1IconRegister.registerIcon("reactioncraft:BrownSymbol3"); // west
 
 		// meta 3-5, Light blue Hireoglyphics
-		iconBuffer[3][0] = par1IconRegister.registerIcon("rcbdm:css"); // bottom
-		iconBuffer[3][1] = par1IconRegister.registerIcon("rcbdm:css"); // top
-		iconBuffer[3][2] = par1IconRegister.registerIcon("rcbdm:lightbluesymbol1"); // north
-		iconBuffer[3][3] = par1IconRegister.registerIcon("rcbdm:lightbluesymbol1"); // east
-		iconBuffer[3][4] = par1IconRegister.registerIcon("rcbdm:lightbluesymbol1"); // south
-		iconBuffer[3][5] = par1IconRegister.registerIcon("rcbdm:lightbluesymbol1"); // west
+		iconBuffer[3][0] = par1IconRegister.registerIcon("reactioncraft:css"); // bottom
+		iconBuffer[3][1] = par1IconRegister.registerIcon("reactioncraft:css"); // top
+		iconBuffer[3][2] = par1IconRegister.registerIcon("reactioncraft:lightbluesymbol1"); // north
+		iconBuffer[3][3] = par1IconRegister.registerIcon("reactioncraft:lightbluesymbol1"); // east
+		iconBuffer[3][4] = par1IconRegister.registerIcon("reactioncraft:lightbluesymbol1"); // south
+		iconBuffer[3][5] = par1IconRegister.registerIcon("reactioncraft:lightbluesymbol1"); // west
 
 		// meta 4, 
-		iconBuffer[4][0] = par1IconRegister.registerIcon("rcbdm:css"); // bottom
-		iconBuffer[4][1] = par1IconRegister.registerIcon("rcbdm:css"); // top
-		iconBuffer[4][2] = par1IconRegister.registerIcon("rcbdm:lightbluesymbol2"); // north
-		iconBuffer[4][3] = par1IconRegister.registerIcon("rcbdm:lightbluesymbol2"); // east
-		iconBuffer[4][4] = par1IconRegister.registerIcon("rcbdm:lightbluesymbol2"); // south
-		iconBuffer[4][5] = par1IconRegister.registerIcon("rcbdm:lightbluesymbol2"); // west
+		iconBuffer[4][0] = par1IconRegister.registerIcon("reactioncraft:css"); // bottom
+		iconBuffer[4][1] = par1IconRegister.registerIcon("reactioncraft:css"); // top
+		iconBuffer[4][2] = par1IconRegister.registerIcon("reactioncraft:lightbluesymbol2"); // north
+		iconBuffer[4][3] = par1IconRegister.registerIcon("reactioncraft:lightbluesymbol2"); // east
+		iconBuffer[4][4] = par1IconRegister.registerIcon("reactioncraft:lightbluesymbol2"); // south
+		iconBuffer[4][5] = par1IconRegister.registerIcon("reactioncraft:lightbluesymbol2"); // west
 
 		// meta 5, 
-		iconBuffer[5][0] = par1IconRegister.registerIcon("rcbdm:css"); // bottom
-		iconBuffer[5][1] = par1IconRegister.registerIcon("rcbdm:css"); // top
-		iconBuffer[5][2] = par1IconRegister.registerIcon("rcbdm:lightbluesymbol3"); // north
-		iconBuffer[5][3] = par1IconRegister.registerIcon("rcbdm:lightbluesymbol3"); // east
-		iconBuffer[5][4] = par1IconRegister.registerIcon("rcbdm:lightbluesymbol3"); // south
-		iconBuffer[5][5] = par1IconRegister.registerIcon("rcbdm:lightbluesymbol3"); // west
+		iconBuffer[5][0] = par1IconRegister.registerIcon("reactioncraft:css"); // bottom
+		iconBuffer[5][1] = par1IconRegister.registerIcon("reactioncraft:css"); // top
+		iconBuffer[5][2] = par1IconRegister.registerIcon("reactioncraft:lightbluesymbol3"); // north
+		iconBuffer[5][3] = par1IconRegister.registerIcon("reactioncraft:lightbluesymbol3"); // east
+		iconBuffer[5][4] = par1IconRegister.registerIcon("reactioncraft:lightbluesymbol3"); // south
+		iconBuffer[5][5] = par1IconRegister.registerIcon("reactioncraft:lightbluesymbol3"); // west
 
 		// meta 6-8, Darkblue Hireoglyphics
-		iconBuffer[6][0] = par1IconRegister.registerIcon("rcbdm:css"); // bottom
-		iconBuffer[6][1] = par1IconRegister.registerIcon("rcbdm:css"); // top
-		iconBuffer[6][2] = par1IconRegister.registerIcon("rcbdm:darkbluesymbol1"); // north
-		iconBuffer[6][3] = par1IconRegister.registerIcon("rcbdm:darkbluesymbol1"); // east
-		iconBuffer[6][4] = par1IconRegister.registerIcon("rcbdm:darkbluesymbol1"); // south
-		iconBuffer[6][5] = par1IconRegister.registerIcon("rcbdm:darkbluesymbol1"); // west
+		iconBuffer[6][0] = par1IconRegister.registerIcon("reactioncraft:css"); // bottom
+		iconBuffer[6][1] = par1IconRegister.registerIcon("reactioncraft:css"); // top
+		iconBuffer[6][2] = par1IconRegister.registerIcon("reactioncraft:darkbluesymbol1"); // north
+		iconBuffer[6][3] = par1IconRegister.registerIcon("reactioncraft:darkbluesymbol1"); // east
+		iconBuffer[6][4] = par1IconRegister.registerIcon("reactioncraft:darkbluesymbol1"); // south
+		iconBuffer[6][5] = par1IconRegister.registerIcon("reactioncraft:darkbluesymbol1"); // west
 
 		// meta 7, 
-		iconBuffer[7][0] = par1IconRegister.registerIcon("rcbdm:css"); // bottom
-		iconBuffer[7][1] = par1IconRegister.registerIcon("rcbdm:css"); // top
-		iconBuffer[7][2] = par1IconRegister.registerIcon("rcbdm:darkbluesymbol2"); // north
-		iconBuffer[7][3] = par1IconRegister.registerIcon("rcbdm:darkbluesymbol2"); // east
-		iconBuffer[7][4] = par1IconRegister.registerIcon("rcbdm:darkbluesymbol2"); // south
-		iconBuffer[7][5] = par1IconRegister.registerIcon("rcbdm:darkbluesymbol2"); // west
+		iconBuffer[7][0] = par1IconRegister.registerIcon("reactioncraft:css"); // bottom
+		iconBuffer[7][1] = par1IconRegister.registerIcon("reactioncraft:css"); // top
+		iconBuffer[7][2] = par1IconRegister.registerIcon("reactioncraft:darkbluesymbol2"); // north
+		iconBuffer[7][3] = par1IconRegister.registerIcon("reactioncraft:darkbluesymbol2"); // east
+		iconBuffer[7][4] = par1IconRegister.registerIcon("reactioncraft:darkbluesymbol2"); // south
+		iconBuffer[7][5] = par1IconRegister.registerIcon("reactioncraft:darkbluesymbol2"); // west
 		
 		// meta 8, 
-		iconBuffer[8][0] = par1IconRegister.registerIcon("rcbdm:css"); // bottom
-		iconBuffer[8][1] = par1IconRegister.registerIcon("rcbdm:css"); // top
-		iconBuffer[8][2] = par1IconRegister.registerIcon("rcbdm:darkbluesymbol3"); // north
-		iconBuffer[8][3] = par1IconRegister.registerIcon("rcbdm:darkbluesymbol3"); // east
-		iconBuffer[8][4] = par1IconRegister.registerIcon("rcbdm:darkbluesymbol3"); // south
-		iconBuffer[8][5] = par1IconRegister.registerIcon("rcbdm:darkbluesymbol3"); // west
+		iconBuffer[8][0] = par1IconRegister.registerIcon("reactioncraft:css"); // bottom
+		iconBuffer[8][1] = par1IconRegister.registerIcon("reactioncraft:css"); // top
+		iconBuffer[8][2] = par1IconRegister.registerIcon("reactioncraft:darkbluesymbol3"); // north
+		iconBuffer[8][3] = par1IconRegister.registerIcon("reactioncraft:darkbluesymbol3"); // east
+		iconBuffer[8][4] = par1IconRegister.registerIcon("reactioncraft:darkbluesymbol3"); // south
+		iconBuffer[8][5] = par1IconRegister.registerIcon("reactioncraft:darkbluesymbol3"); // west
 
 //		// meta 9, Unused
-//		iconBuffer[9][0] = par1IconRegister.registerIcon("rcbdm:css"); // bottom
-//		iconBuffer[9][1] = par1IconRegister.registerIcon("rcbdm:css"); // top
-//		iconBuffer[9][2] = par1IconRegister.registerIcon("rcbdm:LightGreyGlass"); // north
-//		iconBuffer[9][3] = par1IconRegister.registerIcon("rcbdm:LightGreyGlass"); // east
-//		iconBuffer[9][4] = par1IconRegister.registerIcon("rcbdm:LightGreyGlass"); // south
-//		iconBuffer[9][5] = par1IconRegister.registerIcon("rcbdm:LightGreyGlass"); // west
+//		iconBuffer[9][0] = par1IconRegister.registerIcon("reactioncraft:css"); // bottom
+//		iconBuffer[9][1] = par1IconRegister.registerIcon("reactioncraft:css"); // top
+//		iconBuffer[9][2] = par1IconRegister.registerIcon("reactioncraft:LightGreyGlass"); // north
+//		iconBuffer[9][3] = par1IconRegister.registerIcon("reactioncraft:LightGreyGlass"); // east
+//		iconBuffer[9][4] = par1IconRegister.registerIcon("reactioncraft:LightGreyGlass"); // south
+//		iconBuffer[9][5] = par1IconRegister.registerIcon("reactioncraft:LightGreyGlass"); // west
 //
 //		// meta 10, Unused
-//		iconBuffer[10][0] = par1IconRegister.registerIcon("rcbdm:css"); // bottom
-//		iconBuffer[10][1] = par1IconRegister.registerIcon("rcbdm:css"); // top
-//		iconBuffer[10][2] = par1IconRegister.registerIcon("rcbdm:limegreenglass"); // north
-//		iconBuffer[10][3] = par1IconRegister.registerIcon("rcbdm:limegreenglass"); // east
-//		iconBuffer[10][4] = par1IconRegister.registerIcon("rcbdm:limegreenglass"); // south
-//		iconBuffer[10][5] = par1IconRegister.registerIcon("rcbdm:limegreenglass"); // west
+//		iconBuffer[10][0] = par1IconRegister.registerIcon("reactioncraft:css"); // bottom
+//		iconBuffer[10][1] = par1IconRegister.registerIcon("reactioncraft:css"); // top
+//		iconBuffer[10][2] = par1IconRegister.registerIcon("reactioncraft:limegreenglass"); // north
+//		iconBuffer[10][3] = par1IconRegister.registerIcon("reactioncraft:limegreenglass"); // east
+//		iconBuffer[10][4] = par1IconRegister.registerIcon("reactioncraft:limegreenglass"); // south
+//		iconBuffer[10][5] = par1IconRegister.registerIcon("reactioncraft:limegreenglass"); // west
 //
 		// meta 11, Weathered Hireoglyph
-		iconBuffer[11][0] = par1IconRegister.registerIcon("rcbdm:css"); // bottom
-		iconBuffer[11][1] = par1IconRegister.registerIcon("rcbdm:css"); // top
-		iconBuffer[11][2] = par1IconRegister.registerIcon("rcbdm:weathered"); // north
-		iconBuffer[11][3] = par1IconRegister.registerIcon("rcbdm:weathered"); // east
-		iconBuffer[11][4] = par1IconRegister.registerIcon("rcbdm:weathered"); // south
-		iconBuffer[11][5] = par1IconRegister.registerIcon("rcbdm:weathered"); // west
+		iconBuffer[11][0] = par1IconRegister.registerIcon("reactioncraft:css"); // bottom
+		iconBuffer[11][1] = par1IconRegister.registerIcon("reactioncraft:css"); // top
+		iconBuffer[11][2] = par1IconRegister.registerIcon("reactioncraft:weathered"); // north
+		iconBuffer[11][3] = par1IconRegister.registerIcon("reactioncraft:weathered"); // east
+		iconBuffer[11][4] = par1IconRegister.registerIcon("reactioncraft:weathered"); // south
+		iconBuffer[11][5] = par1IconRegister.registerIcon("reactioncraft:weathered"); // west
 
 //		// meta 12, unused
-//		iconBuffer[12][0] = par1IconRegister.registerIcon("rcbdm:css"); // bottom
-//		iconBuffer[12][1] = par1IconRegister.registerIcon("rcbdm:css"); // top
-//		iconBuffer[12][2] = par1IconRegister.registerIcon("rcbdm:OrangeGlass"); // north
-//		iconBuffer[12][3] = par1IconRegister.registerIcon("rcbdm:OrangeGlass"); // east
-//		iconBuffer[12][4] = par1IconRegister.registerIcon("rcbdm:OrangeGlass"); // south
-//		iconBuffer[12][5] = par1IconRegister.registerIcon("rcbdm:OrangeGlass"); // west
+//		iconBuffer[12][0] = par1IconRegister.registerIcon("reactioncraft:css"); // bottom
+//		iconBuffer[12][1] = par1IconRegister.registerIcon("reactioncraft:css"); // top
+//		iconBuffer[12][2] = par1IconRegister.registerIcon("reactioncraft:OrangeGlass"); // north
+//		iconBuffer[12][3] = par1IconRegister.registerIcon("reactioncraft:OrangeGlass"); // east
+//		iconBuffer[12][4] = par1IconRegister.registerIcon("reactioncraft:OrangeGlass"); // south
+//		iconBuffer[12][5] = par1IconRegister.registerIcon("reactioncraft:OrangeGlass"); // west
 
 		// meta 13-15 Gold Hireoglyphics
-		iconBuffer[13][0] = par1IconRegister.registerIcon("rcbdm:css"); // bottom
-		iconBuffer[13][1] = par1IconRegister.registerIcon("rcbdm:css"); // top
-		iconBuffer[13][2] = par1IconRegister.registerIcon("rcbdm:GoldSymbols1"); // north
-		iconBuffer[13][3] = par1IconRegister.registerIcon("rcbdm:GoldSymbols1"); // east
-		iconBuffer[13][4] = par1IconRegister.registerIcon("rcbdm:GoldSymbols1"); // south
-		iconBuffer[13][5] = par1IconRegister.registerIcon("rcbdm:GoldSymbols1"); // west
+		iconBuffer[13][0] = par1IconRegister.registerIcon("reactioncraft:css"); // bottom
+		iconBuffer[13][1] = par1IconRegister.registerIcon("reactioncraft:css"); // top
+		iconBuffer[13][2] = par1IconRegister.registerIcon("reactioncraft:GoldSymbols1"); // north
+		iconBuffer[13][3] = par1IconRegister.registerIcon("reactioncraft:GoldSymbols1"); // east
+		iconBuffer[13][4] = par1IconRegister.registerIcon("reactioncraft:GoldSymbols1"); // south
+		iconBuffer[13][5] = par1IconRegister.registerIcon("reactioncraft:GoldSymbols1"); // west
 
 		// meta 0, Empty Bookshelf
-		iconBuffer[14][0] = par1IconRegister.registerIcon("rcbdm:css"); // bottom
-		iconBuffer[14][1] = par1IconRegister.registerIcon("rcbdm:css"); // top
-		iconBuffer[14][2] = par1IconRegister.registerIcon("rcbdm:GoldSymbols2"); // north
-		iconBuffer[14][3] = par1IconRegister.registerIcon("rcbdm:GoldSymbols2"); // east
-		iconBuffer[14][4] = par1IconRegister.registerIcon("rcbdm:GoldSymbols2"); // south
-		iconBuffer[14][5] = par1IconRegister.registerIcon("rcbdm:GoldSymbols2"); // west
+		iconBuffer[14][0] = par1IconRegister.registerIcon("reactioncraft:css"); // bottom
+		iconBuffer[14][1] = par1IconRegister.registerIcon("reactioncraft:css"); // top
+		iconBuffer[14][2] = par1IconRegister.registerIcon("reactioncraft:GoldSymbols2"); // north
+		iconBuffer[14][3] = par1IconRegister.registerIcon("reactioncraft:GoldSymbols2"); // east
+		iconBuffer[14][4] = par1IconRegister.registerIcon("reactioncraft:GoldSymbols2"); // south
+		iconBuffer[14][5] = par1IconRegister.registerIcon("reactioncraft:GoldSymbols2"); // west
 
 		// meta 0, Empty Bookshelf
-		iconBuffer[15][0] = par1IconRegister.registerIcon("rcbdm:css"); // bottom
-		iconBuffer[15][1] = par1IconRegister.registerIcon("rcbdm:css"); // top
-		iconBuffer[15][2] = par1IconRegister.registerIcon("rcbdm:GoldSymbols3"); // north
-		iconBuffer[15][3] = par1IconRegister.registerIcon("rcbdm:GoldSymbols3"); // east
-		iconBuffer[15][4] = par1IconRegister.registerIcon("rcbdm:GoldSymbols3"); // south
-		iconBuffer[15][5] = par1IconRegister.registerIcon("rcbdm:GoldSymbols3"); // west
+		iconBuffer[15][0] = par1IconRegister.registerIcon("reactioncraft:css"); // bottom
+		iconBuffer[15][1] = par1IconRegister.registerIcon("reactioncraft:css"); // top
+		iconBuffer[15][2] = par1IconRegister.registerIcon("reactioncraft:GoldSymbols3"); // north
+		iconBuffer[15][3] = par1IconRegister.registerIcon("reactioncraft:GoldSymbols3"); // east
+		iconBuffer[15][4] = par1IconRegister.registerIcon("reactioncraft:GoldSymbols3"); // south
+		iconBuffer[15][5] = par1IconRegister.registerIcon("reactioncraft:GoldSymbols3"); // west
 	}
     
     public boolean canMineBlock(World world, int i, int j, int k, EntityMinecart entityminecart, ItemStack itemstack)

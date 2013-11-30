@@ -15,7 +15,10 @@ public class IntegratedChestGen
 		ChestGenHooks.addItem(ChestGenHooks.PYRAMID_DESERT_CHEST, new WeightedRandomChestContent(new ItemStack(IntegratedItems.ingotmould), 1, 2, 5));
 		ChestGenHooks.addItem(ChestGenHooks.PYRAMID_JUNGLE_CHEST, new WeightedRandomChestContent(new ItemStack(IntegratedItems.ingotmould), 1, 2, 5));
 		ChestGenHooks.addItem(ChestGenHooks.VILLAGE_BLACKSMITH, new WeightedRandomChestContent(new ItemStack(IntegratedItems.ingotmould), 1, 2, 5));
-
+		
+		ChestGenHooks.addItem(ChestGenHooks.MINESHAFT_CORRIDOR, new WeightedRandomChestContent(new ItemStack(IntegratedItems.ingotBronze), 1, 2, 5));
+		ChestGenHooks.addItem(ChestGenHooks.VILLAGE_BLACKSMITH, new WeightedRandomChestContent(new ItemStack(IntegratedItems.ingotBronze), 1, 2, 5));
+		
 		ChestGenHooks.addItem(ChestGenHooks.BONUS_CHEST, new WeightedRandomChestContent(new ItemStack(IntegratedItems.CoinMould), 1, 2, 5));
 		ChestGenHooks.addItem(ChestGenHooks.MINESHAFT_CORRIDOR, new WeightedRandomChestContent(new ItemStack(IntegratedItems.CoinMould), 1, 2, 5));
 		ChestGenHooks.addItem(ChestGenHooks.PYRAMID_DESERT_CHEST, new WeightedRandomChestContent(new ItemStack(IntegratedItems.CoinMould), 1, 2, 5));
@@ -40,12 +43,10 @@ public class IntegratedChestGen
 		ChestGenHooks.addItem(ChestGenHooks.PYRAMID_JUNGLE_CHEST, new WeightedRandomChestContent(new ItemStack(IntegratedItems.AncientFlower), 1, 5, 15));
 
 		//Corn
-		ChestGenHooks.addItem(ChestGenHooks.BONUS_CHEST, new WeightedRandomChestContent(new ItemStack(IntegratedItems.CornSeed), 1, 2, 5));
 		ChestGenHooks.addItem(ChestGenHooks.MINESHAFT_CORRIDOR, new WeightedRandomChestContent(new ItemStack(IntegratedItems.CornSeed), 1, 5, 15));
 		ChestGenHooks.addItem(ChestGenHooks.PYRAMID_JUNGLE_CHEST, new WeightedRandomChestContent(new ItemStack(IntegratedItems.CornSeed), 1, 5, 15));
 
 		//Sugarcane
-		ChestGenHooks.addItem(ChestGenHooks.BONUS_CHEST, new WeightedRandomChestContent(new ItemStack(IntegratedItems.sugarcaneItem), 1, 2, 5));
 		ChestGenHooks.addItem(ChestGenHooks.MINESHAFT_CORRIDOR, new WeightedRandomChestContent(new ItemStack(IntegratedItems.sugarcaneItem), 1, 5, 15));
 		ChestGenHooks.addItem(ChestGenHooks.PYRAMID_JUNGLE_CHEST, new WeightedRandomChestContent(new ItemStack(IntegratedItems.sugarcaneItem), 1, 5, 15));
 		

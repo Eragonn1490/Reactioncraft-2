@@ -10,12 +10,10 @@ import net.minecraft.world.World;
 
 public class ItemPieceHilt extends Item 
 {
-
 	public ItemPieceHilt(int par1) 
 	{
 		super(par1);
 		this.setUnlocalizedName("pieceHilt");
-		//this.setCreativeTab(RCB.ReactioncraftItems);
 		this.setCreativeTab(null);
 	}
 
@@ -23,38 +21,6 @@ public class ItemPieceHilt extends Item
 	public String getItemDisplayName(ItemStack par1ItemStack) 
 	{
 		return "Hilt Piece";
-	}
-
-	@Override
-	public void onCreated(ItemStack par1ItemStack, World par2World, EntityPlayer par3EntityPlayer) 
-	{
-		if(par1ItemStack.stackTagCompound != null) par1ItemStack.stackTagCompound.getInteger("str");
-		{
-			if(par1ItemStack.stackTagCompound.getInteger("str") == 0)
-			{
-				this.setMaxDamage(1);
-			}
-			if(par1ItemStack.stackTagCompound.getInteger("str") == 1)
-			{
-				this.setMaxDamage(10);
-			}
-			if(par1ItemStack.stackTagCompound.getInteger("str") == 2)
-			{
-				this.setMaxDamage(20);
-			}
-			if(par1ItemStack.stackTagCompound.getInteger("str") == 3)
-			{
-				this.setMaxDamage(30);
-			}
-			if(par1ItemStack.stackTagCompound.getInteger("str") == 4)
-			{
-				this.setMaxDamage(40);
-			}
-			if(par1ItemStack.stackTagCompound.getInteger("str") == 5)
-			{
-				this.setMaxDamage(50);
-			}
-		}
 	}
 	
 	@Override

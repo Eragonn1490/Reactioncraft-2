@@ -26,8 +26,8 @@ import net.minecraftforge.common.IShearable;
 public class BlockCherryTreeLeaves extends BlockLeavesBase implements IShearable
 {
     public static final String[] LEAF_TYPES = new String[] {"rccherry"};
-    //public static final String[][] field_94396_b = new String[][] {{"rcbdm:leaves_rccherry"}, {"rcbdm:leaves_rccherry_opaque"}};
-    public static final String[][] field_94396_b = new String[][] {{"rcbdm:leaves_rccherry", "leaves_spruce", "leaves_birch", "leaves_jungle"}, {"rcbdm:leaves_rccherry_opaque", "leaves_spruce_opaque", "leaves_birch_opaque", "leaves_jungle_opaque"}};
+    //public static final String[][] field_94396_b = new String[][] {{"reactioncraft:leaves_rccherry"}, {"reactioncraft:leaves_rccherry_opaque"}};
+    public static final String[][] field_94396_b = new String[][] {{"reactioncraft:leaves_rccherry", "leaves_spruce", "leaves_birch", "leaves_jungle"}, {"reactioncraft:leaves_rccherry_opaque", "leaves_spruce_opaque", "leaves_birch_opaque", "leaves_jungle_opaque"}};
     @SideOnly(Side.CLIENT)
 
     /** 1 for fast graphic. 0 for fancy graphics. used in iconArray. */

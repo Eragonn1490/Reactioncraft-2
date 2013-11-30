@@ -67,6 +67,6 @@ public class RenderSeaCreeper extends RenderLiving
 	@Override
 	protected ResourceLocation getEntityTexture(Entity par1Entity)
 	{
-		return (new ResourceLocation("rcmobs:textures/entity/seacreeper5.png"));
+		return (new ResourceLocation("reactioncraft:textures/entity/seacreeper5.png"));
 	}
 }

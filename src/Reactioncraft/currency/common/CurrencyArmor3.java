@@ -38,9 +38,9 @@ public class CurrencyArmor3 extends ItemArmor
 	public String getArmorTexture(ItemStack itemstack, Entity entity, int slot, int layer)
 	{
 		if ((itemstack.itemID == IntegratedItems.bloodstonehelm.itemID || (itemstack.itemID == IntegratedItems.bloodstonechest.itemID || itemstack.itemID == IntegratedItems.bloodstoneboots.itemID)))
-			return "rccm:textures/models/hell_1.png";
+			return "reactioncraft:textures/models/hell_1.png";
 		if (itemstack.itemID == IntegratedItems.bloodstonelegs.itemID){
-			return "rccm:textures/models/hell_2.png";
+			return "reactioncraft:textures/models/hell_2.png";
 		}
 		else return null;
 	}
@@ -49,25 +49,25 @@ public class CurrencyArmor3 extends ItemArmor
 	public void registerIcons(IconRegister par1IconRegister)
 	{
 		if(itemID == IntegratedItems.bloodstonehelm.itemID)
-			this.itemIcon = par1IconRegister.registerIcon("rccm:bloodstonehelm");
+			this.itemIcon = par1IconRegister.registerIcon("reactioncraft:bloodstonehelm");
 		this.canRepair = true;
 		this.setMaxStackSize(1);
 		this.isRepairable();
 		RenderingRegistry.addNewArmourRendererPrefix("Emerald");
 		if(itemID == IntegratedItems.bloodstonechest.itemID)
-			this.itemIcon = par1IconRegister.registerIcon("rccm:bloodstonechest");
+			this.itemIcon = par1IconRegister.registerIcon("reactioncraft:bloodstonechest");
 		this.canRepair = true;
 		this.setMaxStackSize(1);
 		this.isRepairable();
 		RenderingRegistry.addNewArmourRendererPrefix("Emerald");
 		if(itemID == IntegratedItems.bloodstonelegs.itemID)
-			this.itemIcon = par1IconRegister.registerIcon("rccm:bloodstonelegs");
+			this.itemIcon = par1IconRegister.registerIcon("reactioncraft:bloodstonelegs");
 		this.canRepair = true;
 		this.setMaxStackSize(1);
 		this.isRepairable();
 		RenderingRegistry.addNewArmourRendererPrefix("Emerald");
 		if(itemID == IntegratedItems.bloodstoneboots.itemID)
-			this.itemIcon = par1IconRegister.registerIcon("rccm:bloodstoneboots");
+			this.itemIcon = par1IconRegister.registerIcon("reactioncraft:bloodstoneboots");
 		this.canRepair = true;
 		this.setMaxStackSize(1);
 		this.isRepairable();

@@ -20,7 +20,7 @@ import net.minecraft.world.World;
 
 public class BlockBookcasedoor extends Block
 {
-    private static final String[] doorIconNames = new String[] {"rcbb:WoodenBookcasedoor_lower", "rcbb:WoodenBookcasedoor_upper", "rcbb:IronBookcasedoorBlock_lower", "rcbb:IronBookcasedoorBlock_upper"};
+    private static final String[] doorIconNames = new String[] {"reactioncraft:WoodenBookcasedoor_lower", "reactioncraft:WoodenBookcasedoor_upper", "reactioncraft:IronBookcasedoorBlock_lower", "reactioncraft:IronBookcasedoorBlock_upper"};
 
     /** Used for pointing at icon names. */
     private final int doorTypeForIcon;

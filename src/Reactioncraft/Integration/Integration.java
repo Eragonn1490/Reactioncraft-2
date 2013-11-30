@@ -27,7 +27,7 @@ public class Integration
 	{
 		if(IntegratedProperties.hardcorerailcraft.getBoolean(true))
 		{
-			GameRegistry.addRecipe(new ItemStack(Block.rail, 8), new Object[] {"X X", "X#X", "X X", 'X', Item.ingotIron, '#', Item.stick});
+			GameRegistry.addRecipe(new ItemStack(Block.rail, 4), new Object[] {"X X", "X#X", "X X", 'X', Item.ingotIron, '#', Item.stick});
 		}
 
 		/** Blast Furnace Stuff **/
@@ -63,7 +63,15 @@ public class Integration
 
 	public static void loadBrickOvenRecipes() 
 	{
-		BrickOvenRecipes.smelting().addSmelting(Item.clay.itemID, new ItemStack(Block.brick, 1, 0), 0.5F);
+		if(IntegratedProperties.brickoventobrickblock.getBoolean(false))
+		{
+			BrickOvenRecipes.smelting().addSmelting(Item.clay.itemID, new ItemStack(Item.brick, 2, 0), 0.5F);
+		}
+		if(IntegratedProperties.brickoventobrickblock.getBoolean(true))
+		{
+			BrickOvenRecipes.smelting().addSmelting(Item.clay.itemID, new ItemStack(Block.brick, 1, 0), 0.5F);
+		}
+		//cooking darksand clay
 		BrickOvenRecipes.smelting().addSmelting(IntegratedItems.SandStonePaste.itemID, new ItemStack(IntegratedBlocks.DesertBlockMulti, 2, 2), 0.2F);
 	}
 
@@ -78,27 +86,27 @@ public class Integration
 
 	public static void loadIndustrialCraft() 
 	{
+		ItemStack resin1 = Items.getItem("resin");
+		ItemStack dustSilver = Items.getItem("crushedSilverOre");
+		ItemStack dustGold = Items.getItem("crushedGoldOre");
+		
 		//Bloodstone block to bloodstone dust
 		Recipes.macerator.addRecipe(new RecipeInputOreDict("oreBloodstone", 1), null, new ItemStack[] { new ItemStack(IntegratedItems.bloodstonedust, 3)});
-
 		//Black Diamond Ore to Black Diamond
 		Recipes.macerator.addRecipe(new RecipeInputOreDict("oreNetherBlackDiamond", 1), null, new ItemStack[] { new ItemStack(IntegratedItems.blackdiamond, 2)});
-
 		//Dragonstone to Dragonstone Shard
-		Recipes.macerator.addRecipe(new RecipeInputOreDict("oreNetherDragonstone", 1), null, new ItemStack[] { new ItemStack(IntegratedItems.dragonstoneshard, 1)});
-
+		Recipes.macerator.addRecipe(new RecipeInputOreDict("oreNetherDragonstone", 1), null, new ItemStack[] { new ItemStack(IntegratedItems.dragonstoneshard, 3)});
 		//Nether Diamond to Diamond
 		Recipes.macerator.addRecipe(new RecipeInputOreDict("oreNetherDiamondOre", 1), null, new ItemStack[] { new ItemStack(Item.diamond, 2)});
-
-		//Nether Gold to Gold Dust
-		Recipes.macerator.addRecipe(new RecipeInputOreDict("oreNetherGoldOre", 1), null, new ItemStack[] { new ItemStack(IntegratedItems.goldDust, 2)}); 
-		GameRegistry.addSmelting(IntegratedItems.goldDust.itemID, new ItemStack(Item.ingotGold.itemID, 1, 0), 0.1F);
-		
+		//Nether Gold to Crushed Gold
+		Recipes.macerator.addRecipe(new RecipeInputOreDict("oreNetherGoldOre", 1), null, new ItemStack[] { new ItemStack(dustGold.itemID, 2, 2)}); 
+		//Desert Gold to Crushed Gold
+		Recipes.macerator.addRecipe(new RecipeInputOreDict("oreDesertGold", 1), null, new ItemStack[] { new ItemStack(dustGold.itemID, 2, 2)}); 
+		//Silver Ore to Crushed Silver
+		Recipes.macerator.addRecipe(new RecipeInputOreDict("oreSilver", 1), null, new ItemStack[] { new ItemStack(dustSilver.itemID, 2, 0)});
 		//DarkCobble /DarkStone to DarkSand
 		Recipes.macerator.addRecipe(new RecipeInputOreDict("DarkCobble", 1), null, new ItemStack[] { new ItemStack(IntegratedBlocks.DarkSand, 2)});
-		Recipes.macerator.addRecipe(new RecipeInputOreDict("DarkStone",  1), null, new ItemStack[] { new ItemStack(IntegratedBlocks.DarkSand, 3)});
-		
-		ItemStack resin1 = Items.getItem("resin");
+		Recipes.macerator.addRecipe(new RecipeInputOreDict("DarkStone",  1), null, new ItemStack[] { new ItemStack(IntegratedBlocks.DarkSand, 2)});
 
 		if(IntegratedProperties.hardcoreIC2.getBoolean(true))
 		{

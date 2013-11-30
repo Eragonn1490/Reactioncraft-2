@@ -65,6 +65,6 @@ public class RenderSkeletonCrawling extends RenderLiving
     @Override
     protected ResourceLocation getEntityTexture(Entity par1Entity)
     {
-    	return (new ResourceLocation("rcmobs:textures/entity/skelly1.png"));
+    	return (new ResourceLocation("reactioncraft:textures/entity/skeleton1.png"));
     }
 }

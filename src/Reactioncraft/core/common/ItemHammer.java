@@ -14,5 +14,3 @@ public class ItemHammer extends ItemSword
 		this.setCreativeTab(RCB.ReactioncraftItems);
 	}
 }
-
-

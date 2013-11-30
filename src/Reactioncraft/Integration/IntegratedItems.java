@@ -24,7 +24,10 @@ public class IntegratedItems
 	public static Item rcendereye;
 	public static Item meltedventinite;
 	public static Item meltedwizimite;
-		
+	//IC2 Independent Stuff
+	public static Item bloodstoneHammer;
+	public static Item bloodstoneclump;
+	
 	/** From RCBB **/
 	public static Item WoodenBookcasedoor;
 	public static Item IronBookcasedoor;
@@ -94,6 +97,19 @@ public class IntegratedItems
 	public static Item Bacon;
 	public static Item BaconRaw;
 	public static Item cheese;
+	//Butchery Update Food Items
+	public static Item meatcleaver;
+	public static Item churn;
+	public static Item rawHuman;
+	public static Item cookedHuman;
+	public static Item rawLamb;
+	public static Item cookedLamb;
+	public static Item rawHorse;
+	public static Item cookedHorse;
+	public static Item chickenHead;
+	public static Item beefChunk;
+	public static Item porkChunk;
+	public static Item buns;
 	
 	/** From RCG **/
 	public static Item moltenglass;
@@ -110,9 +126,7 @@ public class IntegratedItems
 	public static Item pollencomb;
 	
 	/** From RCN **/
-	public static Item completeNet;
 	public static Item caught;
-	public static Item caughtplayer;
 	public static Item creativeNet;
 	
 	/** From RCORES **/
@@ -153,4 +167,6 @@ public class IntegratedItems
 	public static Item GoldenSwordFragment;
 	public static Item UnbindedSword;
 	public static Item BloodstoneDiamondPick;
+	//ButcheryCraft Update
+	public static Item Bat;
 }

@@ -25,7 +25,7 @@ public class BlockCorn extends Block
 	@Override
 	public void registerIcons(IconRegister par1IconRegister)
 	{
-		this.blockIcon = par1IconRegister.registerIcon("rcpm:tallcorn");
+		this.blockIcon = par1IconRegister.registerIcon("reactioncraft:tallcorn");
 	}
 
 	public Icon getBlockblockIcon(IBlockAccess world, int x, int y, int z, int blockSide)

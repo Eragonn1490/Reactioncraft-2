@@ -34,7 +34,7 @@ import cpw.mods.fml.relauncher.SideOnly;
 
 public class ClientProxy extends CommonProxy
 {
-	public static String BORE_TEXTURE ="/mods/RCC/textures/railcraft/";
+	public static String BORE_TEXTURE ="/mods/reactioncraft/textures/railcraft/";
 
 	@SideOnly(Side.CLIENT)
 	public static void registerRenderInformation()

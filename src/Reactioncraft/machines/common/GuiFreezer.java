@@ -13,7 +13,7 @@ import org.lwjgl.opengl.GL11;
 @SideOnly(Side.CLIENT)
 public class GuiFreezer extends GuiContainer
 {
-	private static final ResourceLocation furnaceGuiTextures = new ResourceLocation("rcmm", "textures/gui/freezer.png");
+	private static final ResourceLocation furnaceGuiTextures = new ResourceLocation("reactioncraft", "textures/gui/freezer.png");
 	
 	private TileEntityFreezer furnaceInventory;
     

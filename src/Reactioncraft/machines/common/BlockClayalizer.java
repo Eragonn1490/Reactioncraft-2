@@ -83,9 +83,9 @@ public class BlockClayalizer extends BlockContainer
      */
     public void registerIcons(IconRegister par1IconRegister)
     {
-        this.blockIcon = par1IconRegister.registerIcon("RCMM:SandBrick");
-        this.field_94459_cP = par1IconRegister.registerIcon(this.isActive ? "RCMM:cai" : "RCMM:caa");
-        this.field_94458_cO = par1IconRegister.registerIcon("RCMM:SandBrick");
+        this.blockIcon = par1IconRegister.registerIcon("reactioncraft:SandBrick");
+        this.field_94459_cP = par1IconRegister.registerIcon(this.isActive ? "reactioncraft:cai" : "reactioncraft:caa");
+        this.field_94458_cO = par1IconRegister.registerIcon("reactioncraft:SandBrick");
     }
 
     /**
