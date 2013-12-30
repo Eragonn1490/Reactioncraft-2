@@ -6,16 +6,26 @@ import net.minecraft.client.model.ModelBase;
 import net.minecraft.client.renderer.entity.RenderLiving;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityLiving;
+import net.minecraft.entity.passive.EntityVillager;
 import net.minecraft.util.ResourceLocation;
 import org.lwjgl.opengl.GL11;
+
+import cpw.mods.fml.common.registry.VillagerRegistry;
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
 
 @SideOnly(Side.CLIENT)
 public class RenderSeaCreeper extends RenderLiving
 {
-	Random random;
-
+	private static final ResourceLocation villagerTextures             = new ResourceLocation("reactioncraft:textures/entity/seacreeper1.png");
+    private static final ResourceLocation farmerVillagerTextures       = new ResourceLocation("reactioncraft:textures/entity/seacreeper2.png");
+    private static final ResourceLocation librarianVillagerTextures    = new ResourceLocation("reactioncraft:textures/entity/seacreeper3.png");
+    private static final ResourceLocation priestVillagerTextures       = new ResourceLocation("reactioncraft:textures/entity/seacreeper4.png");
+    private static final ResourceLocation smithVillagerTextures        = new ResourceLocation("reactioncraft:textures/entity/seacreeper5.png");
+    private static final ResourceLocation butcherVillagerTextures      = new ResourceLocation("reactioncraft:textures/entity/seacreeper6.png");
+    private static final ResourceLocation smithVillagerTextures1       = new ResourceLocation("reactioncraft:textures/entity/seacreeper7.png");
+    private static final ResourceLocation butcherVillagerTextures1     = new ResourceLocation("reactioncraft:textures/entity/seacreeper8.png");
+    
 	public RenderSeaCreeper(ModelBase modelbase, float f)
 	{
 		super(modelbase, f);
@@ -65,8 +75,34 @@ public class RenderSeaCreeper extends RenderLiving
 	 * Returns the location of an entity's texture. Doesn't seem to be called unless you call Render.bindEntityTexture.
 	 */
 	@Override
-	protected ResourceLocation getEntityTexture(Entity par1Entity)
-	{
-		return (new ResourceLocation("reactioncraft:textures/entity/seacreeper5.png"));
-	}
+	/**
+     * Returns the location of an entity's texture. Doesn't seem to be called unless you call Render.bindEntityTexture.
+     */
+    protected ResourceLocation getEntityTexture(Entity par1Entity)
+    {
+        return this.func_110902_a((EntitySeaCreeper)par1Entity);
+    }
+	
+	protected ResourceLocation func_110902_a(EntitySeaCreeper par1EntityVillager)
+    {
+        switch (par1EntityVillager.getProfession())
+        {
+            case 0:
+                return farmerVillagerTextures;
+            case 1:
+                return librarianVillagerTextures;
+            case 2:
+                return priestVillagerTextures;
+            case 3:
+                return smithVillagerTextures;
+            case 4:
+                return butcherVillagerTextures;
+            case 5:
+                return smithVillagerTextures1;
+            case 6:
+                return butcherVillagerTextures1;
+            default:
+                return VillagerRegistry.getVillagerSkin(par1EntityVillager.getProfession(), villagerTextures);
+        }
+    }
 }

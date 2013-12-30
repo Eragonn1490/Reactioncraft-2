@@ -125,7 +125,6 @@ public class IntegratedItemCode
 	public static void loadNet() 
 	{
 		IntegratedItems.caught = new ItemCaughtEntity(IntegratedConfigI.caught2IID).setUnlocalizedName("reactioncraft:caught").setTextureName("reactioncraft:caught");
-		IntegratedItems.creativeNet = new ItemCreativeNet(IntegratedConfigI.creativeNetIID).setUnlocalizedName("reactioncraft:fullnet").setTextureName("reactioncraft:fullnet").setCreativeTab(RCB.ReactioncraftItems);
 	}
 
 	public static void loadRCORES()

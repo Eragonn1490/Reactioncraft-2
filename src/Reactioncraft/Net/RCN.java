@@ -31,7 +31,7 @@ import cpw.mods.fml.common.registry.GameRegistry;
 import cpw.mods.fml.common.registry.LanguageRegistry;
 
 
-@Mod(modid = "rcn", name = "Reactioncraft Netting", version = "[1.6.4] Reactioncraft 3 Version 1.2.4", dependencies = "required-after:reactioncraft")
+@Mod(modid = "rcn", name = "Reactioncraft Netting", version = "[1.6.4] Reactioncraft 3 Version 1.2.7", dependencies = "required-after:reactioncraft")
 @NetworkMod(channels = { "RCN" }, clientSideRequired = true, serverSideRequired = false, packetHandler = PacketHandler.class)
 
 public class RCN implements ICraftingHandler
@@ -99,12 +99,14 @@ public class RCN implements ICraftingHandler
 
 	public void registerEntities()
 	{
-		EntityRegistry.registerGlobalEntityID(EntityPlayerClone.class, "Player", EntityRegistry.findGlobalUniqueEntityId(), 0x333333, 0x999999);
-		LanguageRegistry.instance().addStringLocalization("entity.EntityPlayerClone.name", "en_US", "Player");
+		//EntityRegistry.registerGlobalEntityID(EntityPlayerClone.class, "Player", EntityRegistry.findGlobalUniqueEntityId(), 0x333333, 0x999999);
+		//LanguageRegistry.instance().addStringLocalization("entity.EntityPlayerClone.name", "en_US", "Player");
 	}
 
 	public void itemRegistry() 
-	{}
+	{
+		IntegratedItemRegistry.loadNet();
+	}
 
 	public void recipes() 
 	{
@@ -131,8 +133,8 @@ public class RCN implements ICraftingHandler
 
 	public void itemCode()
 	{
-		hilt = new ItemPieceHilt(IntegratedConfigI.hiltIID).setUnlocalizedName("reactioncraft:hilt").setTextureName("reactioncraft:hilt").setCreativeTab(RCB.ReactioncraftItems);
-		net = new ItemPieceNet(IntegratedConfigI.netIID).setUnlocalizedName("reactioncraft:netpart").setTextureName("reactioncraft:netpart").setCreativeTab(RCB.ReactioncraftItems);
+		hilt = new ItemPieceHilt(IntegratedConfigI.hiltIID).setUnlocalizedName("reactioncraft:hilt").setTextureName("reactioncraft:hilt");
+		net = new ItemPieceNet(IntegratedConfigI.netIID).setUnlocalizedName("reactioncraft:netpart").setTextureName("reactioncraft:netpart");
 		completeNet = new ItemNetCatcher(IntegratedConfigI.completeNetIID).setUnlocalizedName("reactioncraft:fullnet").setTextureName("reactioncraft:fullnet");
 		caught = new ItemCaughtEntity(IntegratedConfigI.caughtIID).setUnlocalizedName("reactioncraft:caught").setTextureName("reactioncraft:caught");
 		caughtplayer = new ItemCaughtPlayer(IntegratedConfigI.caughtplayerIID).setUnlocalizedName("reactioncraft:caught").setTextureName("reactioncraft:caught");

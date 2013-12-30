@@ -20,6 +20,8 @@ import cpw.mods.fml.relauncher.SideOnly;
 
 public class EntitySeaCreeper extends EntityWaterMob
 {
+	private int skin;
+	
 	/**
 	 * Time when this creeper was last in an active state (Messed up code here, probably causes creeper animation to go
 	 * weird)
@@ -150,6 +152,7 @@ public class EntitySeaCreeper extends EntityWaterMob
 	public void entityInit()
 	{
 		super.entityInit();
+		this.dataWatcher.addObject(20, Integer.valueOf(-1));
 		this.dataWatcher.addObject(16, Byte.valueOf((byte) - 1));
 		this.dataWatcher.addObject(17, Byte.valueOf((byte)0));
 	}
@@ -168,6 +171,9 @@ public class EntitySeaCreeper extends EntityWaterMob
 
 		par1NBTTagCompound.setShort("Fuse", (short)this.fuseTime);
 		par1NBTTagCompound.setByte("ExplosionRadius", (byte)this.explosionRadius);
+		
+		
+		par1NBTTagCompound.setInteger("skin", this.getProfession());
 	}
 
 	/**
@@ -187,6 +193,22 @@ public class EntitySeaCreeper extends EntityWaterMob
 		{
 			this.explosionRadius = par1NBTTagCompound.getByte("ExplosionRadius");
 		}
+
+		this.setProfession(par1NBTTagCompound.getInteger("skin"));
+	}
+
+	public void setProfession(int skin)
+	{
+		this.dataWatcher.updateObject(20, Integer.valueOf("skin"));
+	}
+
+	public int getProfession()
+	{
+		 if( !worldObj.isRemote ) 
+		 {
+			 dataWatcher.updateObject(20, Integer.valueOf("skin"));
+		 }
+		return skin;
 	}
 
 	/**

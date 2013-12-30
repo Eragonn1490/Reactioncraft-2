@@ -20,5 +20,5 @@ public class ReactioncraftConfiguration extends Configuration
 		super.save();
 	}
 	
-	public static final String ID = "RCCM".toLowerCase(Locale.ENGLISH);
+	public static final String ID = "REACTIONCRAFT".toLowerCase(Locale.ENGLISH);
 }
