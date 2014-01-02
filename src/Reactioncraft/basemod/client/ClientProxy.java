@@ -13,7 +13,6 @@ public class ClientProxy extends CommonProxy
 	public static void registerRenderInformation()
 	{
 		TickRegistry.registerTickHandler(new ClientTickHandler(), Side.CLIENT);
-		
 	}
 	
 	@Override
